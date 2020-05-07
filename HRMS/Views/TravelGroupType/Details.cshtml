@@ -1,0 +1,42 @@
+﻿@model HRMS.Models.HRMS_TravelGroupType_MS
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>HRMS_TravelGroupType_MS</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Group_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Group_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HRMS_TravelMode_MS.Mode_Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HRMS_TravelMode_MS.Mode_Type)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

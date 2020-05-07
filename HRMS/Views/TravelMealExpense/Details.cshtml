@@ -1,0 +1,35 @@
+﻿@model HRMS.Models.HRMS_TRAVEL_MEAL_EXPENSE_MS
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>HRMS_TRAVEL_MEAL_EXPENSE_MS</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Meal_Expense_NM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Meal_Expense_NM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Meal_Expense_Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Meal_Expense_Status)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Meal_Expense_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

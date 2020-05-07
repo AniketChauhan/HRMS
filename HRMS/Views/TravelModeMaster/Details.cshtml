@@ -1,0 +1,42 @@
+﻿@model HRMS.Models.HRMS_TravelMode_MS
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>HRMS_TravelMode_MS</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Mode_Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mode_Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mode_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mode_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mode_Short_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mode_Short_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Mode_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

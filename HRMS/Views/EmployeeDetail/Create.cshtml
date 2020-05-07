@@ -1,0 +1,227 @@
+﻿@model HRMS.Models.HRMS_Emp_Details
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal row">
+        <h4>Employee Details</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="col-md-6">
+
+            <div class="form-group">
+                <span class="col-md-4 control-label">
+                    <i class="glyphicon glyphicon-asterisk" style="color:red ; font-size:x-small;"></i>
+                    @Html.LabelFor(model => model.EMP_ID)
+                </span>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.EMP_ID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EMP_ID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+
+                @Html.LabelFor(model => model.Old_Emp_Cd, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Old_Emp_Cd, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Old_Emp_Cd, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <span class="col-md-4 control-label">
+                    <i class="glyphicon glyphicon-asterisk" style="color:red ; font-size:x-small;"></i>
+                    @Html.LabelFor(model => model.Join_Date)
+                </span>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Join_Date, new { htmlAttributes = new { @class = "form-control" } })
+
+                    @Html.ValidationMessageFor(model => model.Join_Date, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Card_Id, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Card_Id, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Card_Id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <span class="col-md-4 control-label">
+                    <i class="glyphicon glyphicon-asterisk" style="color:red ; font-size:x-small;"></i>
+                    @Html.LabelFor(model => model.salutation)
+                </span>
+                <div class="col-md-8">
+                    @Html.DropDownList("salutation", new SelectList(ViewBag.salutation, "Salutation_ID", "Salutation_Name"), "Select Salutation", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.salutation, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <span class="col-md-4 control-label">
+                    <i class="glyphicon glyphicon-asterisk" style="color:red ; font-size:x-small;"></i>
+                    @Html.LabelFor(model => model.First_Name)
+                </span>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.First_Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.First_Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Middle_Name, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Middle_Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Middle_Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Last_Name, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Last_Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Last_Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+
+            <div class="form-group">
+                <span class="col-md-4 control-label">
+                    <i class="glyphicon glyphicon-asterisk" style="color:red ; font-size:x-small;"></i>
+                    @Html.LabelFor(model => model.Display_Name)
+                </span>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Display_Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Display_Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <span class="col-md-4 control-label">
+                    <i class="glyphicon glyphicon-asterisk" style="color:red ; font-size:x-small;"></i>
+                    @Html.LabelFor(model => model.Designation)
+                </span>
+                <div class="col-md-8">
+                    @Html.DropDownList("Designation", new SelectList(ViewBag.Designation, "Desg_Id", "Desg_Name"), "Select Designation", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <span class="col-md-4 control-label">
+                    @Html.LabelFor(model => model.Work_Location)
+                </span>
+                <div class="col-md-8">
+                    @Html.DropDownList("Work_Location", new SelectList(ViewBag.Work_Location, "WorkID", "WorkLocationName"), "Select Work location ", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Work_Location, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <span class="col-md-4 control-label">
+                    <i class="glyphicon glyphicon-asterisk" style="color:red ; font-size:x-small;"></i>
+                    @Html.LabelFor(model => model.Unit)
+                </span>
+                <div class="col-md-8">
+                    @Html.DropDownList("Unit", new SelectList(ViewBag.Unit, "UnitCode", "UnitName"), "Select Unit ", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Unit, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <span class="col-md-4 control-label">
+                    <i class="glyphicon glyphicon-asterisk" style="color:red ; font-size:x-small;"></i>
+                    <label>Division</label>
+                </span>
+                <div class="col-md-8">
+                    @Html.DropDownList("Division", new SelectList(ViewBag.DivisionData, "Dept_Id", "Dept_Name"), "Select Division", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <span class="col-md-4 control-label">
+                    <i class="glyphicon glyphicon-asterisk" style="color:red ; font-size:x-small;"></i>
+                    <label>Department</label>
+                </span>
+                <div class="col-md-8">
+                    @Html.DropDownList("Department", new SelectList(ViewBag.Department, "Dept_Id", "Dept_Name"), "Select Division", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <span class="col-md-4 control-label">
+                    <i class="glyphicon glyphicon-asterisk" style="color:red ; font-size:x-small;"></i>
+                    @Html.LabelFor(model => model.Cost_Center)
+                </span>
+                <div class="col-md-8">
+                    @Html.DropDownList("Cost_Center", new SelectList(ViewBag.Cost_Center, "ID", "Cost_Cntr_Name"), "select Cost Center", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Cost_Center, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.UAN_No_, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.UAN_No_, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UAN_No_, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+    <div class="form-group">
+        <center>
+            <input type="submit" value="Create" class="btn btn-primary" /><i> &emsp;</i>
+            <input type="reset" value="Cancel" class="btn btn-danger" />
+        </center>
+    </div>
+}
+@if (ViewBag.EmpDetailStatus != null)
+{
+    <div class="alert alert-success alert-dismissible " style="width:50%;">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <span>
+            @ViewBag.EmpDetailStatus
+        </span>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#Division").change(function () {
+            $.get("/EmployeeDetail/GetDepartmentData", { DivisionData: $("#Division").val() }, function (data) {
+
+                $("#Department").empty();
+
+                $('#Department').append($('<option>', {
+                    value: '0',
+                    text: 'Select Department',
+                }, '</option>'));
+                $.each(data, function (index, row) {
+
+                    $("#Department").append("<option value='" + row.Dept_Id + "'>" + row.Dept_Name + "</option>")
+                });
+
+            });
+        });
+    });
+</script>

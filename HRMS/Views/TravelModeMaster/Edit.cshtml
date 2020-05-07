@@ -1,0 +1,91 @@
+﻿@model HRMS.Models.HRMS_TravelMode_MS
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<head>
+    <link href="~/StyleSheet/UnitStyleSheet.css" rel="stylesheet" />
+
+</head>
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>HRMS_TravelMode_MS</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Mode_ID)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Mode_Type, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @*@Html.EditorFor(model => model.Mode_Type, new { htmlAttributes = new { @class = "form-control" } })*@
+            <div>
+                <div class="radio-inline">
+                    @Html.RadioButtonFor(model => model.Mode_Type, "Air", new { @name = "Gender" })
+                    Air
+                </div>
+
+                <div class="radio-inline">
+                    @Html.RadioButtonFor(model => model.Mode_Type, "Railway", new { @name = "Gender" })
+                    Railway
+                </div>
+
+                <div class="radio-inline">
+                    @Html.RadioButtonFor(model => model.Mode_Type, "Bus", new { @name = "Gender" })
+                    Bus
+                </div>
+
+                <div class="radio-inline">
+                    @Html.RadioButtonFor(model => model.Mode_Type, "Local Coveyance", new { @name = "Gender" })
+                    Local Coveyance
+                </div>
+            </div>
+            @Html.ValidationMessageFor(model => model.Mode_Type, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Mode_Name, htmlAttributes: new { @class = "control-label col-md-2 required" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Mode_Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Mode_Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Mode_Short_Name, htmlAttributes: new { @class = "control-label col-md-2 required" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Mode_Short_Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Mode_Short_Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <label class="label label-danger">@ViewBag.error</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <label class="label label-success">@ViewBag.success</label>
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

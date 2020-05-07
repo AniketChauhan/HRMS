@@ -1,0 +1,41 @@
+﻿@model IEnumerable<HRMS.Models.HRMS_TRAVEL_MEAL_EXPENSE_MS>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Meal_Expense_NM)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Meal_Expense_Status)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Meal_Expense_NM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Meal_Expense_Status)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Meal_Expense_ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Meal_Expense_ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Meal_Expense_ID })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,2251 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HRMS5Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="role" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BankMaster">
+          <Key>
+            <PropertyRef Name="BankCode" />
+          </Key>
+          <Property Name="BankCode" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BankName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BranchMaster">
+          <Key>
+            <PropertyRef Name="BranchCode" />
+          </Key>
+          <Property Name="BranchCode" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BankCode" Type="bigint" Nullable="false" />
+          <Property Name="BranchName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MICR_Code" Type="varchar" MaxLength="50" />
+          <Property Name="IFSC_Code" Type="varchar" MaxLength="50" />
+          <Property Name="Contact" Type="bigint" />
+          <Property Name="Fax" Type="varchar" MaxLength="50" />
+          <Property Name="EmailID" Type="varchar" MaxLength="50" />
+          <Property Name="Country" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="PinCode" Type="bigint" />
+        </EntityType>
+        <EntityType Name="CastMaster">
+          <Key>
+            <PropertyRef Name="CastCode" />
+          </Key>
+          <Property Name="CastCode" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReligionID" Type="bigint" Nullable="false" />
+          <Property Name="CastName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CityID" />
+          </Key>
+          <Property Name="CityID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CityName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StateID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Name="CountryID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EMP_Grade_Assignment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EMP_ID" Type="bigint" Nullable="false" />
+          <Property Name="Grade_ID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee_Personal_Detail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Gender" Type="bigint" Nullable="false" />
+          <Property Name="DOB" Type="date" Nullable="false" />
+          <Property Name="Category" Type="bigint" Nullable="false" />
+          <Property Name="IdentityMark1" Type="varchar" MaxLength="50" />
+          <Property Name="IdentityMark2" Type="varchar" MaxLength="50" />
+          <Property Name="Religion" Type="bigint" />
+          <Property Name="Citizenship" Type="bigint" />
+          <Property Name="Caste" Type="bigint" />
+          <Property Name="Race" Type="varchar" MaxLength="50" />
+          <Property Name="MarraigeStatus" Type="bigint" />
+          <Property Name="MarraigeDate" Type="date" />
+          <Property Name="NoOfChild" Type="int" />
+          <Property Name="NoOfDependents" Type="int" />
+          <Property Name="AadharNo" Type="varchar" MaxLength="20" />
+          <Property Name="SIN" Type="varchar" MaxLength="20" />
+          <Property Name="AKA" Type="varchar" MaxLength="50" />
+          <Property Name="MilitaryService" Type="varchar" MaxLength="50" />
+          <Property Name="BirthCity" Type="varchar" MaxLength="50" />
+          <Property Name="Note" Type="varchar(max)" />
+          <Property Name="Hobbies" Type="varchar(max)" />
+          <Property Name="MilitaryServiceDetail" Type="varchar(max)" />
+          <Property Name="EMP_ID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="HRMS_ATTACHMENT_TYPE">
+          <Key>
+            <PropertyRef Name="Attachment_Type_ID" />
+          </Key>
+          <Property Name="Attachment_Type_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Attachment_Type_Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HRMS_CATEGORY_GRADE">
+          <Key>
+            <PropertyRef Name="Category_ID" />
+          </Key>
+          <Property Name="Category_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Category_Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Grade_Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Grade_Detail" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="HRMS_Contact">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Phone_Work" Type="varchar" MaxLength="10" />
+          <Property Name="Ext" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Mobile_No_Work" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Corporate_Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone_Home" Type="varchar" MaxLength="11" />
+          <Property Name="Mobile_no_home" Type="varchar" MaxLength="10" />
+          <Property Name="Personal_Email" Type="varchar" MaxLength="50" />
+          <Property Name="Office_Email" Type="varchar" MaxLength="50" />
+          <Property Name="Employee_ID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HRMS_COST_CENTER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cost_Cntr_Code" Type="bigint" Nullable="false" />
+          <Property Name="Cost_Cntr_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Parent_Cost_Cntr_Code" Type="bigint" />
+          <Property Name="Ledger_Code" Type="bigint" />
+        </EntityType>
+        <EntityType Name="HRMS_DEPT">
+          <Key>
+            <PropertyRef Name="Dept_Id" />
+          </Key>
+          <Property Name="Dept_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Dept_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sort_Name" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Parent_ID" Type="bigint" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreateDate" Type="date" />
+          <Property Name="ModifyBy" Type="bigint" />
+          <Property Name="ModifyDate" Type="date" />
+        </EntityType>
+        <EntityType Name="HRMS_DESG_MS">
+          <Key>
+            <PropertyRef Name="Desg_Id" />
+          </Key>
+          <Property Name="Desg_Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Desg_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Desg_Short_Name" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Desg_Parent_ID" Type="bigint" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreateDate" Type="date" />
+          <Property Name="ModifyBy" Type="bigint" />
+          <Property Name="ModifyDate" Type="date" />
+        </EntityType>
+        <EntityType Name="HRMS_EMP_Attachment_Details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EMP_ID" Type="bigint" Nullable="false" />
+          <Property Name="Attachment_Title" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Attachment_Type_ID" Type="bigint" Nullable="false" />
+          <Property Name="FILENAME" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FILEURL" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="Note" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="HRMS_EMP_BUSINESSDIVISION_MS">
+          <Key>
+            <PropertyRef Name="BusinessDivision_ID" />
+          </Key>
+          <Property Name="BusinessDivision_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BusinessDivision_Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="BusinessDivision_SapCode" Type="bigint" />
+        </EntityType>
+        <EntityType Name="HRMS_EMP_CITIZENSHIP_MS">
+          <Key>
+            <PropertyRef Name="CitizenShip_ID" />
+          </Key>
+          <Property Name="CitizenShip_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CitizenShip_Country_NM" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HRMS_Emp_Details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EMP_ID" Type="bigint" Nullable="false" />
+          <Property Name="Old_Emp_Cd" Type="bigint" />
+          <Property Name="Join_Date" Type="date" Nullable="false" />
+          <Property Name="Card_Id" Type="bigint" />
+          <Property Name="salutation" Type="bigint" Nullable="false" />
+          <Property Name="First_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Middle_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Last_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Display_Name" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Designation" Type="bigint" Nullable="false" />
+          <Property Name="Work_Location" Type="bigint" />
+          <Property Name="Unit" Type="bigint" Nullable="false" />
+          <Property Name="Department" Type="bigint" Nullable="false" />
+          <Property Name="Cost_Center" Type="bigint" Nullable="false" />
+          <Property Name="UAN No." Type="bigint" />
+        </EntityType>
+        <EntityType Name="HRMS_EMP_GENDER_MS">
+          <Key>
+            <PropertyRef Name="Gender_ID" />
+          </Key>
+          <Property Name="Gender_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Gender_Value" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HRMS_EMP_PHOTO_SIGN">
+          <Key>
+            <PropertyRef Name="Emp_Photos_ID" />
+          </Key>
+          <Property Name="Emp_Photos_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Emp_ID" Type="bigint" Nullable="false" />
+          <Property Name="Emp_Photo_Title" Type="nvarchar(max)" />
+          <Property Name="Emp_Photo_Path" Type="nvarchar(max)" />
+          <Property Name="Emp_Sign_Title" Type="nvarchar(max)" />
+          <Property Name="Emp_Sign_Path" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="HRMS_EMP_ReferenceDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EMP_ID" Type="bigint" Nullable="false" />
+          <Property Name="Is_Ref_Emp" Type="bit" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Country" Type="bigint" Nullable="false" />
+          <Property Name="State" Type="bigint" Nullable="false" />
+          <Property Name="City" Type="bigint" Nullable="false" />
+          <Property Name="Relationship" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pincode" Type="bigint" />
+          <Property Name="Address" Type="varchar(max)" />
+          <Property Name="Designation" Type="varchar" MaxLength="50" />
+          <Property Name="Company" Type="varchar" MaxLength="50" />
+          <Property Name="PhoneNo" Type="varchar" MaxLength="15" />
+          <Property Name="MobileNo" Type="varchar" MaxLength="15" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="HRMS_SALUTATION">
+          <Key>
+            <PropertyRef Name="Salutation_ID" />
+          </Key>
+          <Property Name="Salutation_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Salutation_Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HRMS_TRAVEL_MEAL_EXPENSE_MS">
+          <Key>
+            <PropertyRef Name="Meal_Expense_ID" />
+          </Key>
+          <Property Name="Meal_Expense_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Meal_Expense_NM" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Meal_Expense_Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HRMS_TRAVEL_OTHER_DETAILS_MS">
+          <Key>
+            <PropertyRef Name="Travel_Other_Details_ID" />
+          </Key>
+          <Property Name="Travel_Other_Details_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Travel_Other_Details_NM" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HRMS_Travel_Purpose">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HRMS_Travel_type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Short_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="HRMS_TravelGroupType_MS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Mode_ID" Type="bigint" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Group_Name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HRMS_TravelMode_MS">
+          <Key>
+            <PropertyRef Name="Mode_ID" />
+          </Key>
+          <Property Name="Mode_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Mode_Type" Type="varchar" MaxLength="50" />
+          <Property Name="Mode_Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Mode_Short_Name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MaritalMaster">
+          <Key>
+            <PropertyRef Name="MaritalID" />
+          </Key>
+          <Property Name="MaritalID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaritalName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PayRollMaster">
+          <Key>
+            <PropertyRef Name="PayRollCode" />
+          </Key>
+          <Property Name="PayRollCode" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PayRollName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReligionMaster">
+          <Key>
+            <PropertyRef Name="ReligionID" />
+          </Key>
+          <Property Name="ReligionID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReligionShortName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ReligionName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SegmentMaster">
+          <Key>
+            <PropertyRef Name="SegmentID" />
+          </Key>
+          <Property Name="SegmentID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SegmentName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SAPCode" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="StateID" />
+          </Key>
+          <Property Name="StateID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CountryID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UnitMaster">
+          <Key>
+            <PropertyRef Name="UnitCode" />
+          </Key>
+          <Property Name="UnitCode" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UnitName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="varchar(max)" Nullable="false" />
+          <Property Name="Country" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pincode" Type="bigint" Nullable="false" />
+          <Property Name="Priority" Type="bigint" Nullable="false" />
+          <Property Name="PaySlip" Type="bit" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkLocationMaster">
+          <Key>
+            <PropertyRef Name="WorkID" />
+          </Key>
+          <Property Name="WorkID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkLocationName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SAPCode" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_BranchMaster_BankMaster">
+          <End Role="BankMaster" Type="Self.BankMaster" Multiplicity="1" />
+          <End Role="BranchMaster" Type="Self.BranchMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankMaster">
+              <PropertyRef Name="BankCode" />
+            </Principal>
+            <Dependent Role="BranchMaster">
+              <PropertyRef Name="BankCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CastMaster_ReligionMaster">
+          <End Role="ReligionMaster" Type="Self.ReligionMaster" Multiplicity="1" />
+          <End Role="CastMaster" Type="Self.CastMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReligionMaster">
+              <PropertyRef Name="ReligionID" />
+            </Principal>
+            <Dependent Role="CastMaster">
+              <PropertyRef Name="ReligionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_City_State">
+          <End Role="State" Type="Self.State" Multiplicity="1" />
+          <End Role="City" Type="Self.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="StateID" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMP_Grade_Assignment_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="EMP_Grade_Assignment" Type="Self.EMP_Grade_Assignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EMP_Grade_Assignment">
+              <PropertyRef Name="EMP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMP_Grade_Assignment_HRMS_CATEGORY_GRADE">
+          <End Role="HRMS_CATEGORY_GRADE" Type="Self.HRMS_CATEGORY_GRADE" Multiplicity="1" />
+          <End Role="EMP_Grade_Assignment" Type="Self.EMP_Grade_Assignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_CATEGORY_GRADE">
+              <PropertyRef Name="Category_ID" />
+            </Principal>
+            <Dependent Role="EMP_Grade_Assignment">
+              <PropertyRef Name="Grade_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Personal_Detail_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="Employee_Personal_Detail" Type="Self.Employee_Personal_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Employee_Personal_Detail">
+              <PropertyRef Name="EMP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Personal_Detail_Employee_Personal_Detail">
+          <End Role="CastMaster" Type="Self.CastMaster" Multiplicity="0..1" />
+          <End Role="Employee_Personal_Detail" Type="Self.Employee_Personal_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CastMaster">
+              <PropertyRef Name="CastCode" />
+            </Principal>
+            <Dependent Role="Employee_Personal_Detail">
+              <PropertyRef Name="Caste" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Personal_Detail_HRMS_CATEGORY_GRADE">
+          <End Role="HRMS_CATEGORY_GRADE" Type="Self.HRMS_CATEGORY_GRADE" Multiplicity="1" />
+          <End Role="Employee_Personal_Detail" Type="Self.Employee_Personal_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_CATEGORY_GRADE">
+              <PropertyRef Name="Category_ID" />
+            </Principal>
+            <Dependent Role="Employee_Personal_Detail">
+              <PropertyRef Name="Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Personal_Detail_HRMS_EMP_CITIZENSHIP_MS">
+          <End Role="HRMS_EMP_CITIZENSHIP_MS" Type="Self.HRMS_EMP_CITIZENSHIP_MS" Multiplicity="0..1" />
+          <End Role="Employee_Personal_Detail" Type="Self.Employee_Personal_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_EMP_CITIZENSHIP_MS">
+              <PropertyRef Name="CitizenShip_ID" />
+            </Principal>
+            <Dependent Role="Employee_Personal_Detail">
+              <PropertyRef Name="Citizenship" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Personal_Detail_HRMS_EMP_GENDER_MS">
+          <End Role="HRMS_EMP_GENDER_MS" Type="Self.HRMS_EMP_GENDER_MS" Multiplicity="1" />
+          <End Role="Employee_Personal_Detail" Type="Self.Employee_Personal_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_EMP_GENDER_MS">
+              <PropertyRef Name="Gender_ID" />
+            </Principal>
+            <Dependent Role="Employee_Personal_Detail">
+              <PropertyRef Name="Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Personal_Detail_MaritalMaster">
+          <End Role="MaritalMaster" Type="Self.MaritalMaster" Multiplicity="0..1" />
+          <End Role="Employee_Personal_Detail" Type="Self.Employee_Personal_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaritalMaster">
+              <PropertyRef Name="MaritalID" />
+            </Principal>
+            <Dependent Role="Employee_Personal_Detail">
+              <PropertyRef Name="MarraigeStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Personal_Detail_ReligionMaster">
+          <End Role="ReligionMaster" Type="Self.ReligionMaster" Multiplicity="0..1" />
+          <End Role="Employee_Personal_Detail" Type="Self.Employee_Personal_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReligionMaster">
+              <PropertyRef Name="ReligionID" />
+            </Principal>
+            <Dependent Role="Employee_Personal_Detail">
+              <PropertyRef Name="Religion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_Contact_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="HRMS_Contact" Type="Self.HRMS_Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_Contact">
+              <PropertyRef Name="Employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_EMP_Attachment_Details_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="HRMS_EMP_Attachment_Details" Type="Self.HRMS_EMP_Attachment_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_EMP_Attachment_Details">
+              <PropertyRef Name="EMP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_EMP_Attachment_Details_HRMS_ATTACHMENT_TYPE">
+          <End Role="HRMS_ATTACHMENT_TYPE" Type="Self.HRMS_ATTACHMENT_TYPE" Multiplicity="1" />
+          <End Role="HRMS_EMP_Attachment_Details" Type="Self.HRMS_EMP_Attachment_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_ATTACHMENT_TYPE">
+              <PropertyRef Name="Attachment_Type_ID" />
+            </Principal>
+            <Dependent Role="HRMS_EMP_Attachment_Details">
+              <PropertyRef Name="Attachment_Type_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_Emp_Details_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="HRMS_Emp_Details" Type="Self.HRMS_Emp_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_Emp_Details">
+              <PropertyRef Name="EMP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_Emp_Details_HRMS_COST_CENTER">
+          <End Role="HRMS_COST_CENTER" Type="Self.HRMS_COST_CENTER" Multiplicity="1" />
+          <End Role="HRMS_Emp_Details" Type="Self.HRMS_Emp_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_COST_CENTER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_Emp_Details">
+              <PropertyRef Name="Cost_Center" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_Emp_Details_HRMS_DEPT">
+          <End Role="HRMS_DEPT" Type="Self.HRMS_DEPT" Multiplicity="1" />
+          <End Role="HRMS_Emp_Details" Type="Self.HRMS_Emp_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_DEPT">
+              <PropertyRef Name="Dept_Id" />
+            </Principal>
+            <Dependent Role="HRMS_Emp_Details">
+              <PropertyRef Name="Department" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_Emp_Details_HRMS_DESG_MS">
+          <End Role="HRMS_DESG_MS" Type="Self.HRMS_DESG_MS" Multiplicity="1" />
+          <End Role="HRMS_Emp_Details" Type="Self.HRMS_Emp_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_DESG_MS">
+              <PropertyRef Name="Desg_Id" />
+            </Principal>
+            <Dependent Role="HRMS_Emp_Details">
+              <PropertyRef Name="Designation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_Emp_Details_HRMS_SALUTATION">
+          <End Role="HRMS_SALUTATION" Type="Self.HRMS_SALUTATION" Multiplicity="1" />
+          <End Role="HRMS_Emp_Details" Type="Self.HRMS_Emp_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_SALUTATION">
+              <PropertyRef Name="Salutation_ID" />
+            </Principal>
+            <Dependent Role="HRMS_Emp_Details">
+              <PropertyRef Name="salutation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_Emp_Details_UnitMaster">
+          <End Role="UnitMaster" Type="Self.UnitMaster" Multiplicity="1" />
+          <End Role="HRMS_Emp_Details" Type="Self.HRMS_Emp_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitMaster">
+              <PropertyRef Name="UnitCode" />
+            </Principal>
+            <Dependent Role="HRMS_Emp_Details">
+              <PropertyRef Name="Unit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_Emp_Details_WorkLocationMaster">
+          <End Role="WorkLocationMaster" Type="Self.WorkLocationMaster" Multiplicity="0..1" />
+          <End Role="HRMS_Emp_Details" Type="Self.HRMS_Emp_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkLocationMaster">
+              <PropertyRef Name="WorkID" />
+            </Principal>
+            <Dependent Role="HRMS_Emp_Details">
+              <PropertyRef Name="Work_Location" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_EMP_PHOTO_SIGN_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="HRMS_EMP_PHOTO_SIGN" Type="Self.HRMS_EMP_PHOTO_SIGN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_EMP_PHOTO_SIGN">
+              <PropertyRef Name="Emp_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_EMP_ReferenceDetail_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="HRMS_EMP_ReferenceDetail" Type="Self.HRMS_EMP_ReferenceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_EMP_ReferenceDetail">
+              <PropertyRef Name="EMP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_EMP_ReferenceDetail_City">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="HRMS_EMP_ReferenceDetail" Type="Self.HRMS_EMP_ReferenceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="HRMS_EMP_ReferenceDetail">
+              <PropertyRef Name="City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_EMP_ReferenceDetail_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="HRMS_EMP_ReferenceDetail" Type="Self.HRMS_EMP_ReferenceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="HRMS_EMP_ReferenceDetail">
+              <PropertyRef Name="Country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_EMP_ReferenceDetail_State">
+          <End Role="State" Type="Self.State" Multiplicity="1" />
+          <End Role="HRMS_EMP_ReferenceDetail" Type="Self.HRMS_EMP_ReferenceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="StateID" />
+            </Principal>
+            <Dependent Role="HRMS_EMP_ReferenceDetail">
+              <PropertyRef Name="State" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_TravelGroupType_MS_HRMS_TravelMode_MS">
+          <End Role="HRMS_TravelMode_MS" Type="Self.HRMS_TravelMode_MS" Multiplicity="1" />
+          <End Role="HRMS_TravelGroupType_MS" Type="Self.HRMS_TravelGroupType_MS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_TravelMode_MS">
+              <PropertyRef Name="Mode_ID" />
+            </Principal>
+            <Dependent Role="HRMS_TravelGroupType_MS">
+              <PropertyRef Name="Mode_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_State_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="State" Type="Self.State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="State">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="DepartmentData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="HRMS5ModelStoreContainer">
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BankMaster" EntityType="Self.BankMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BranchMaster" EntityType="Self.BranchMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CastMaster" EntityType="Self.CastMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Country" EntityType="Self.Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMP_Grade_Assignment" EntityType="Self.EMP_Grade_Assignment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee_Personal_Detail" EntityType="Self.Employee_Personal_Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_ATTACHMENT_TYPE" EntityType="Self.HRMS_ATTACHMENT_TYPE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_CATEGORY_GRADE" EntityType="Self.HRMS_CATEGORY_GRADE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_Contact" EntityType="Self.HRMS_Contact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_COST_CENTER" EntityType="Self.HRMS_COST_CENTER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_DEPT" EntityType="Self.HRMS_DEPT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_DESG_MS" EntityType="Self.HRMS_DESG_MS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_EMP_Attachment_Details" EntityType="Self.HRMS_EMP_Attachment_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_EMP_BUSINESSDIVISION_MS" EntityType="Self.HRMS_EMP_BUSINESSDIVISION_MS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_EMP_CITIZENSHIP_MS" EntityType="Self.HRMS_EMP_CITIZENSHIP_MS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_Emp_Details" EntityType="Self.HRMS_Emp_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_EMP_GENDER_MS" EntityType="Self.HRMS_EMP_GENDER_MS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_EMP_PHOTO_SIGN" EntityType="Self.HRMS_EMP_PHOTO_SIGN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_EMP_ReferenceDetail" EntityType="Self.HRMS_EMP_ReferenceDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_SALUTATION" EntityType="Self.HRMS_SALUTATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_TRAVEL_MEAL_EXPENSE_MS" EntityType="Self.HRMS_TRAVEL_MEAL_EXPENSE_MS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_TRAVEL_OTHER_DETAILS_MS" EntityType="Self.HRMS_TRAVEL_OTHER_DETAILS_MS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_Travel_Purpose" EntityType="Self.HRMS_Travel_Purpose" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_Travel_type" EntityType="Self.HRMS_Travel_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_TravelGroupType_MS" EntityType="Self.HRMS_TravelGroupType_MS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_TravelMode_MS" EntityType="Self.HRMS_TravelMode_MS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaritalMaster" EntityType="Self.MaritalMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PayRollMaster" EntityType="Self.PayRollMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReligionMaster" EntityType="Self.ReligionMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SegmentMaster" EntityType="Self.SegmentMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UnitMaster" EntityType="Self.UnitMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkLocationMaster" EntityType="Self.WorkLocationMaster" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BranchMaster_BankMaster" Association="Self.FK_BranchMaster_BankMaster">
+            <End Role="BankMaster" EntitySet="BankMaster" />
+            <End Role="BranchMaster" EntitySet="BranchMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CastMaster_ReligionMaster" Association="Self.FK_CastMaster_ReligionMaster">
+            <End Role="ReligionMaster" EntitySet="ReligionMaster" />
+            <End Role="CastMaster" EntitySet="CastMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_City_State" Association="Self.FK_City_State">
+            <End Role="State" EntitySet="State" />
+            <End Role="City" EntitySet="City" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMP_Grade_Assignment_Accounts" Association="Self.FK_EMP_Grade_Assignment_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="EMP_Grade_Assignment" EntitySet="EMP_Grade_Assignment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMP_Grade_Assignment_HRMS_CATEGORY_GRADE" Association="Self.FK_EMP_Grade_Assignment_HRMS_CATEGORY_GRADE">
+            <End Role="HRMS_CATEGORY_GRADE" EntitySet="HRMS_CATEGORY_GRADE" />
+            <End Role="EMP_Grade_Assignment" EntitySet="EMP_Grade_Assignment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Personal_Detail_Accounts" Association="Self.FK_Employee_Personal_Detail_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Employee_Personal_Detail" EntitySet="Employee_Personal_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Personal_Detail_Employee_Personal_Detail" Association="Self.FK_Employee_Personal_Detail_Employee_Personal_Detail">
+            <End Role="CastMaster" EntitySet="CastMaster" />
+            <End Role="Employee_Personal_Detail" EntitySet="Employee_Personal_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Personal_Detail_HRMS_CATEGORY_GRADE" Association="Self.FK_Employee_Personal_Detail_HRMS_CATEGORY_GRADE">
+            <End Role="HRMS_CATEGORY_GRADE" EntitySet="HRMS_CATEGORY_GRADE" />
+            <End Role="Employee_Personal_Detail" EntitySet="Employee_Personal_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Personal_Detail_HRMS_EMP_CITIZENSHIP_MS" Association="Self.FK_Employee_Personal_Detail_HRMS_EMP_CITIZENSHIP_MS">
+            <End Role="HRMS_EMP_CITIZENSHIP_MS" EntitySet="HRMS_EMP_CITIZENSHIP_MS" />
+            <End Role="Employee_Personal_Detail" EntitySet="Employee_Personal_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Personal_Detail_HRMS_EMP_GENDER_MS" Association="Self.FK_Employee_Personal_Detail_HRMS_EMP_GENDER_MS">
+            <End Role="HRMS_EMP_GENDER_MS" EntitySet="HRMS_EMP_GENDER_MS" />
+            <End Role="Employee_Personal_Detail" EntitySet="Employee_Personal_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Personal_Detail_MaritalMaster" Association="Self.FK_Employee_Personal_Detail_MaritalMaster">
+            <End Role="MaritalMaster" EntitySet="MaritalMaster" />
+            <End Role="Employee_Personal_Detail" EntitySet="Employee_Personal_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Personal_Detail_ReligionMaster" Association="Self.FK_Employee_Personal_Detail_ReligionMaster">
+            <End Role="ReligionMaster" EntitySet="ReligionMaster" />
+            <End Role="Employee_Personal_Detail" EntitySet="Employee_Personal_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_Contact_Accounts" Association="Self.FK_HRMS_Contact_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="HRMS_Contact" EntitySet="HRMS_Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_EMP_Attachment_Details_Accounts" Association="Self.FK_HRMS_EMP_Attachment_Details_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="HRMS_EMP_Attachment_Details" EntitySet="HRMS_EMP_Attachment_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_EMP_Attachment_Details_HRMS_ATTACHMENT_TYPE" Association="Self.FK_HRMS_EMP_Attachment_Details_HRMS_ATTACHMENT_TYPE">
+            <End Role="HRMS_ATTACHMENT_TYPE" EntitySet="HRMS_ATTACHMENT_TYPE" />
+            <End Role="HRMS_EMP_Attachment_Details" EntitySet="HRMS_EMP_Attachment_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_Emp_Details_Accounts" Association="Self.FK_HRMS_Emp_Details_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="HRMS_Emp_Details" EntitySet="HRMS_Emp_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_Emp_Details_HRMS_COST_CENTER" Association="Self.FK_HRMS_Emp_Details_HRMS_COST_CENTER">
+            <End Role="HRMS_COST_CENTER" EntitySet="HRMS_COST_CENTER" />
+            <End Role="HRMS_Emp_Details" EntitySet="HRMS_Emp_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_Emp_Details_HRMS_DEPT" Association="Self.FK_HRMS_Emp_Details_HRMS_DEPT">
+            <End Role="HRMS_DEPT" EntitySet="HRMS_DEPT" />
+            <End Role="HRMS_Emp_Details" EntitySet="HRMS_Emp_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_Emp_Details_HRMS_DESG_MS" Association="Self.FK_HRMS_Emp_Details_HRMS_DESG_MS">
+            <End Role="HRMS_DESG_MS" EntitySet="HRMS_DESG_MS" />
+            <End Role="HRMS_Emp_Details" EntitySet="HRMS_Emp_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_Emp_Details_HRMS_SALUTATION" Association="Self.FK_HRMS_Emp_Details_HRMS_SALUTATION">
+            <End Role="HRMS_SALUTATION" EntitySet="HRMS_SALUTATION" />
+            <End Role="HRMS_Emp_Details" EntitySet="HRMS_Emp_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_Emp_Details_UnitMaster" Association="Self.FK_HRMS_Emp_Details_UnitMaster">
+            <End Role="UnitMaster" EntitySet="UnitMaster" />
+            <End Role="HRMS_Emp_Details" EntitySet="HRMS_Emp_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_Emp_Details_WorkLocationMaster" Association="Self.FK_HRMS_Emp_Details_WorkLocationMaster">
+            <End Role="WorkLocationMaster" EntitySet="WorkLocationMaster" />
+            <End Role="HRMS_Emp_Details" EntitySet="HRMS_Emp_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_EMP_PHOTO_SIGN_Accounts" Association="Self.FK_HRMS_EMP_PHOTO_SIGN_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="HRMS_EMP_PHOTO_SIGN" EntitySet="HRMS_EMP_PHOTO_SIGN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_EMP_ReferenceDetail_Accounts" Association="Self.FK_HRMS_EMP_ReferenceDetail_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="HRMS_EMP_ReferenceDetail" EntitySet="HRMS_EMP_ReferenceDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_EMP_ReferenceDetail_City" Association="Self.FK_HRMS_EMP_ReferenceDetail_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="HRMS_EMP_ReferenceDetail" EntitySet="HRMS_EMP_ReferenceDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_EMP_ReferenceDetail_Country" Association="Self.FK_HRMS_EMP_ReferenceDetail_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="HRMS_EMP_ReferenceDetail" EntitySet="HRMS_EMP_ReferenceDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_EMP_ReferenceDetail_State" Association="Self.FK_HRMS_EMP_ReferenceDetail_State">
+            <End Role="State" EntitySet="State" />
+            <End Role="HRMS_EMP_ReferenceDetail" EntitySet="HRMS_EMP_ReferenceDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_TravelGroupType_MS_HRMS_TravelMode_MS" Association="Self.FK_HRMS_TravelGroupType_MS_HRMS_TravelMode_MS">
+            <End Role="HRMS_TravelMode_MS" EntitySet="HRMS_TravelMode_MS" />
+            <End Role="HRMS_TravelGroupType_MS" EntitySet="HRMS_TravelGroupType_MS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_State_Country" Association="Self.FK_State_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="State" EntitySet="State" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HRMS5Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="role" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="EMP_Grade_Assignment" Relationship="Self.FK_EMP_Grade_Assignment_Accounts" FromRole="Accounts" ToRole="EMP_Grade_Assignment" />
+          <NavigationProperty Name="Employee_Personal_Detail" Relationship="Self.FK_Employee_Personal_Detail_Accounts" FromRole="Accounts" ToRole="Employee_Personal_Detail" />
+          <NavigationProperty Name="HRMS_Contact" Relationship="Self.FK_HRMS_Contact_Accounts" FromRole="Accounts" ToRole="HRMS_Contact" />
+          <NavigationProperty Name="HRMS_EMP_Attachment_Details" Relationship="Self.FK_HRMS_EMP_Attachment_Details_Accounts" FromRole="Accounts" ToRole="HRMS_EMP_Attachment_Details" />
+          <NavigationProperty Name="HRMS_EMP_PHOTO_SIGN" Relationship="Self.FK_HRMS_EMP_PHOTO_SIGN_Accounts" FromRole="Accounts" ToRole="HRMS_EMP_PHOTO_SIGN" />
+          <NavigationProperty Name="HRMS_EMP_ReferenceDetail" Relationship="Self.FK_HRMS_EMP_ReferenceDetail_Accounts" FromRole="Accounts" ToRole="HRMS_EMP_ReferenceDetail" />
+          <NavigationProperty Name="HRMS_Emp_Details" Relationship="HRMS5Model.FK_HRMS_Emp_Details_Accounts" FromRole="Accounts" ToRole="HRMS_Emp_Details" />
+        </EntityType>
+        <EntityType Name="BankMaster">
+          <Key>
+            <PropertyRef Name="BankCode" />
+          </Key>
+          <Property Name="BankCode" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BankName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="BranchMaster" Relationship="Self.FK_BranchMaster_BankMaster" FromRole="BankMaster" ToRole="BranchMaster" />
+        </EntityType>
+        <EntityType Name="BranchMaster">
+          <Key>
+            <PropertyRef Name="BranchCode" />
+          </Key>
+          <Property Name="BranchCode" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BankCode" Type="Int64" Nullable="false" />
+          <Property Name="BranchName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MICR_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IFSC_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contact" Type="Int64" />
+          <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PinCode" Type="Int64" />
+          <NavigationProperty Name="BankMaster" Relationship="Self.FK_BranchMaster_BankMaster" FromRole="BranchMaster" ToRole="BankMaster" />
+        </EntityType>
+        <EntityType Name="CastMaster">
+          <Key>
+            <PropertyRef Name="CastCode" />
+          </Key>
+          <Property Name="CastCode" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReligionID" Type="Int64" Nullable="false" />
+          <Property Name="CastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ReligionMaster" Relationship="Self.FK_CastMaster_ReligionMaster" FromRole="CastMaster" ToRole="ReligionMaster" />
+          <NavigationProperty Name="Employee_Personal_Detail" Relationship="Self.FK_Employee_Personal_Detail_Employee_Personal_Detail" FromRole="CastMaster" ToRole="Employee_Personal_Detail" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CityID" />
+          </Key>
+          <Property Name="CityID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StateID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="State" Relationship="Self.FK_City_State" FromRole="City" ToRole="State" />
+          <NavigationProperty Name="HRMS_EMP_ReferenceDetail" Relationship="Self.FK_HRMS_EMP_ReferenceDetail_City" FromRole="City" ToRole="HRMS_EMP_ReferenceDetail" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Name="CountryID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="HRMS_EMP_ReferenceDetail" Relationship="Self.FK_HRMS_EMP_ReferenceDetail_Country" FromRole="Country" ToRole="HRMS_EMP_ReferenceDetail" />
+          <NavigationProperty Name="State" Relationship="Self.FK_State_Country" FromRole="Country" ToRole="State" />
+        </EntityType>
+        <EntityType Name="EMP_Grade_Assignment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EMP_ID" Type="Int64" Nullable="false" />
+          <Property Name="Grade_ID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_EMP_Grade_Assignment_Accounts" FromRole="EMP_Grade_Assignment" ToRole="Accounts" />
+          <NavigationProperty Name="HRMS_CATEGORY_GRADE" Relationship="Self.FK_EMP_Grade_Assignment_HRMS_CATEGORY_GRADE" FromRole="EMP_Grade_Assignment" ToRole="HRMS_CATEGORY_GRADE" />
+        </EntityType>
+        <EntityType Name="Employee_Personal_Detail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Gender" Type="Int64" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Category" Type="Int64" Nullable="false" />
+          <Property Name="IdentityMark1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdentityMark2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Religion" Type="Int64" />
+          <Property Name="Citizenship" Type="Int64" />
+          <Property Name="Caste" Type="Int64" />
+          <Property Name="Race" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MarraigeStatus" Type="Int64" />
+          <Property Name="MarraigeDate" Type="DateTime" Precision="0" />
+          <Property Name="NoOfChild" Type="Int32" />
+          <Property Name="NoOfDependents" Type="Int32" />
+          <Property Name="AadharNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="SIN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="AKA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MilitaryService" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BirthCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Hobbies" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MilitaryServiceDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EMP_ID" Type="Int64" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_Employee_Personal_Detail_Accounts" FromRole="Employee_Personal_Detail" ToRole="Accounts" />
+          <NavigationProperty Name="CastMaster" Relationship="Self.FK_Employee_Personal_Detail_Employee_Personal_Detail" FromRole="Employee_Personal_Detail" ToRole="CastMaster" />
+          <NavigationProperty Name="HRMS_CATEGORY_GRADE" Relationship="Self.FK_Employee_Personal_Detail_HRMS_CATEGORY_GRADE" FromRole="Employee_Personal_Detail" ToRole="HRMS_CATEGORY_GRADE" />
+          <NavigationProperty Name="HRMS_EMP_CITIZENSHIP_MS" Relationship="Self.FK_Employee_Personal_Detail_HRMS_EMP_CITIZENSHIP_MS" FromRole="Employee_Personal_Detail" ToRole="HRMS_EMP_CITIZENSHIP_MS" />
+          <NavigationProperty Name="HRMS_EMP_GENDER_MS" Relationship="Self.FK_Employee_Personal_Detail_HRMS_EMP_GENDER_MS" FromRole="Employee_Personal_Detail" ToRole="HRMS_EMP_GENDER_MS" />
+          <NavigationProperty Name="MaritalMaster" Relationship="Self.FK_Employee_Personal_Detail_MaritalMaster" FromRole="Employee_Personal_Detail" ToRole="MaritalMaster" />
+          <NavigationProperty Name="ReligionMaster" Relationship="Self.FK_Employee_Personal_Detail_ReligionMaster" FromRole="Employee_Personal_Detail" ToRole="ReligionMaster" />
+        </EntityType>
+        <EntityType Name="HRMS_ATTACHMENT_TYPE">
+          <Key>
+            <PropertyRef Name="Attachment_Type_ID" />
+          </Key>
+          <Property Name="Attachment_Type_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Attachment_Type_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="HRMS_EMP_Attachment_Details" Relationship="Self.FK_HRMS_EMP_Attachment_Details_HRMS_ATTACHMENT_TYPE" FromRole="HRMS_ATTACHMENT_TYPE" ToRole="HRMS_EMP_Attachment_Details" />
+        </EntityType>
+        <EntityType Name="HRMS_CATEGORY_GRADE">
+          <Key>
+            <PropertyRef Name="Category_ID" />
+          </Key>
+          <Property Name="Category_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Category_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Grade_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Grade_Detail" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EMP_Grade_Assignment" Relationship="Self.FK_EMP_Grade_Assignment_HRMS_CATEGORY_GRADE" FromRole="HRMS_CATEGORY_GRADE" ToRole="EMP_Grade_Assignment" />
+          <NavigationProperty Name="Employee_Personal_Detail" Relationship="Self.FK_Employee_Personal_Detail_HRMS_CATEGORY_GRADE" FromRole="HRMS_CATEGORY_GRADE" ToRole="Employee_Personal_Detail" />
+        </EntityType>
+        <EntityType Name="HRMS_Contact">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Phone_Work" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Ext" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mobile_No_Work" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Corporate_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone_Home" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile_no_home" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Personal_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Office_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Employee_ID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_HRMS_Contact_Accounts" FromRole="HRMS_Contact" ToRole="Accounts" />
+        </EntityType>
+        <EntityType Name="HRMS_COST_CENTER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cost_Cntr_Code" Type="Int64" Nullable="false" />
+          <Property Name="Cost_Cntr_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Parent_Cost_Cntr_Code" Type="Int64" />
+          <Property Name="Ledger_Code" Type="Int64" />
+          <NavigationProperty Name="HRMS_Emp_Details" Relationship="HRMS5Model.FK_HRMS_Emp_Details_HRMS_COST_CENTER" FromRole="HRMS_COST_CENTER" ToRole="HRMS_Emp_Details" />
+        </EntityType>
+        <EntityType Name="HRMS_DEPT">
+          <Key>
+            <PropertyRef Name="Dept_Id" />
+          </Key>
+          <Property Name="Dept_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Dept_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sort_Name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Parent_ID" Type="Int64" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="ModifyBy" Type="Int64" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="HRMS_Emp_Details" Relationship="HRMS5Model.FK_HRMS_Emp_Details_HRMS_DEPT" FromRole="HRMS_DEPT" ToRole="HRMS_Emp_Details" />
+        </EntityType>
+        <EntityType Name="HRMS_EMP_Attachment_Details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EMP_ID" Type="Int64" Nullable="false" />
+          <Property Name="Attachment_Title" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Attachment_Type_ID" Type="Int64" Nullable="false" />
+          <Property Name="FILENAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FILEURL" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_HRMS_EMP_Attachment_Details_Accounts" FromRole="HRMS_EMP_Attachment_Details" ToRole="Accounts" />
+          <NavigationProperty Name="HRMS_ATTACHMENT_TYPE" Relationship="Self.FK_HRMS_EMP_Attachment_Details_HRMS_ATTACHMENT_TYPE" FromRole="HRMS_EMP_Attachment_Details" ToRole="HRMS_ATTACHMENT_TYPE" />
+        </EntityType>
+        <EntityType Name="HRMS_EMP_BUSINESSDIVISION_MS">
+          <Key>
+            <PropertyRef Name="BusinessDivision_ID" />
+          </Key>
+          <Property Name="BusinessDivision_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BusinessDivision_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BusinessDivision_SapCode" Type="Int64" />
+        </EntityType>
+        <EntityType Name="HRMS_EMP_CITIZENSHIP_MS">
+          <Key>
+            <PropertyRef Name="CitizenShip_ID" />
+          </Key>
+          <Property Name="CitizenShip_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CitizenShip_Country_NM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Employee_Personal_Detail" Relationship="Self.FK_Employee_Personal_Detail_HRMS_EMP_CITIZENSHIP_MS" FromRole="HRMS_EMP_CITIZENSHIP_MS" ToRole="Employee_Personal_Detail" />
+        </EntityType>
+        <EntityType Name="HRMS_EMP_GENDER_MS">
+          <Key>
+            <PropertyRef Name="Gender_ID" />
+          </Key>
+          <Property Name="Gender_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Gender_Value" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Employee_Personal_Detail" Relationship="Self.FK_Employee_Personal_Detail_HRMS_EMP_GENDER_MS" FromRole="HRMS_EMP_GENDER_MS" ToRole="Employee_Personal_Detail" />
+        </EntityType>
+        <EntityType Name="HRMS_EMP_PHOTO_SIGN">
+          <Key>
+            <PropertyRef Name="Emp_Photos_ID" />
+          </Key>
+          <Property Name="Emp_Photos_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Emp_ID" Type="Int64" Nullable="false" />
+          <Property Name="Emp_Photo_Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Emp_Photo_Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Emp_Sign_Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Emp_Sign_Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_HRMS_EMP_PHOTO_SIGN_Accounts" FromRole="HRMS_EMP_PHOTO_SIGN" ToRole="Accounts" />
+        </EntityType>
+        <EntityType Name="HRMS_EMP_ReferenceDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EMP_ID" Type="Int64" Nullable="false" />
+          <Property Name="Is_Ref_Emp" Type="Boolean" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Country" Type="Int64" Nullable="false" />
+          <Property Name="State" Type="Int64" Nullable="false" />
+          <Property Name="City" Type="Int64" Nullable="false" />
+          <Property Name="Relationship" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Pincode" Type="Int64" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Company" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Accounts" Relationship="Self.FK_HRMS_EMP_ReferenceDetail_Accounts" FromRole="HRMS_EMP_ReferenceDetail" ToRole="Accounts" />
+          <NavigationProperty Name="City1" Relationship="Self.FK_HRMS_EMP_ReferenceDetail_City" FromRole="HRMS_EMP_ReferenceDetail" ToRole="City" />
+          <NavigationProperty Name="Country1" Relationship="Self.FK_HRMS_EMP_ReferenceDetail_Country" FromRole="HRMS_EMP_ReferenceDetail" ToRole="Country" />
+          <NavigationProperty Name="State1" Relationship="Self.FK_HRMS_EMP_ReferenceDetail_State" FromRole="HRMS_EMP_ReferenceDetail" ToRole="State" />
+        </EntityType>
+        <EntityType Name="HRMS_SALUTATION">
+          <Key>
+            <PropertyRef Name="Salutation_ID" />
+          </Key>
+          <Property Name="Salutation_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Salutation_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="HRMS_Emp_Details" Relationship="HRMS5Model.FK_HRMS_Emp_Details_HRMS_SALUTATION" FromRole="HRMS_SALUTATION" ToRole="HRMS_Emp_Details" />
+        </EntityType>
+        <EntityType Name="HRMS_Travel_Purpose">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HRMS_Travel_type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Short_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="HRMS_TravelGroupType_MS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Mode_ID" Type="Int64" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Group_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="HRMS_TravelMode_MS" Relationship="Self.FK_HRMS_TravelGroupType_MS_HRMS_TravelMode_MS" FromRole="HRMS_TravelGroupType_MS" ToRole="HRMS_TravelMode_MS" />
+        </EntityType>
+        <EntityType Name="HRMS_TravelMode_MS">
+          <Key>
+            <PropertyRef Name="Mode_ID" />
+          </Key>
+          <Property Name="Mode_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Mode_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mode_Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mode_Short_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="HRMS_TravelGroupType_MS" Relationship="Self.FK_HRMS_TravelGroupType_MS_HRMS_TravelMode_MS" FromRole="HRMS_TravelMode_MS" ToRole="HRMS_TravelGroupType_MS" />
+        </EntityType>
+        <EntityType Name="MaritalMaster">
+          <Key>
+            <PropertyRef Name="MaritalID" />
+          </Key>
+          <Property Name="MaritalID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaritalName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Employee_Personal_Detail" Relationship="Self.FK_Employee_Personal_Detail_MaritalMaster" FromRole="MaritalMaster" ToRole="Employee_Personal_Detail" />
+        </EntityType>
+        <EntityType Name="PayRollMaster">
+          <Key>
+            <PropertyRef Name="PayRollCode" />
+          </Key>
+          <Property Name="PayRollCode" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PayRollName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReligionMaster">
+          <Key>
+            <PropertyRef Name="ReligionID" />
+          </Key>
+          <Property Name="ReligionID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReligionShortName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ReligionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CastMaster" Relationship="Self.FK_CastMaster_ReligionMaster" FromRole="ReligionMaster" ToRole="CastMaster" />
+          <NavigationProperty Name="Employee_Personal_Detail" Relationship="Self.FK_Employee_Personal_Detail_ReligionMaster" FromRole="ReligionMaster" ToRole="Employee_Personal_Detail" />
+        </EntityType>
+        <EntityType Name="SegmentMaster">
+          <Key>
+            <PropertyRef Name="SegmentID" />
+          </Key>
+          <Property Name="SegmentID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SegmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SAPCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="StateID" />
+          </Key>
+          <Property Name="StateID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CountryID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="City" Relationship="Self.FK_City_State" FromRole="State" ToRole="City" />
+          <NavigationProperty Name="Country" Relationship="Self.FK_State_Country" FromRole="State" ToRole="Country" />
+          <NavigationProperty Name="HRMS_EMP_ReferenceDetail" Relationship="Self.FK_HRMS_EMP_ReferenceDetail_State" FromRole="State" ToRole="HRMS_EMP_ReferenceDetail" />
+        </EntityType>
+        <EntityType Name="UnitMaster">
+          <Key>
+            <PropertyRef Name="UnitCode" />
+          </Key>
+          <Property Name="UnitCode" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UnitName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Pincode" Type="Int64" Nullable="false" />
+          <Property Name="Priority" Type="Int64" Nullable="false" />
+          <Property Name="PaySlip" Type="Boolean" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="HRMS_Emp_Details" Relationship="HRMS5Model.FK_HRMS_Emp_Details_UnitMaster" FromRole="UnitMaster" ToRole="HRMS_Emp_Details" />
+        </EntityType>
+        <EntityType Name="WorkLocationMaster">
+          <Key>
+            <PropertyRef Name="WorkID" />
+          </Key>
+          <Property Name="WorkID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkLocationName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SAPCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="HRMS_Emp_Details" Relationship="HRMS5Model.FK_HRMS_Emp_Details_WorkLocationMaster" FromRole="WorkLocationMaster" ToRole="HRMS_Emp_Details" />
+        </EntityType>
+        <Association Name="FK_EMP_Grade_Assignment_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="EMP_Grade_Assignment" Type="Self.EMP_Grade_Assignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EMP_Grade_Assignment">
+              <PropertyRef Name="EMP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Personal_Detail_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="Employee_Personal_Detail" Type="Self.Employee_Personal_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Employee_Personal_Detail">
+              <PropertyRef Name="EMP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_Contact_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="HRMS_Contact" Type="Self.HRMS_Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_Contact">
+              <PropertyRef Name="Employee_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_EMP_Attachment_Details_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="HRMS_EMP_Attachment_Details" Type="Self.HRMS_EMP_Attachment_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_EMP_Attachment_Details">
+              <PropertyRef Name="EMP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_EMP_PHOTO_SIGN_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="HRMS_EMP_PHOTO_SIGN" Type="Self.HRMS_EMP_PHOTO_SIGN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_EMP_PHOTO_SIGN">
+              <PropertyRef Name="Emp_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_EMP_ReferenceDetail_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="HRMS_EMP_ReferenceDetail" Type="Self.HRMS_EMP_ReferenceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_EMP_ReferenceDetail">
+              <PropertyRef Name="EMP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BranchMaster_BankMaster">
+          <End Role="BankMaster" Type="Self.BankMaster" Multiplicity="1" />
+          <End Role="BranchMaster" Type="Self.BranchMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankMaster">
+              <PropertyRef Name="BankCode" />
+            </Principal>
+            <Dependent Role="BranchMaster">
+              <PropertyRef Name="BankCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CastMaster_ReligionMaster">
+          <End Role="ReligionMaster" Type="Self.ReligionMaster" Multiplicity="1" />
+          <End Role="CastMaster" Type="Self.CastMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReligionMaster">
+              <PropertyRef Name="ReligionID" />
+            </Principal>
+            <Dependent Role="CastMaster">
+              <PropertyRef Name="ReligionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Personal_Detail_Employee_Personal_Detail">
+          <End Role="CastMaster" Type="Self.CastMaster" Multiplicity="0..1" />
+          <End Role="Employee_Personal_Detail" Type="Self.Employee_Personal_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CastMaster">
+              <PropertyRef Name="CastCode" />
+            </Principal>
+            <Dependent Role="Employee_Personal_Detail">
+              <PropertyRef Name="Caste" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_City_State">
+          <End Role="State" Type="Self.State" Multiplicity="1" />
+          <End Role="City" Type="Self.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="StateID" />
+            </Principal>
+            <Dependent Role="City">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_EMP_ReferenceDetail_City">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="HRMS_EMP_ReferenceDetail" Type="Self.HRMS_EMP_ReferenceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="HRMS_EMP_ReferenceDetail">
+              <PropertyRef Name="City" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_EMP_ReferenceDetail_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="HRMS_EMP_ReferenceDetail" Type="Self.HRMS_EMP_ReferenceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="HRMS_EMP_ReferenceDetail">
+              <PropertyRef Name="Country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_State_Country">
+          <End Role="Country" Type="Self.Country" Multiplicity="1" />
+          <End Role="State" Type="Self.State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
+            </Principal>
+            <Dependent Role="State">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EMP_Grade_Assignment_HRMS_CATEGORY_GRADE">
+          <End Role="HRMS_CATEGORY_GRADE" Type="Self.HRMS_CATEGORY_GRADE" Multiplicity="1" />
+          <End Role="EMP_Grade_Assignment" Type="Self.EMP_Grade_Assignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_CATEGORY_GRADE">
+              <PropertyRef Name="Category_ID" />
+            </Principal>
+            <Dependent Role="EMP_Grade_Assignment">
+              <PropertyRef Name="Grade_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Personal_Detail_HRMS_CATEGORY_GRADE">
+          <End Role="HRMS_CATEGORY_GRADE" Type="Self.HRMS_CATEGORY_GRADE" Multiplicity="1" />
+          <End Role="Employee_Personal_Detail" Type="Self.Employee_Personal_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_CATEGORY_GRADE">
+              <PropertyRef Name="Category_ID" />
+            </Principal>
+            <Dependent Role="Employee_Personal_Detail">
+              <PropertyRef Name="Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Personal_Detail_HRMS_EMP_CITIZENSHIP_MS">
+          <End Role="HRMS_EMP_CITIZENSHIP_MS" Type="Self.HRMS_EMP_CITIZENSHIP_MS" Multiplicity="0..1" />
+          <End Role="Employee_Personal_Detail" Type="Self.Employee_Personal_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_EMP_CITIZENSHIP_MS">
+              <PropertyRef Name="CitizenShip_ID" />
+            </Principal>
+            <Dependent Role="Employee_Personal_Detail">
+              <PropertyRef Name="Citizenship" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Personal_Detail_HRMS_EMP_GENDER_MS">
+          <End Role="HRMS_EMP_GENDER_MS" Type="Self.HRMS_EMP_GENDER_MS" Multiplicity="1" />
+          <End Role="Employee_Personal_Detail" Type="Self.Employee_Personal_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_EMP_GENDER_MS">
+              <PropertyRef Name="Gender_ID" />
+            </Principal>
+            <Dependent Role="Employee_Personal_Detail">
+              <PropertyRef Name="Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Personal_Detail_MaritalMaster">
+          <End Role="MaritalMaster" Type="Self.MaritalMaster" Multiplicity="0..1" />
+          <End Role="Employee_Personal_Detail" Type="Self.Employee_Personal_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaritalMaster">
+              <PropertyRef Name="MaritalID" />
+            </Principal>
+            <Dependent Role="Employee_Personal_Detail">
+              <PropertyRef Name="MarraigeStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Personal_Detail_ReligionMaster">
+          <End Role="ReligionMaster" Type="Self.ReligionMaster" Multiplicity="0..1" />
+          <End Role="Employee_Personal_Detail" Type="Self.Employee_Personal_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReligionMaster">
+              <PropertyRef Name="ReligionID" />
+            </Principal>
+            <Dependent Role="Employee_Personal_Detail">
+              <PropertyRef Name="Religion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_EMP_Attachment_Details_HRMS_ATTACHMENT_TYPE">
+          <End Role="HRMS_ATTACHMENT_TYPE" Type="Self.HRMS_ATTACHMENT_TYPE" Multiplicity="1" />
+          <End Role="HRMS_EMP_Attachment_Details" Type="Self.HRMS_EMP_Attachment_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_ATTACHMENT_TYPE">
+              <PropertyRef Name="Attachment_Type_ID" />
+            </Principal>
+            <Dependent Role="HRMS_EMP_Attachment_Details">
+              <PropertyRef Name="Attachment_Type_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_EMP_ReferenceDetail_State">
+          <End Role="State" Type="Self.State" Multiplicity="1" />
+          <End Role="HRMS_EMP_ReferenceDetail" Type="Self.HRMS_EMP_ReferenceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="StateID" />
+            </Principal>
+            <Dependent Role="HRMS_EMP_ReferenceDetail">
+              <PropertyRef Name="State" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_TravelGroupType_MS_HRMS_TravelMode_MS">
+          <End Role="HRMS_TravelMode_MS" Type="Self.HRMS_TravelMode_MS" Multiplicity="1" />
+          <End Role="HRMS_TravelGroupType_MS" Type="Self.HRMS_TravelGroupType_MS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_TravelMode_MS">
+              <PropertyRef Name="Mode_ID" />
+            </Principal>
+            <Dependent Role="HRMS_TravelGroupType_MS">
+              <PropertyRef Name="Mode_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HRMSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" />
+          <EntitySet Name="BankMaster" EntityType="Self.BankMaster" />
+          <EntitySet Name="BranchMaster" EntityType="Self.BranchMaster" />
+          <EntitySet Name="CastMaster" EntityType="Self.CastMaster" />
+          <EntitySet Name="City" EntityType="Self.City" />
+          <EntitySet Name="Country" EntityType="Self.Country" />
+          <EntitySet Name="EMP_Grade_Assignment" EntityType="Self.EMP_Grade_Assignment" />
+          <EntitySet Name="Employee_Personal_Detail" EntityType="Self.Employee_Personal_Detail" />
+          <EntitySet Name="HRMS_ATTACHMENT_TYPE" EntityType="Self.HRMS_ATTACHMENT_TYPE" />
+          <EntitySet Name="HRMS_CATEGORY_GRADE" EntityType="Self.HRMS_CATEGORY_GRADE" />
+          <EntitySet Name="HRMS_Contact" EntityType="Self.HRMS_Contact" />
+          <EntitySet Name="HRMS_COST_CENTER" EntityType="Self.HRMS_COST_CENTER" />
+          <EntitySet Name="HRMS_DEPT" EntityType="Self.HRMS_DEPT" />
+          <EntitySet Name="HRMS_EMP_Attachment_Details" EntityType="Self.HRMS_EMP_Attachment_Details" />
+          <EntitySet Name="HRMS_EMP_BUSINESSDIVISION_MS" EntityType="Self.HRMS_EMP_BUSINESSDIVISION_MS" />
+          <EntitySet Name="HRMS_EMP_CITIZENSHIP_MS" EntityType="Self.HRMS_EMP_CITIZENSHIP_MS" />
+          <EntitySet Name="HRMS_EMP_GENDER_MS" EntityType="Self.HRMS_EMP_GENDER_MS" />
+          <EntitySet Name="HRMS_EMP_PHOTO_SIGN" EntityType="Self.HRMS_EMP_PHOTO_SIGN" />
+          <EntitySet Name="HRMS_EMP_ReferenceDetail" EntityType="Self.HRMS_EMP_ReferenceDetail" />
+          <EntitySet Name="HRMS_SALUTATION" EntityType="Self.HRMS_SALUTATION" />
+          <EntitySet Name="HRMS_Travel_Purpose" EntityType="Self.HRMS_Travel_Purpose" />
+          <EntitySet Name="HRMS_Travel_type" EntityType="Self.HRMS_Travel_type" />
+          <EntitySet Name="HRMS_TravelGroupType_MS" EntityType="Self.HRMS_TravelGroupType_MS" />
+          <EntitySet Name="HRMS_TravelMode_MS" EntityType="Self.HRMS_TravelMode_MS" />
+          <EntitySet Name="MaritalMaster" EntityType="Self.MaritalMaster" />
+          <EntitySet Name="PayRollMaster" EntityType="Self.PayRollMaster" />
+          <EntitySet Name="ReligionMaster" EntityType="Self.ReligionMaster" />
+          <EntitySet Name="SegmentMaster" EntityType="Self.SegmentMaster" />
+          <EntitySet Name="State" EntityType="Self.State" />
+          <EntitySet Name="UnitMaster" EntityType="Self.UnitMaster" />
+          <EntitySet Name="WorkLocationMaster" EntityType="Self.WorkLocationMaster" />
+          <AssociationSet Name="FK_EMP_Grade_Assignment_Accounts" Association="Self.FK_EMP_Grade_Assignment_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="EMP_Grade_Assignment" EntitySet="EMP_Grade_Assignment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Personal_Detail_Accounts" Association="Self.FK_Employee_Personal_Detail_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Employee_Personal_Detail" EntitySet="Employee_Personal_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_Contact_Accounts" Association="Self.FK_HRMS_Contact_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="HRMS_Contact" EntitySet="HRMS_Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_EMP_Attachment_Details_Accounts" Association="Self.FK_HRMS_EMP_Attachment_Details_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="HRMS_EMP_Attachment_Details" EntitySet="HRMS_EMP_Attachment_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_EMP_PHOTO_SIGN_Accounts" Association="Self.FK_HRMS_EMP_PHOTO_SIGN_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="HRMS_EMP_PHOTO_SIGN" EntitySet="HRMS_EMP_PHOTO_SIGN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_EMP_ReferenceDetail_Accounts" Association="Self.FK_HRMS_EMP_ReferenceDetail_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="HRMS_EMP_ReferenceDetail" EntitySet="HRMS_EMP_ReferenceDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BranchMaster_BankMaster" Association="Self.FK_BranchMaster_BankMaster">
+            <End Role="BankMaster" EntitySet="BankMaster" />
+            <End Role="BranchMaster" EntitySet="BranchMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CastMaster_ReligionMaster" Association="Self.FK_CastMaster_ReligionMaster">
+            <End Role="ReligionMaster" EntitySet="ReligionMaster" />
+            <End Role="CastMaster" EntitySet="CastMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Personal_Detail_Employee_Personal_Detail" Association="Self.FK_Employee_Personal_Detail_Employee_Personal_Detail">
+            <End Role="CastMaster" EntitySet="CastMaster" />
+            <End Role="Employee_Personal_Detail" EntitySet="Employee_Personal_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_City_State" Association="Self.FK_City_State">
+            <End Role="State" EntitySet="State" />
+            <End Role="City" EntitySet="City" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_EMP_ReferenceDetail_City" Association="Self.FK_HRMS_EMP_ReferenceDetail_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="HRMS_EMP_ReferenceDetail" EntitySet="HRMS_EMP_ReferenceDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_EMP_ReferenceDetail_Country" Association="Self.FK_HRMS_EMP_ReferenceDetail_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="HRMS_EMP_ReferenceDetail" EntitySet="HRMS_EMP_ReferenceDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_State_Country" Association="Self.FK_State_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="State" EntitySet="State" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EMP_Grade_Assignment_HRMS_CATEGORY_GRADE" Association="Self.FK_EMP_Grade_Assignment_HRMS_CATEGORY_GRADE">
+            <End Role="HRMS_CATEGORY_GRADE" EntitySet="HRMS_CATEGORY_GRADE" />
+            <End Role="EMP_Grade_Assignment" EntitySet="EMP_Grade_Assignment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Personal_Detail_HRMS_CATEGORY_GRADE" Association="Self.FK_Employee_Personal_Detail_HRMS_CATEGORY_GRADE">
+            <End Role="HRMS_CATEGORY_GRADE" EntitySet="HRMS_CATEGORY_GRADE" />
+            <End Role="Employee_Personal_Detail" EntitySet="Employee_Personal_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Personal_Detail_HRMS_EMP_CITIZENSHIP_MS" Association="Self.FK_Employee_Personal_Detail_HRMS_EMP_CITIZENSHIP_MS">
+            <End Role="HRMS_EMP_CITIZENSHIP_MS" EntitySet="HRMS_EMP_CITIZENSHIP_MS" />
+            <End Role="Employee_Personal_Detail" EntitySet="Employee_Personal_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Personal_Detail_HRMS_EMP_GENDER_MS" Association="Self.FK_Employee_Personal_Detail_HRMS_EMP_GENDER_MS">
+            <End Role="HRMS_EMP_GENDER_MS" EntitySet="HRMS_EMP_GENDER_MS" />
+            <End Role="Employee_Personal_Detail" EntitySet="Employee_Personal_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Personal_Detail_MaritalMaster" Association="Self.FK_Employee_Personal_Detail_MaritalMaster">
+            <End Role="MaritalMaster" EntitySet="MaritalMaster" />
+            <End Role="Employee_Personal_Detail" EntitySet="Employee_Personal_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Personal_Detail_ReligionMaster" Association="Self.FK_Employee_Personal_Detail_ReligionMaster">
+            <End Role="ReligionMaster" EntitySet="ReligionMaster" />
+            <End Role="Employee_Personal_Detail" EntitySet="Employee_Personal_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_EMP_Attachment_Details_HRMS_ATTACHMENT_TYPE" Association="Self.FK_HRMS_EMP_Attachment_Details_HRMS_ATTACHMENT_TYPE">
+            <End Role="HRMS_ATTACHMENT_TYPE" EntitySet="HRMS_ATTACHMENT_TYPE" />
+            <End Role="HRMS_EMP_Attachment_Details" EntitySet="HRMS_EMP_Attachment_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_EMP_ReferenceDetail_State" Association="Self.FK_HRMS_EMP_ReferenceDetail_State">
+            <End Role="State" EntitySet="State" />
+            <End Role="HRMS_EMP_ReferenceDetail" EntitySet="HRMS_EMP_ReferenceDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_TravelGroupType_MS_HRMS_TravelMode_MS" Association="Self.FK_HRMS_TravelGroupType_MS_HRMS_TravelMode_MS">
+            <End Role="HRMS_TravelMode_MS" EntitySet="HRMS_TravelMode_MS" />
+            <End Role="HRMS_TravelGroupType_MS" EntitySet="HRMS_TravelGroupType_MS" />
+          </AssociationSet>
+          <FunctionImport Name="DepartmentData" ReturnType="Collection(HRMS5Model.DepartmentData_Result)" />
+          <EntitySet Name="HRMS_DESG_MS" EntityType="HRMS5Model.HRMS_DESG_MS" />
+          <EntitySet Name="HRMS_Emp_Details" EntityType="HRMS5Model.HRMS_Emp_Details" />
+          <AssociationSet Name="FK_HRMS_Emp_Details_Accounts" Association="HRMS5Model.FK_HRMS_Emp_Details_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="HRMS_Emp_Details" EntitySet="HRMS_Emp_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_Emp_Details_HRMS_COST_CENTER" Association="HRMS5Model.FK_HRMS_Emp_Details_HRMS_COST_CENTER">
+            <End Role="HRMS_COST_CENTER" EntitySet="HRMS_COST_CENTER" />
+            <End Role="HRMS_Emp_Details" EntitySet="HRMS_Emp_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_Emp_Details_HRMS_DEPT" Association="HRMS5Model.FK_HRMS_Emp_Details_HRMS_DEPT">
+            <End Role="HRMS_DEPT" EntitySet="HRMS_DEPT" />
+            <End Role="HRMS_Emp_Details" EntitySet="HRMS_Emp_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_Emp_Details_HRMS_DESG_MS" Association="HRMS5Model.FK_HRMS_Emp_Details_HRMS_DESG_MS">
+            <End Role="HRMS_DESG_MS" EntitySet="HRMS_DESG_MS" />
+            <End Role="HRMS_Emp_Details" EntitySet="HRMS_Emp_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_Emp_Details_HRMS_SALUTATION" Association="HRMS5Model.FK_HRMS_Emp_Details_HRMS_SALUTATION">
+            <End Role="HRMS_SALUTATION" EntitySet="HRMS_SALUTATION" />
+            <End Role="HRMS_Emp_Details" EntitySet="HRMS_Emp_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_Emp_Details_UnitMaster" Association="HRMS5Model.FK_HRMS_Emp_Details_UnitMaster">
+            <End Role="UnitMaster" EntitySet="UnitMaster" />
+            <End Role="HRMS_Emp_Details" EntitySet="HRMS_Emp_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_Emp_Details_WorkLocationMaster" Association="HRMS5Model.FK_HRMS_Emp_Details_WorkLocationMaster">
+            <End Role="WorkLocationMaster" EntitySet="WorkLocationMaster" />
+            <End Role="HRMS_Emp_Details" EntitySet="HRMS_Emp_Details" />
+          </AssociationSet>
+          <EntitySet Name="HRMS_TRAVEL_MEAL_EXPENSE_MS" EntityType="HRMS5Model.HRMS_TRAVEL_MEAL_EXPENSE_MS" />
+          <EntitySet Name="HRMS_TRAVEL_OTHER_DETAILS_MS" EntityType="HRMS5Model.HRMS_TRAVEL_OTHER_DETAILS_MS" />
+        </EntityContainer>
+        <ComplexType Name="DepartmentData_Result">
+          <Property Type="Int64" Name="Dept_Id" Nullable="false" />
+          <Property Type="String" Name="Dept_Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Sort_Name" Nullable="false" MaxLength="10" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="String" Name="parentname" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="HRMS_DESG_MS">
+          <Key>
+            <PropertyRef Name="Desg_Id" />
+          </Key>
+          <Property Name="Desg_Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Desg_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Desg_Short_Name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Desg_Parent_ID" Type="Int64" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="ModifyBy" Type="Int64" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="HRMS_Emp_Details" Relationship="HRMS5Model.FK_HRMS_Emp_Details_HRMS_DESG_MS" FromRole="HRMS_DESG_MS" ToRole="HRMS_Emp_Details" />
+        </EntityType>
+        <EntityType Name="HRMS_Emp_Details">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EMP_ID" Type="Int64" Nullable="false" />
+          <Property Name="Old_Emp_Cd" Type="Int64" />
+          <Property Name="Join_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Card_Id" Type="Int64" />
+          <Property Name="salutation" Type="Int64" Nullable="false" />
+          <Property Name="First_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Middle_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Display_Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Designation" Type="Int64" Nullable="false" />
+          <Property Name="Work_Location" Type="Int64" />
+          <Property Name="Unit" Type="Int64" Nullable="false" />
+          <Property Name="Department" Type="Int64" Nullable="false" />
+          <Property Name="Cost_Center" Type="Int64" Nullable="false" />
+          <Property Name="UAN_No_" Type="Int64" />
+          <NavigationProperty Name="Accounts" Relationship="HRMS5Model.FK_HRMS_Emp_Details_Accounts" FromRole="HRMS_Emp_Details" ToRole="Accounts" />
+          <NavigationProperty Name="HRMS_COST_CENTER" Relationship="HRMS5Model.FK_HRMS_Emp_Details_HRMS_COST_CENTER" FromRole="HRMS_Emp_Details" ToRole="HRMS_COST_CENTER" />
+          <NavigationProperty Name="HRMS_DEPT" Relationship="HRMS5Model.FK_HRMS_Emp_Details_HRMS_DEPT" FromRole="HRMS_Emp_Details" ToRole="HRMS_DEPT" />
+          <NavigationProperty Name="HRMS_DESG_MS" Relationship="HRMS5Model.FK_HRMS_Emp_Details_HRMS_DESG_MS" FromRole="HRMS_Emp_Details" ToRole="HRMS_DESG_MS" />
+          <NavigationProperty Name="HRMS_SALUTATION" Relationship="HRMS5Model.FK_HRMS_Emp_Details_HRMS_SALUTATION" FromRole="HRMS_Emp_Details" ToRole="HRMS_SALUTATION" />
+          <NavigationProperty Name="UnitMaster" Relationship="HRMS5Model.FK_HRMS_Emp_Details_UnitMaster" FromRole="HRMS_Emp_Details" ToRole="UnitMaster" />
+          <NavigationProperty Name="WorkLocationMaster" Relationship="HRMS5Model.FK_HRMS_Emp_Details_WorkLocationMaster" FromRole="HRMS_Emp_Details" ToRole="WorkLocationMaster" />
+        </EntityType>
+        <Association Name="FK_HRMS_Emp_Details_Accounts">
+          <End Type="HRMS5Model.Accounts" Role="Accounts" Multiplicity="1" />
+          <End Type="HRMS5Model.HRMS_Emp_Details" Role="HRMS_Emp_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_Emp_Details">
+              <PropertyRef Name="EMP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_Emp_Details_HRMS_COST_CENTER">
+          <End Type="HRMS5Model.HRMS_COST_CENTER" Role="HRMS_COST_CENTER" Multiplicity="1" />
+          <End Type="HRMS5Model.HRMS_Emp_Details" Role="HRMS_Emp_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_COST_CENTER">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_Emp_Details">
+              <PropertyRef Name="Cost_Center" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_Emp_Details_HRMS_DEPT">
+          <End Type="HRMS5Model.HRMS_DEPT" Role="HRMS_DEPT" Multiplicity="1" />
+          <End Type="HRMS5Model.HRMS_Emp_Details" Role="HRMS_Emp_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_DEPT">
+              <PropertyRef Name="Dept_Id" />
+            </Principal>
+            <Dependent Role="HRMS_Emp_Details">
+              <PropertyRef Name="Department" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_Emp_Details_HRMS_DESG_MS">
+          <End Type="HRMS5Model.HRMS_DESG_MS" Role="HRMS_DESG_MS" Multiplicity="1" />
+          <End Type="HRMS5Model.HRMS_Emp_Details" Role="HRMS_Emp_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_DESG_MS">
+              <PropertyRef Name="Desg_Id" />
+            </Principal>
+            <Dependent Role="HRMS_Emp_Details">
+              <PropertyRef Name="Designation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_Emp_Details_HRMS_SALUTATION">
+          <End Type="HRMS5Model.HRMS_SALUTATION" Role="HRMS_SALUTATION" Multiplicity="1" />
+          <End Type="HRMS5Model.HRMS_Emp_Details" Role="HRMS_Emp_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_SALUTATION">
+              <PropertyRef Name="Salutation_ID" />
+            </Principal>
+            <Dependent Role="HRMS_Emp_Details">
+              <PropertyRef Name="salutation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_Emp_Details_UnitMaster">
+          <End Type="HRMS5Model.UnitMaster" Role="UnitMaster" Multiplicity="1" />
+          <End Type="HRMS5Model.HRMS_Emp_Details" Role="HRMS_Emp_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitMaster">
+              <PropertyRef Name="UnitCode" />
+            </Principal>
+            <Dependent Role="HRMS_Emp_Details">
+              <PropertyRef Name="Unit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_Emp_Details_WorkLocationMaster">
+          <End Type="HRMS5Model.WorkLocationMaster" Role="WorkLocationMaster" Multiplicity="0..1" />
+          <End Type="HRMS5Model.HRMS_Emp_Details" Role="HRMS_Emp_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkLocationMaster">
+              <PropertyRef Name="WorkID" />
+            </Principal>
+            <Dependent Role="HRMS_Emp_Details">
+              <PropertyRef Name="Work_Location" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="HRMS_TRAVEL_MEAL_EXPENSE_MS">
+          <Key>
+            <PropertyRef Name="Meal_Expense_ID" />
+          </Key>
+          <Property Name="Meal_Expense_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Meal_Expense_NM" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Meal_Expense_Status" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HRMS_TRAVEL_OTHER_DETAILS_MS">
+          <Key>
+            <PropertyRef Name="Travel_Other_Details_ID" />
+          </Key>
+          <Property Name="Travel_Other_Details_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Travel_Other_Details_NM" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HRMS5ModelStoreContainer" CdmEntityContainer="HRMSEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="HRMS5Model.Accounts">
+              <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="role" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BankMaster">
+            <EntityTypeMapping TypeName="HRMS5Model.BankMaster">
+              <MappingFragment StoreEntitySet="BankMaster">
+                <ScalarProperty Name="BankCode" ColumnName="BankCode" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BranchMaster">
+            <EntityTypeMapping TypeName="HRMS5Model.BranchMaster">
+              <MappingFragment StoreEntitySet="BranchMaster">
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="BankCode" ColumnName="BankCode" />
+                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+                <ScalarProperty Name="MICR_Code" ColumnName="MICR_Code" />
+                <ScalarProperty Name="IFSC_Code" ColumnName="IFSC_Code" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CastMaster">
+            <EntityTypeMapping TypeName="HRMS5Model.CastMaster">
+              <MappingFragment StoreEntitySet="CastMaster">
+                <ScalarProperty Name="CastCode" ColumnName="CastCode" />
+                <ScalarProperty Name="ReligionID" ColumnName="ReligionID" />
+                <ScalarProperty Name="CastName" ColumnName="CastName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="City">
+            <EntityTypeMapping TypeName="HRMS5Model.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Country">
+            <EntityTypeMapping TypeName="HRMS5Model.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMP_Grade_Assignment">
+            <EntityTypeMapping TypeName="HRMS5Model.EMP_Grade_Assignment">
+              <MappingFragment StoreEntitySet="EMP_Grade_Assignment">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EMP_ID" ColumnName="EMP_ID" />
+                <ScalarProperty Name="Grade_ID" ColumnName="Grade_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee_Personal_Detail">
+            <EntityTypeMapping TypeName="HRMS5Model.Employee_Personal_Detail">
+              <MappingFragment StoreEntitySet="Employee_Personal_Detail">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="IdentityMark1" ColumnName="IdentityMark1" />
+                <ScalarProperty Name="IdentityMark2" ColumnName="IdentityMark2" />
+                <ScalarProperty Name="Religion" ColumnName="Religion" />
+                <ScalarProperty Name="Citizenship" ColumnName="Citizenship" />
+                <ScalarProperty Name="Caste" ColumnName="Caste" />
+                <ScalarProperty Name="Race" ColumnName="Race" />
+                <ScalarProperty Name="MarraigeStatus" ColumnName="MarraigeStatus" />
+                <ScalarProperty Name="MarraigeDate" ColumnName="MarraigeDate" />
+                <ScalarProperty Name="NoOfChild" ColumnName="NoOfChild" />
+                <ScalarProperty Name="NoOfDependents" ColumnName="NoOfDependents" />
+                <ScalarProperty Name="AadharNo" ColumnName="AadharNo" />
+                <ScalarProperty Name="SIN" ColumnName="SIN" />
+                <ScalarProperty Name="AKA" ColumnName="AKA" />
+                <ScalarProperty Name="MilitaryService" ColumnName="MilitaryService" />
+                <ScalarProperty Name="BirthCity" ColumnName="BirthCity" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Hobbies" ColumnName="Hobbies" />
+                <ScalarProperty Name="MilitaryServiceDetail" ColumnName="MilitaryServiceDetail" />
+                <ScalarProperty Name="EMP_ID" ColumnName="EMP_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_ATTACHMENT_TYPE">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_ATTACHMENT_TYPE">
+              <MappingFragment StoreEntitySet="HRMS_ATTACHMENT_TYPE">
+                <ScalarProperty Name="Attachment_Type_ID" ColumnName="Attachment_Type_ID" />
+                <ScalarProperty Name="Attachment_Type_Name" ColumnName="Attachment_Type_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_CATEGORY_GRADE">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_CATEGORY_GRADE">
+              <MappingFragment StoreEntitySet="HRMS_CATEGORY_GRADE">
+                <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
+                <ScalarProperty Name="Category_Name" ColumnName="Category_Name" />
+                <ScalarProperty Name="Grade_Name" ColumnName="Grade_Name" />
+                <ScalarProperty Name="Grade_Detail" ColumnName="Grade_Detail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_Contact">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_Contact">
+              <MappingFragment StoreEntitySet="HRMS_Contact">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Phone_Work" ColumnName="Phone_Work" />
+                <ScalarProperty Name="Ext" ColumnName="Ext" />
+                <ScalarProperty Name="Mobile_No_Work" ColumnName="Mobile_No_Work" />
+                <ScalarProperty Name="Corporate_Email" ColumnName="Corporate_Email" />
+                <ScalarProperty Name="Phone_Home" ColumnName="Phone_Home" />
+                <ScalarProperty Name="Mobile_no_home" ColumnName="Mobile_no_home" />
+                <ScalarProperty Name="Personal_Email" ColumnName="Personal_Email" />
+                <ScalarProperty Name="Office_Email" ColumnName="Office_Email" />
+                <ScalarProperty Name="Employee_ID" ColumnName="Employee_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_COST_CENTER">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_COST_CENTER">
+              <MappingFragment StoreEntitySet="HRMS_COST_CENTER">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Cost_Cntr_Code" ColumnName="Cost_Cntr_Code" />
+                <ScalarProperty Name="Cost_Cntr_Name" ColumnName="Cost_Cntr_Name" />
+                <ScalarProperty Name="Parent_Cost_Cntr_Code" ColumnName="Parent_Cost_Cntr_Code" />
+                <ScalarProperty Name="Ledger_Code" ColumnName="Ledger_Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_DEPT">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_DEPT">
+              <MappingFragment StoreEntitySet="HRMS_DEPT">
+                <ScalarProperty Name="Dept_Id" ColumnName="Dept_Id" />
+                <ScalarProperty Name="Dept_Name" ColumnName="Dept_Name" />
+                <ScalarProperty Name="Sort_Name" ColumnName="Sort_Name" />
+                <ScalarProperty Name="Parent_ID" ColumnName="Parent_ID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_EMP_Attachment_Details">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_EMP_Attachment_Details">
+              <MappingFragment StoreEntitySet="HRMS_EMP_Attachment_Details">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EMP_ID" ColumnName="EMP_ID" />
+                <ScalarProperty Name="Attachment_Title" ColumnName="Attachment_Title" />
+                <ScalarProperty Name="Attachment_Type_ID" ColumnName="Attachment_Type_ID" />
+                <ScalarProperty Name="FILENAME" ColumnName="FILENAME" />
+                <ScalarProperty Name="FILEURL" ColumnName="FILEURL" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_EMP_BUSINESSDIVISION_MS">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_EMP_BUSINESSDIVISION_MS">
+              <MappingFragment StoreEntitySet="HRMS_EMP_BUSINESSDIVISION_MS">
+                <ScalarProperty Name="BusinessDivision_ID" ColumnName="BusinessDivision_ID" />
+                <ScalarProperty Name="BusinessDivision_Name" ColumnName="BusinessDivision_Name" />
+                <ScalarProperty Name="BusinessDivision_SapCode" ColumnName="BusinessDivision_SapCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_EMP_CITIZENSHIP_MS">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_EMP_CITIZENSHIP_MS">
+              <MappingFragment StoreEntitySet="HRMS_EMP_CITIZENSHIP_MS">
+                <ScalarProperty Name="CitizenShip_ID" ColumnName="CitizenShip_ID" />
+                <ScalarProperty Name="CitizenShip_Country_NM" ColumnName="CitizenShip_Country_NM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_EMP_GENDER_MS">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_EMP_GENDER_MS">
+              <MappingFragment StoreEntitySet="HRMS_EMP_GENDER_MS">
+                <ScalarProperty Name="Gender_ID" ColumnName="Gender_ID" />
+                <ScalarProperty Name="Gender_Value" ColumnName="Gender_Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_EMP_PHOTO_SIGN">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_EMP_PHOTO_SIGN">
+              <MappingFragment StoreEntitySet="HRMS_EMP_PHOTO_SIGN">
+                <ScalarProperty Name="Emp_Photos_ID" ColumnName="Emp_Photos_ID" />
+                <ScalarProperty Name="Emp_ID" ColumnName="Emp_ID" />
+                <ScalarProperty Name="Emp_Photo_Title" ColumnName="Emp_Photo_Title" />
+                <ScalarProperty Name="Emp_Photo_Path" ColumnName="Emp_Photo_Path" />
+                <ScalarProperty Name="Emp_Sign_Title" ColumnName="Emp_Sign_Title" />
+                <ScalarProperty Name="Emp_Sign_Path" ColumnName="Emp_Sign_Path" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_EMP_ReferenceDetail">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_EMP_ReferenceDetail">
+              <MappingFragment StoreEntitySet="HRMS_EMP_ReferenceDetail">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EMP_ID" ColumnName="EMP_ID" />
+                <ScalarProperty Name="Is_Ref_Emp" ColumnName="Is_Ref_Emp" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_SALUTATION">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_SALUTATION">
+              <MappingFragment StoreEntitySet="HRMS_SALUTATION">
+                <ScalarProperty Name="Salutation_ID" ColumnName="Salutation_ID" />
+                <ScalarProperty Name="Salutation_Name" ColumnName="Salutation_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_Travel_Purpose">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_Travel_Purpose">
+              <MappingFragment StoreEntitySet="HRMS_Travel_Purpose">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_Travel_type">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_Travel_type">
+              <MappingFragment StoreEntitySet="HRMS_Travel_type">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Short_Name" ColumnName="Short_Name" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_TravelGroupType_MS">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_TravelGroupType_MS">
+              <MappingFragment StoreEntitySet="HRMS_TravelGroupType_MS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Mode_ID" ColumnName="Mode_ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Group_Name" ColumnName="Group_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_TravelMode_MS">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_TravelMode_MS">
+              <MappingFragment StoreEntitySet="HRMS_TravelMode_MS">
+                <ScalarProperty Name="Mode_ID" ColumnName="Mode_ID" />
+                <ScalarProperty Name="Mode_Type" ColumnName="Mode_Type" />
+                <ScalarProperty Name="Mode_Name" ColumnName="Mode_Name" />
+                <ScalarProperty Name="Mode_Short_Name" ColumnName="Mode_Short_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaritalMaster">
+            <EntityTypeMapping TypeName="HRMS5Model.MaritalMaster">
+              <MappingFragment StoreEntitySet="MaritalMaster">
+                <ScalarProperty Name="MaritalID" ColumnName="MaritalID" />
+                <ScalarProperty Name="MaritalName" ColumnName="MaritalName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PayRollMaster">
+            <EntityTypeMapping TypeName="HRMS5Model.PayRollMaster">
+              <MappingFragment StoreEntitySet="PayRollMaster">
+                <ScalarProperty Name="PayRollCode" ColumnName="PayRollCode" />
+                <ScalarProperty Name="PayRollName" ColumnName="PayRollName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReligionMaster">
+            <EntityTypeMapping TypeName="HRMS5Model.ReligionMaster">
+              <MappingFragment StoreEntitySet="ReligionMaster">
+                <ScalarProperty Name="ReligionID" ColumnName="ReligionID" />
+                <ScalarProperty Name="ReligionShortName" ColumnName="ReligionShortName" />
+                <ScalarProperty Name="ReligionName" ColumnName="ReligionName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SegmentMaster">
+            <EntityTypeMapping TypeName="HRMS5Model.SegmentMaster">
+              <MappingFragment StoreEntitySet="SegmentMaster">
+                <ScalarProperty Name="SegmentID" ColumnName="SegmentID" />
+                <ScalarProperty Name="SegmentName" ColumnName="SegmentName" />
+                <ScalarProperty Name="SAPCode" ColumnName="SAPCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="State">
+            <EntityTypeMapping TypeName="HRMS5Model.State">
+              <MappingFragment StoreEntitySet="State">
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnitMaster">
+            <EntityTypeMapping TypeName="HRMS5Model.UnitMaster">
+              <MappingFragment StoreEntitySet="UnitMaster">
+                <ScalarProperty Name="UnitCode" ColumnName="UnitCode" />
+                <ScalarProperty Name="UnitName" ColumnName="UnitName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="PaySlip" ColumnName="PaySlip" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkLocationMaster">
+            <EntityTypeMapping TypeName="HRMS5Model.WorkLocationMaster">
+              <MappingFragment StoreEntitySet="WorkLocationMaster">
+                <ScalarProperty Name="WorkID" ColumnName="WorkID" />
+                <ScalarProperty Name="WorkLocationName" ColumnName="WorkLocationName" />
+                <ScalarProperty Name="SAPCode" ColumnName="SAPCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DepartmentData" FunctionName="HRMS5Model.Store.DepartmentData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HRMS5Model.DepartmentData_Result">
+                <ScalarProperty Name="Dept_Id" ColumnName="Dept_Id" />
+                <ScalarProperty Name="Dept_Name" ColumnName="Dept_Name" />
+                <ScalarProperty Name="Sort_Name" ColumnName="Sort_Name" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="parentname" ColumnName="parentname" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="HRMS_DESG_MS">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_DESG_MS">
+              <MappingFragment StoreEntitySet="HRMS_DESG_MS">
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="ModifyBy" ColumnName="ModifyBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Desg_Parent_ID" ColumnName="Desg_Parent_ID" />
+                <ScalarProperty Name="Desg_Short_Name" ColumnName="Desg_Short_Name" />
+                <ScalarProperty Name="Desg_Name" ColumnName="Desg_Name" />
+                <ScalarProperty Name="Desg_Id" ColumnName="Desg_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_Emp_Details">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_Emp_Details">
+              <MappingFragment StoreEntitySet="HRMS_Emp_Details">
+                <ScalarProperty Name="UAN_No_" ColumnName="UAN No." />
+                <ScalarProperty Name="Cost_Center" ColumnName="Cost_Center" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Work_Location" ColumnName="Work_Location" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="Display_Name" ColumnName="Display_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Middle_Name" ColumnName="Middle_Name" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="salutation" ColumnName="salutation" />
+                <ScalarProperty Name="Card_Id" ColumnName="Card_Id" />
+                <ScalarProperty Name="Join_Date" ColumnName="Join_Date" />
+                <ScalarProperty Name="Old_Emp_Cd" ColumnName="Old_Emp_Cd" />
+                <ScalarProperty Name="EMP_ID" ColumnName="EMP_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_TRAVEL_MEAL_EXPENSE_MS">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_TRAVEL_MEAL_EXPENSE_MS">
+              <MappingFragment StoreEntitySet="HRMS_TRAVEL_MEAL_EXPENSE_MS">
+                <ScalarProperty Name="Meal_Expense_Status" ColumnName="Meal_Expense_Status" />
+                <ScalarProperty Name="Meal_Expense_NM" ColumnName="Meal_Expense_NM" />
+                <ScalarProperty Name="Meal_Expense_ID" ColumnName="Meal_Expense_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_TRAVEL_OTHER_DETAILS_MS">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_TRAVEL_OTHER_DETAILS_MS">
+              <MappingFragment StoreEntitySet="HRMS_TRAVEL_OTHER_DETAILS_MS">
+                <ScalarProperty Name="Travel_Other_Details_NM" ColumnName="Travel_Other_Details_NM" />
+                <ScalarProperty Name="Travel_Other_Details_ID" ColumnName="Travel_Other_Details_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

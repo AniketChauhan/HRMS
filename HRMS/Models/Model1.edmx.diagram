@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9ed5e60fcdce400180e9e2b8cc258e73" Name="Diagram1" ZoomLevel="71">
+        <EntityTypeShape EntityType="HRMS5Model.Accounts" Width="1.5" PointX="0.75" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS5Model.BankMaster" Width="1.5" PointX="8.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS5Model.BranchMaster" Width="1.5" PointX="11" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS5Model.CastMaster" Width="1.5" PointX="3.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS5Model.City" Width="1.5" PointX="6.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS5Model.Country" Width="1.5" PointX="2.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS5Model.EMP_Grade_Assignment" Width="1.5" PointX="3" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS5Model.Employee_Personal_Detail" Width="1.5" PointX="6" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_ATTACHMENT_TYPE" Width="1.5" PointX="0.75" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_CATEGORY_GRADE" Width="1.5" PointX="0.75" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_Contact" Width="1.5" PointX="3" PointY="25.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_COST_CENTER" Width="1.5" PointX="6.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_DEPT" Width="1.5" PointX="6.75" PointY="22.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_EMP_Attachment_Details" Width="1.5" PointX="3" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_EMP_BUSINESSDIVISION_MS" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_EMP_CITIZENSHIP_MS" Width="1.5" PointX="3.75" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_EMP_GENDER_MS" Width="1.5" PointX="3.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_EMP_PHOTO_SIGN" Width="1.5" PointX="3" PointY="39" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_EMP_ReferenceDetail" Width="1.5" PointX="9" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_SALUTATION" Width="1.5" PointX="6.75" PointY="28.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_Travel_Purpose" Width="1.5" PointX="11.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_Travel_type" Width="1.5" PointX="11.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_TravelGroupType_MS" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_TravelMode_MS" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS5Model.MaritalMaster" Width="1.5" PointX="3.75" PointY="30.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS5Model.PayRollMaster" Width="1.5" PointX="12.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS5Model.ReligionMaster" Width="1.5" PointX="1.5" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS5Model.SegmentMaster" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS5Model.State" Width="1.5" PointX="4.5" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS5Model.UnitMaster" Width="1.5" PointX="6.75" PointY="31.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS5Model.WorkLocationMaster" Width="1.5" PointX="6.75" PointY="35.125" IsExpanded="true" />
+        <AssociationConnector Association="HRMS5Model.FK_EMP_Grade_Assignment_Accounts" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMS5Model.FK_Employee_Personal_Detail_Accounts" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_Contact_Accounts" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_EMP_Attachment_Details_Accounts" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_EMP_PHOTO_SIGN_Accounts" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_EMP_ReferenceDetail_Accounts" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMS5Model.FK_BranchMaster_BankMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMS5Model.FK_CastMaster_ReligionMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMS5Model.FK_Employee_Personal_Detail_Employee_Personal_Detail" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMS5Model.FK_City_State" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_EMP_ReferenceDetail_City" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_EMP_ReferenceDetail_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMS5Model.FK_State_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMS5Model.FK_EMP_Grade_Assignment_HRMS_CATEGORY_GRADE" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMS5Model.FK_Employee_Personal_Detail_HRMS_CATEGORY_GRADE" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMS5Model.FK_Employee_Personal_Detail_HRMS_EMP_CITIZENSHIP_MS" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMS5Model.FK_Employee_Personal_Detail_HRMS_EMP_GENDER_MS" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMS5Model.FK_Employee_Personal_Detail_MaritalMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMS5Model.FK_Employee_Personal_Detail_ReligionMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_EMP_Attachment_Details_HRMS_ATTACHMENT_TYPE" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_EMP_ReferenceDetail_State" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_TravelGroupType_MS_HRMS_TravelMode_MS" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_DESG_MS" Width="1.5" PointX="6.75" PointY="37.75" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_Emp_Details" Width="1.5" PointX="9" PointY="18.5" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_Emp_Details_Accounts" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_Emp_Details_HRMS_COST_CENTER" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_Emp_Details_HRMS_DEPT" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_Emp_Details_HRMS_DESG_MS" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_Emp_Details_HRMS_SALUTATION" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_Emp_Details_UnitMaster" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_Emp_Details_WorkLocationMaster" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_TRAVEL_MEAL_EXPENSE_MS" Width="1.5" PointX="14.375" PointY="8.75" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_TRAVEL_OTHER_DETAILS_MS" Width="1.5" PointX="9.375" PointY="5.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

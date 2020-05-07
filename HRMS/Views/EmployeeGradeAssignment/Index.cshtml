@@ -1,0 +1,74 @@
+﻿@model IEnumerable<HRMS.Models.HRMS_Emp_Details>
+@*@model HRMS.Models.EMP_Grade_Assignment*@
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+<table class="table table-bordered table-responsive table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Emp_ID)
+        </th>
+        <th>
+
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Emp_ID)
+                @*<p id=@item.Emp_ID>@item.Emp_ID</p>*@
+
+            </td>
+            <td>
+                @Html.DropDownList("Grade_ID", null, "--Select--", htmlAttributes: new { @class = "form-control xyz",@id=item.Emp_ID })
+                @*, @id = item.Emp_ID*@
+
+            </td>
+
+        </tr>
+    }
+
+</table>
+
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@*, EmpID: item.attr("id")*@
+<script>
+    $(document).ready(function () {
+        $(".xyz").change(function () {
+           
+            //console.log("===========");
+            ////console.log(item.attr("id"));
+            //console.log("===========");
+             var item = $(this);    //   item.attr("value")
+            $.get("/EmployeeGradeAssignment/CrudOperation", { GradeID: item.val(), EmpID: item.attr("id") }, function (data) {
+
+               
+
+            });
+        });
+    });
+</script>
+
+@*<script>
+    $(document).on('change', 'select', function(){
+     $.get("/EmployeeGradeAssignment/CrudOperation", { GradeID: $("#Grade_ID").val(), EmpID: $("#Emp_ID").text() }, function (data) {
+
+     });
+          //var data = $(this).val();
+
+    });
+        </script>*@
+
+
