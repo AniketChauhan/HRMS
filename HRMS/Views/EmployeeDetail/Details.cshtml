@@ -133,6 +133,10 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID })|
+    @if (ViewBag.Role == "admin")
+    {
+        
+      @Html.ActionLink("Back to List", "Index")
+}
 </p>

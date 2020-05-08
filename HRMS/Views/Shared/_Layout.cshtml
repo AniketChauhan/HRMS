@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="w3-bar w3-indigo w3-card-2">
-        @Html.ActionLink("H.R.M.S", "Index", "CostCenter", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
+        @Html.ActionLink("H.R.M.S", "Index", "Account", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
 
         @if (User.IsInRole("admin"))
         {
@@ -210,7 +210,8 @@
 
         @if (User.Identity.IsAuthenticated)
         {
-        @Html.ActionLink("LogOut", "Logout", "Account", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
+            @Html.ActionLink("LogOut", "Logout", "Account", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
+            @Html.ActionLink(User.Identity.Name, "", "", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
         }
 
 

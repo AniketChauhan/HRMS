@@ -15,17 +15,20 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="col-md-6">
 
-            @*<div class="form-group">
-                <span class="col-md-4 control-label">
-                    <i class="glyphicon glyphicon-asterisk" style="color:red ; font-size:x-small;"></i>
-                    @Html.LabelFor(model => model.Emp_Cd)
-                </span>
-                <div class="col-md-8">
-                    @Html.EditorFor(model => model.Emp_Cd, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Emp_Cd, "", new { @class = "text-danger" })
+            @if (ViewBag.Role == "admin")
+            {
+                <div class="form-group">
+                    <span class="col-md-4 control-label">
+                        <i class="glyphicon glyphicon-asterisk" style="color:red ; font-size:x-small;"></i>
+                        @Html.LabelFor(model => model.EMP_ID)
+                    </span>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.EMP_ID, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.EMP_ID, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>*@
 
+            }
             <div class="form-group">
 
                 @Html.LabelFor(model => model.Old_Emp_Cd, htmlAttributes: new { @class = "control-label col-md-4" })
@@ -41,7 +44,8 @@
                     @Html.LabelFor(model => model.Join_Date)
                 </span>
                 <div class="col-md-8">
-                    @Html.EditorFor(model => model.Join_Date, new { htmlAttributes = new { @class = "form-control" } })
+                    @*@Html.EditorFor(model => model.Join_Date, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.EditorFor(model => model.Join_Date, new { htmlAttributes = new { @class = "form-control datepicker" } })
 
                     @Html.ValidationMessageFor(model => model.Join_Date, "", new { @class = "text-danger" })
                 </div>
@@ -198,32 +202,61 @@
     </div>
 }
 
+@if (ViewBag.Role == "admin")
+{
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
 }
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $("#Division").change(function () {
-            $.get("/EmployeeDetail/GetDepartmentData", { DivisionData: $("#Division").val() }, function (data) {
 
-                $("#Department").empty();
 
-                $('#Department').append($('<option>', {
-                    value: '0',
-                    text: 'Select Department',
-                }, '</option>'));
-                $.each(data, function (index, row) {
 
-                    $("#Department").append("<option value='" + row.Dept_Id + "'>" + row.Dept_Name + "</option>")
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    }
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#Division").change(function () {
+                $.get("/EmployeeDetail/GetDepartmentData", { DivisionData: $("#Division").val() }, function (data) {
+
+                    $("#Department").empty();
+
+                    $('#Department').append($('<option>', {
+                        value: '0',
+                        text: 'Select Department',
+                    }, '</option>'));
+                    $.each(data, function (index, row) {
+
+                        $("#Department").append("<option value='" + row.Dept_Id + "'>" + row.Dept_Name + "</option>")
+                    });
+
                 });
-
             });
         });
-    });
-</script>
+    </script>
+
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+
+
+    <script>
+        $(function () {
+            $(".datepicker").datepicker({
+                dateFormat: "yy-mm-dd",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "1920:2020",
+                orientation: "right top",
+                maxDate: new Date()
+
+
+
+            });
+
+        });
+    </script>
+
+

@@ -25,7 +25,8 @@ namespace HRMS.Models
         public Nullable<long> Old_Emp_Cd { get; set; }
         [Required]
         [Display(Name = "Join Date")]
-        [DataType(DataType.Date, ErrorMessage = "Only Date allowed")]
+        // [DataType(DataType.Date, ErrorMessage = "Only Date allowed")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public System.DateTime Join_Date { get; set; }
         [Display(Name = "Card Id")]
         [Range(1, 2147483647, ErrorMessage = "Ild Employee Code should be 10 digits maximum!")]
