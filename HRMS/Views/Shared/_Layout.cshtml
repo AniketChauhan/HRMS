@@ -210,7 +210,8 @@
 
         @if (User.Identity.IsAuthenticated)
         {
-        @Html.ActionLink("LogOut", "Logout", "Account", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
+            @Html.ActionLink("LogOut", "Logout", "Account", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
+            @Html.ActionLink(User.Identity.Name, "", "", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
         }
 
 

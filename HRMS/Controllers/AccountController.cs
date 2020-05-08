@@ -47,7 +47,20 @@ namespace HRMS.Controllers
                     {
                         Session["id"] = acc.ID;
                         FormsAuthentication.SetAuthCookie(obj.UserName, true);
-                        return RedirectToAction("Create", "EmployeeDetail");
+
+                        //checking for Employee data is already there or not
+                        bool isExist = db.HRMS_Emp_Details.Any(x => x.EMP_ID == acc.ID);
+                        long id = db.HRMS_Emp_Details.Where(x=>x.EMP_ID==acc.ID).Select(x=>x.ID).FirstOrDefault();
+                        if (isExist)
+                        {
+                            return RedirectToAction("Details", "EmployeeDetail", new {id});
+                        }
+                        else
+                        {
+                            //return RedirectToAction("Create", "EmployeeDetail", new { acc.ID });
+                            return RedirectToAction("Create", "EmployeeDetail");
+                        }
+
                     }
                 }
                 else
