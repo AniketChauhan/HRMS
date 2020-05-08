@@ -55,6 +55,7 @@ namespace HRMS.Controllers
 
                             db.HRMS_COST_CENTER.Add(hRMS_COST_CENTER);
                             db.SaveChanges();
+                            ModelState.Clear();
                             ViewBag.cost_Status = "New Cost added succcessfully.";
                             return View();
                         }
@@ -103,6 +104,8 @@ namespace HRMS.Controllers
 
                             db.Entry(hRMS_COST_CENTER).State = EntityState.Modified;
                             db.SaveChanges();
+                            ModelState.Clear();
+
                             ViewBag.cost_Status = "Cost Updated succcessfully.";
                             return View();
                         }
@@ -118,7 +121,6 @@ namespace HRMS.Controllers
 
             return View(hRMS_COST_CENTER);
         }
-    [HttpPost]
     public bool delete(long id)
     {
         HRMS_COST_CENTER hRMS_COST_CENTER = db.HRMS_COST_CENTER.Find(id);
@@ -126,7 +128,9 @@ namespace HRMS.Controllers
         {
             db.HRMS_COST_CENTER.Remove(hRMS_COST_CENTER);
             db.SaveChanges();
-            return true;
+                ModelState.Clear();
+
+                return true;
         }
         else
         {

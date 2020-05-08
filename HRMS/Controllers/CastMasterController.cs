@@ -122,6 +122,8 @@ namespace HRMS.Controllers
                 {
                     db.Entry(CastMasters).State = EntityState.Modified;
                     db.SaveChanges();
+                    ModelState.Clear();
+
                     ViewBag.success = "Your Record Successfully Updated!";
                     ViewBag.ReligionID = new SelectList(db.ReligionMaster, "ReligionID", "ReligionName", CastMasters.ReligionID);
                     return View();
@@ -138,32 +140,20 @@ namespace HRMS.Controllers
             return View(CastMasters);
         }
 
-        // GET: CastMasters/Delete/5
-        public ActionResult Delete(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CastMaster CastMasters = db.CastMaster.Find(id);
-            if (CastMasters == null)
-            {
-                return HttpNotFound();
-            }
-            return View(CastMasters);
-        }
-
-        // POST: CastMasters/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
+        public bool Delete(long id)
         {
             CastMaster CastMasters = db.CastMaster.Find(id);
-            db.CastMaster.Remove(CastMasters);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (CastMasters != null)
+            {
+                db.CastMaster.Remove(CastMasters);
+                db.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

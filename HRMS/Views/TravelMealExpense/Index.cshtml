@@ -10,7 +10,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table table-bordered table-striped table-responsive">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Meal_Expense_NM)
@@ -18,7 +18,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Meal_Expense_Status)
         </th>
-        <th></th>
+        <th><center><i class="glyphicon glyphicon-wrench"> </i> Operations</center></th>
     </tr>
 
     @foreach (var item in Model)
@@ -30,12 +30,34 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Meal_Expense_Status)
             </td>
+
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Meal_Expense_ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Meal_Expense_ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Meal_Expense_ID })
+                <center>
+                    @Html.ActionLink(" Edit", "Edit", new { id = item.Meal_Expense_ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" }) |
+                    @Html.ActionLink(" Details", "Details", new { id = item.Meal_Expense_ID }, new { @class = "btn btn-warning btn-sm glyphicon glyphicon-edit" }) |
+                    <button class="btn btn-danger  btn-sm " onclick="return removeFromList(this, '@item.Meal_Expense_ID') "> <i class="glyphicon glyphicon-trash"> </i> Delete</button>
+                </center>
             </td>
         </tr>
     }
 
 </table>
+
+<script>
+    function removeFromList(thisobj,id) {
+        var data = JSON.stringify({
+            'id': id
+        });
+        $.ajax({
+        type: "POST",
+            contentType: "application/json",
+            url: "@Url.Action("delete","TravelMealExpense")",
+            datatype: "json",
+            data: data,
+            success: function (response) {
+                    var tr = $(thisobj).closest("tr");
+                    $(tr).remove();
+            }
+        });
+    }
+</script>

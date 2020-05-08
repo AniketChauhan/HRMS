@@ -12,7 +12,7 @@
 @if (Model.Count<HRMS.Models.HRMS_Travel_type>() > 0 && Model != null)
 {
 
-    <table class="table">
+    <table class="table table-bordered table-striped table-responsive">
         <tr>
             <th>
                 Shortname
@@ -21,7 +21,7 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
 
-            <th><i class="glyphicon glyphicon-wrench"> </i> Operations</th>
+            <th><center><i class="glyphicon glyphicon-wrench"> </i> Operations</center></th>
         </tr>
 
         @foreach (var item in Model)
@@ -35,12 +35,12 @@
                 </td>
 
 
-                <td class="btn-group-sm">
-                    @Html.ActionLink(" Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" })
-                    @Html.ActionLink(" Details", "Details", new { id = item.ID }, new { @class = "btn btn-warning btn-sm glyphicon glyphicon-list-alt" })
+                <td class="btn-group-sm"><center>
+    @Html.ActionLink(" Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" })
+    @Html.ActionLink(" Details", "Details", new { id = item.ID }, new { @class = "btn btn-warning btn-sm glyphicon glyphicon-list-alt" })
 
-                    <button class="btn btn-danger  btn-sm " onclick="return removeFromList(this, '@item.ID') "> <i class="glyphicon glyphicon-trash"> </i> Delete</button>
-                </td>
+    <button class="btn btn-danger  btn-sm " onclick="return removeFromList(this, '@item.ID') "> <i class="glyphicon glyphicon-trash"> </i> Delete</button>
+</center> </td>
             </tr>
         }
 

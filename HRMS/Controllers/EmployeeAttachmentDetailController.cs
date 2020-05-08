@@ -54,6 +54,7 @@ namespace HRMS.Controllers
                         files.SaveAs(path);
                         db.HRMS_EMP_Attachment_Details.Add(model);
                         db.SaveChanges();
+                        ModelState.Clear();
 
 
                         ViewBag.Success = "File is Succeccfully Uploaded!";
@@ -108,7 +109,8 @@ namespace HRMS.Controllers
             {
                 HRMS_EMP_Attachment_Details model = db.HRMS_EMP_Attachment_Details.Find(id);
                 db.HRMS_EMP_Attachment_Details.Remove(model);
-                db.SaveChanges();
+                db.SaveChanges(); ModelState.Clear();
+
                 return RedirectToAction("Index");
             }
             return RedirectToAction("Index");

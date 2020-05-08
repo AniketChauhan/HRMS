@@ -24,20 +24,47 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReligionShortName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReligionName)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ReligionID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ReligionID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ReligionID })
-            </td>
-        </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.ReligionShortName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ReligionName)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.ReligionID }) |
+        @Html.ActionLink("Details", "Details", new { id = item.ReligionID }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.ReligionID })
+    </td>
+    <td>
+    <center>
+        @Html.ActionLink(" Edit", "Edit", new { id = item.ReligionID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" }) |
+        @Html.ActionLink(" Details", "Details", new { id = item.ReligionID }, new { @class = "btn btn-warning btn-sm glyphicon glyphicon-edit" }) |
+        <button class="btn btn-danger  btn-sm " onclick="return removeFromList(this, '@item.ReligionID') "> <i class="glyphicon glyphicon-trash"> </i> Delete</button>
+    </center>
+        </td>
+</tr>
     }
 
 </table>
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
+<script>
+    function removeFromList(thisobj, id) {
+        if (confirm("Are you sure?") == true) {
+            var data = JSON.stringify({
+                'id': id
+            });
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "@Url.Action("delete","ReligionMaster")",
+                datatype: "json",
+                data: data,
+                success: function (response) {
+                    var tr = $(thisobj).closest("tr");
+                    $(tr).remove();
+                }
+            });
+        }
+    }
+</script>

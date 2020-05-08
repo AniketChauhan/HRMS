@@ -52,6 +52,7 @@ namespace HRMS.Controllers
             {
                 db.HRMS_TRAVEL_MEAL_EXPENSE_MS.Add(hRMS_TRAVEL_MEAL_EXPENSE_MS);
                 db.SaveChanges();
+                ModelState.Clear();
                 return RedirectToAction("Index");
             }
 
@@ -89,32 +90,21 @@ namespace HRMS.Controllers
             return View(hRMS_TRAVEL_MEAL_EXPENSE_MS);
         }
 
-        // GET: HRMS_TRAVEL_MEAL_EXPENSE_MS/Delete/5
-        public ActionResult Delete(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            HRMS_TRAVEL_MEAL_EXPENSE_MS hRMS_TRAVEL_MEAL_EXPENSE_MS = db.HRMS_TRAVEL_MEAL_EXPENSE_MS.Find(id);
-            if (hRMS_TRAVEL_MEAL_EXPENSE_MS == null)
-            {
-                return HttpNotFound();
-            }
-            return View(hRMS_TRAVEL_MEAL_EXPENSE_MS);
-        }
-
-        // POST: HRMS_TRAVEL_MEAL_EXPENSE_MS/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
+       
+        public bool delete(long id)
         {
             HRMS_TRAVEL_MEAL_EXPENSE_MS hRMS_TRAVEL_MEAL_EXPENSE_MS = db.HRMS_TRAVEL_MEAL_EXPENSE_MS.Find(id);
-            db.HRMS_TRAVEL_MEAL_EXPENSE_MS.Remove(hRMS_TRAVEL_MEAL_EXPENSE_MS);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (hRMS_TRAVEL_MEAL_EXPENSE_MS != null)
+            {
+                db.HRMS_TRAVEL_MEAL_EXPENSE_MS.Remove(hRMS_TRAVEL_MEAL_EXPENSE_MS);
+                db.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -34,7 +34,8 @@ namespace HRMS.Controllers
                 if (salutationName == null)
                 {
                     db.HRMS_SALUTATION.Add(hRMS_SALUTATION);
-                    db.SaveChanges();
+                    db.SaveChanges(); ModelState.Clear();
+
                     ViewBag.Salutation_Status = "It is Created successfully!";
                     return View();
                 }
@@ -71,7 +72,8 @@ namespace HRMS.Controllers
                 if (salutationName == null)
                 {
                     db.Entry(hRMS_SALUTATION).State = EntityState.Modified;
-                    db.SaveChanges();
+                    db.SaveChanges(); ModelState.Clear();
+
                     return RedirectToAction("Index");
                 }
                 else
@@ -82,14 +84,14 @@ namespace HRMS.Controllers
             }
             return View(hRMS_SALUTATION);
         }
-        [HttpPost]
         public bool delete(long id)
         {
             HRMS_SALUTATION hRMS_SALUTATION = db.HRMS_SALUTATION.Find(id);
             if (hRMS_SALUTATION != null)
             {
                 db.HRMS_SALUTATION.Remove(hRMS_SALUTATION);
-                db.SaveChanges();
+                db.SaveChanges(); ModelState.Clear();
+
                 return true;
             }
             else

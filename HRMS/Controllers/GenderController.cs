@@ -52,7 +52,8 @@ namespace HRMS.Controllers
             if (ModelState.IsValid)
             {
                 db.HRMS_EMP_GENDER_MS.Add(hRMS_EMP_GENDER_MS);
-                db.SaveChanges();
+                db.SaveChanges(); ModelState.Clear();
+
                 return RedirectToAction("Index");
             }
 
@@ -84,38 +85,28 @@ namespace HRMS.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(hRMS_EMP_GENDER_MS).State = EntityState.Modified;
-                db.SaveChanges();
+                db.SaveChanges(); ModelState.Clear();
+
                 return RedirectToAction("Index");
             }
             return View(hRMS_EMP_GENDER_MS);
         }
 
-        // GET: HRMS_EMP_GENDER_MS/Delete/5
-        public ActionResult Delete(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            HRMS_EMP_GENDER_MS hRMS_EMP_GENDER_MS = db.HRMS_EMP_GENDER_MS.Find(id);
-            if (hRMS_EMP_GENDER_MS == null)
-            {
-                return HttpNotFound();
-            }
-            return View(hRMS_EMP_GENDER_MS);
-        }
-
-        // POST: HRMS_EMP_GENDER_MS/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
+        
+        public bool delete(long id)
         {
             HRMS_EMP_GENDER_MS hRMS_EMP_GENDER_MS = db.HRMS_EMP_GENDER_MS.Find(id);
-            db.HRMS_EMP_GENDER_MS.Remove(hRMS_EMP_GENDER_MS);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (hRMS_EMP_GENDER_MS != null)
+            {
+                db.HRMS_EMP_GENDER_MS.Remove(hRMS_EMP_GENDER_MS);
+                db.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

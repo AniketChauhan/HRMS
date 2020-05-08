@@ -128,30 +128,21 @@ namespace HRMS.Controllers
             return View(religionMaster);
         }
 
-        // GET: ReligionMaster/Delete/5
-        public ActionResult Delete(long? id)
+       
+        public bool delete(long id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             ReligionMaster religionMaster = db.ReligionMaster.Find(id);
-            if (religionMaster == null)
+            if (religionMaster != null)
             {
-                return HttpNotFound();
+                db.ReligionMaster.Remove(religionMaster);
+                db.SaveChanges();
+                return true;
             }
-            return View(religionMaster);
-        }
+            else
+            {
+                return false;
+            }
 
-        // POST: ReligionMaster/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
-        {
-            ReligionMaster religionMaster = db.ReligionMaster.Find(id);
-            db.ReligionMaster.Remove(religionMaster);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

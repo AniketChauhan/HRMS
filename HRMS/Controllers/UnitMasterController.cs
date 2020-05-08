@@ -197,33 +197,15 @@ namespace HRMS.Controllers
                 return View(unitMaster);
             }
 
-            // GET: UnitMaster/Delete/5
-            public ActionResult Delete(long? id)
-            {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                UnitMaster unitMaster = db.UnitMaster.Find(id);
-                if (unitMaster == null)
-                {
-                    return HttpNotFound();
-                }
-                return View(unitMaster);
-            }
-
-            // POST: UnitMaster/Delete/5
-            [HttpPost, ActionName("Delete")]
-            [ValidateAntiForgeryToken]
-            public ActionResult DeleteConfirmed(long id)
-            {
-                UnitMaster unitMaster = db.UnitMaster.Find(id);
-                db.UnitMaster.Remove(unitMaster);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            protected override void Dispose(bool disposing)
+            
+        public bool Delete(long id)
+        {
+            UnitMaster unitMaster = db.UnitMaster.Find(id);
+            db.UnitMaster.Remove(unitMaster);
+            db.SaveChanges();
+            return true;
+        }
+        protected override void Dispose(bool disposing)
             {
                 if (disposing)
                 {

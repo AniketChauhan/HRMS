@@ -54,7 +54,8 @@ namespace HRMS.Controllers
                     if(AlreadyParent == null)
                     {
                         db.HRMS_DEPT.Add(hRMS_DEPT);
-                        db.SaveChanges();
+                        db.SaveChanges(); ModelState.Clear();
+
                         ViewBag.Department_Status = "Parent Department added successfully.";
                         var dropdowndata = db.HRMS_DEPT.Where(rec => rec.Parent_ID == null && rec.IsActive == true);
                         if (dropdowndata != null)

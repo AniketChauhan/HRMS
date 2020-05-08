@@ -245,30 +245,20 @@ namespace HRMS.Controllers
             return View(branchMaster);
         }
 
-        // GET: BranchMaster/Delete/5
-        public ActionResult Delete(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            BranchMaster branchMaster = db.BranchMaster.Find(id);
-            if (branchMaster == null)
-            {
-                return HttpNotFound();
-            }
-            return View(branchMaster);
-        }
-
-        // POST: BranchMaster/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
+       
+        public bool Delete(long id)
         {
             BranchMaster branchMaster = db.BranchMaster.Find(id);
-            db.BranchMaster.Remove(branchMaster);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (branchMaster != null)
+            {
+                db.BranchMaster.Remove(branchMaster);
+                db.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         protected override void Dispose(bool disposing)

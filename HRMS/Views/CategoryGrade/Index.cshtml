@@ -12,7 +12,7 @@
 
 @if (Model.Count<HRMS.Models.HRMS_CATEGORY_GRADE>() > 0 && Model != null)
 {
-    <table class="table">
+    <table class="table table-bordered table-responsive table-striped">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Category_Name)
@@ -23,7 +23,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Grade_Detail)
             </th>
-            <th><i class="glyphicon glyphicon-wrench" style="font-size:large"> </i> Operations</th>
+            <th><center><i class="glyphicon glyphicon-wrench" style="font-size:large"> </i> Operations</center></th>
         </tr>
 
         @foreach (var item in Model)
@@ -39,8 +39,10 @@
                     @Html.DisplayFor(modelItem => item.Grade_Detail)
                 </td>
                 <td>
-                    @Html.ActionLink(" Edit", "Edit", new { id = item.Category_ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" }) |
-                    <button class="btn btn-danger  btn-sm " onclick="return removeFromList(this, '@item.Category_ID') "> <i class="glyphicon glyphicon-trash"> </i> Delete</button>
+                    <center>
+                        @Html.ActionLink(" Edit", "Edit", new { id = item.Category_ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" }) |
+                        <button class="btn btn-danger  btn-sm " onclick="return removeFromList(this, '@item.Category_ID') "> <i class="glyphicon glyphicon-trash"> </i> Delete</button>
+                    </center>
                 </td>
             </tr>
         }

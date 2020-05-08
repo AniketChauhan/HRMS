@@ -169,32 +169,21 @@ namespace HRMS.Controllers
             return View(employee_Personal_Detail);
         }
 
-        // GET: EmployeePersonalDetail/Delete/5
-        public ActionResult Delete(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Employee_Personal_Detail employee_Personal_Detail = db.Employee_Personal_Detail.Find(id);
-            if (employee_Personal_Detail == null)
-            {
-                return HttpNotFound();
-            }
-            return View(employee_Personal_Detail);
-        }
-
-        // POST: EmployeePersonalDetail/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
+    
+        public bool Delete(long id)
         {
             Employee_Personal_Detail employee_Personal_Detail = db.Employee_Personal_Detail.Find(id);
-            db.Employee_Personal_Detail.Remove(employee_Personal_Detail);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (employee_Personal_Detail != null)
+            {
+                db.Employee_Personal_Detail.Remove(employee_Personal_Detail);
+                db.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

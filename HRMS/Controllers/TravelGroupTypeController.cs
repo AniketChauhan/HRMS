@@ -124,32 +124,20 @@ namespace HRMS.Controllers
             return View(hRMS_TravelGroupType_MS);
         }
 
-        // GET: TravelGroupType/Delete/5
-        public ActionResult Delete(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            HRMS_TravelGroupType_MS hRMS_TravelGroupType_MS = db.HRMS_TravelGroupType_MS.Find(id);
-            if (hRMS_TravelGroupType_MS == null)
-            {
-                return HttpNotFound();
-            }
-            return View(hRMS_TravelGroupType_MS);
-        }
-
-        // POST: TravelGroupType/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
+        public bool delete(long id)
         {
             HRMS_TravelGroupType_MS hRMS_TravelGroupType_MS = db.HRMS_TravelGroupType_MS.Find(id);
-            db.HRMS_TravelGroupType_MS.Remove(hRMS_TravelGroupType_MS);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (hRMS_TravelGroupType_MS != null)
+            {
+                db.HRMS_TravelGroupType_MS.Remove(hRMS_TravelGroupType_MS);
+                db.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -61,7 +61,8 @@ namespace HRMS.Controllers
                         if (PhoneWorkNoExist == null)
                         {
                             db.HRMS_Contact.Add(hRMS_Contact);
-                            db.SaveChanges();
+                            db.SaveChanges(); ModelState.Clear();
+
                             ViewBag.ContactStatus = "Employee Contact detail is added successfully";
                             ViewBag.Employee_ID = db.HRMS_Emp_Details;
 
@@ -126,7 +127,8 @@ namespace HRMS.Controllers
                     if (PhoneWorkNoExist == null)
                     {
                         db.Entry(hRMS_Contact).State = EntityState.Modified;
-                        db.SaveChanges();
+                        db.SaveChanges(); ModelState.Clear();
+
                         ViewBag.ContactStatus = "Employee Contact detail is Updated successfully";
                         ViewBag.Employee_ID = db.Accounts.Where(rec => rec.ID == hRMS_Contact.Employee_ID);
 
@@ -160,7 +162,8 @@ namespace HRMS.Controllers
             HRMS_Contact hRMS_Contact = db.HRMS_Contact.Find(id);
 
             db.HRMS_Contact.Remove(hRMS_Contact);
-            db.SaveChanges();
+            db.SaveChanges(); ModelState.Clear();
+
             return true;
 
 

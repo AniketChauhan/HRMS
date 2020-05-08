@@ -34,6 +34,7 @@ namespace HRMS.Controllers
                     }
                     db.HRMS_CATEGORY_GRADE.Add(hRMS_CATEGORY_GRADE);
                     db.SaveChanges();
+                    ModelState.Clear();
                     ViewBag.Grade_Status = "Grade is added Successfuly.";
                     return View(hRMS_CATEGORY_GRADE);
                 }
@@ -78,6 +79,8 @@ namespace HRMS.Controllers
                     searchRaw.Grade_Name = hRMS_CATEGORY_GRADE.Grade_Name;
                     searchRaw.Grade_Detail = hRMS_CATEGORY_GRADE.Grade_Detail;
                     db.SaveChanges();
+
+                    ModelState.Clear();
                     ViewBag.Grade_Status = "Grade is added Successfuly.";
                     return RedirectToAction("Index");
                 }
@@ -86,12 +89,13 @@ namespace HRMS.Controllers
                 searchRaw1.Grade_Name = hRMS_CATEGORY_GRADE.Grade_Name;
                 searchRaw1.Grade_Detail = hRMS_CATEGORY_GRADE.Grade_Detail;
                 db.SaveChanges();
+
+                ModelState.Clear();
                 ViewBag.Grade_Status = "Grade is added Successfuly.";
                 return RedirectToAction("Index");
             }
             return View(hRMS_CATEGORY_GRADE);
         }
-        [HttpPost]
         public bool delete(long id)
         {
             HRMS_CATEGORY_GRADE hRMS_CATEGORY_GRADE = db.HRMS_CATEGORY_GRADE.Find(id);
@@ -99,6 +103,8 @@ namespace HRMS.Controllers
             {
                 db.HRMS_CATEGORY_GRADE.Remove(hRMS_CATEGORY_GRADE);
                 db.SaveChanges();
+                ModelState.Clear();
+
                 return true;
             }
             else

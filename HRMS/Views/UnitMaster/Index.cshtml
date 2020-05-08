@@ -50,8 +50,8 @@
             @Html.DisplayNameFor(model => model.First().UnitName)
         </th>
         @*<th>
-                @Html.DisplayNameFor(model => model.First().Address)
-            </th>*@
+            @Html.DisplayNameFor(model => model.First().Address)
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.First().Country)
         </th>
@@ -59,21 +59,21 @@
             @Html.DisplayNameFor(model => model.First().City)
         </th>
         @*<th>
-                @Html.DisplayNameFor(model => model.First().Pincode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().Priority)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().PaySlip)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.First().IsActive)
-            </th>*@
+            @Html.DisplayNameFor(model => model.First().Pincode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Priority)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().PaySlip)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().IsActive)
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.First().State)
         </th>
-        <th></th>
+        <th><center><i class="glyphicon glyphicon-wrench"> </i> Operations</center></th>
     </tr>
 
     @if (Model.Count() <= 0)
@@ -86,40 +86,44 @@
     {
         foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UnitName)
-                </td>
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.Address)
-                    </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.Country)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.City)
-                </td>
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.Pincode)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Priority)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PaySlip)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IsActive)
-                    </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.State)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.UnitCode }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.UnitCode }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.UnitCode })
-                </td>
-            </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.UnitName)
+    </td>
+    @*<td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>*@
+    <td>
+        @Html.DisplayFor(modelItem => item.Country)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.City)
+    </td>
+    @*<td>
+            @Html.DisplayFor(modelItem => item.Pincode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Priority)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaySlip)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>*@
+    <td>
+        @Html.DisplayFor(modelItem => item.State)
+    </td>
+    
+    <td class="btn-group-sm">
+        <center>
+            @Html.ActionLink(" Edit", "Edit", new { id = item.UnitCode }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" })
+            @Html.ActionLink(" Details", "Details", new { id = item.UnitCode }, new { @class = "btn btn-warning btn-sm glyphicon glyphicon-list-alt" })
+
+            <button class="btn btn-danger  btn-sm " onclick="return removeFromList(this, '@item.UnitCode') "> <i class="glyphicon glyphicon-trash"> </i> Delete</button>
+        </center>
+    </td>
+</tr>
         }
 
 
@@ -128,3 +132,23 @@
 
 </table>
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page, Search = Request.QueryString["Search"], Data = Request.QueryString["Data"] }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
+<script>
+    function removeFromList(thisobj, id) {
+        if (confirm("Are you sure?") == true) {
+            var data = JSON.stringify({
+                'id': id
+            });
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "@Url.Action("Delete","UnitMaster")",
+                datatype: "json",
+                data: data,
+                success: function (response) {
+                    var tr = $(thisobj).closest("tr");
+                    $(tr).remove();
+                }
+            });
+        }
+    }
+</script>

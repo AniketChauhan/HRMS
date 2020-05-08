@@ -25,14 +25,16 @@ namespace HRMS.Controllers
                 obj.EMP_ID = EmpID;
                 obj.Grade_ID = GradeID;
                 db.EMP_Grade_Assignment.Add(obj);
-                db.SaveChanges();
+                db.SaveChanges(); ModelState.Clear();
+
             }
             else
             {
 
                 EMP_Grade_Assignment obj = db.EMP_Grade_Assignment.Where(x => x.EMP_ID == EmpID).FirstOrDefault();
                 obj.Grade_ID = GradeID;
-                db.SaveChanges();
+                db.SaveChanges(); ModelState.Clear();
+
             }
             return Json(true, JsonRequestBehavior.AllowGet);
         }

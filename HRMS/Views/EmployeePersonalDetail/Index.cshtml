@@ -77,7 +77,7 @@
         <th>
             @Html.DisplayNameFor(model => model.ReligionMaster.ReligionShortName)
         </th>*@
-        <th></th>
+        <th><center><i class="glyphicon glyphicon-wrench"> </i> Operations</center></th>
     </tr>
 
     @foreach (var item in Model)
@@ -89,74 +89,96 @@
         @Html.DisplayFor(modelItem => item.DOB)
     </td>
     @*<td>
-        @Html.DisplayFor(modelItem => item.IdentityMark1)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.IdentityMark2)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Race)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.MarraigeDate)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.NoOfChild)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.NoOfDependents)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.AadharNo)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.SIN)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.AKA)
-    </td>*@
+            @Html.DisplayFor(modelItem => item.IdentityMark1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdentityMark2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Race)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MarraigeDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoOfChild)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoOfDependents)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AadharNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SIN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AKA)
+        </td>*@
     <td>
         @Html.DisplayFor(modelItem => item.MilitaryService)
     </td>
     @*<td>
-        @Html.DisplayFor(modelItem => item.BirthCity)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Note)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Hobbies)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.MilitaryServiceDetail)
-    </td>*@
+            @Html.DisplayFor(modelItem => item.BirthCity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Note)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Hobbies)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MilitaryServiceDetail)
+        </td>*@
     <td>
         @Html.DisplayFor(modelItem => item.EMP_ID)
     </td>
     @*<td>
-        @Html.DisplayFor(modelItem => item.CastMaster.CastName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.HRMS_CATEGORY_GRADE.Category_Name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.HRMS_EMP_CITIZENSHIP_MS.CitizenShip_Country_NM)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.HRMS_EMP_GENDER_MS.Gender_Value)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.MaritalMaster.MaritalName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.ReligionMaster.ReligionShortName)
-    </td>*@
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            @Html.DisplayFor(modelItem => item.CastMaster.CastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HRMS_CATEGORY_GRADE.Category_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HRMS_EMP_CITIZENSHIP_MS.CitizenShip_Country_NM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HRMS_EMP_GENDER_MS.Gender_Value)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaritalMaster.MaritalName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReligionMaster.ReligionShortName)
+        </td>*@
+  
+    <td class="btn-group-sm">
+        @Html.ActionLink(" Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" })
+        @Html.ActionLink(" Details", "Details", new { id = item.ID }, new { @class = "btn btn-warning btn-sm glyphicon glyphicon-list-alt" })
+
+        <button class="btn btn-danger  btn-sm " onclick="return removeFromList(this, '@item.ID') "> <i class="glyphicon glyphicon-trash"> </i> Delete</button>
     </td>
 </tr>
 }
 
 </table>
+<script>
+    function removeFromList(thisobj, id) {
+        if (confirm("Are you sure?") == true) {
+            var data = JSON.stringify({
+                'id': id
+            });
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "@Url.Action("Delete","EmployeePersonalDetail")",
+                datatype: "json",
+                data: data,
+                success: function (response) {
+                    var tr = $(thisobj).closest("tr");
+                    $(tr).remove();
+                }
+            });
+        }
+    }
+</script>

@@ -28,9 +28,12 @@ namespace HRMS.Controllers
             if (ModelState.IsValid)
             {
                 var attachment_name = db.HRMS_ATTACHMENT_TYPE.FirstOrDefault(rec => rec.Attachment_Type_Name == hRMS_ATTACHMENT_TYPE.Attachment_Type_Name);
-                if(attachment_name == null) { 
-                db.HRMS_ATTACHMENT_TYPE.Add(hRMS_ATTACHMENT_TYPE);
-                db.SaveChanges();
+                if (attachment_name == null)
+                {
+                    db.HRMS_ATTACHMENT_TYPE.Add(hRMS_ATTACHMENT_TYPE);
+                    db.SaveChanges();
+                    ModelState.Clear();
+
                     ViewBag.Attachment_status = "Attachment Type is added successfully!";
                     return View();
                 }
@@ -66,6 +69,8 @@ namespace HRMS.Controllers
                 {
                     db.Entry(hRMS_ATTACHMENT_TYPE).State = EntityState.Modified;
                     db.SaveChanges();
+                    ModelState.Clear();
+
                     return RedirectToAction("Index");
                 }
                 else
@@ -76,13 +81,22 @@ namespace HRMS.Controllers
             }
             return View(hRMS_ATTACHMENT_TYPE);
         }
-        [HttpPost]
-        public ActionResult Delete(long id)
+       
+        public bool Delete(long id)
         {
             HRMS_ATTACHMENT_TYPE hRMS_ATTACHMENT_TYPE = db.HRMS_ATTACHMENT_TYPE.Find(id);
-            db.HRMS_ATTACHMENT_TYPE.Remove(hRMS_ATTACHMENT_TYPE);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (hRMS_ATTACHMENT_TYPE != null)
+            {
+                db.HRMS_ATTACHMENT_TYPE.Remove(hRMS_ATTACHMENT_TYPE);
+                db.SaveChanges();
+                ModelState.Clear();
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         protected override void Dispose(bool disposing)
         {

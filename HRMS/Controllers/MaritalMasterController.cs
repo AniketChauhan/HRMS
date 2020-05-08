@@ -121,33 +121,20 @@ namespace HRMS.Controllers
             }
             return View(MaritalMasters);
         }
-
-        // GET: MaritalMasters/Delete/5
-        public ActionResult Delete(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            MaritalMaster MaritalMasters = db.MaritalMaster.Find(id);
-            if (MaritalMasters == null)
-            {
-                return HttpNotFound();
-            }
-            return View(MaritalMasters);
-        }
-
-        // POST: MaritalMasters/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
+        public bool delete(long id)
         {
             MaritalMaster MaritalMasters = db.MaritalMaster.Find(id);
-            db.MaritalMaster.Remove(MaritalMasters);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (MaritalMasters != null)
+            {
+                db.MaritalMaster.Remove(MaritalMasters);
+                db.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)

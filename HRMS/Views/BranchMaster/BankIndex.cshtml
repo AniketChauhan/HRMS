@@ -14,7 +14,7 @@
         <th>
             @Html.DisplayNameFor(model => model.BankName)
         </th>
-        <th></th>
+        <th><center><i class="glyphicon glyphicon-wrench" style="font-size:large"> </i> Operations</center></th>
     </tr>
 
     @foreach (var item in Model)
@@ -24,7 +24,9 @@
                 @Html.DisplayFor(modelItem => item.BankName)
             </td>
             <td>
-                @Html.ActionLink("Edit", "EditBank", new { id = item.BankCode }, new { @class = "btn btn-warning" })
+                <center>
+                    @Html.ActionLink(" Edit ", "EditBank", new { id = item.BankCode }, new { @class = "btn btn-warning glyphicon glyphicon-edit" })
+                </center>
             </td>
         </tr>
     }

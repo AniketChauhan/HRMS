@@ -40,7 +40,8 @@ namespace HRMS.Controllers
                 {
 
                     db.HRMS_Travel_Purpose.Add(hRMS_Travel_Purpose);
-                    db.SaveChanges();
+                    db.SaveChanges(); ModelState.Clear();
+
                     ViewBag.PurposeStatus = "Travel Purpose Added Successfully.";
                     return View();
                 }
@@ -81,7 +82,8 @@ namespace HRMS.Controllers
                 {
 
                     db.Entry(hRMS_Travel_Purpose).State = EntityState.Modified;
-                    db.SaveChanges();
+                    db.SaveChanges(); ModelState.Clear();
+
                     return RedirectToAction("Index");
                 }
                 else
@@ -99,7 +101,8 @@ namespace HRMS.Controllers
         {
             HRMS_Travel_Purpose hRMS_Travel_Purpose = db.HRMS_Travel_Purpose.Find(id);
             db.HRMS_Travel_Purpose.Remove(hRMS_Travel_Purpose);
-            db.SaveChanges();
+            db.SaveChanges(); ModelState.Clear();
+
             return true;
         }
 

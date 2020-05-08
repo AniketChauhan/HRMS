@@ -19,7 +19,7 @@
         <th>
             @Html.DisplayNameFor(model => model.First().SAPCode)
         </th>
-        <th></th>
+        <th><center><i class="glyphicon glyphicon-wrench"> </i> Operations</center></th>
     </tr>
 
     @foreach (var item in Model)
@@ -31,13 +31,35 @@
             <td>
                 @Html.DisplayFor(modelItem => item.SAPCode)
             </td>
+           
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.SegmentID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.SegmentID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.SegmentID })
+                <center>
+                    @Html.ActionLink(" Edit", "Edit", new { id = item.SegmentID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" }) |
+                    @Html.ActionLink(" Details", "Details", new { id = item.SegmentID }, new { @class = "btn btn-warning btn-sm glyphicon glyphicon-edit" }) |
+                    <button class="btn btn-danger  btn-sm " onclick="return removeFromList(this, '@item.SegmentID') "> <i class="glyphicon glyphicon-trash"> </i> Delete</button>
+                </center>
             </td>
         </tr>
     }
 
 </table>
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
+
+<script>
+    function removeFromList(thisobj,id) {
+        var data = JSON.stringify({
+            'id': id
+        });
+        $.ajax({
+        type: "POST",
+            contentType: "application/json",
+            url: "@Url.Action("delete","SegmentMaster")",
+            datatype: "json",
+            data: data,
+            success: function (response) {
+                    var tr = $(thisobj).closest("tr");
+                    $(tr).remove();
+            }
+        });
+    }
+</script>

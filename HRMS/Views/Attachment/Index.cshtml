@@ -12,12 +12,12 @@
 </p>
 @if (Model.Count<HRMS.Models.HRMS_ATTACHMENT_TYPE>() > 0 && Model != null)
 {
-    <table class="table">
+    <table class="table table-bordered table-responsive table-striped">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Attachment_Type_Name)
             </th>
-            <th><i class="glyphicon glyphicon-wrench"> </i> Operations</th>
+            <th><center><i class="glyphicon glyphicon-wrench"> </i> Operations</center></th>
         </tr>
 
         @foreach (var item in Model)

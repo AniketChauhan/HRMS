@@ -56,7 +56,8 @@ namespace HRMS.Controllers
                     {
 
                         db.HRMS_Travel_type.Add(hRMS_Travel_type);
-                        db.SaveChanges();
+                        db.SaveChanges(); ModelState.Clear();
+
                         ViewBag.TypeStatus = "New Travel Type is added successfully.";
                         return View();
                     }
@@ -106,7 +107,8 @@ namespace HRMS.Controllers
                     {
 
                         db.Entry(hRMS_Travel_type).State = EntityState.Modified;
-                        db.SaveChanges();
+                        db.SaveChanges(); ModelState.Clear();
+
                         return RedirectToAction("Index");
                     }
                     else
@@ -132,7 +134,8 @@ namespace HRMS.Controllers
         {
             HRMS_Travel_type hRMS_Travel_type = db.HRMS_Travel_type.Find(id);
             db.HRMS_Travel_type.Remove(hRMS_Travel_type);
-            db.SaveChanges();
+            db.SaveChanges(); ModelState.Clear();
+
             return true;
         }
 

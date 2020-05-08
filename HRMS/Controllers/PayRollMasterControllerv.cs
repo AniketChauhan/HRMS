@@ -114,30 +114,21 @@ namespace HRMS.Controllers
             return View(payRollMaster);
         }
 
-        // GET: PayRollMaster/Delete/5
-        public ActionResult Delete(long? id)
+        
+        public bool delete(long id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             PayRollMaster payRollMaster = db.PayRollMaster.Find(id);
-            if (payRollMaster == null)
+            if (payRollMaster != null)
             {
-                return HttpNotFound();
+                db.PayRollMaster.Remove(payRollMaster);
+                db.SaveChanges();
+                return true;
             }
-            return View(payRollMaster);
-        }
+            else
+            {
+                return false;
+            }
 
-        // POST: PayRollMaster/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
-        {
-            PayRollMaster payRollMaster = db.PayRollMaster.Find(id);
-            db.PayRollMaster.Remove(payRollMaster);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

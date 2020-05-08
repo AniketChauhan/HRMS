@@ -116,33 +116,15 @@ namespace HRMS.Controllers
                 return View(workLocationMaster);
             }
 
-            // GET: WorkLocationMaster/Delete/5
-            public ActionResult Delete(long? id)
-            {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                WorkLocationMaster workLocationMaster = db.WorkLocationMaster.Find(id);
-                if (workLocationMaster == null)
-                {
-                    return HttpNotFound();
-                }
-                return View(workLocationMaster);
-            }
-
-            // POST: WorkLocationMaster/Delete/5
-            [HttpPost, ActionName("Delete")]
-            [ValidateAntiForgeryToken]
-            public ActionResult DeleteConfirmed(long id)
-            {
-                WorkLocationMaster workLocationMaster = db.WorkLocationMaster.Find(id);
-                db.WorkLocationMaster.Remove(workLocationMaster);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            protected override void Dispose(bool disposing)
+            
+        public bool Delete(long id)
+        {
+            WorkLocationMaster workLocationMaster = db.WorkLocationMaster.Find(id);
+            db.WorkLocationMaster.Remove(workLocationMaster);
+            db.SaveChanges();
+            return true;
+        }
+        protected override void Dispose(bool disposing)
             {
                 if (disposing)
                 {

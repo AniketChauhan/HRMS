@@ -162,32 +162,21 @@ namespace HRMS.Controllers
             return View(hRMS_EMP_ReferenceDetail);
         }
 
-        // GET: EmployeeReferenceDetail/Delete/5
-        public ActionResult Delete(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            HRMS_EMP_ReferenceDetail hRMS_EMP_ReferenceDetail = db.HRMS_EMP_ReferenceDetail.Find(id);
-            if (hRMS_EMP_ReferenceDetail == null)
-            {
-                return HttpNotFound();
-            }
-            return View(hRMS_EMP_ReferenceDetail);
-        }
-
-        // POST: EmployeeReferenceDetail/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
+        public bool delete(long id)
         {
             HRMS_EMP_ReferenceDetail hRMS_EMP_ReferenceDetail = db.HRMS_EMP_ReferenceDetail.Find(id);
-            db.HRMS_EMP_ReferenceDetail.Remove(hRMS_EMP_ReferenceDetail);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+            if (hRMS_EMP_ReferenceDetail != null)
+            {
+                db.HRMS_EMP_ReferenceDetail.Remove(hRMS_EMP_ReferenceDetail);
+                db.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

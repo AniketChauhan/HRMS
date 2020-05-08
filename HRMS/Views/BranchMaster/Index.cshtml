@@ -16,22 +16,10 @@
 <table class="table table-bordered table-striped table-responsive">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.BankMaster.BankName)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.BranchName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MICR_Code)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IFSC_Code)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Contact)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fax)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EmailID)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Country)
@@ -42,63 +30,61 @@
         <th>
             @Html.DisplayNameFor(model => model.City)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PinCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BankMaster.BankName)
-        </th>
-        <th></th>
+
+
+        <th><center><i class="glyphicon glyphicon-wrench" style="font-size:large"> </i> Operations</center></th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BranchName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MICR_Code)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IFSC_Code)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Contact)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fax)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmailID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Country)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.State)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PinCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BankMaster.BankName)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.BranchCode }) |
-                @Html.ActionLink("Details", "Details", new { id = item.BranchCode }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.BranchCode })
-            </td>
-        </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.BankMaster.BankName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BranchName)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.Country)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.State)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.City)
+    </td>
+   
+
+    <td><center>
+
+    @Html.ActionLink(" Edit", "Edit", new { id = item.BranchCode }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" })
+    @Html.ActionLink(" Details", "Details", new { id = item.BranchCode }, new { @class = "btn btn-warning btn-sm glyphicon glyphicon-list-alt" })
+
+    <button class="btn btn-danger  btn-sm " onclick="return removeFromList(this, '@item.BranchCode') "> <i class="glyphicon glyphicon-trash"> </i> Delete</button>
+</center>
+    </td>
+</tr>
     }
 
 </table>
+<script>
+    function removeFromList(thisobj, id) {
+        if (confirm("Are you sure?") == true) {
+            var data = JSON.stringify({
+                'id': id
+            });
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "@Url.Action("Delete","BranchMaster")",
+                datatype: "json",
+                data: data,
+                success: function (response) {
+                    var tr = $(thisobj).closest("tr");
+                    $(tr).remove();
+                }
+            });
+        }
+    }
+</script>

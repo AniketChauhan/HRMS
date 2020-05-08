@@ -67,6 +67,8 @@ namespace HRMS.Controllers
                     {
                         db.HRMS_DESG_MS.Add(hRMS_DESG_MS);
                         db.SaveChanges();
+                        ModelState.Clear();
+
                         ViewBag.Designation_Status = "Parent Designation added successfully.";
                         var dropdowndata = db.HRMS_DESG_MS.Where(rec => rec.Desg_Parent_ID == null && rec.IsActive == true);
                         if (dropdowndata != null)
@@ -108,7 +110,8 @@ namespace HRMS.Controllers
                         {
 
                             db.HRMS_DESG_MS.Add(hRMS_DESG_MS);
-                            db.SaveChanges();
+                            db.SaveChanges(); ModelState.Clear();
+
                             ViewBag.Designation_Status = "Sub Designation added successfully.";
                             var dropdowndata = db.HRMS_DESG_MS.Where(rec => rec.Desg_Parent_ID == null && rec.IsActive == true);
                             if (dropdowndata != null)
@@ -178,7 +181,8 @@ namespace HRMS.Controllers
                     {
                         db.Entry(hRMS_DESG_MS).State = EntityState.Modified;
 
-                        db.SaveChanges();
+                        db.SaveChanges(); ModelState.Clear();
+
                         ViewBag.Designation_Status = "Parent Designation added successfully.";
                         var dropdowndata = db.HRMS_DESG_MS.Where(rec => rec.Desg_Parent_ID == null && rec.IsActive == true);
                         if (dropdowndata != null)

@@ -12,7 +12,7 @@
 @if (Model != null)
 {
 
-    <table class="table">
+    <table class="table table-bordered table-responsive table-striped">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Dept_Name)
@@ -27,7 +27,7 @@
                 @Html.DisplayNameFor(model => model.IsActive)
             </th>
 
-            <th></th>
+            <th><center><i class="glyphicon glyphicon-wrench"> </i> Operations</center></th>
         </tr>
 
         @foreach (var item in Model)
@@ -46,8 +46,10 @@
                     @Html.DisplayFor(modelItem => item.IsActive)
                 </td>
                 <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.Dept_Id })
-                </td>
+                    <center>
+                        @Html.ActionLink("Details", "Details", new { id = item.Dept_Id })
+                    </center>
+                        </td>
             </tr>
         }
 

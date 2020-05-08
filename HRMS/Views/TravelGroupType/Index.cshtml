@@ -9,7 +9,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table table-bordered table-striped table-responsive">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Date)
@@ -20,26 +20,49 @@
         <th>
             @Html.DisplayNameFor(model => model.HRMS_TravelMode_MS.Mode_Type)
         </th>
-        <th></th>
+        <th><center><i class="glyphicon glyphicon-wrench"> </i> Operations</center></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Group_Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HRMS_TravelMode_MS.Mode_Type)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Group_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HRMS_TravelMode_MS.Mode_Type)
+            </td>
+            
+            <td>
+                <center>
+                    @Html.ActionLink(" Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" }) |
+                    @Html.ActionLink(" Details", "Details", new { id = item.ID }, new { @class = "btn btn-warning btn-sm glyphicon glyphicon-edit" }) |
+                    <button class="btn btn-danger  btn-sm " onclick="return removeFromList(this, '@item.ID') "> <i class="glyphicon glyphicon-trash"> </i> Delete</button>
+                </center>
+            </td>
+        </tr>
+    }
 
 </table>
+
+<script>
+    function removeFromList(thisobj,id) {
+        var data = JSON.stringify({
+            'id': id
+        });
+        $.ajax({
+        type: "POST",
+            contentType: "application/json",
+            url: "@Url.Action("delete","TravelGroupType")",
+            datatype: "json",
+            data: data,
+            success: function (response) {
+                    var tr = $(thisobj).closest("tr");
+                    $(tr).remove();
+            }
+        });
+    }
+</script>
