@@ -14,13 +14,14 @@ namespace HRMS.Controllers
     {
         private HRMSEntities db = new HRMSEntities();
 
+        [Authorize(Roles = "admin")]
         public ActionResult Index()
         {
             //return Content(Session["id"].ToString());
             var hRMS_Emp_Details = db.HRMS_Emp_Details.Include(h => h.HRMS_COST_CENTER).Include(h => h.HRMS_DEPT).Include(h => h.HRMS_DESG_MS).Include(h => h.HRMS_SALUTATION).Include(h => h.UnitMaster).Include(h => h.WorkLocationMaster);
             return View(hRMS_Emp_Details.ToList());
         }
-
+        [Authorize(Roles = "admin,emp")]
         public ActionResult Details(long? id)
         {
             if (id == null)
@@ -35,6 +36,7 @@ namespace HRMS.Controllers
             return View(hRMS_Emp_Details);
         }
 
+        [Authorize(Roles = "admin,emp")]
         public ActionResult Create()
         {
             ViewBag.Cost_Center = db.HRMS_COST_CENTER;
@@ -46,6 +48,8 @@ namespace HRMS.Controllers
             ViewBag.DivisionData = db.HRMS_DEPT.Where(rec => rec.Parent_ID == null && rec.IsActive == true);
             return View();
         }
+
+        [Authorize(Roles = "admin,emp")]
         public JsonResult GetDepartmentData(string DivisionData)
         {
             var DivisionID = Convert.ToInt64(DivisionData);
@@ -54,7 +58,9 @@ namespace HRMS.Controllers
             return Json(DepartmentList, JsonRequestBehavior.AllowGet);
 
         }
+
         [HttpPost]
+        [Authorize(Roles = "admin,emp")]
         public ActionResult Create(HRMS_Emp_Details hRMS_Emp_Details)
         {
             if (ModelState.IsValid)
@@ -152,6 +158,8 @@ namespace HRMS.Controllers
             ViewBag.DivisionData = db.HRMS_DEPT.Where(rec => rec.Parent_ID == null && rec.IsActive == true);
             return View(hRMS_Emp_Details);
         }
+
+        [Authorize(Roles = "admin,emp")]
         public ActionResult Edit(long? id)
         {
             if (id == null)
@@ -172,7 +180,10 @@ namespace HRMS.Controllers
             ViewBag.DivisionData = db.HRMS_DEPT.Where(rec => rec.Parent_ID == null && rec.IsActive == true);
             return View(hRMS_Emp_Details);
         }
+
+
         [HttpPost]
+        [Authorize(Roles = "admin,emp")]
         public ActionResult Edit(HRMS_Emp_Details hRMS_Emp_Details)
         {
             if (ModelState.IsValid)
@@ -239,6 +250,7 @@ namespace HRMS.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "admin,emp")]
         public bool Delete(long id)
         {
             HRMS_Emp_Details hRMS_Emp_Details = db.HRMS_Emp_Details.Find(id);

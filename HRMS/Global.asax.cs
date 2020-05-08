@@ -30,6 +30,8 @@ namespace HRMS
             };
             //end
 
+            
+            //GlobalFilters.Filters.Add(new AuthorizeAttribute());
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
