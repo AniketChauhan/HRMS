@@ -4,7 +4,15 @@
     ViewBag.Title = "Index";
 }
 
-@*<p>@Session["id"]</p>*@
+@*<p>@Session["id"]</p>
+<p>@Session["id"]</p>
+@if (User.Identity.IsAuthenticated)
+{
+    <p>@Session["id"]</p>
+    <p>@Session["id"]</p>
+    <p>@Session["id"]</p>
+    <p>@Session["id"]</p>
+}*@
 
 <h2>Employees data</h2>
 
