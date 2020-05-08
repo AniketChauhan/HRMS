@@ -16,6 +16,7 @@ namespace HRMS.Controllers
 
         public ActionResult Index()
         {
+            //return Content(Session["id"].ToString());
             var hRMS_Emp_Details = db.HRMS_Emp_Details.Include(h => h.HRMS_COST_CENTER).Include(h => h.HRMS_DEPT).Include(h => h.HRMS_DESG_MS).Include(h => h.HRMS_SALUTATION).Include(h => h.UnitMaster).Include(h => h.WorkLocationMaster);
             return View(hRMS_Emp_Details.ToList());
         }
