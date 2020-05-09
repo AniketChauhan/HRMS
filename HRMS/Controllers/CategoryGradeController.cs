@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace HRMS.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class CategoryGradeController : Controller
     {
         private HRMSEntities db = new HRMSEntities();

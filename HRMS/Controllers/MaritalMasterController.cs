@@ -10,13 +10,11 @@ using HRMS.Models;
 using PagedList;
 using PagedList.Mvc;
 
-//Testing on git
-//Testing 2
-//Testing 3 
-//l
+
 
 namespace HRMS.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class MaritalMastersController : Controller
     {
         // GET: MaritalMasters

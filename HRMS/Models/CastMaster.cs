@@ -11,7 +11,9 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class CastMaster
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,6 +24,9 @@ namespace HRMS.Models
     
         public long CastCode { get; set; }
         public long ReligionID { get; set; }
+        [Required]
+        [DisplayName("Cast Name")]
+        [RegularExpression(@"^[A-Za-z]+", ErrorMessage = "Only Alphabetic values are allowed!")]
         public string CastName { get; set; }
     
         public virtual ReligionMaster ReligionMaster { get; set; }

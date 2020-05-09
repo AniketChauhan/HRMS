@@ -12,6 +12,7 @@ using PagedList.Mvc;
 
 namespace HRMS.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class ReligionMasterController : Controller
     {
         private HRMSEntities db = new HRMSEntities();

@@ -11,11 +11,17 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class HRMS_TRAVEL_MEAL_EXPENSE_MS
     {
         public long Meal_Expense_ID { get; set; }
+        [Required]
+        [DisplayName("Meal Expense Name")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
         public string Meal_Expense_NM { get; set; }
+        [DisplayName("Meal Expense Status")]
         public bool Meal_Expense_Status { get; set; }
     }
 }

@@ -10,6 +10,7 @@ using HRMS.Models;
 
 namespace HRMS.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class CitizenShipController : Controller
     {
         private HRMSEntities db = new HRMSEntities();

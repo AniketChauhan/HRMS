@@ -15,7 +15,7 @@
 
 @*<h2>Index</h2>*@
 
-<div class="container border border-primary w3-card-4" style="width: 70%; margin-top: 1%;">
+<div class="container border border-primary w3-card-4" style="width: 70%; margin-top: 8%;">
     @using (Html.BeginForm("Index", "Account", FormMethod.Post, new { @enctype = "multipart/form-data", @id = "formCaptcha" }))
     {
         @Html.AntiForgeryToken()

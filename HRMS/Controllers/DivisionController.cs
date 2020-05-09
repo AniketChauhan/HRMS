@@ -11,6 +11,7 @@ using HRMS.Models;
 
 namespace HRMS.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class DivisionController : Controller
     {
         private HRMSEntities db = new HRMSEntities();

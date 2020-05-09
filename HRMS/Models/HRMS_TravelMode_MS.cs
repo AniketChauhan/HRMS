@@ -11,7 +11,9 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class HRMS_TravelMode_MS
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,12 +21,21 @@ namespace HRMS.Models
         {
             this.HRMS_TravelGroupType_MS = new HashSet<HRMS_TravelGroupType_MS>();
         }
-    
+
+        //public long Mode_ID { get; set; }
+        //public string Mode_Type { get; set; }
+        //public string Mode_Name { get; set; }
+        //public string Mode_Short_Name { get; set; }
         public long Mode_ID { get; set; }
+        [DisplayName("Mode Type")]
         public string Mode_Type { get; set; }
+        [Required]
+        [DisplayName("Mode Name")]
         public string Mode_Name { get; set; }
+        [Required]
+        [DisplayName("Mode Short Name")]
         public string Mode_Short_Name { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HRMS_TravelGroupType_MS> HRMS_TravelGroupType_MS { get; set; }
     }

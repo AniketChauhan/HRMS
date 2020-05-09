@@ -11,7 +11,9 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class HRMS_DESG_MS
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,9 +21,14 @@ namespace HRMS.Models
         {
             this.HRMS_Emp_Details = new HashSet<HRMS_Emp_Details>();
         }
-    
+        [DisplayName("ID")]
         public long Desg_Id { get; set; }
+        [Required]
+
+        [DisplayName("Designation Name")]
         public string Desg_Name { get; set; }
+        [Required]
+        [DisplayName("Designation ShortName")]
         public string Desg_Short_Name { get; set; }
         public Nullable<long> Desg_Parent_ID { get; set; }
         public bool IsActive { get; set; }

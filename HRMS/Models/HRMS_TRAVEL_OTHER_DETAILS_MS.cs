@@ -11,10 +11,16 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
+
+
     public partial class HRMS_TRAVEL_OTHER_DETAILS_MS
     {
         public long Travel_Other_Details_ID { get; set; }
+        [Required]
+        [DisplayName("Travel Other Detail")]
         public string Travel_Other_Details_NM { get; set; }
     }
 }

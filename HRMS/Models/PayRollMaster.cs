@@ -11,10 +11,19 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
+
     public partial class PayRollMaster
     {
+        //public long PayRollCode { get; set; }
+        //public string PayRollName { get; set; }
+
         public long PayRollCode { get; set; }
+        [Required]
+        [DisplayName("PayRoll Name")]
+        [RegularExpression(@"^[A-Za-z]+", ErrorMessage = "Only Alphabet values are allowed!")]
         public string PayRollName { get; set; }
     }
 }

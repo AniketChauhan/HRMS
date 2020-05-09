@@ -11,6 +11,7 @@ using PagedList;
 using PagedList.Mvc;
 namespace HRMS.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class SegmentMasterController : Controller
     {
    private HRMSEntities db = new HRMSEntities();

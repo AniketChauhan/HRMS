@@ -12,6 +12,7 @@ using PagedList.Mvc;
 
 namespace HRMS.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class PayRollMasterController : Controller
     {
         private HRMSEntities db = new HRMSEntities();

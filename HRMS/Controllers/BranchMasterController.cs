@@ -10,6 +10,7 @@ using HRMS.Models;
 
 namespace HRMS.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class BranchMasterController : Controller
     {
         private HRMSEntities db = new HRMSEntities();
