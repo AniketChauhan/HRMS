@@ -168,17 +168,27 @@
         </div>
     </div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <label class="label label-danger">@ViewBag.error</label>
+    @if (ViewBag.error != null)
+    {
+        <div class="alert alert-success alert-dismissible " style="width:50%;">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <span>
+                @ViewBag.error
+            </span>
         </div>
-    </div>
+    }
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <label class="label label-success">@ViewBag.success</label>
+
+    @if (ViewBag.success != null)
+    {
+        <div class="alert alert-success alert-dismissible " style="width:50%;">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <span>
+                @ViewBag.success
+            </span>
         </div>
-    </div>
+    }
+    
 
 }
 @if (ViewBag.Role == "admin")
@@ -188,55 +198,55 @@
         @Html.ActionLink("Back to List", "Index")
     </div>
 }
-    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            $("#Country").change(function () {
-                $.get("/EmployeeReferenceDetail/GetStateList", { CountryX: $("#Country").val() }, function (data) {
+<script>
+    $(document).ready(function () {
+        $("#Country").change(function () {
+            $.get("/EmployeeReferenceDetail/GetStateList", { CountryX: $("#Country").val() }, function (data) {
 
-                    $("#State").empty();
+                $("#State").empty();
 
-                    $('#State').append($('<option>', {
-                        value: '0',
-                        text: '--Select State--',
-                    }, '</option>'));
+                $('#State').append($('<option>', {
+                    value: '0',
+                    text: '--Select State--',
+                }, '</option>'));
 
-                    $("#City").empty();
-                    $('#City').append($('<option>', {
-                        value: '0',
-                        text: '--Select City--',
-                    }, '</option>'));
+                $("#City").empty();
+                $('#City').append($('<option>', {
+                    value: '0',
+                    text: '--Select City--',
+                }, '</option>'));
 
-                    $.each(data, function (index, row) {
+                $.each(data, function (index, row) {
 
-                        $("#State").append("<option value='" + row.StateID + "'>" + row.StateName + "</option>")
-                    });
+                    $("#State").append("<option value='" + row.StateID + "'>" + row.StateName + "</option>")
+                });
 
+            });
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#State").change(function () {
+            $.get("/EmployeeReferenceDetail/GetCityList", { StateX: $("#State").val() }, function (data) {
+
+                $("#City").empty();
+
+                $('#City').append($('<option>', {
+                    value: '0',
+                    text: '--Select City--',
+                }, '</option>'));
+                $.each(data, function (index, row) {
+
+                    $("#City").append("<option value='" + row.CityID + "'>" + row.CityName + "</option>")
                 });
             });
         });
-    </script>
-
-    <script>
-        $(document).ready(function () {
-            $("#State").change(function () {
-                $.get("/EmployeeReferenceDetail/GetCityList", { StateX: $("#State").val() }, function (data) {
-
-                    $("#City").empty();
-
-                    $('#City').append($('<option>', {
-                        value: '0',
-                        text: '--Select City--',
-                    }, '</option>'));
-                    $.each(data, function (index, row) {
-
-                        $("#City").append("<option value='" + row.CityID + "'>" + row.CityName + "</option>")
-                    });
-                });
-            });
-        });
-    </script>
+    });
+</script>
 
