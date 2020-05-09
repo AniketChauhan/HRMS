@@ -13,17 +13,41 @@ namespace HRMS.Controllers
     {
         
         HRMSEntities db = new HRMSEntities();
-       
+        [Authorize(Roles = "admin,emp")]
         public ActionResult Index()
         {
             ViewBag.Attachment_Type_ID = new SelectList(db.HRMS_ATTACHMENT_TYPE, "Attachment_Type_ID", "Attachment_Type_Name");
-            ViewData["users"] = db.HRMS_EMP_Attachment_Details.ToList();
+
+
+            long emp_id = Convert.ToInt64(Session["id"]);
+            string role = db.Accounts.Where(x => x.ID == emp_id).Select(x => x.role).FirstOrDefault();
+            if (role == "admin")
+            {
+                ViewBag.Role = "admin";
+                ViewData["users"] = db.HRMS_EMP_Attachment_Details.ToList();
+            }
+
+            else
+            {
+                ViewData["users"] = db.HRMS_EMP_Attachment_Details.Where(x => x.EMP_ID == emp_id).ToList();
+            }
+            
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin,emp")]
         public ActionResult Index(HttpPostedFileBase files, HRMS_EMP_Attachment_Details model)
         {
+            long emp_id = Convert.ToInt64(Session["id"]);
+            string role = db.Accounts.Where(x => x.ID == emp_id).Select(x => x.role).FirstOrDefault();
+
+            if (role == "emp")
+            {
+                //ModelState.Remove("EMP_ID");
+                model.EMP_ID = emp_id;
+            }
+
 
             if (files != null)
             {
@@ -33,8 +57,19 @@ namespace HRMS.Controllers
                 {
                     ViewBag.IsExist = "File is already Uploaded!";
                     ViewBag.Attachment_Type_ID = new SelectList(db.HRMS_ATTACHMENT_TYPE, "Attachment_Type_ID", "Attachment_Type_Name");
-                    ViewData["users"] = db.HRMS_EMP_Attachment_Details.ToList();
+                    if (role == "admin")
+                    {
+                        ViewBag.Role = "admin";
+                        ViewData["users"] = db.HRMS_EMP_Attachment_Details.ToList();
+                    }
+
+                    else
+                    {
+                        ViewData["users"] = db.HRMS_EMP_Attachment_Details.Where(x => x.EMP_ID == emp_id).ToList();
+                    }
                     return View();
+
+                   
                 }
 
                 else
@@ -56,11 +91,19 @@ namespace HRMS.Controllers
                         db.SaveChanges();
                         ModelState.Clear();
 
-
                         ViewBag.Success = "File is Succeccfully Uploaded!";
                         ViewBag.Attachment_Type_ID = new SelectList(db.HRMS_ATTACHMENT_TYPE, "Attachment_Type_ID", "Attachment_Type_Name");
-                        ViewData["users"] = db.HRMS_EMP_Attachment_Details.ToList();
-                        ModelState.Clear();
+
+                        if (role == "admin")
+                        {
+                            ViewBag.Role = "admin";
+                            ViewData["users"] = db.HRMS_EMP_Attachment_Details.ToList();
+                        }
+
+                        else
+                        {
+                            ViewData["users"] = db.HRMS_EMP_Attachment_Details.Where(x => x.EMP_ID == emp_id).ToList();
+                        }
                         return View();
                     }
 
@@ -68,7 +111,16 @@ namespace HRMS.Controllers
                     {
                         ViewBag.Format = "Please Upload only pdf format!";
                         ViewBag.Attachment_Type_ID = new SelectList(db.HRMS_ATTACHMENT_TYPE, "Attachment_Type_ID", "Attachment_Type_Name");
-                        ViewData["users"] = db.HRMS_EMP_Attachment_Details.ToList();
+                        if (role == "admin")
+                        {
+                            ViewBag.Role = "admin";
+                            ViewData["users"] = db.HRMS_EMP_Attachment_Details.ToList();
+                        }
+
+                        else
+                        {
+                            ViewData["users"] = db.HRMS_EMP_Attachment_Details.Where(x => x.EMP_ID == emp_id).ToList();
+                        }
                         return View();
                     }
                 }
@@ -77,12 +129,21 @@ namespace HRMS.Controllers
             {
                 ModelState.AddModelError("", "Please Choose Correct File Type !!");
                 ViewBag.Attachment_Type_ID = new SelectList(db.HRMS_ATTACHMENT_TYPE, "Attachment_Type_ID", "Attachment_Type_Name");
-                ViewData["users"] = db.HRMS_EMP_Attachment_Details.ToList();
+                if (role == "admin")
+                {
+                    ViewBag.Role = "admin";
+                    ViewData["users"] = db.HRMS_EMP_Attachment_Details.ToList();
+                }
+
+                else
+                {
+                    ViewData["users"] = db.HRMS_EMP_Attachment_Details.Where(x => x.EMP_ID == emp_id).ToList();
+                }
                 return View(model);
             }
 
         }
-
+        [Authorize(Roles = "admin,emp")]
         public ActionResult DownloadFile(string filePath)
         {
             string fullName = Server.MapPath("~" + filePath);
@@ -101,7 +162,7 @@ namespace HRMS.Controllers
                 throw new System.IO.IOException(s);
             return data;
         }
-
+        [Authorize(Roles = "admin,emp")]
         public ActionResult Delete(string filePath, int id)
         {
             bool isValid = RemoveFileFromServer(filePath);
@@ -109,7 +170,7 @@ namespace HRMS.Controllers
             {
                 HRMS_EMP_Attachment_Details model = db.HRMS_EMP_Attachment_Details.Find(id);
                 db.HRMS_EMP_Attachment_Details.Remove(model);
-                db.SaveChanges(); ModelState.Clear();
+                db.SaveChanges(); 
 
                 return RedirectToAction("Index");
             }

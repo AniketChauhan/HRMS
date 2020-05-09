@@ -32,6 +32,7 @@ namespace HRMS.Controllers
 
 
         // GET: EmployeeReferenceDetail
+        [Authorize(Roles = "admin")]
         public ActionResult Index()
         {
             var hRMS_EMP_ReferenceDetail = db.HRMS_EMP_ReferenceDetail.Include(h => h.City1).Include(h => h.Country1).Include(h => h.Accounts).Include(h => h.State1);
@@ -39,24 +40,64 @@ namespace HRMS.Controllers
         }
 
         // GET: EmployeeReferenceDetail/Details/5
+        [Authorize(Roles = "admin,emp")]
         public ActionResult Details(long? id)
         {
-            if (id == null)
+            long emp_id = Convert.ToInt64(Session["id"]);
+            string role = db.Accounts.Where(x => x.ID == emp_id).Select(x => x.role).FirstOrDefault();
+            if (role == "admin")
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                ViewBag.Role = "admin";
             }
-            HRMS_EMP_ReferenceDetail hRMS_EMP_ReferenceDetail = db.HRMS_EMP_ReferenceDetail.Find(id);
-            if (hRMS_EMP_ReferenceDetail == null)
+
+            //if no entry it will redirect to create
+            bool isExist = db.HRMS_EMP_ReferenceDetail.Any(x => x.EMP_ID == emp_id);
+            if (!isExist)
             {
-                return HttpNotFound();
+                return RedirectToAction("Create");
             }
-            return View(hRMS_EMP_ReferenceDetail);
-        }
+
+            else
+            {
+
+
+                //    if (id == null)
+                //{
+                //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //}
+                id = db.HRMS_EMP_ReferenceDetail.Where(x => x.EMP_ID == emp_id).Select(x => x.ID).FirstOrDefault();
+
+                HRMS_EMP_ReferenceDetail hRMS_EMP_ReferenceDetail = db.HRMS_EMP_ReferenceDetail.Find(id);
+                if (hRMS_EMP_ReferenceDetail == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(hRMS_EMP_ReferenceDetail);
+            }
+            }
 
         // GET: EmployeeReferenceDetail/Create
+        [Authorize(Roles = "admin,emp")]
         public ActionResult Create()
         {
-            
+            long emp_id = Convert.ToInt64(Session["id"]);
+            string role = db.Accounts.Where(x => x.ID == emp_id).Select(x => x.role).FirstOrDefault();
+            if (role == "admin")
+            {
+                ViewBag.Role = "admin";
+            }
+
+            //if attck by direct URL
+            if (role == "emp")
+            {
+                bool isExist = db.HRMS_EMP_ReferenceDetail.Any(x => x.EMP_ID == emp_id);
+                if (isExist)
+                {
+                    long id = db.HRMS_EMP_ReferenceDetail.Where(x => x.EMP_ID == emp_id).Select(x => x.ID).FirstOrDefault();
+                    return RedirectToAction("Details", "EmployeeReferenceDetail", new { id });
+                }
+            }
+
             ViewBag.Country = new SelectList(db.Country, "CountryID", "CountryName");
             ViewBag.State = new SelectList("");
             ViewBag.City = new SelectList("");
@@ -70,8 +111,19 @@ namespace HRMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin,emp")]
         public ActionResult Create([Bind(Include = "ID,EMP_ID,Is_Ref_Emp,Name,Country,State,City,Relationship,Pincode,Address,Designation,Company,PhoneNo,MobileNo,Email")] HRMS_EMP_ReferenceDetail hRMS_EMP_ReferenceDetail)
         {
+            long emp_id = Convert.ToInt64(Session["id"]);
+            string role = db.Accounts.Where(x => x.ID == emp_id).Select(x => x.role).FirstOrDefault();
+
+            if (role == "emp")
+            {
+                ModelState.Remove("EMP_ID");
+                hRMS_EMP_ReferenceDetail.EMP_ID = emp_id;
+            }
+
+
             if (ModelState.IsValid)
             {
                 bool isValid = db.HRMS_EMP_ReferenceDetail.Any(x => x.EMP_ID == hRMS_EMP_ReferenceDetail.EMP_ID);
@@ -82,9 +134,20 @@ namespace HRMS.Controllers
                     db.SaveChanges();
                     ViewBag.success = "Reference is Successfully created!";
                     ModelState.Clear();
+
+                    if (role == "emp")
+                    {
+                        long id = db.HRMS_EMP_ReferenceDetail.Where(x => x.EMP_ID == emp_id).Select(x => x.ID).FirstOrDefault();
+                        return RedirectToAction("Details", "EmployeeReferenceDetail", new { id });
+                    }
+
                     ViewBag.Country = new SelectList(db.Country, "CountryID", "CountryName");
                     ViewBag.State = new SelectList("");
                     ViewBag.City = new SelectList("");
+                    if (role == "admin")
+                    {
+                        ViewBag.Role = "admin";
+                    }
                     return View();
                 }
                 else
@@ -96,7 +159,10 @@ namespace HRMS.Controllers
                     ViewBag.Country = new SelectList(db.Country, "CountryID", "CountryName");
                     ViewBag.State = new SelectList(db.State.Where(x=>x.CountryID==hRMS_EMP_ReferenceDetail.Country),"StateID","StateName");
                     ViewBag.City = new SelectList(db.City.Where(x => x.StateID == hRMS_EMP_ReferenceDetail.State), "CityID", "CityName");
-
+                    if (role == "admin")
+                    {
+                        ViewBag.Role = "admin";
+                    }
                     return View(hRMS_EMP_ReferenceDetail);
                 }
             }
@@ -104,16 +170,36 @@ namespace HRMS.Controllers
             ViewBag.Country = new SelectList(db.Country, "CountryID", "CountryName");
             ViewBag.State = new SelectList(db.State.Where(x => x.CountryID == hRMS_EMP_ReferenceDetail.Country), "StateID", "StateName");
             ViewBag.City = new SelectList(db.City.Where(x => x.StateID == hRMS_EMP_ReferenceDetail.State), "CityID", "CityName");
+            if (role == "admin")
+            {
+                ViewBag.Role = "admin";
+            }
             return View(hRMS_EMP_ReferenceDetail);
         }
 
         // GET: EmployeeReferenceDetail/Edit/5
+        [Authorize(Roles = "admin,emp")]
         public ActionResult Edit(long? id)
         {
+            long emp_id = Convert.ToInt64(Session["id"]);
+            string role = db.Accounts.Where(x => x.ID == emp_id).Select(x => x.role).FirstOrDefault();
+            if (role == "admin")
+            {
+                ViewBag.Role = "admin";
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            //URL Attack
+            if (role == "emp")
+            {
+                id = db.HRMS_EMP_ReferenceDetail.Where(x => x.EMP_ID == emp_id).Select(x => x.ID).FirstOrDefault();
+            }
+
+
             HRMS_EMP_ReferenceDetail hRMS_EMP_ReferenceDetail = db.HRMS_EMP_ReferenceDetail.Find(id);
             if (hRMS_EMP_ReferenceDetail == null)
             {
@@ -130,8 +216,19 @@ namespace HRMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin,emp")]
         public ActionResult Edit([Bind(Include = "ID,EMP_ID,Is_Ref_Emp,Name,Country,State,City,Relationship,Pincode,Address,Designation,Company,PhoneNo,MobileNo,Email")] HRMS_EMP_ReferenceDetail hRMS_EMP_ReferenceDetail)
         {
+            long emp_id = Convert.ToInt64(Session["id"]);
+            string role = db.Accounts.Where(x => x.ID == emp_id).Select(x => x.role).FirstOrDefault();
+
+            if (role == "emp")
+            {
+                ModelState.Remove("EMP_ID");
+                hRMS_EMP_ReferenceDetail.EMP_ID = emp_id;
+            }
+
+
             if (ModelState.IsValid)
             {
                 bool isValid = db.HRMS_EMP_ReferenceDetail.Any(x => (x.ID != hRMS_EMP_ReferenceDetail.ID) && (x.EMP_ID == hRMS_EMP_ReferenceDetail.EMP_ID ));
@@ -141,9 +238,19 @@ namespace HRMS.Controllers
                     db.SaveChanges();
                     ViewBag.success = "Your Record Successfully Updated!";
 
+                    if (role == "emp")
+                    {
+                        long id = db.HRMS_EMP_ReferenceDetail.Where(x => x.EMP_ID == emp_id).Select(x => x.ID).FirstOrDefault();
+                        return RedirectToAction("Details", "EmployeeReferenceDetail", new { id });
+                    }
+
                     ViewBag.Country = new SelectList(db.Country, "CountryID", "CountryName");
                     ViewBag.State = new SelectList(db.State.Where(x => x.CountryID == hRMS_EMP_ReferenceDetail.Country), "StateID", "StateName");
                     ViewBag.City = new SelectList(db.City.Where(x => x.StateID == hRMS_EMP_ReferenceDetail.State), "CityID", "CityName");
+                    if (role == "admin")
+                    {
+                        ViewBag.Role = "admin";
+                    }
                     return View();
                 }
                 else
@@ -152,6 +259,10 @@ namespace HRMS.Controllers
                     ViewBag.Country = new SelectList(db.Country, "CountryID", "CountryName");
                     ViewBag.State = new SelectList(db.State.Where(x => x.CountryID == hRMS_EMP_ReferenceDetail.Country), "StateID", "StateName");
                     ViewBag.City = new SelectList(db.City.Where(x => x.StateID == hRMS_EMP_ReferenceDetail.State), "CityID", "CityName");
+                    if (role == "admin")
+                    {
+                        ViewBag.Role = "admin";
+                    }
                     return View();
                     
                 }
@@ -159,9 +270,13 @@ namespace HRMS.Controllers
             ViewBag.Country = new SelectList(db.Country, "CountryID", "CountryName");
             ViewBag.State = new SelectList(db.State.Where(x => x.CountryID == hRMS_EMP_ReferenceDetail.Country), "StateID", "StateName");
             ViewBag.City = new SelectList(db.City.Where(x => x.StateID == hRMS_EMP_ReferenceDetail.State), "CityID", "CityName");
+            if (role == "admin")
+            {
+                ViewBag.Role = "admin";
+            }
             return View(hRMS_EMP_ReferenceDetail);
         }
-
+        [Authorize(Roles = "admin")]
         public bool delete(long id)
         {
             HRMS_EMP_ReferenceDetail hRMS_EMP_ReferenceDetail = db.HRMS_EMP_ReferenceDetail.Find(id);

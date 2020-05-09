@@ -15,6 +15,7 @@ namespace HRMS.Controllers
         private HRMSEntities db = new HRMSEntities();
 
         // GET: EmployeeContactDetails
+        [Authorize(Roles = "admin")]
         public ActionResult Index()
         {
             var hRMS_Contact = db.HRMS_Contact.Include(h => h.Accounts);
@@ -22,32 +23,81 @@ namespace HRMS.Controllers
         }
 
         // GET: EmployeeContactDetails/Details/5
+        [Authorize(Roles = "admin,emp")]
         public ActionResult Details(long? id)
         {
-            if (id == null)
+            long emp_id = Convert.ToInt64(Session["id"]);
+            string role = db.Accounts.Where(x => x.ID == emp_id).Select(x => x.role).FirstOrDefault();
+            if (role == "admin")
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                ViewBag.Role = "admin";
             }
-            HRMS_Contact hRMS_Contact = db.HRMS_Contact.Find(id);
-            if (hRMS_Contact == null)
+
+            bool isExist = db.HRMS_Contact.Any(x => x.Employee_ID == emp_id);
+            if (!isExist)
             {
-                return HttpNotFound();
+                return RedirectToAction("Create");
             }
-            return View(hRMS_Contact);
-        }
+
+            else
+            {
+
+                //if (id == null)
+                //{
+                //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //}
+                id = db.HRMS_Contact.Where(x => x.Employee_ID == emp_id).Select(x => x.ID).FirstOrDefault();
+
+                HRMS_Contact hRMS_Contact = db.HRMS_Contact.Find(id);
+                if (hRMS_Contact == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(hRMS_Contact);
+            }
+            }
 
         // GET: EmployeeContactDetails/Create
+        [Authorize(Roles = "admin,emp")]
         public ActionResult Create()
         {
-            ViewBag.Employee_ID = db.HRMS_Emp_Details;
+            long emp_id = Convert.ToInt64(Session["id"]);
+            string role = db.Accounts.Where(x => x.ID == emp_id).Select(x => x.role).FirstOrDefault();
+            if (role == "admin")
+            {
+                ViewBag.Role = "admin";
+            }
+
+            //if attck by direct URL
+            if (role == "emp")
+            {
+                bool isExist = db.HRMS_Contact.Any(x => x.Employee_ID == emp_id);
+                if (isExist)
+                {
+                    long id = db.HRMS_Contact.Where(x => x.Employee_ID == emp_id).Select(x => x.ID).FirstOrDefault();
+                    return RedirectToAction("Details", "EmployeeContactDetails", new { id });
+                }
+            }
+
+            //ViewBag.Employee_ID = db.Accounts;
             return View();
         }
 
 
         [HttpPost]
-
+        [Authorize(Roles = "admin,emp")]
         public ActionResult Create(HRMS_Contact hRMS_Contact)
         {
+            long emp_id = Convert.ToInt64(Session["id"]);
+            string role = db.Accounts.Where(x => x.ID == emp_id).Select(x => x.role).FirstOrDefault();
+
+            if (role == "emp")
+            {
+                ModelState.Remove("Employee_ID");
+                hRMS_Contact.Employee_ID = emp_id;
+            }
+
+
             if (ModelState.IsValid)
             {
                 HRMS_Contact employeeExist = db.HRMS_Contact.Where(rec => rec.Employee_ID == hRMS_Contact.Employee_ID).FirstOrDefault();
@@ -61,17 +111,35 @@ namespace HRMS.Controllers
                         if (PhoneWorkNoExist == null)
                         {
                             db.HRMS_Contact.Add(hRMS_Contact);
-                            db.SaveChanges(); ModelState.Clear();
-
+                            db.SaveChanges(); 
+                            ModelState.Clear();
                             ViewBag.ContactStatus = "Employee Contact detail is added successfully";
-                            ViewBag.Employee_ID = db.HRMS_Emp_Details;
+
+                           
+                            if (role == "emp")
+                            {
+                                long id = db.HRMS_Contact.Where(x => x.Employee_ID == emp_id).Select(x => x.ID).FirstOrDefault();
+                                return RedirectToAction("Details", "EmployeeContactDetails", new { id });
+                            }
+
+                            //ViewBag.Employee_ID = db.Accounts;
+
+                            if (role == "admin")
+                            {
+                                ViewBag.Role = "admin";
+                            }
 
                             return View();
                         }
                         else
                         {
                             ViewBag.ContactStatus = "Phone Work number is already exist for another employee";
-                            ViewBag.Employee_ID = db.HRMS_Emp_Details;
+                            //ViewBag.Employee_ID = db.Accounts;
+
+                            if (role == "admin")
+                            {
+                                ViewBag.Role = "admin";
+                            }
 
                             return View();
                         }
@@ -79,31 +147,57 @@ namespace HRMS.Controllers
                     else
                     {
                         ViewBag.ContactStatus = "Corporate Email address is already exist for another employee";
-                        ViewBag.Employee_ID = db.HRMS_Emp_Details;
-
+                        //ViewBag.Employee_ID = db.Accounts;
+                        if (role == "admin")
+                        {
+                            ViewBag.Role = "admin";
+                        }
                         return View();
                     }
                 }
                 else
                 {
                     ViewBag.ContactStatus = "Employee Contact details is already exist!";
-                    ViewBag.Employee_ID = db.HRMS_Emp_Details;
-
+                    //ViewBag.Employee_ID = db.Accounts;
+                    if (role == "admin")
+                    {
+                        ViewBag.Role = "admin";
+                    }
                     return View();
                 }
             }
 
-            ViewBag.Employee_ID = db.HRMS_Emp_Details;
+            //ViewBag.Employee_ID = db.Accounts;
+            if (role == "admin")
+            {
+                ViewBag.Role = "admin";
+            }
             return View(hRMS_Contact);
         }
 
         // GET: EmployeeContactDetails/Edit/5
+        [Authorize(Roles = "admin,emp")]
         public ActionResult Edit(long? id)
         {
+            long emp_id = Convert.ToInt64(Session["id"]);
+            string role = db.Accounts.Where(x => x.ID == emp_id).Select(x => x.role).FirstOrDefault();
+            if (role == "admin")
+            {
+                ViewBag.Role = "admin";
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            //URL Attack
+            if (role == "emp")
+            {
+                id = db.HRMS_Contact.Where(x => x.Employee_ID == emp_id).Select(x => x.ID).FirstOrDefault();
+            }
+
+
             HRMS_Contact hRMS_Contact = db.HRMS_Contact.Find(id);
             if (hRMS_Contact == null)
             {
@@ -115,8 +209,19 @@ namespace HRMS.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "admin,emp")]
         public ActionResult Edit(HRMS_Contact hRMS_Contact)
         {
+            long emp_id = Convert.ToInt64(Session["id"]);
+            string role = db.Accounts.Where(x => x.ID == emp_id).Select(x => x.role).FirstOrDefault();
+
+            if (role == "emp")
+            {
+                ModelState.Remove("Employee_ID");
+                hRMS_Contact.Employee_ID = emp_id;
+            }
+
+
             if (ModelState.IsValid)
             {
                 HRMS_Contact CorporateEmailExist = db.HRMS_Contact.Where(rec => rec.Corporate_Email == hRMS_Contact.Corporate_Email && rec.ID != hRMS_Contact.ID).FirstOrDefault();
@@ -127,18 +232,32 @@ namespace HRMS.Controllers
                     if (PhoneWorkNoExist == null)
                     {
                         db.Entry(hRMS_Contact).State = EntityState.Modified;
-                        db.SaveChanges(); ModelState.Clear();
+                        db.SaveChanges();
+
+                        if (role == "emp")
+                        {
+                            long id = db.HRMS_Contact.Where(x => x.Employee_ID == emp_id).Select(x => x.ID).FirstOrDefault();
+                            return RedirectToAction("Details", "EmployeeContactDetails", new { id });
+                        }
+
+                       
 
                         ViewBag.ContactStatus = "Employee Contact detail is Updated successfully";
                         ViewBag.Employee_ID = db.Accounts.Where(rec => rec.ID == hRMS_Contact.Employee_ID);
-
-                        return RedirectToAction("Index");
+                        if (role == "admin")
+                        {
+                            ViewBag.Role = "admin";
+                        }
+                        return View();
                     }
                     else
                     {
                         ViewBag.ContactStatus = "Phone Work number is already exist for another employee";
                         ViewBag.Employee_ID = db.Accounts.Where(rec => rec.ID == hRMS_Contact.Employee_ID);
-
+                        if (role == "admin")
+                        {
+                            ViewBag.Role = "admin";
+                        }
                         return View();
                     }
                 }
@@ -146,17 +265,25 @@ namespace HRMS.Controllers
                 {
                     ViewBag.ContactStatus = "Corporate Email address is already exist for another employee";
                     ViewBag.Employee_ID = db.Accounts.Where(rec => rec.ID == hRMS_Contact.Employee_ID);
-
+                    if (role == "admin")
+                    {
+                        ViewBag.Role = "admin";
+                    }
                     return View();
                 }
             }
 
             ViewBag.Employee_ID = db.Accounts.Where(rec => rec.ID == hRMS_Contact.Employee_ID);
+            if (role == "admin")
+            {
+                ViewBag.Role = "admin";
+            }
             return View(hRMS_Contact);
         }
 
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public bool Delete(long id)
         {
             HRMS_Contact hRMS_Contact = db.HRMS_Contact.Find(id);

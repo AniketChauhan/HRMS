@@ -106,13 +106,13 @@
             @Html.DisplayFor(model => model.Country1.CountryName)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.HRMS_Emp_Details.First_Name)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.HRMS_Emp_Details.First_Name)
-        </dd>
+        </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.State1.StateName)
@@ -126,5 +126,9 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+
+    @if (ViewBag.Role == "admin")
+    {
+        @Html.ActionLink("Back to List", "Index")
+    }
 </p>

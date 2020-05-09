@@ -18,75 +18,81 @@
     <h4>Employee Attachment Details</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.EMP_ID, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.EMP_ID, null, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.EMP_ID, "", new { @class = "text-danger" })
-        </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Attachment_Title, htmlAttributes: new { @class = "control-label col-md-2 required" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Attachment_Title, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Attachment_Title, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Attachment_Type_ID, htmlAttributes: new { @class = "control-label col-md-2 required" })
-        <div class="col-md-10">
-            @Html.DropDownList("Attachment_Type_ID", null, "-Select--", htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.Attachment_Type_ID, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-md-2 control-label">Upload File</label>
-        <div class="col-md-10">
-            <input type="file" id="files" name="files" class="form-control" required="required"><br />
-        </div> 
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextAreaFor(model => model.Note, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Upload" class="btn btn-primary" />
-        </div>
-    </div>
-
-    @if (ViewBag.IsExist != null)
+    @if (ViewBag.Role == "admin")
     {
-        <script>alert("@ViewBag.IsExist");</script>
-
+        <div class="form-group">
+            @Html.LabelFor(model => model.EMP_ID, htmlAttributes: new { @class = "control-label col-md-2 required" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EMP_ID, null, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EMP_ID, "", new { @class = "text-danger" })
+            </div>
+        </div>
     }
+        <div class="form-group">
+            @Html.LabelFor(model => model.Attachment_Title, htmlAttributes: new { @class = "control-label col-md-2 required" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Attachment_Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Attachment_Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Attachment_Type_ID, htmlAttributes: new { @class = "control-label col-md-2 required" })
+            <div class="col-md-10">
+                @Html.DropDownList("Attachment_Type_ID", null, "-Select--", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Attachment_Type_ID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 control-label">Upload File</label>
+            <div class="col-md-10">
+                <input type="file" id="files" name="files" class="form-control" required="required"><br />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Note, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Upload" class="btn btn-primary" />
+            </div>
+        </div>
+
+        @if (ViewBag.IsExist != null)
+        {
+            <script>alert("@ViewBag.IsExist");</script>
+
+        }
 
 
-    @if (ViewBag.Success != null)
-    {
-        <script>alert("@ViewBag.Success");</script>
+        @if (ViewBag.Success != null)
+        {
+            <script>alert("@ViewBag.Success");</script>
 
-    }
+        }
 
-    @if (ViewBag.Format != null)
-    {
-        <script>alert("@ViewBag.Format");</script>
+        @if (ViewBag.Format != null)
+        {
+            <script>alert("@ViewBag.Format");</script>
 
-    }
-</div>
+        }
+    </div>
 }
 <br />
 <h3><b>Uploaded File Details</b></h3>
 <table class="table table-bordered table-responsive table-striped">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EMP_ID)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Attachment_Title)
         </th>
@@ -99,6 +105,9 @@
     @foreach (var item in (IEnumerable<HRMS.Models.HRMS_EMP_Attachment_Details>)ViewData["users"])
     {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EMP_ID)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Attachment_Title)
             </td>
