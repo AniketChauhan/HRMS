@@ -65,8 +65,9 @@ namespace HRMS.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError(String.Empty, "Username or Password is wrong!");
-                    return RedirectToAction("Index");
+                    //ModelState.AddModelError(String.Empty, "Username or Password is wrong!");
+                    ViewBag.AccountStatus = "UserName Or Password is not valid!";
+                    return View();
                 }
             }
            
