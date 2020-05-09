@@ -31,17 +31,31 @@ namespace HRMS.Controllers
                 ViewBag.Role = "admin";
             }
 
-            if (id == null)
+            //if no entry it will redirect to create
+            bool isExist = db.HRMS_Emp_Details.Any(x=>x.EMP_ID==emp_id);
+            if (!isExist)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Create");
             }
-            HRMS_Emp_Details hRMS_Emp_Details = db.HRMS_Emp_Details.Find(id);
-            if (hRMS_Emp_Details == null)
+
+            else
             {
-                return HttpNotFound();
+
+                //if (id == null)
+                //{
+                //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                //}
+
+                id = db.HRMS_Emp_Details.Where(x => x.EMP_ID == emp_id).Select(x => x.ID).FirstOrDefault();
+
+                HRMS_Emp_Details hRMS_Emp_Details = db.HRMS_Emp_Details.Find(id);
+                if (hRMS_Emp_Details == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(hRMS_Emp_Details);
             }
-            return View(hRMS_Emp_Details);
-        }
+            }
 
         [Authorize(Roles = "admin,emp")]
         public ActionResult Create()
@@ -52,6 +66,18 @@ namespace HRMS.Controllers
             {
                 ViewBag.Role = "admin";
             }
+
+            //if attck by direct URL
+            if (role == "emp")
+            {
+                bool isExist = db.HRMS_Emp_Details.Any(x => x.EMP_ID == emp_id);
+                if (isExist)
+                {
+                    long id = db.HRMS_Emp_Details.Where(x => x.EMP_ID == emp_id).Select(x => x.ID).FirstOrDefault();
+                    return RedirectToAction("Details", "EmployeeDetail", new { id });
+                }
+            }
+
 
             ViewBag.Cost_Center = db.HRMS_COST_CENTER;
             ViewBag.Designation = db.HRMS_DESG_MS.Where(rec => rec.IsActive == true);
@@ -222,10 +248,19 @@ namespace HRMS.Controllers
                 ViewBag.Role = "admin";
             }
 
+           
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            //URL Attack
+            if (role == "emp")
+            {
+                id = db.HRMS_Emp_Details.Where(x => x.EMP_ID == emp_id).Select(x => x.ID).FirstOrDefault();
+            }
+
+
             HRMS_Emp_Details hRMS_Emp_Details = db.HRMS_Emp_Details.Find(id);
             if (hRMS_Emp_Details == null)
             {

@@ -131,11 +131,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EmployeeID)
+            @Html.DisplayNameFor(model => model.EMP_ID)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EmployeeID)
+            @Html.DisplayFor(model => model.EMP_ID)
         </dd>
 
         <dt>
@@ -190,5 +190,9 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
+
+    @if (ViewBag.Role == "admin")
+    {
+        @Html.ActionLink("Back to List", "Index")
+    }
 </p>

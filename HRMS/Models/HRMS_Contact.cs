@@ -22,6 +22,7 @@ namespace HRMS.Models
         public string Phone_Work { get; set; }
         
         public string Ext { get; set; }
+        [Required]
         [Display(Name = "Phone No. Work")]
         [DataType(DataType.PhoneNumber)]
         public string Mobile_No_Work { get; set; }
