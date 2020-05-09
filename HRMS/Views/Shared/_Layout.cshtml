@@ -9,13 +9,20 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="w3-bar w3-indigo w3-card-2">
+    @{ string color = string.Empty;
+        HttpCookie httpCookie = Request.Cookies["Bgcolor"];
+        if(httpCookie != null)
+        {
+            color = httpCookie["Color"].ToString();
+        }
+    }
+    <div  class="w3-bar @color  w3-card-2" >
         @Html.ActionLink("H.R.M.S", "Index", "Account", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
 
         @if (User.IsInRole("admin"))
         {
             <div class="w3-dropdown-hover">
-                <button class="w3-button  w3-indigo">Master Pages <i class="glyphicon glyphicon-chevron-down"> </i></button>
+                <button class="w3-button  @color">Master Pages <i class="glyphicon glyphicon-chevron-down"> </i></button>
                 <div class="w3-dropdown-content w3-center w3-bar-block w3-card-4">
                     <div class="w3-bar-item w3-button w3-mobile">
                         <i class="glyphicon glyphicon-euro"> </i>
@@ -93,7 +100,7 @@
         @if (User.IsInRole("admin"))
         {
             <div class="w3-dropdown-hover">
-                <button class="w3-button  w3-indigo">Transactions <i class="glyphicon glyphicon-chevron-down"> </i></button>
+                <button class="w3-button  @color">Transactions <i class="glyphicon glyphicon-chevron-down"> </i></button>
                 <div class="w3-dropdown-content w3-center w3-bar-block w3-card-4">
                     <div class="w3-bar-item w3-button w3-mobile">
                         <i class="glyphicon glyphicon-info-sign"> </i>
@@ -135,7 +142,7 @@
         @if (User.IsInRole("admin"))
         {
             <div class="w3-dropdown-hover">
-                <button class="w3-button  w3-indigo">Travel MS <i class="glyphicon glyphicon-chevron-down"> </i></button>
+                <button class="w3-button  @color">Travel MS <i class="glyphicon glyphicon-chevron-down"> </i></button>
                 <div class="w3-dropdown-content w3-center w3-bar-block w3-card-4">
                     <div class="w3-bar-item w3-button w3-mobile">
                         <i class="glyphicon glyphicon-move"> </i>
@@ -171,7 +178,7 @@
         @if (User.IsInRole("emp"))
         {
             <div class="w3-dropdown-hover">
-                <button class="w3-button  w3-indigo">Transactions <i class="glyphicon glyphicon-chevron-down"> </i></button>
+                <button class="w3-button  @color">Transactions <i class="glyphicon glyphicon-chevron-down"> </i></button>
                 <div class="w3-dropdown-content w3-center w3-bar-block w3-card-4">
                     <div class="w3-bar-item w3-button w3-mobile">
                         <i class="glyphicon glyphicon-info-sign"> </i>
@@ -208,25 +215,78 @@
             </div>
         }
 
-        @if (User.Identity.IsAuthenticated)
-        {
-            @Html.ActionLink("LogOut", "Logout", "Account", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
-            @Html.ActionLink(User.Identity.Name, "", "", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
-        }
+        <div class="w3-right ">
+            @if (User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink(User.Identity.Name, "", "", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
+                <i>&emsp;</i>
+                @Html.ActionLink(" ", "Logout", "Account", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile glyphicon glyphicon-log-out" })
+            }
+            <div class="w3-dropdown-hover">
+                <button class="w3-button  @color"><i class="glyphicon glyphicon-cog"></i> <i class="glyphicon glyphicon-chevron-down"> </i></button>
+                <div style="margin-left:-7%" class="w3-dropdown-content w3-bar-block w3-center  w3-card-4">
+                    <button onclick="return changeColor('w3-indigo')" class="w3-indigo w3-bar-item w3-button w3-mobile">
+                        Indigo
+                    </button>
+                    <button onclick="return changeColor('w3-pale-red')" class="w3-pale-red w3-bar-item w3-button w3-mobile">
+                        pale red
+                    </button> <button onclick="return changeColor('w3-purple')" class="w3-purple w3-bar-item w3-button w3-mobile">
+                        purple
+                    </button> <button onclick="return changeColor('w3-light-green')" class="w3-light-green w3-bar-item w3-button w3-mobile">
+                        light-green
+                    </button>
+                    <button onclick="return changeColor('w3-pink')" class="w3-pink w3-bar-item w3-button w3-mobile">
+                        pink
+                    </button>
+                    <button onclick="return changeColor('w3-blue-gray')" class="w3-blue-gray w3-bar-item w3-button w3-mobile">
+                        blue gray
+                    </button>
+                    <button onclick="return changeColor('w3-red')" class="w3-red w3-bar-item w3-button w3-mobile">
+                        Red
+                    </button> <button onclick="return changeColor('w3-yellow')" class="w3-yellow w3-bar-item w3-button w3-mobile">
+                        yellow
+                    </button>
+                              <button onclick="return changeColor('w3-blue')" class="w3-blue w3-bar-item w3-button w3-mobile">
+                                  blue
+                              </button>
+                    <button onclick="return changeColor('w3-sand')" class="w3-sand w3-bar-item w3-button w3-mobile">
+                        Sand
+                    </button>
 
+                </div>
+            </div>
+        </div>
 
 
     </div>
-            <div class="container body-content">
-                @RenderBody()
-                <hr />
-                <footer>
-                    <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-                </footer>
-            </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <script src="~/Scripts/jquery-3.4.1.js"></script>
+            <script>
+ function changeColor(color) {
+        var data = JSON.stringify({
+            'color': color
+        }); 
+        $.ajax({
+    type: "POST",
+            contentType: "application/json",
+            url: "@Url.Action("ChangeTheme","Account")",
+            datatype: "json",
+            data: data,
+            success: function (response) {
+                location.reload(true);
+        }
+    });
+}
+            </script>
+        </footer>
+    </div>
 
-            @Scripts.Render("~/bundles/jquery")
-            @Scripts.Render("~/bundles/bootstrap")
-            @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -74,7 +74,17 @@ namespace HRMS.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
+            Session.Clear();
             return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public bool ChangeTheme(string color)
+        {
+            HttpCookie Bgcolor = new HttpCookie("Bgcolor");
+            Bgcolor["Color"] = color;
+            Bgcolor.Expires = DateTime.Now.AddHours(24);
+            Response.Cookies.Add(Bgcolor);
+            return true;
         }
     }
 
