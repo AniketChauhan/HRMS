@@ -39,14 +39,14 @@ namespace HRMS.Controllers
                     {
                         // return RedirectToAction("LogIn", "Account", new { area = "Admin" });
                         Session["id"] = acc.ID;
-                        FormsAuthentication.SetAuthCookie(obj.UserName, true);
+                        FormsAuthentication.SetAuthCookie(obj.UserName ,false);
                         return RedirectToAction("Index", "EmployeeDetail");
                     
                     }
                     else
                     {
                         Session["id"] = acc.ID;
-                        FormsAuthentication.SetAuthCookie(obj.UserName, true);
+                        FormsAuthentication.SetAuthCookie(obj.UserName, false);
 
                         //checking for Employee data is already there or not
                         bool isExist = db.HRMS_Emp_Details.Any(x => x.EMP_ID == acc.ID);
@@ -65,7 +65,8 @@ namespace HRMS.Controllers
                 }
                 else
                 {
-                    return Content("Wrong data!!");
+                    ModelState.AddModelError(String.Empty, "Username or Password is wrong!");
+                    return RedirectToAction("Index");
                 }
             }
            
@@ -75,6 +76,7 @@ namespace HRMS.Controllers
         {
             FormsAuthentication.SignOut();
             Session.Clear();
+           
             return RedirectToAction("Index");
         }
         [HttpPost]
