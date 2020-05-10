@@ -16,18 +16,18 @@ namespace HRMS
         protected void Application_Start()
         {
             //start
-            var cap = (DefaultCaptchaManager)CaptchaUtils.CaptchaManager;
-            cap.CharactersFactory = () => "my characters";
-            cap.PlainCaptchaPairFactory = length =>
-            {
-                string randomtext = RandomText.Generate(cap.CharactersFactory(), length);
-                bool ignorecase = false;
-                return new KeyValuePair<string, ICaptchaValue>(Guid.NewGuid().ToString("N"),
+            //var cap = (DefaultCaptchaManager)CaptchaUtils.CaptchaManager;
+            //cap.CharactersFactory = () => "my characters";
+            //cap.PlainCaptchaPairFactory = length =>
+            //{
+            //    string randomtext = RandomText.Generate(cap.CharactersFactory(), length);
+            //    bool ignorecase = false;
+            //    return new KeyValuePair<string, ICaptchaValue>(Guid.NewGuid().ToString("N"),
 
-                    new StringCaptchaValue(randomtext, randomtext, ignorecase)
-                    );
+            //        new StringCaptchaValue(randomtext, randomtext, ignorecase)
+            //        );
 
-            };
+            //};
             //end
 
             
