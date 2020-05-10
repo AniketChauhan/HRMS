@@ -6,137 +6,318 @@
 
 <h2>Details</h2>
 
-<div>
-    <h4>HRMS_Emp_Details</h4>
+<div class="form-horizontal row">
+    <h4>Employee Details</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.EMP_ID)
-        </dt>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="col-md-6">
 
-        <dd>
-            @Html.DisplayFor(model => model.EMP_ID)
-        </dd>
+        @if (ViewBag.Role == "admin")
+        {
+            <div class="form-group">
+                <span class="col-md-4 control-label">
+                    <i class="glyphicon glyphicon-asterisk" style="color:red ; font-size:x-small;"></i>
+                    @Html.LabelFor(model => model.EMP_ID)
+                </span>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.EMP_ID, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.EMP_ID, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Old_Emp_Cd)
-        </dt>
+        }
+        <div class="form-group">
 
-        <dd>
-            @Html.DisplayFor(model => model.Old_Emp_Cd)
-        </dd>
+            @Html.LabelFor(model => model.Old_Emp_Cd, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Old_Emp_Cd, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Old_Emp_Cd, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Join_Date)
-        </dt>
+        <div class="form-group">
+            <span class="col-md-4 control-label">
+                <i class="glyphicon glyphicon-asterisk" style="color:red ; font-size:x-small;"></i>
+                @Html.LabelFor(model => model.Join_Date)
+            </span>
+            <div class="col-md-8">
+                @*@Html.EditorFor(model => model.Join_Date, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.EditorFor(model => model.Join_Date, new { htmlAttributes = new { @class = "form-control datepicker", @readonly = "readonly" } })
 
-        <dd>
-            @Html.DisplayFor(model => model.Join_Date)
-        </dd>
+                @Html.ValidationMessageFor(model => model.Join_Date, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Card_Id)
-        </dt>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Card_Id, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Card_Id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Card_Id, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Card_Id)
-        </dd>
+        <div class="form-group">
+            <span class="col-md-4 control-label">
+                <i class="glyphicon glyphicon-asterisk" style="color:red ; font-size:x-small;"></i>
+                @Html.LabelFor(model => model.salutation)
+            </span>
+            <div class="col-md-8">
+                @*@Html.DropDownList("salutation", new SelectList(ViewBag.salutation, "Salutation_ID", "Salutation_Name"), htmlAttributes: new { @class = "form-control" })*@
+                @Html.EditorFor(model => model.HRMS_SALUTATION.Salutation_Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.salutation, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.First_Name)
-        </dt>
+        <div class="form-group">
+            <span class="col-md-4 control-label">
+                <i class="glyphicon glyphicon-asterisk" style="color:red ; font-size:x-small;"></i>
+                @Html.LabelFor(model => model.First_Name)
+            </span>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.First_Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.First_Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.First_Name)
-        </dd>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Middle_Name, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Middle_Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Middle_Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Middle_Name)
-        </dt>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Last_Name, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Last_Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Last_Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
 
-        <dd>
-            @Html.DisplayFor(model => model.Middle_Name)
-        </dd>
+        <div class="form-group">
+            <span class="col-md-4 control-label">
+                <i class="glyphicon glyphicon-asterisk" style="color:red ; font-size:x-small;"></i>
+                @Html.LabelFor(model => model.Display_Name)
+            </span>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.Display_Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Display_Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Last_Name)
-        </dt>
+        <div class="form-group">
+            <span class="col-md-4 control-label">
+                <i class="glyphicon glyphicon-asterisk" style="color:red ; font-size:x-small;"></i>
+                @Html.LabelFor(model => model.Designation)
+            </span>
+            <div class="col-md-8">
+                @*@Html.DropDownList("Designation", new SelectList(ViewBag.Designation, "Desg_Id", "Desg_Name"), htmlAttributes: new { @class = "form-control" })*@
+                @Html.EditorFor(model => model.HRMS_DESG_MS.Desg_Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Designation, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Last_Name)
-        </dd>
+        <div class="form-group">
+            <span class="col-md-4 control-label">
+                @Html.LabelFor(model => model.Work_Location)
+            </span>
+            <div class="col-md-8">
+                @*@Html.DropDownList("Work_Location", new SelectList(ViewBag.Work_Location, "WorkID", "WorkLocationName"), htmlAttributes: new { @class = "form-control" })*@
+                @Html.EditorFor(model => model.WorkLocationMaster.WorkLocationName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Work_Location, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Display_Name)
-        </dt>
+        <div class="form-group">
+            <span class="col-md-4 control-label">
+                <i class="glyphicon glyphicon-asterisk" style="color:red ; font-size:x-small;"></i>
+                @Html.LabelFor(model => model.Unit)
+            </span>
+            <div class="col-md-8">
+                @*@Html.DropDownList("Unit", new SelectList(ViewBag.Unit, "UnitCode", "UnitName"), htmlAttributes: new { @class = "form-control" })*@
+                @Html.EditorFor(model => model.UnitMaster.UnitName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Unit, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Display_Name)
-        </dd>
+        <div class="form-group">
+            <span class="col-md-4 control-label">
+                <i class="glyphicon glyphicon-asterisk" style="color:red ; font-size:x-small;"></i>
+                <label>Division</label>
+            </span>
+            <div class="col-md-8">
+                @*@Html.DropDownList("Division", new SelectList(ViewBag.DivisionData, "Dept_Id", "Dept_Name"), htmlAttributes: new { @class = "form-control" })*@
+                @Html.EditorFor(model => model.HRMS_DEPT.Dept_Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <span class="col-md-4 control-label">
+                <i class="glyphicon glyphicon-asterisk" style="color:red ; font-size:x-small;"></i>
+                <label>Department</label>
+            </span>
+            <div class="col-md-8">
+                @*@Html.DropDownList("Department", new SelectList(ViewBag.Department, "Dept_Id", "Dept_Name"), htmlAttributes: new { @class = "form-control" })*@
+                @Html.EditorFor(model => model.HRMS_DEPT.Dept_Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <span class="col-md-4 control-label">
+                <i class="glyphicon glyphicon-asterisk" style="color:red ; font-size:x-small;"></i>
+                @Html.LabelFor(model => model.Cost_Center)
+            </span>
+            <div class="col-md-8">
+                @*@Html.DropDownList("Cost_Center", new SelectList(ViewBag.Cost_Center, "ID", "Cost_Cntr_Name"), htmlAttributes: new { @class = "form-control" })*@
+                @Html.EditorFor(model => model.HRMS_COST_CENTER.Cost_Cntr_Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Cost_Center, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UAN_No_)
-        </dt>
+        <div class="form-group">
+            @Html.LabelFor(model => model.UAN_No_, htmlAttributes: new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.UAN_No_, new { htmlAttributes = new { @class = "form-control" , @readonly = "readonly"} })
+                @Html.ValidationMessageFor(model => model.UAN_No_, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.UAN_No_)
-        </dd>
+        </div>
+    </div>
+        @*<div>
+                <h4>HRMS_Emp_Details</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.EMP_ID)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HRMS_COST_CENTER.Cost_Cntr_Name)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.EMP_ID)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.HRMS_COST_CENTER.Cost_Cntr_Name)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Old_Emp_Cd)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HRMS_DEPT.Dept_Name)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Old_Emp_Cd)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.HRMS_DEPT.Dept_Name)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Join_Date)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HRMS_DESG_MS.Desg_Name)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Join_Date)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.HRMS_DESG_MS.Desg_Name)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Card_Id)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HRMS_SALUTATION.Salutation_Name)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Card_Id)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.HRMS_SALUTATION.Salutation_Name)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.First_Name)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UnitMaster.UnitName)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.First_Name)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.UnitMaster.UnitName)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Middle_Name)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.WorkLocationMaster.WorkLocationName)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Middle_Name)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.WorkLocationMaster.WorkLocationName)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Last_Name)
+                    </dt>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID })|
-    @if (ViewBag.Role == "admin")
-    {
-        
-      @Html.ActionLink("Back to List", "Index")
-}
-</p>
+                    <dd>
+                        @Html.DisplayFor(model => model.Last_Name)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Display_Name)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Display_Name)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.UAN_No_)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.UAN_No_)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.HRMS_COST_CENTER.Cost_Cntr_Name)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.HRMS_COST_CENTER.Cost_Cntr_Name)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.HRMS_DEPT.Dept_Name)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.HRMS_DEPT.Dept_Name)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.HRMS_DESG_MS.Desg_Name)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.HRMS_DESG_MS.Desg_Name)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.HRMS_SALUTATION.Salutation_Name)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.HRMS_SALUTATION.Salutation_Name)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.UnitMaster.UnitName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.UnitMaster.UnitName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.WorkLocationMaster.WorkLocationName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.WorkLocationMaster.WorkLocationName)
+                    </dd>
+
+                </dl>
+            </div>*@
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ID })|
+            @if (ViewBag.Role == "admin")
+            {
+
+                @Html.ActionLink("Back to List", "Index")
+            }
+        </p>

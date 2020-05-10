@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/Content/w3.css" type="text/css" />
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
+<body  style="background-color:whitesmoke;">
     @{ string color = string.Empty;
         HttpCookie httpCookie = Request.Cookies["Bgcolor"];
         if(httpCookie != null)

@@ -45,9 +45,10 @@ namespace HRMS.Controllers
                 //{
                 //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 //}
-
-                id = db.HRMS_Emp_Details.Where(x => x.EMP_ID == emp_id).Select(x => x.ID).FirstOrDefault();
-
+                if (role == "emp")
+                {
+                    id = db.HRMS_Emp_Details.Where(x => x.EMP_ID == emp_id).Select(x => x.ID).FirstOrDefault();
+                }
                 HRMS_Emp_Details hRMS_Emp_Details = db.HRMS_Emp_Details.Find(id);
                 if (hRMS_Emp_Details == null)
                 {
