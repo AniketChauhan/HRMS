@@ -39,12 +39,32 @@
     
     <td class="btn-group-sm">
         @Html.ActionLink(" Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" })
-       
-        @Html.ActionLink(" Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-trash" })
 
-        
+        <button class="btn btn-danger  btn-sm " onclick="return removeFromList(this, '@item.ID') "> <i class="glyphicon glyphicon-trash"> </i> Delete</button>
+
+
     </td>
 </tr>
 }
 
 </table>
+<script>
+    function removeFromList(thisobj, id) {
+        if (confirm("Are you sure?") == true) {
+            var data = JSON.stringify({
+                'id': id
+            });
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "@Url.Action("delete","EmployeeRegistration")",
+                datatype: "json",
+                data: data,
+                success: function (response) {
+                    var tr = $(thisobj).closest("tr");
+                    $(tr).remove();
+                }
+            });
+        }
+    }
+</script>

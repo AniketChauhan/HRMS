@@ -229,6 +229,18 @@ namespace HRMS.Controllers
             return RedirectToAction("Index");
         }
 
+
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        public bool Delete(long id)
+        {
+
+            Accounts accounts = db.Accounts.Find(id);
+            db.Accounts.Remove(accounts);
+            db.SaveChanges();
+            return true;
+            
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)
