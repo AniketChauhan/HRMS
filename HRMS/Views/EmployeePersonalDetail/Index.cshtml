@@ -12,6 +12,9 @@
 <table class="table table-bordered table-responsive table-striped">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.EMP_ID)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.DOB)
         </th>
         @*<th>
@@ -56,9 +59,7 @@
         <th>
             @Html.DisplayNameFor(model => model.MilitaryServiceDetail)
         </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.EMP_ID)
-        </th>
+        
         @*<th>
             @Html.DisplayNameFor(model => model.CastMaster.CastName)
         </th>
@@ -84,6 +85,10 @@
     { //   var DOB = @item.DOB.ToShortDateString();
       //    var MDATE = @item.MarraigeDate?.ToShortDateString();
 <tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.EMP_ID)
+    </td>
+    
     <td>
 
         @Html.DisplayFor(modelItem => item.DOB)
@@ -130,9 +135,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.MilitaryServiceDetail)
         </td>*@
-    <td>
-        @Html.DisplayFor(modelItem => item.EMP_ID)
-    </td>
+    
     @*<td>
             @Html.DisplayFor(modelItem => item.CastMaster.CastName)
         </td>

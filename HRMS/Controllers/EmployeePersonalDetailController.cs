@@ -53,8 +53,10 @@ namespace HRMS.Controllers
                 //{
                 //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 //}
-
-                id = db.Employee_Personal_Detail.Where(x => x.EMP_ID == emp_id).Select(x => x.ID).FirstOrDefault();
+                if (role == "emp")
+                {
+                    id = db.Employee_Personal_Detail.Where(x => x.EMP_ID == emp_id).Select(x => x.ID).FirstOrDefault();
+                }
                 Employee_Personal_Detail employee_Personal_Detail = db.Employee_Personal_Detail.Find(id);
                 if (employee_Personal_Detail == null)
                 {
@@ -207,11 +209,12 @@ namespace HRMS.Controllers
             }
             // ViewBag.Caste = new SelectList(db.CastMasters, "CastCode", "CastName", employee_Personal_Detail.Caste);
             ViewBag.Caste = new SelectList(db.CastMaster.Where(x => x.ReligionID == employee_Personal_Detail.Religion), "CastCode", "CastName");
+
             ViewBag.Category = new SelectList(db.HRMS_CATEGORY_GRADE, "Category_ID", "Category_Name", employee_Personal_Detail.Category);
             ViewBag.Citizenship = new SelectList(db.HRMS_EMP_CITIZENSHIP_MS, "CitizenShip_ID", "CitizenShip_Country_NM", employee_Personal_Detail.Citizenship);
             ViewBag.Gender = new SelectList(db.HRMS_EMP_GENDER_MS, "Gender_ID", "Gender_Value", employee_Personal_Detail.Gender);
             ViewBag.MarraigeStatus = new SelectList(db.MaritalMaster, "MaritalID", "MaritalName", employee_Personal_Detail.MarraigeStatus);
-            ViewBag.Religion = new SelectList(db.ReligionMaster, "ReligionID", "ReligionShortName", employee_Personal_Detail.Religion);
+            ViewBag.Religion = new SelectList(db.ReligionMaster, "ReligionID", "ReligionName", employee_Personal_Detail.Religion);
             return View(employee_Personal_Detail);
         }
 
@@ -250,7 +253,7 @@ namespace HRMS.Controllers
                 ViewBag.Citizenship = new SelectList(db.HRMS_EMP_CITIZENSHIP_MS, "CitizenShip_ID", "CitizenShip_Country_NM", employee_Personal_Detail.Citizenship);
                 ViewBag.Gender = new SelectList(db.HRMS_EMP_GENDER_MS, "Gender_ID", "Gender_Value", employee_Personal_Detail.Gender);
                 ViewBag.MarraigeStatus = new SelectList(db.MaritalMaster, "MaritalID", "MaritalName", employee_Personal_Detail.MarraigeStatus);
-                ViewBag.Religion = new SelectList(db.ReligionMaster, "ReligionID", "ReligionShortName", employee_Personal_Detail.Religion);
+                ViewBag.Religion = new SelectList(db.ReligionMaster, "ReligionID", "ReligionName", employee_Personal_Detail.Religion);
 
                 if (role == "admin")
                 {
@@ -263,7 +266,7 @@ namespace HRMS.Controllers
             ViewBag.Citizenship = new SelectList(db.HRMS_EMP_CITIZENSHIP_MS, "CitizenShip_ID", "CitizenShip_Country_NM", employee_Personal_Detail.Citizenship);
             ViewBag.Gender = new SelectList(db.HRMS_EMP_GENDER_MS, "Gender_ID", "Gender_Value", employee_Personal_Detail.Gender);
             ViewBag.MarraigeStatus = new SelectList(db.MaritalMaster, "MaritalID", "MaritalName", employee_Personal_Detail.MarraigeStatus);
-            ViewBag.Religion = new SelectList(db.ReligionMaster, "ReligionID", "ReligionShortName", employee_Personal_Detail.Religion);
+            ViewBag.Religion = new SelectList(db.ReligionMaster, "ReligionID", "ReligionName", employee_Personal_Detail.Religion);
 
             if (role == "admin")
             {

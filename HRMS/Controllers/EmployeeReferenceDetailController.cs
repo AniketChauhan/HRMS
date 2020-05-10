@@ -65,8 +65,10 @@ namespace HRMS.Controllers
                 //{
                 //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 //}
-                id = db.HRMS_EMP_ReferenceDetail.Where(x => x.EMP_ID == emp_id).Select(x => x.ID).FirstOrDefault();
-
+                if (role == "emp")
+                {
+                    id = db.HRMS_EMP_ReferenceDetail.Where(x => x.EMP_ID == emp_id).Select(x => x.ID).FirstOrDefault();
+                }
                 HRMS_EMP_ReferenceDetail hRMS_EMP_ReferenceDetail = db.HRMS_EMP_ReferenceDetail.Find(id);
                 if (hRMS_EMP_ReferenceDetail == null)
                 {

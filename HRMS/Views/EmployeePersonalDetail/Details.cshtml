@@ -6,193 +6,400 @@
 
 <h2>Details</h2>
 
-<div>
+
+<div class="form-horizontal row">
     <h4>Employee_Personal_Detail</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.DOB)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DOB)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IdentityMark1)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IdentityMark1)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IdentityMark2)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IdentityMark2)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Race)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Race)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MarraigeDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MarraigeDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NoOfChild)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NoOfChild)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NoOfDependents)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NoOfDependents)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AadharNo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AadharNo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SIN)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SIN)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AKA)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AKA)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MilitaryService)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MilitaryService)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BirthCity)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BirthCity)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Note)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Note)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hobbies)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hobbies)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MilitaryServiceDetail)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MilitaryServiceDetail)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EMP_ID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EMP_ID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CastMaster.CastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CastMaster.CastName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HRMS_CATEGORY_GRADE.Category_Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HRMS_CATEGORY_GRADE.Category_Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HRMS_EMP_CITIZENSHIP_MS.CitizenShip_Country_NM)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HRMS_EMP_CITIZENSHIP_MS.CitizenShip_Country_NM)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.HRMS_EMP_GENDER_MS.Gender_Value)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HRMS_EMP_GENDER_MS.Gender_Value)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MaritalMaster.MaritalName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MaritalMaster.MaritalName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ReligionMaster.ReligionShortName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ReligionMaster.ReligionShortName)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ID)
 
     @if (ViewBag.Role == "admin")
     {
-        @Html.ActionLink("Back to List", "Index")
+        <div class="form-group">
+            @Html.LabelFor(model => model.EMP_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EMP_ID, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.EMP_ID, "", new { @class = "text-danger" })
+            </div>
+        </div>
     }
-</p>
+<div class="col-md-6">
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Gender, "Gender", htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.HRMS_EMP_GENDER_MS.Gender_Value, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DOB, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-5">
+            <div class="input-group">
+
+                @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control datepicker", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+                <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Category, "Category", htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.HRMS_CATEGORY_GRADE.Category_Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.IdentityMark1, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.IdentityMark1, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.IdentityMark1, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.IdentityMark2, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.IdentityMark2, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.IdentityMark2, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Religion, "Religion", htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.ReligionMaster.ReligionName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.Religion, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Citizenship, "Citizenship", htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.HRMS_EMP_CITIZENSHIP_MS.CitizenShip_Country_NM, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.Citizenship, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Caste, "Caste", htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.CastMaster.CastName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.Caste, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Race, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.Race, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.Race, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MarraigeStatus, "MarraigeStatus", htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.MaritalMaster.MaritalName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.MarraigeStatus, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+</div>
+
+<div class="col-md-6">
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MarraigeDate, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-5">
+            <div class="input-group">
+                @Html.EditorFor(model => model.MarraigeDate, new { htmlAttributes = new { @class = "form-control datepicker" , @readonly = "readonly"} })
+                @Html.ValidationMessageFor(model => model.MarraigeDate, "", new { @class = "text-danger" })
+                <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NoOfChild, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.NoOfChild, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.NoOfChild, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NoOfDependents, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.NoOfDependents, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.NoOfDependents, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.AadharNo, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+
+            @Html.EditorFor(model => model.AadharNo, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.AadharNo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SIN, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.SIN, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.SIN, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.AKA, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.AKA, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.AKA, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MilitaryService, htmlAttributes: new { @class = "control-label col-md-4" })
+        @Html.EditorFor(model => model.MilitaryService, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+
+        @*@Html.EditorFor(model => model.MilitaryService, new { htmlAttributes = new { @class = "form-control" } })*@
+        @Html.ValidationMessageFor(model => model.MilitaryService, "", new { @class = "text-danger" })
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.BirthCity, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.BirthCity, new { htmlAttributes = new { @class = "form-control" , @readonly = "readonly"} })
+            @Html.ValidationMessageFor(model => model.BirthCity, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.TextAreaFor(model => model.Note, new { @readonly="readonly" })
+            @Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Hobbies, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.EditorFor(model => model.Hobbies, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.Hobbies, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MilitaryServiceDetail, htmlAttributes: new { @class = "control-label col-md-4" })
+        <div class="col-md-8">
+            @Html.TextAreaFor(model => model.MilitaryServiceDetail, new { @readonly="readonly" })
+            @Html.ValidationMessageFor(model => model.MilitaryServiceDetail, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+</div>
+
+    @*<div>
+            <h4>Employee_Personal_Detail</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.DOB)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DOB)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.IdentityMark1)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.IdentityMark1)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.IdentityMark2)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.IdentityMark2)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Race)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Race)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.MarraigeDate)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.MarraigeDate)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.NoOfChild)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.NoOfChild)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.NoOfDependents)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.NoOfDependents)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.AadharNo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AadharNo)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.SIN)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SIN)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.AKA)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AKA)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.MilitaryService)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.MilitaryService)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.BirthCity)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.BirthCity)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Note)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Note)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Hobbies)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Hobbies)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.MilitaryServiceDetail)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.MilitaryServiceDetail)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.EMP_ID)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.EMP_ID)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CastMaster.CastName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CastMaster.CastName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.HRMS_CATEGORY_GRADE.Category_Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.HRMS_CATEGORY_GRADE.Category_Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.HRMS_EMP_CITIZENSHIP_MS.CitizenShip_Country_NM)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.HRMS_EMP_CITIZENSHIP_MS.CitizenShip_Country_NM)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.HRMS_EMP_GENDER_MS.Gender_Value)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.HRMS_EMP_GENDER_MS.Gender_Value)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.MaritalMaster.MaritalName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.MaritalMaster.MaritalName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ReligionMaster.ReligionShortName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ReligionMaster.ReligionShortName)
+                </dd>
+
+            </dl>
+        </div>*@
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+
+        @if (ViewBag.Role == "admin")
+        {
+            @Html.ActionLink("Back to List", "Index")
+        }
+    </p>
