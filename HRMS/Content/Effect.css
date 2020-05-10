@@ -1,0 +1,71 @@
+﻿#loginHeader {
+    margin: 0%;
+    height: 55px;
+    padding: 1px;
+}
+body{
+    background-color:whitesmoke;
+}
+#LoginDiv {
+    padding: 0px;
+    padding-bottom:3%;
+    width: 70%;
+    margin-top: 8%;
+}
+#InDiv {
+    margin-left: 23%;
+}
+#colorDiv {
+    margin-left: -7%
+}
+.DixDiv{
+
+}
+#contant{
+    display:block;
+}
+
+.mobileDive{
+    display:none;
+}
+
+
+@media only screen and (max-width: 600px) {
+   
+    #contant {
+        display: none;
+    }
+    #LoginDiv {
+        padding: 0px;
+        width: 100%;
+        margin-top: 3px;
+    }
+    .mobileDive {
+        display: block;
+    }
+    .w3-button:hover {
+        color: inherit;
+        background-color: inherit;
+    }
+
+    .RightSIde {
+        margin-right: 15%;
+    }
+    #mobTogDiv {
+        text-align: center; 
+    }
+    #colorDiv {
+        margin-left: 15%;
+    }
+    #InDiv {
+        margin-left: 2%;
+    }
+    .DixDiv {
+        width: 100%;
+        text-align: center;
+    }
+    .DIVINSIDE {
+        margin-left: 28%;
+    }
+    }
+}

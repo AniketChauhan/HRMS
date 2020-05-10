@@ -16,7 +16,31 @@ namespace HRMS.Controllers
         // GET: Account
         public ActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("admin"))
+                {
+                    return RedirectToAction("Index", "EmployeeDetail");
+
+                }
+                if (User.IsInRole("emp"))
+                {
+                    long emp_id = Convert.ToInt64(Session["id"]);
+                    bool isExist = db.HRMS_Emp_Details.Any(x => x.EMP_ID == emp_id);
+                    if (!isExist)
+                    {
+                        return RedirectToAction("Create", "EmployeeDetail");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Details", "EmployeeDetail", new { emp_id });
+
+                    }
+
+                }
+            }
             return View();
+
         }
         [HttpPost]
         public ActionResult Index( Accounts obj)

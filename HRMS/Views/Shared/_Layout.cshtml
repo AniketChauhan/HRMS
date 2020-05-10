@@ -6,24 +6,29 @@
     <title>@ViewBag.Title H.R.M.S.</title>
     @Styles.Render("~/Content/css")
     <link rel="stylesheet" href="~/Content/w3.css" type="text/css" />
+    <link rel="stylesheet" href="~/Content/Effect.css" type="text/css" />
+
     @Scripts.Render("~/bundles/modernizr")
-</head>
-<body>
     @{ string color = string.Empty;
         HttpCookie httpCookie = Request.Cookies["Bgcolor"];
-        if(httpCookie != null)
+        if (httpCookie != null)
         {
             color = httpCookie["Color"].ToString();
         }
     }
-    <div class="w3-bar @color  w3-card-2">
-        @Html.ActionLink("H.R.M.S", "", "", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
+</head>
+<body>
+    <div class="mobileDive">
+        <div class="  @color" id="mobTogDiv"> H.R.M.S.<button class="w3-button" id="navbutton"> <i class="glyphicon glyphicon-align-justify"></i></button></div>
+    </div>
+    <div  id="contant" class="w3-bar @color  w3-card-2">
+        @Html.ActionLink("H.R.M.S", "", "", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile mainhrms" })
 
         @if (User.IsInRole("admin"))
         {
-            <div class="w3-dropdown-hover">
+            <div class="w3-dropdown-hover DixDiv">
                 <button class="w3-button  @color">Master Pages <i class="glyphicon glyphicon-chevron-down"> </i></button>
-                <div class="w3-dropdown-content w3-center w3-bar-block w3-card-4">
+                <div class="w3-dropdown-content w3-center w3-bar-block w3-card-4 DIVINSIDE">
                     <div class="w3-bar-item w3-button w3-mobile">
                         <i class="glyphicon glyphicon-euro"> </i>
                         @Html.ActionLink("Cost Center", "Index", "CostCenter", new { area = "" }, new { @class = " " })
@@ -99,9 +104,9 @@
 
         @if (User.IsInRole("admin"))
         {
-            <div class="w3-dropdown-hover">
+            <div class="w3-dropdown-hover DixDiv">
                 <button class="w3-button  @color">Transactions <i class="glyphicon glyphicon-chevron-down"> </i></button>
-                <div class="w3-dropdown-content w3-center w3-bar-block w3-card-4">
+                <div class="w3-dropdown-content w3-center w3-bar-block w3-card-4 DIVINSIDE">
                     <div class="w3-bar-item w3-button w3-mobile">
                         <i class="glyphicon glyphicon-info-sign"> </i>
                         @Html.ActionLink("Employee Detail", "Index", "EmployeeDetail", new { area = "" }, new { @class = " " })
@@ -141,9 +146,9 @@
 
         @if (User.IsInRole("admin"))
         {
-            <div class="w3-dropdown-hover">
+            <div class="w3-dropdown-hover DixDiv">
                 <button class="w3-button  @color">Travel MS <i class="glyphicon glyphicon-chevron-down"> </i></button>
-                <div class="w3-dropdown-content w3-center w3-bar-block w3-card-4">
+                <div class="w3-dropdown-content w3-center w3-bar-block w3-card-4 DIVINSIDE">
                     <div class="w3-bar-item w3-button w3-mobile">
                         <i class="glyphicon glyphicon-move"> </i>
                         @Html.ActionLink("Travel Mode", "Index", "TravelModeMaster", new { area = "" }, new { @class = " " })
@@ -187,9 +192,9 @@
 
         @if (User.IsInRole("emp"))
         {
-            <div class="w3-dropdown-hover">
+            <div class="w3-dropdown-hover DixDiv">
                 <button class="w3-button  @color">Transactions <i class="glyphicon glyphicon-chevron-down"> </i></button>
-                <div class="w3-dropdown-content w3-center w3-bar-block w3-card-4">
+                <div class="w3-dropdown-content w3-center w3-bar-block w3-card-4 DIVINSIDE">
                     <div class="w3-bar-item w3-button w3-mobile">
                         <i class="glyphicon glyphicon-info-sign"> </i>
                         @Html.ActionLink("Employee Detail", "Details", "EmployeeDetail", new { area = "" }, new { @class = " " })
@@ -225,16 +230,16 @@
             </div>
         }
 
-        <div class="w3-right ">
+        <div class="w3-right RightSIde">
             @if (User.Identity.IsAuthenticated)
             {
                 @Html.ActionLink(User.Identity.Name, "", "", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
                 <i>&emsp;</i>
                 @Html.ActionLink(" ", "Logout", "Account", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile glyphicon glyphicon-log-out" })
             }
-            <div class="w3-dropdown-hover">
+            <div class="w3-dropdown-hover DixDiv">
                 <button class="w3-button  @color"><i class="glyphicon glyphicon-cog"></i> <i class="glyphicon glyphicon-chevron-down"> </i></button>
-                <div style="margin-left:-7%" class="w3-dropdown-content w3-bar-block w3-center  w3-card-4">
+                <div style="" id="colorDiv" class="w3-dropdown-content w3-bar-block w3-center  w3-card-4 ">
                     <button onclick="return changeColor('w3-indigo')" class="w3-indigo w3-bar-item w3-button w3-mobile">
                         Indigo
                     </button>
@@ -274,12 +279,20 @@
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - H.R.M.S. - HUMAN RESOURCE MANAGEMENT SYSTEM</p>
-            <script src="~/Scripts/jquery-3.4.1.js"></script>
-            <script>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script>
  function changeColor(color) {
         var data = JSON.stringify({
             'color': color
-        }); 
+        });
         $.ajax({
     type: "POST",
             contentType: "application/json",
@@ -290,13 +303,11 @@
                 location.reload(true);
         }
     });
-}
-            </script>
-        </footer>
-    </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-</body>
-</html>
+    }
+   $(document).ready(function(){
+       $("#navbutton").click(function () {
+           $("#contant").slideToggle();
+       });
+  
+});
+</script>
