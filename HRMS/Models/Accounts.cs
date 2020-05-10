@@ -28,11 +28,17 @@ namespace HRMS.Models
             this.HRMS_EMP_ReferenceDetail = new HashSet<HRMS_EMP_ReferenceDetail>();
             this.HRMS_Emp_Details = new HashSet<HRMS_Emp_Details>();
         }
-
+        [DisplayName("Employee ID")]
         public long ID { get; set; }
         [DisplayName("UserName")]
+        [Required]
         [DataType(DataType.EmailAddress, ErrorMessage = "Username mast be Email ID!")]
         public string UserName { get; set; }
+
+        //for registration only
+        [DisplayName("Confirm UserName")]
+        public string ConfirmUsername { get; set; }
+        [Required]
         public string password { get; set; }
         public string role { get; set; }
     

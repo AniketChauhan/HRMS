@@ -15,6 +15,7 @@
     @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
+    
     <h4>Employee Attachment Details</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -84,6 +85,7 @@
             <script>alert("@ViewBag.Format");</script>
 
         }
+
     </div>
 }
 <br />

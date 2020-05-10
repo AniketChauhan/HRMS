@@ -1,0 +1,50 @@
+﻿@model IEnumerable<HRMS.Models.Accounts>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-bordered table-responsive table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.role)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(momodelItemdel =>item.ID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UserName)
+    </td>
+    
+    <td>
+        @Html.DisplayFor(modelItem => item.role)
+    </td>
+    
+    <td class="btn-group-sm">
+        @Html.ActionLink(" Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" })
+       
+        @Html.ActionLink(" Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-trash" })
+
+        
+    </td>
+</tr>
+}
+
+</table>

@@ -16,8 +16,8 @@
             color = httpCookie["Color"].ToString();
         }
     }
-    <div  class="w3-bar @color  w3-card-2" >
-        @Html.ActionLink("H.R.M.S", "Index", "Account", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
+    <div class="w3-bar @color  w3-card-2">
+        @Html.ActionLink("H.R.M.S", "", "", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
 
         @if (User.IsInRole("admin"))
         {
@@ -173,6 +173,16 @@
         }
 
 
+        @*---------------------------Add Employee--------------------------------*@
+
+        @if (User.IsInRole("admin"))
+        {
+            @Html.ActionLink("Account", "Index", "EmployeeRegistration", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
+        }
+
+
+
+
         @*---------------------------fourth here----------------------------*@
 
         @if (User.IsInRole("emp"))
@@ -246,9 +256,9 @@
                     </button> <button onclick="return changeColor('w3-yellow')" class="w3-yellow w3-bar-item w3-button w3-mobile">
                         yellow
                     </button>
-                              <button onclick="return changeColor('w3-blue')" class="w3-blue w3-bar-item w3-button w3-mobile">
-                                  blue
-                              </button>
+                    <button onclick="return changeColor('w3-blue')" class="w3-blue w3-bar-item w3-button w3-mobile">
+                        blue
+                    </button>
                     <button onclick="return changeColor('w3-sand')" class="w3-sand w3-bar-item w3-button w3-mobile">
                         Sand
                     </button>

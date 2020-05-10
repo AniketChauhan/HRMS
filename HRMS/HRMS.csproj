@@ -152,6 +152,7 @@
     <Compile Include="Controllers\EmployeePersonalDetailController.cs" />
     <Compile Include="Controllers\EmployeePhotoSignController.cs" />
     <Compile Include="Controllers\EmployeeReferenceDetailController.cs" />
+    <Compile Include="Controllers\EmployeeRegistrationController.cs" />
     <Compile Include="Controllers\GenderController.cs" />
     <Compile Include="Controllers\MaritalMasterController.cs" />
     <Compile Include="Controllers\PayRollMasterControllerv.cs" />
@@ -541,6 +542,11 @@
     <Content Include="Views\EmployeePhotoSign\Index.cshtml" />
     <Content Include="Views\EmployeePhotoSign\AddNew.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\EmployeeRegistration\Create.cshtml" />
+    <Content Include="Views\EmployeeRegistration\Delete.cshtml" />
+    <Content Include="Views\EmployeeRegistration\Details.cshtml" />
+    <Content Include="Views\EmployeeRegistration\Edit.cshtml" />
+    <Content Include="Views\EmployeeRegistration\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
