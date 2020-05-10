@@ -43,13 +43,14 @@
                     @Html.DisplayFor(modelItem => item.parentname)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IsActive)
+                    <center>   @Html.DisplayFor(modelItem => item.IsActive)</center>
                 </td>
                 <td>
                     <center>
-                        @Html.ActionLink("Details", "Details", new { id = item.Dept_Id })
+                        @Html.ActionLink(" Edit", "Edit", new { id = item.Dept_Id }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" })
+                        @Html.ActionLink(" Delete", "Delete", new { id = item.Dept_Id }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-trash" })
                     </center>
-                        </td>
+                </td>
             </tr>
         }
 
@@ -61,3 +62,4 @@ else
         <h2 class="text-center text-primary">sorry!!! We don't have any Grade Data Right Now...</h2>
     </div>
 }
+

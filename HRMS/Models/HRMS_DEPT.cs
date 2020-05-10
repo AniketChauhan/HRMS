@@ -24,13 +24,13 @@ namespace HRMS.Models
         public long Dept_Id { get; set; }
         [Required]
         [Display(Name ="Department Name")]
-        [RegularExpression(@"^[A-Za-z]+", ErrorMessage = "Only Alphabetic values are allowed!")]
+        [RegularExpression(@"^[A-Za-z_ ]*$", ErrorMessage = "Only Alphabetic values are allowed!")]
         [DataType(DataType.Text,ErrorMessage ="Only Alphabetic value are allowed" )]
         [MaxLength(50,ErrorMessage ="Department name can have 50 characters maximum!")]
         public string Dept_Name { get; set; }
         [Required]
         [Display(Name = "Department Short Name")]
-        [RegularExpression(@"^[A-Za-z]+", ErrorMessage = "Only Alphabetic values are allowed!")]
+        [RegularExpression(@"^[A-Za-z_ ]*$", ErrorMessage = "Only Alphabetic values are allowed!")]
         [DataType(DataType.Text, ErrorMessage = "Only Alphabetic value are allowed")]
         [MaxLength(50, ErrorMessage = "Short name can have 10 characters maximum!")]
 
