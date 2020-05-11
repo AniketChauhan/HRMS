@@ -51,13 +51,32 @@ namespace HRMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.HRMS_EMP_CITIZENSHIP_MS.Add(hRMS_EMP_CITIZENSHIP_MS);
-                db.SaveChanges(); ModelState.Clear();
+                bool isValid = db.HRMS_EMP_CITIZENSHIP_MS.Any(x => x.CitizenShip_Country_NM==hRMS_EMP_CITIZENSHIP_MS.CitizenShip_Country_NM);
+                if (!isValid)
+                {
 
-                return RedirectToAction("Index");
-            }
+                    db.HRMS_EMP_CITIZENSHIP_MS.Add(hRMS_EMP_CITIZENSHIP_MS);
+                    db.SaveChanges();
+                    ViewBag.success = "It is Successfully Added!";
+                    ModelState.Clear();
+                    return View();
+                }
+                else
+                {
 
-            return View(hRMS_EMP_CITIZENSHIP_MS);
+                    ViewBag.success = "Sorry! It is already exist!";
+                    return View(hRMS_EMP_CITIZENSHIP_MS);
+                }
+
+
+                    //db.HRMS_EMP_CITIZENSHIP_MS.Add(hRMS_EMP_CITIZENSHIP_MS);
+                    //db.SaveChanges(); 
+                    //ModelState.Clear();
+
+                    //return RedirectToAction("Index");
+                }
+
+                return View(hRMS_EMP_CITIZENSHIP_MS);
         }
 
         // GET: HRMS_EMP_CITIZENSHIP_MS/Edit/5
@@ -84,11 +103,29 @@ namespace HRMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(hRMS_EMP_CITIZENSHIP_MS).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(hRMS_EMP_CITIZENSHIP_MS);
+                bool isValid = db.HRMS_EMP_CITIZENSHIP_MS.Any(x => (x.CitizenShip_ID != hRMS_EMP_CITIZENSHIP_MS.CitizenShip_ID) && (x.CitizenShip_Country_NM == hRMS_EMP_CITIZENSHIP_MS.CitizenShip_Country_NM ));
+                if (!isValid)
+                {
+                    db.Entry(hRMS_EMP_CITIZENSHIP_MS).State = EntityState.Modified;
+                    db.SaveChanges();
+                    ViewBag.success = "Your Record Successfully Updated!";
+                    return View();
+                }
+                else
+                {
+
+                    ViewBag.success = "It is Already exist!";
+                    return View();
+
+
+                }
+
+
+                    //db.Entry(hRMS_EMP_CITIZENSHIP_MS).State = EntityState.Modified;
+                    //db.SaveChanges();
+                    //return RedirectToAction("Index");
+                }
+                return View(hRMS_EMP_CITIZENSHIP_MS);
         }
         public bool Delete(long id)
         {

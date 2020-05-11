@@ -10,17 +10,17 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table table-bordered table-responsive table-striped">
     <tr>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Emp_Photo_Title)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Emp_Photo_Path)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Emp_Sign_Title)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Emp_Sign_Path)
         </th>
@@ -33,15 +33,15 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Emp_Photo_Title)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Emp_Photo_Path)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Emp_Sign_Title)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Emp_Sign_Path)
             </td>

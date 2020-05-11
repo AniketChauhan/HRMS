@@ -8,19 +8,19 @@
     var newFileName = "";
     var imagePath = "";
 
-    if (IsPost)
-    {
-        photo = WebImage.GetImageFromRequest();
-        if (photo != null)
-        {
-            newFileName = Guid.NewGuid().ToString() + "_" +
-                Path.GetFileName(photo.FileName);
-            imagePath = @"EmpPhoto\" + newFileName;
+    //if (IsPost)
+    //{
+    //    photo = WebImage.GetImageFromRequest();
+    //    if (photo != null)
+    //    {
+    //        newFileName = Guid.NewGuid().ToString() + "_" +
+    //            Path.GetFileName(photo.FileName);
+    //        imagePath = @"EmpPhoto\" + newFileName;
 
 
-        }
+    //    }
 
-    }
+    //}
 
 }
 
@@ -35,15 +35,18 @@
         <h4>HRMS_EMP_PHOTO_SIGN</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Emp_ID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Emp_ID, new { htmlAttributes = new { @class = "form-control" } })
-                @*@Html.DropDownList("Emp_ID", null, htmlAttributes: new { @class = "form-control" })*@
-                @Html.ValidationMessageFor(model => model.Emp_ID, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        @if (ViewBag.Role == "admin")
+        {
 
+            <div class="form-group">
+                @Html.LabelFor(model => model.Emp_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Emp_ID, new { htmlAttributes = new { @class = "form-control" } })
+                    @*@Html.DropDownList("Emp_ID", null, htmlAttributes: new { @class = "form-control" })*@
+                    @Html.ValidationMessageFor(model => model.Emp_ID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
         @*<div class="form-group">
                 @Html.LabelFor(model => model.Emp_Photo_Title, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -51,10 +54,10 @@
                     @Html.ValidationMessageFor(model => model.Emp_Photo_Title, "", new { @class = "text-danger" })
                 </div>alt="~/Image/default_image.png"
             </div>*@
-        @if (imagePath != "")
-        {
-            <img src="@imagePath" height="200" width="200">
-        }
+        @*@if (imagePath != "")
+            {
+                <img src="@imagePath" height="200" width="200">
+            }*@
         <div class="form-group">
             @Html.LabelFor(model => model.Emp_Photo_Path, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -89,11 +92,12 @@
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+@if (ViewBag.Role == "admin")
+{
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
 }
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
