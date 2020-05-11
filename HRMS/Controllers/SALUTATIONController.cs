@@ -69,7 +69,7 @@ namespace HRMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                var salutationName = db.HRMS_SALUTATION.FirstOrDefault(rec => rec.Salutation_Name == hRMS_SALUTATION.Salutation_Name);
+                var salutationName = db.HRMS_SALUTATION.FirstOrDefault(rec => rec.Salutation_Name == hRMS_SALUTATION.Salutation_Name && rec.Salutation_ID != hRMS_SALUTATION.Salutation_ID);
                 if (salutationName == null)
                 {
                     db.Entry(hRMS_SALUTATION).State = EntityState.Modified;

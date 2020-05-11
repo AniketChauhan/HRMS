@@ -66,10 +66,10 @@ namespace HRMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                var category_name = db.HRMS_CATEGORY_GRADE.FirstOrDefault(rec => rec.Category_Name == hRMS_CATEGORY_GRADE.Category_Name);
+                var category_name = db.HRMS_CATEGORY_GRADE.FirstOrDefault(rec => rec.Category_Name == hRMS_CATEGORY_GRADE.Category_Name && rec.Category_ID != hRMS_CATEGORY_GRADE.Category_ID);
                 if (category_name != null)
                 {
-                    var grade_name = db.HRMS_CATEGORY_GRADE.FirstOrDefault(rec => rec.Grade_Name == hRMS_CATEGORY_GRADE.Grade_Name);
+                    var grade_name = db.HRMS_CATEGORY_GRADE.FirstOrDefault(rec => rec.Grade_Name == hRMS_CATEGORY_GRADE.Grade_Name && rec.Category_ID != hRMS_CATEGORY_GRADE.Category_ID);
                     if (grade_name != null)
                     {
                         ViewBag.Grade_Status = "Grade name is Already exist in the same category !";

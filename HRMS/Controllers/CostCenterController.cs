@@ -93,13 +93,13 @@ namespace HRMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                var existData = db.HRMS_COST_CENTER.FirstOrDefault(rec => rec.Cost_Cntr_Code == hRMS_COST_CENTER.Cost_Cntr_Code && rec.Cost_Cntr_Name == hRMS_COST_CENTER.Cost_Cntr_Name);
+                var existData = db.HRMS_COST_CENTER.FirstOrDefault(rec => rec.Cost_Cntr_Code == hRMS_COST_CENTER.Cost_Cntr_Code && rec.Cost_Cntr_Name == hRMS_COST_CENTER.Cost_Cntr_Name && rec.ID != hRMS_COST_CENTER.ID);
                 if (existData == null)
                 {
-                    var existCode = db.HRMS_COST_CENTER.FirstOrDefault(rec => rec.Cost_Cntr_Code == hRMS_COST_CENTER.Cost_Cntr_Code);
+                    var existCode = db.HRMS_COST_CENTER.FirstOrDefault(rec => rec.Cost_Cntr_Code == hRMS_COST_CENTER.Cost_Cntr_Code && rec.ID != hRMS_COST_CENTER.ID);
                     if (existCode == null)
                     {
-                        var ExistName = db.HRMS_COST_CENTER.FirstOrDefault(rec => rec.Cost_Cntr_Name == hRMS_COST_CENTER.Cost_Cntr_Name);
+                        var ExistName = db.HRMS_COST_CENTER.FirstOrDefault(rec => rec.Cost_Cntr_Name == hRMS_COST_CENTER.Cost_Cntr_Name && rec.ID != hRMS_COST_CENTER.ID);
                         if (ExistName == null)
                         {
 
