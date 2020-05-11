@@ -286,17 +286,20 @@
         <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
         <script>
             $(function () {
+                
                 $(".datepicker").datepicker({
+                    
                     dateFormat: "yy-mm-dd",
                     changeMonth: true,
                     changeYear: true,
                     yearRange: "1920:2020",
                     orientation: "right top",
                     maxDate: new Date()
-
+          
 
 
                 });
+  //$('#ui-datepicker-div').css('clip', 'auto'); 
 
             });
         </script>
@@ -306,6 +309,7 @@
 
     <script>
         $(document).ready(function () {
+            
             $("#Religion").change(function () {
                 $.get("/EmployeePersonalDetail/GetCastList", { ReligionID: $("#Religion").val() }, function (data) {
 
