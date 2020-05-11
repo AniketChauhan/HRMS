@@ -204,30 +204,30 @@ namespace HRMS.Controllers
         }
 
         // GET: EmployeeRegistration/Delete/5
-        public ActionResult Delete(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Accounts accounts = db.Accounts.Find(id);
-            if (accounts == null)
-            {
-                return HttpNotFound();
-            }
-            return View(accounts);
-        }
+        //public ActionResult Delete(long? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Accounts accounts = db.Accounts.Find(id);
+        //    if (accounts == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(accounts);
+        //}
 
-        // POST: EmployeeRegistration/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
-        {
-            Accounts accounts = db.Accounts.Find(id);
-            db.Accounts.Remove(accounts);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //// POST: EmployeeRegistration/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(long id)
+        //{
+        //    Accounts accounts = db.Accounts.Find(id);
+        //    db.Accounts.Remove(accounts);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
 
         [HttpPost]
