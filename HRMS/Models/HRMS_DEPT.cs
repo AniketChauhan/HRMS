@@ -11,6 +11,7 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class HRMS_DEPT
     {
@@ -21,8 +22,20 @@ namespace HRMS.Models
         }
     
         public long Dept_Id { get; set; }
+        [Required]
+        [Display(Name ="Department Name")]
+        [RegularExpression(@"^[A-Za-z_ ]*$", ErrorMessage = "Only Alphabetic values are allowed!")]
+        [DataType(DataType.Text,ErrorMessage ="Only Alphabetic value are allowed" )]
+        [MaxLength(50,ErrorMessage ="Department name can have 50 characters maximum!")]
         public string Dept_Name { get; set; }
+        [Required]
+        [Display(Name = "Department Short Name")]
+        [RegularExpression(@"^[A-Za-z_ ]*$", ErrorMessage = "Only Alphabetic values are allowed!")]
+        [DataType(DataType.Text, ErrorMessage = "Only Alphabetic value are allowed")]
+        [MaxLength(10, ErrorMessage = "Short name can have 10 characters maximum!")]
+
         public string Sort_Name { get; set; }
+
         public Nullable<long> Parent_ID { get; set; }
         public bool IsActive { get; set; }
         public Nullable<long> CreatedBy { get; set; }
