@@ -80,13 +80,20 @@ namespace HRMS.Controllers
 
         // GET: EmployeeReferenceDetail/Create
         [Authorize(Roles = "admin,emp")]
-        public ActionResult Create()
+        public ActionResult Create(long? ID)
         {
+            HRMS_EMP_ReferenceDetail obj = new HRMS_EMP_ReferenceDetail();
             long emp_id = Convert.ToInt64(Session["id"]);
             string role = db.Accounts.Where(x => x.ID == emp_id).Select(x => x.role).FirstOrDefault();
             if (role == "admin")
             {
                 ViewBag.Role = "admin";
+                obj.EMP_ID = ID.Value;
+                bool isExist = db.HRMS_EMP_ReferenceDetail.Any(x => x.EMP_ID == obj.EMP_ID);
+                if (isExist)
+                {
+                    return RedirectToAction("Index", "EmployeeAttachmentDetail", new { ID = obj.EMP_ID });
+                }
             }
 
             //if attck by direct URL
@@ -105,7 +112,7 @@ namespace HRMS.Controllers
             ViewBag.City = new SelectList("");
             //ViewBag.EMP_ID = new SelectList(db.HRMS_Emp_Details, "Emp_ID", "First_Name");
             
-            return View();
+            return View(obj);
         }
 
         // POST: EmployeeReferenceDetail/Create
@@ -143,14 +150,15 @@ namespace HRMS.Controllers
                         return RedirectToAction("Details", "EmployeeReferenceDetail", new { id });
                     }
 
-                    ViewBag.Country = new SelectList(db.Country, "CountryID", "CountryName");
-                    ViewBag.State = new SelectList("");
-                    ViewBag.City = new SelectList("");
+                    //ViewBag.Country = new SelectList(db.Country, "CountryID", "CountryName");
+                    //ViewBag.State = new SelectList("");
+                    //ViewBag.City = new SelectList("");
                     if (role == "admin")
                     {
                         ViewBag.Role = "admin";
+                        return RedirectToAction("Index", "EmployeeAttachmentDetail", new { ID = hRMS_EMP_ReferenceDetail.EMP_ID });
                     }
-                    return View();
+                    //return View();
                 }
                 else
                 {

@@ -68,14 +68,20 @@ namespace HRMS.Controllers
 
         // GET: EmployeePersonalDetail/Create
         [Authorize(Roles = "admin,emp")]
-        public ActionResult Create()
+        public ActionResult Create(long? ID)
         {
-
+            Employee_Personal_Detail obj = new Employee_Personal_Detail();
             long emp_id = Convert.ToInt64(Session["id"]);
             string role = db.Accounts.Where(x => x.ID == emp_id).Select(x => x.role).FirstOrDefault();
             if (role == "admin")
             {
                 ViewBag.Role = "admin";
+                obj.EMP_ID = ID.Value;
+                bool isExist = db.Employee_Personal_Detail.Any(x => x.EMP_ID == obj.EMP_ID);
+                if (isExist)
+                {
+                    return RedirectToAction("Create", "EmployeeContactDetails", new { ID=obj.EMP_ID });
+                }
             }
 
             //if attck by direct URL
@@ -96,7 +102,7 @@ namespace HRMS.Controllers
             ViewBag.Gender = new SelectList(db.HRMS_EMP_GENDER_MS, "Gender_ID", "Gender_Value");
             ViewBag.MarraigeStatus = new SelectList(db.MaritalMaster, "MaritalID", "MaritalName");
             ViewBag.Religion = new SelectList(db.ReligionMaster, "ReligionID", "ReligionName");
-            return View();
+            return View(obj);
         }
 
         // POST: EmployeePersonalDetail/Create
@@ -135,18 +141,19 @@ namespace HRMS.Controllers
                         return RedirectToAction("Details", "EmployeePersonalDetail", new { id });
                     }
 
-                    ViewBag.Caste = new SelectList("");
-                    ViewBag.Category = new SelectList(db.HRMS_CATEGORY_GRADE, "Category_ID", "Category_Name");
-                    ViewBag.Citizenship = new SelectList(db.HRMS_EMP_CITIZENSHIP_MS, "CitizenShip_ID", "CitizenShip_Country_NM");
-                    ViewBag.Gender = new SelectList(db.HRMS_EMP_GENDER_MS, "Gender_ID", "Gender_Value");
-                    ViewBag.MarraigeStatus = new SelectList(db.MaritalMaster, "MaritalID", "MaritalName");
-                    ViewBag.Religion = new SelectList(db.ReligionMaster, "ReligionID", "ReligionName");
+                    //ViewBag.Caste = new SelectList("");
+                    //ViewBag.Category = new SelectList(db.HRMS_CATEGORY_GRADE, "Category_ID", "Category_Name");
+                    //ViewBag.Citizenship = new SelectList(db.HRMS_EMP_CITIZENSHIP_MS, "CitizenShip_ID", "CitizenShip_Country_NM");
+                    //ViewBag.Gender = new SelectList(db.HRMS_EMP_GENDER_MS, "Gender_ID", "Gender_Value");
+                    //ViewBag.MarraigeStatus = new SelectList(db.MaritalMaster, "MaritalID", "MaritalName");
+                    //ViewBag.Religion = new SelectList(db.ReligionMaster, "ReligionID", "ReligionName");
 
                     if (role == "admin")
                     {
                         ViewBag.Role = "admin";
+                        return RedirectToAction("Create", "EmployeeContactDetails", new { ID = employee_Personal_Detail.EMP_ID });
                     }
-                    return View();
+                    //return View();
                 }
                 else
                 {

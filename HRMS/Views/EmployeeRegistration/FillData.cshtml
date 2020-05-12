@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HRMS.Models.Accounts>
+﻿@model IEnumerable<HRMS.Models.FillEmployee_Result>
 
 @{
     ViewBag.Title = "FillData";
@@ -6,20 +6,18 @@
 
 <h2>FillData</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+</p>*@
+<table class="table table-bordered table-responsive table-striped">
     <tr>
+      
         <th>
             @Html.DisplayNameFor(model => model.ID)
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.password)
-        </th>
         <th>
-            @Html.DisplayNameFor(model => model.role)
-        </th>*@
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
         <th></th>
     </tr>
 
@@ -28,16 +26,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.ID)
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.password)
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.role)
-        </td>*@
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Fill Detail", "Create","EmployeeDetail", new {item.ID }, new { @class = "btn btn-primary" })
         </td>
     </tr>
 }
