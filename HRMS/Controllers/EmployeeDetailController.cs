@@ -112,6 +112,8 @@ namespace HRMS.Controllers
             ViewBag.Unit = db.UnitMaster;
             ViewBag.Work_Location = db.WorkLocationMaster;
             ViewBag.DivisionData = db.HRMS_DEPT.Where(rec => rec.Parent_ID == null && rec.IsActive == true);
+
+           // obj.Join_Date = ;
             return View(obj);
         }
 
@@ -200,7 +202,7 @@ namespace HRMS.Controllers
                         {
                             ViewBag.Role = "admin";
                         }
-                        return View();
+                        return View(hRMS_Emp_Details);
                         }
                     
                     
@@ -220,7 +222,7 @@ namespace HRMS.Controllers
                     {
                         ViewBag.Role = "admin";
                     }
-                    return View();
+                    return View(hRMS_Emp_Details);
                 }
             }
 
@@ -325,7 +327,7 @@ namespace HRMS.Controllers
                     {
                         ViewBag.Role = "admin";
                     }
-                    return View();
+                    return View(hRMS_Emp_Details);
                     }
                     else
                     {
@@ -344,7 +346,7 @@ namespace HRMS.Controllers
                     {
                         ViewBag.Role = "admin";
                     }
-                    return View();
+                    return View(hRMS_Emp_Details);
                     }
                 //}
                 //else

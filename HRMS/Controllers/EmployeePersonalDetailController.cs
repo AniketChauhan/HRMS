@@ -144,6 +144,26 @@ namespace HRMS.Controllers
 
             if (ModelState.IsValid)
             {
+                //Date checking
+                if (employee_Personal_Detail.DOB >= employee_Personal_Detail.MarraigeDate)
+                {
+                    ViewBag.success = "DOB must ne smaller than Marraige Date!";
+                    ViewBag.Caste = new SelectList(db.CastMaster.Where(x => x.ReligionID == employee_Personal_Detail.Religion), "CastCode", "CastName");
+                    ViewBag.Category = new SelectList(db.HRMS_CATEGORY_GRADE, "Category_ID", "Category_Name");
+                    ViewBag.Citizenship = new SelectList(db.HRMS_EMP_CITIZENSHIP_MS, "CitizenShip_ID", "CitizenShip_Country_NM");
+                    ViewBag.Gender = new SelectList(db.HRMS_EMP_GENDER_MS, "Gender_ID", "Gender_Value");
+                    ViewBag.MarraigeStatus = new SelectList(db.MaritalMaster, "MaritalID", "MaritalName");
+                    ViewBag.Religion = new SelectList(db.ReligionMaster, "ReligionID", "ReligionName");
+
+                    if (role == "admin")
+                    {
+                        ViewBag.Role = "admin";
+                    }
+
+                    return View(employee_Personal_Detail);
+                }
+                
+                
                 bool isValid = db.Employee_Personal_Detail.Any(x => x.EMP_ID == employee_Personal_Detail.EMP_ID);
                 if (!isValid)
                 {
@@ -284,7 +304,7 @@ namespace HRMS.Controllers
                 {
                     ViewBag.Role = "admin";
                 }
-                return View();
+                return View(employee_Personal_Detail);
             }
             ViewBag.Caste = new SelectList(db.CastMaster.Where(x => x.ReligionID == employee_Personal_Detail.Religion), "CastCode", "CastName");
             ViewBag.Category = new SelectList(db.HRMS_CATEGORY_GRADE, "Category_ID", "Category_Name", employee_Personal_Detail.Category);

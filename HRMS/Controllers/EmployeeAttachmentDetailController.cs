@@ -103,7 +103,7 @@ namespace HRMS.Controllers
                     {
                         ViewData["users"] = db.HRMS_EMP_Attachment_Details.Where(x => x.EMP_ID == emp_id).ToList();
                     }
-                    return View();
+                    return View(model);
 
                    
                 }
@@ -141,7 +141,7 @@ namespace HRMS.Controllers
                         {
                             ViewData["users"] = db.HRMS_EMP_Attachment_Details.Where(x => x.EMP_ID == emp_id).ToList();
                         }
-                        return View();
+                        return View(model);
                     }
 
                     else
@@ -158,7 +158,7 @@ namespace HRMS.Controllers
                         {
                             ViewData["users"] = db.HRMS_EMP_Attachment_Details.Where(x => x.EMP_ID == emp_id).ToList();
                         }
-                        return View();
+                        return View(model);
                     }
                 }
             }

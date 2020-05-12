@@ -167,7 +167,7 @@ namespace HRMS.Controllers
                                 ViewBag.Role = "admin";
                             }
 
-                            return View();
+                            return View(hRMS_Contact);
                         }
                     }
                     else
@@ -178,7 +178,7 @@ namespace HRMS.Controllers
                         {
                             ViewBag.Role = "admin";
                         }
-                        return View();
+                        return View(hRMS_Contact);
                     }
                 }
                 else
@@ -189,7 +189,7 @@ namespace HRMS.Controllers
                     {
                         ViewBag.Role = "admin";
                     }
-                    return View();
+                    return View(hRMS_Contact);
                 }
             }
 
@@ -274,7 +274,7 @@ namespace HRMS.Controllers
                         {
                             ViewBag.Role = "admin";
                         }
-                        return View();
+                        return View(hRMS_Contact);
                     }
                     else
                     {
@@ -284,7 +284,7 @@ namespace HRMS.Controllers
                         {
                             ViewBag.Role = "admin";
                         }
-                        return View();
+                        return View(hRMS_Contact);
                     }
                 }
                 else
@@ -295,7 +295,7 @@ namespace HRMS.Controllers
                     {
                         ViewBag.Role = "admin";
                     }
-                    return View();
+                    return View(hRMS_Contact);
                 }
             }
 
