@@ -28,7 +28,7 @@ namespace HRMS.Models
         [Display(Name = "Join Date")]
         // [DataType(DataType.Date, ErrorMessage = "Only Date allowed")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
-        public System.DateTime Join_Date { get; set; }
+        public Nullable<System.DateTime> Join_Date { get; set; }
         [Display(Name = "Card Id")]
         [RegularExpression("^[0-9]*$", ErrorMessage = "Card Id must be in valid format")]
 

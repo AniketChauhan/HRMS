@@ -47,7 +47,7 @@ namespace HRMS.Models
         [Required]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         [DisplayName("Birth Date")]
-        public System.DateTime DOB { get; set; }
+        public Nullable<System.DateTime> DOB { get; set; }
         [Required]
         public long Category { get; set; }
         [DisplayName("Identity Mark 1")]
