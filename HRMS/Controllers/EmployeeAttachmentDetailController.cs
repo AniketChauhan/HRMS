@@ -14,7 +14,7 @@ namespace HRMS.Controllers
         
         HRMSEntities db = new HRMSEntities();
         [Authorize(Roles = "admin,emp")]
-        public ActionResult Index(long? ID)
+        public ActionResult Index(long? ID, string name)
         {
             HRMS_EMP_Attachment_Details obj = new HRMS_EMP_Attachment_Details();
             
@@ -22,16 +22,44 @@ namespace HRMS.Controllers
 
             long emp_id = Convert.ToInt64(Session["id"]);
             string role = db.Accounts.Where(x => x.ID == emp_id).Select(x => x.role).FirstOrDefault();
+
             if (role == "admin")
             {
                 ViewBag.Role = "admin";
                 ViewData["users"] = db.HRMS_EMP_Attachment_Details.ToList();
-                obj.EMP_ID = ID.Value;
-                bool isExist = db.HRMS_EMP_Attachment_Details.Any(x => x.EMP_ID == obj.EMP_ID);
-                if (isExist)
+
+                if (ID != null)  //different than other transaction pages 
                 {
-                    return RedirectToAction("Create", "EmployeePhotoSign", new { ID = obj.EMP_ID });
+                    obj.EMP_ID = ID.Value;
                 }
+
+
+                if (name == null)
+                {
+                    bool isExist = db.HRMS_EMP_Attachment_Details.Any(x => x.EMP_ID == obj.EMP_ID);
+                    if (isExist)
+                    {
+                        return RedirectToAction("Create", "EmployeePhotoSign", new { ID = obj.EMP_ID });
+                    }
+                }
+
+                else
+                {
+                    bool isExist = db.HRMS_EMP_Attachment_Details.Any(x => x.EMP_ID == obj.EMP_ID);
+                    if (isExist)
+                    {
+                        return View(obj);
+                    }
+                    else
+                    {
+                        return View(obj);
+                    }
+
+                }
+
+
+
+            
 
             }
 

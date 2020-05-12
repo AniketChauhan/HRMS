@@ -5,17 +5,20 @@
 }
 
 <h2>Index</h2>
-
-<p>
+<br />
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
+</p>*@
 @if (Model.Count<HRMS.Models.HRMS_Contact>() > 0 && Model != null)
 {
     <table class="table table-striped table-hover table-bordered table-responsive">
         <tr>
             @*<th>
-                @Html.DisplayNameFor(model => model.HRMS_Emp_Details.Display_Name)
-            </th>*@
+            @Html.DisplayNameFor(model => model.HRMS_Emp_Details.Display_Name)
+        </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Employee_ID)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Corporate_Email)
             </th>
@@ -30,28 +33,31 @@
 
         @foreach (var item in Model)
         {
-            <tr>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item.HRMS_Emp_Details.Display_Name)
-                </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.Corporate_Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Ext)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Phone_Work)
-                </td>
+    <tr>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.HRMS_Emp_Details.Display_Name)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Corporate_Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ext)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone_Work)
+        </td>
 
 
-                <td class="btn-group-sm">
-                    @Html.ActionLink(" Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" })
-                    @Html.ActionLink(" Details", "Details", new { id = item.ID }, new { @class = "btn btn-warning btn-sm glyphicon glyphicon-list-alt" })
+        <td class="btn-group-sm">
+            @Html.ActionLink(" Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" })
+            @Html.ActionLink(" Details", "Details", new { id = item.ID }, new { @class = "btn btn-warning btn-sm glyphicon glyphicon-list-alt" })
 
-                    <button class="btn btn-danger  btn-sm " onclick="return removeFromList(this, '@item.ID') "> <i class="glyphicon glyphicon-trash"> </i> Delete</button>
-                </td>
-            </tr>
+            <button class="btn btn-danger  btn-sm " onclick="return removeFromList(this, '@item.ID') "> <i class="glyphicon glyphicon-trash"> </i> Delete</button>
+        </td>
+    </tr>
         }
 
     </table>

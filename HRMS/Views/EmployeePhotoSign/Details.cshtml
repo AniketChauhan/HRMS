@@ -9,6 +9,15 @@
 
 <div>
     <h4>HRMS_EMP_PHOTO_SIGN</h4>
+
+    @if (ViewBag.Role == "admin")
+    {
+        @*@Html.ActionLink("Back to List", "Index")*@
+        <div class="w3-right-align">
+            @Html.ActionLink("<<Prev", "Index", "EmployeeAttachmentDetail", new { ID = Model.Emp_ID, name = "yes" }, new { @class = "btn btn-primary" })
+        </div>
+    }
+
     <hr />
     <dl class="dl-horizontal">
 
@@ -61,10 +70,9 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Emp_Photos_ID }) |
+   @if (ViewBag.EditVisible == null)
+   {
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Emp_Photos_ID }) }
 
-    @if (ViewBag.Role == "admin")
-    {
-        @Html.ActionLink("Back to List", "Index")
-    }
+   
 </p>
