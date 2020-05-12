@@ -11,6 +11,7 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Accounts
     {
@@ -28,13 +29,21 @@ namespace HRMS.Models
             this.HRMS_Travel_Application1 = new HashSet<HRMS_Travel_Application>();
             this.Sample = new HashSet<Sample>();
         }
-    
+        [Display(Name ="Employee ID")]
         public long ID { get; set; }
+        [Display(Name ="UserName")]
+        [Required]
+        [DataType(DataType.EmailAddress, ErrorMessage = "Username mast be Email ID!")]
         public string UserName { get; set; }
+
+        //for registration only
+        [Display(Name ="Confirm UserName")]
         public string ConfirmUsername { get; set; }
+        [Required]
         public string password { get; set; }
         public string role { get; set; }
-    
+
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EMP_Grade_Assignment> EMP_Grade_Assignment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
