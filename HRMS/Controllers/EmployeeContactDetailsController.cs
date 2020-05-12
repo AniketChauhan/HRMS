@@ -61,13 +61,20 @@ namespace HRMS.Controllers
 
         // GET: EmployeeContactDetails/Create
         [Authorize(Roles = "admin,emp")]
-        public ActionResult Create()
+        public ActionResult Create(long? ID)
         {
+            HRMS_Contact obj = new HRMS_Contact();
             long emp_id = Convert.ToInt64(Session["id"]);
             string role = db.Accounts.Where(x => x.ID == emp_id).Select(x => x.role).FirstOrDefault();
             if (role == "admin")
             {
                 ViewBag.Role = "admin";
+                obj.Employee_ID = ID.Value;
+                bool isExist = db.HRMS_Contact.Any(x => x.Employee_ID == obj.Employee_ID);
+                if (isExist)
+                {
+                    return RedirectToAction("Create", "EmployeeReferenceDetail", new { ID = obj.Employee_ID });
+                }
             }
 
             //if attck by direct URL
@@ -82,7 +89,7 @@ namespace HRMS.Controllers
             }
 
             //ViewBag.Employee_ID = db.Accounts;
-            return View();
+            return View(obj);
         }
 
 
@@ -129,9 +136,10 @@ namespace HRMS.Controllers
                             if (role == "admin")
                             {
                                 ViewBag.Role = "admin";
+                                return RedirectToAction("Create", "EmployeeReferenceDetail", new { ID = hRMS_Contact.Employee_ID });
                             }
 
-                            return View();
+                            //return View();
                         }
                         else
                         {

@@ -29,6 +29,7 @@ namespace HRMS.Controllers
             if (role == "admin")
             {
                 ViewBag.Role = "admin";
+
             }
 
             //if no entry it will redirect to create
@@ -59,13 +60,22 @@ namespace HRMS.Controllers
             }
 
         [Authorize(Roles = "admin,emp")]
-        public ActionResult Create()
+        public ActionResult Create(long? ID)
         {
+            HRMS_Emp_Details obj = new HRMS_Emp_Details();
             long emp_id = Convert.ToInt64(Session["id"]);
             string role = db.Accounts.Where(x => x.ID == emp_id).Select(x => x.role).FirstOrDefault();
             if (role == "admin")
             {
+                
                 ViewBag.Role = "admin";
+                obj.EMP_ID = ID.Value;
+                bool isExist = db.HRMS_Emp_Details.Any(x => x.EMP_ID == obj.EMP_ID);
+                if (isExist)
+                {
+                    return RedirectToAction("Create", "EmployeePersonalDetail", new { ID=obj.EMP_ID });
+                }
+
             }
 
             //if attck by direct URL
@@ -87,7 +97,7 @@ namespace HRMS.Controllers
             ViewBag.Unit = db.UnitMaster;
             ViewBag.Work_Location = db.WorkLocationMaster;
             ViewBag.DivisionData = db.HRMS_DEPT.Where(rec => rec.Parent_ID == null && rec.IsActive == true);
-            return View();
+            return View(obj);
         }
 
         [Authorize(Roles = "admin,emp")]
@@ -127,24 +137,7 @@ namespace HRMS.Controllers
 
                         if (!AlreadyCard_Id || (AlreadyCard_Id && hRMS_Emp_Details.Card_Id == null))
                         {
-                            // HRMS_Emp_Details Employee_data = new HRMS_Emp_Details();
-                            // Employee_data.Emp_ID = hRMS_Emp_Details.Emp_ID;
-                            // Employee_data.Emp_Cd = hRMS_Emp_Details.Emp_Cd;
-                            // Employee_data.Old_Emp_Cd = hRMS_Emp_Details.Old_Emp_Cd;
-                            // Employee_data.Join_Date = hRMS_Emp_Details.Join_Date;
-                            // Employee_data.Card_Id = hRMS_Emp_Details.Card_Id;
-                            // Employee_data.salutation = hRMS_Emp_Details.salutation;
-                            // Employee_data.First_Name = hRMS_Emp_Details.First_Name;
-                            // Employee_data.Middle_Name = hRMS_Emp_Details.Middle_Name;
-                            // Employee_data.Last_Name = hRMS_Emp_Details.Last_Name;
-                            // Employee_data.Display_Name = hRMS_Emp_Details.Display_Name;
-                            // Employee_data.Designation_id = hRMS_Emp_Details.Designation_id;
-                            // Employee_data.Work_Location = hRMS_Emp_Details.Work_Location;
-                            // Employee_data.Unit = hRMS_Emp_Details.Unit;
-                            // Employee_data.Department = hRMS_Emp_Details.Department;
-                            // Employee_data.Cost_Center = hRMS_Emp_Details.Cost_Center;
-                            //Employee_data.UAN_No_ = hRMS_Emp_Details.UAN_No_;
-
+                           
 
                             db.HRMS_Emp_Details.Add(hRMS_Emp_Details);
                             db.SaveChanges();
@@ -156,19 +149,22 @@ namespace HRMS.Controllers
                             return RedirectToAction("Details","EmployeeDetail",new {id});
                         }
 
-                        ViewBag.Cost_Center = db.HRMS_COST_CENTER;
-                        ViewBag.Designation = db.HRMS_DESG_MS.Where(rec => rec.IsActive == true);
-                        ViewBag.Department = db.HRMS_DEPT.Where(rec => rec.Parent_ID != null && rec.IsActive == true);
-                        ViewBag.salutation = db.HRMS_SALUTATION;
-                        ViewBag.Unit = db.UnitMaster;
-                        ViewBag.Work_Location = db.WorkLocationMaster;
-                        ViewBag.DivisionData = db.HRMS_DEPT.Where(rec => rec.Parent_ID == null && rec.IsActive == true);
+                        //ViewBag.Cost_Center = db.HRMS_COST_CENTER;
+                        //ViewBag.Designation = db.HRMS_DESG_MS.Where(rec => rec.IsActive == true);
+                        //ViewBag.Department = db.HRMS_DEPT.Where(rec => rec.Parent_ID != null && rec.IsActive == true);
+                        //ViewBag.salutation = db.HRMS_SALUTATION;
+                        //ViewBag.Unit = db.UnitMaster;
+                        //ViewBag.Work_Location = db.WorkLocationMaster;
+                        //ViewBag.DivisionData = db.HRMS_DEPT.Where(rec => rec.Parent_ID == null && rec.IsActive == true);
                         
                         if (role == "admin")
                         {
                             ViewBag.Role = "admin";
+                            
+                            return RedirectToAction("Create", "EmployeePersonalDetail", new { ID=hRMS_Emp_Details.EMP_ID });
+
                         }
-                        return View();
+                        
 
 
 
@@ -192,18 +188,7 @@ namespace HRMS.Controllers
                         return View();
                         }
                     
-                    //else
-                    //{
-                    //    ViewBag.EmpDetailStatus = "The Employee Code is Already Exist for another employee!";
-                    //    ViewBag.Cost_Center = db.HRMS_COST_CENTER;
-                    //    ViewBag.Designation = db.HRMS_DESG_MS.Where(rec => rec.IsActive == true);
-                    //    ViewBag.Department = db.HRMS_DEPT.Where(rec => rec.Parent_ID != null && rec.IsActive == true);
-                    //    ViewBag.salutation = db.HRMS_SALUTATION;
-                    //    ViewBag.Unit = db.UnitMasters;
-                    //    ViewBag.Work_Location = db.WorkLocationMasters;
-                    //    ViewBag.DivisionData = db.HRMS_DEPT.Where(rec => rec.Parent_ID == null && rec.IsActive == true);
-                    //    return View();
-                    //}
+                    
                 }
                 else
                 {

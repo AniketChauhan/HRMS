@@ -65,13 +65,20 @@ namespace HRMS.Controllers
 
         // GET: HRMS_EMP_PHOTO_SIGN/Create
         [Authorize(Roles = "admin,emp")]
-        public ActionResult Create()
+        public ActionResult Create(long? ID)
         {
+            HRMS_EMP_PHOTO_SIGN obj = new HRMS_EMP_PHOTO_SIGN();
             long emp_id = Convert.ToInt64(Session["id"]);
             string role = db.Accounts.Where(x => x.ID == emp_id).Select(x => x.role).FirstOrDefault();
             if (role == "admin")
             {
                 ViewBag.Role = "admin";
+                obj.Emp_ID = ID.Value;
+                bool isExist = db.HRMS_EMP_PHOTO_SIGN.Any(x => x.Emp_ID == obj.Emp_ID);
+                if (isExist)
+                {
+                    return RedirectToAction("FillData", "EmployeeRegistration");
+                }
             }
 
             //if attck by direct URL
@@ -150,6 +157,11 @@ namespace HRMS.Controllers
                 {
                     long id = db.HRMS_EMP_PHOTO_SIGN.Where(x => x.Emp_ID == emp_id).Select(x => x.Emp_Photos_ID).FirstOrDefault();
                     return RedirectToAction("Details", "EmployeePhotoSign", new { id });
+                }
+
+                if (role == "admin")
+                {
+                    return RedirectToAction("FillData", "EmployeeRegistration");
                 }
 
                 return View();

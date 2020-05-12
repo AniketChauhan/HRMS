@@ -14,10 +14,11 @@ namespace HRMS.Controllers
         
         HRMSEntities db = new HRMSEntities();
         [Authorize(Roles = "admin,emp")]
-        public ActionResult Index()
+        public ActionResult Index(long? ID)
         {
+            HRMS_EMP_Attachment_Details obj = new HRMS_EMP_Attachment_Details();
+            
             ViewBag.Attachment_Type_ID = new SelectList(db.HRMS_ATTACHMENT_TYPE, "Attachment_Type_ID", "Attachment_Type_Name");
-
 
             long emp_id = Convert.ToInt64(Session["id"]);
             string role = db.Accounts.Where(x => x.ID == emp_id).Select(x => x.role).FirstOrDefault();
@@ -25,6 +26,13 @@ namespace HRMS.Controllers
             {
                 ViewBag.Role = "admin";
                 ViewData["users"] = db.HRMS_EMP_Attachment_Details.ToList();
+                obj.EMP_ID = ID.Value;
+                bool isExist = db.HRMS_EMP_Attachment_Details.Any(x => x.EMP_ID == obj.EMP_ID);
+                if (isExist)
+                {
+                    return RedirectToAction("Create", "EmployeePhotoSign", new { ID = obj.EMP_ID });
+                }
+
             }
 
             else
@@ -32,7 +40,7 @@ namespace HRMS.Controllers
                 ViewData["users"] = db.HRMS_EMP_Attachment_Details.Where(x => x.EMP_ID == emp_id).ToList();
             }
             
-            return View();
+            return View(obj);
         }
 
         [HttpPost]
@@ -98,6 +106,7 @@ namespace HRMS.Controllers
                         {
                             ViewBag.Role = "admin";
                             ViewData["users"] = db.HRMS_EMP_Attachment_Details.ToList();
+                            return RedirectToAction("Create", "EmployeePhotoSign", new { ID = model.EMP_ID });
                         }
 
                         else
