@@ -248,6 +248,9 @@
     <Compile Include="Models\HRMS_TravelMode_MS.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\HRMS_Travel_Application.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\HRMS_TRAVEL_MEAL_EXPENSE_MS.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

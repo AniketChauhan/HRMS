@@ -11,51 +11,25 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
-
+    
     public partial class HRMS_EMP_ReferenceDetail
     {
-        //public long ID { get; set; }
-        //public long EMP_ID { get; set; }
-        //public bool Is_Ref_Emp { get; set; }
-        //public string Name { get; set; }
-        //public long Country { get; set; }
-        //public long State { get; set; }
-        //public long City { get; set; }
-        //public string Relationship { get; set; }
-        //public Nullable<long> Pincode { get; set; }
-        //public string Address { get; set; }
-        //public string Designation { get; set; }
-        //public string Company { get; set; }
-        //public string PhoneNo { get; set; }
-        //public string MobileNo { get; set; }
-        //public string Email { get; set; }
         public long ID { get; set; }
-        [DisplayName("Employee ID")]
         public long EMP_ID { get; set; }
-        [DisplayName("If Employee as Reference")]
         public bool Is_Ref_Emp { get; set; }
         public string Name { get; set; }
         public long Country { get; set; }
         public long State { get; set; }
         public long City { get; set; }
         public string Relationship { get; set; }
-        [RegularExpression(@"^[1-9][0-9]{5}$", ErrorMessage = "Pincode must be in valid format")]
         public Nullable<long> Pincode { get; set; }
         public string Address { get; set; }
         public string Designation { get; set; }
         public string Company { get; set; }
-        [DisplayName("Phone No.")]
-        [RegularExpression(@"^[0-9]+$", ErrorMessage = "Please enter in Valid format!")]
         public string PhoneNo { get; set; }
-        [RegularExpression(@"^[0-9]+$", ErrorMessage = "Please enter in Valid format!")]
-        [DisplayName("Mobile No.")]
         public string MobileNo { get; set; }
-        [DataType(DataType.EmailAddress, ErrorMessage = "E-mail is not valid")]
         public string Email { get; set; }
-
+    
         public virtual Accounts Accounts { get; set; }
         public virtual City City1 { get; set; }
         public virtual Country Country1 { get; set; }

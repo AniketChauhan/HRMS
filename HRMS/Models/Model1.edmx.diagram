@@ -69,6 +69,16 @@
         <AssociationConnector Association="HRMS5Model.FK_HRMS_Emp_Details_WorkLocationMaster" />
         <EntityTypeShape EntityType="HRMS5Model.HRMS_TRAVEL_MEAL_EXPENSE_MS" Width="1.5" PointX="14.375" PointY="8.75" />
         <EntityTypeShape EntityType="HRMS5Model.HRMS_TRAVEL_OTHER_DETAILS_MS" Width="1.5" PointX="9.375" PointY="5.75" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_Travel_Application" Width="1.5" PointX="14" PointY="18.25" />
+        <EntityTypeShape EntityType="HRMS5Model.Sample" Width="1.5" PointX="3" PointY="32.625" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_Travel_Application_Accounts" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_Travel_Application_Accounts1" />
+        <AssociationConnector Association="HRMS5Model.FK_Sample_Accounts" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_Travel_Application_HRMS_CATEGORY_GRADE" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_Travel_Application_HRMS_DESG_MS" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_Travel_Application_HRMS_Travel_Purpose" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_Travel_Application_HRMS_Travel_type" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_Travel_Application_HRMS_TravelMode_MS" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

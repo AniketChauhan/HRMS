@@ -62,10 +62,17 @@ namespace HRMS.Models
         public virtual DbSet<HRMS_Emp_Details> HRMS_Emp_Details { get; set; }
         public virtual DbSet<HRMS_TRAVEL_MEAL_EXPENSE_MS> HRMS_TRAVEL_MEAL_EXPENSE_MS { get; set; }
         public virtual DbSet<HRMS_TRAVEL_OTHER_DETAILS_MS> HRMS_TRAVEL_OTHER_DETAILS_MS { get; set; }
+        public virtual DbSet<HRMS_Travel_Application> HRMS_Travel_Application { get; set; }
+        public virtual DbSet<Sample> Sample { get; set; }
     
         public virtual ObjectResult<DepartmentData_Result> DepartmentData()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DepartmentData_Result>("DepartmentData");
+        }
+    
+        public virtual ObjectResult<FillEmployee_Result> FillEmployee()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FillEmployee_Result>("FillEmployee");
         }
     }
 }

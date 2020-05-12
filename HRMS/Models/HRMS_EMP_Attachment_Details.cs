@@ -11,26 +11,17 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
-
+    
     public partial class HRMS_EMP_Attachment_Details
     {
         public long ID { get; set; }
-        [DisplayName("Employee ID")]
         public long EMP_ID { get; set; }
-        [Required]
-        [DisplayName("Attachment Title")]
         public string Attachment_Title { get; set; }
-
-        [Required]
-        [DisplayName("Attachment Type")]
         public long Attachment_Type_ID { get; set; }
         public string FILENAME { get; set; }
         public string FILEURL { get; set; }
         public string Note { get; set; }
-
+    
         public virtual Accounts Accounts { get; set; }
         public virtual HRMS_ATTACHMENT_TYPE HRMS_ATTACHMENT_TYPE { get; set; }
     }

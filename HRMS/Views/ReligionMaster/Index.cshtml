@@ -19,7 +19,7 @@
         <th>
             @Html.DisplayNameFor(model => model.First().ReligionName)
         </th>
-        <th></th>
+        <th><center><i class="glyphicon glyphicon-wrench"> </i> Operations</center></th>
     </tr>
 
     @foreach (var item in Model)
@@ -31,11 +31,7 @@
     <td>
         @Html.DisplayFor(modelItem => item.ReligionName)
     </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.ReligionID }) |
-        @Html.ActionLink("Details", "Details", new { id = item.ReligionID }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.ReligionID })
-    </td>
+  
     <td>
     <center>
         @Html.ActionLink(" Edit", "Edit", new { id = item.ReligionID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" }) |
