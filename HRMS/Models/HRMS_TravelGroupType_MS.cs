@@ -11,29 +11,14 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
-
+    
     public partial class HRMS_TravelGroupType_MS
     {
-        //public long ID { get; set; }
-        //public long Mode_ID { get; set; }
-        //public System.DateTime Date { get; set; }
-        //public string Group_Name { get; set; }
-
         public long ID { get; set; }
-
-        [DisplayName("Type")]
         public long Mode_ID { get; set; }
-        [DisplayName("Effective Date")]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
-        [Required]
         public System.DateTime Date { get; set; }
-        [Required]
-        [DisplayName("Group Name")]
         public string Group_Name { get; set; }
-
+    
         public virtual HRMS_TravelMode_MS HRMS_TravelMode_MS { get; set; }
     }
 }

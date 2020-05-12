@@ -12,9 +12,12 @@ namespace HRMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class HRMS_TRAVEL_OTHER_DETAILS_MS
+    public partial class Sample
     {
-        public long Travel_Other_Details_ID { get; set; }
-        public string Travel_Other_Details_NM { get; set; }
+        public long ID { get; set; }
+        public string Name { get; set; }
+        public long Emp_ID { get; set; }
+    
+        public virtual Accounts Accounts { get; set; }
     }
 }

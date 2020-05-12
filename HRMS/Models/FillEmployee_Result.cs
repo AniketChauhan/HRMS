@@ -10,11 +10,10 @@
 namespace HRMS.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class HRMS_TRAVEL_OTHER_DETAILS_MS
+    public partial class FillEmployee_Result
     {
-        public long Travel_Other_Details_ID { get; set; }
-        public string Travel_Other_Details_NM { get; set; }
+        public long ID { get; set; }
+        public string UserName { get; set; }
     }
 }

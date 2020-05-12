@@ -11,10 +11,7 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
-
+    
     public partial class Accounts
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -27,18 +24,14 @@ namespace HRMS.Models
             this.HRMS_EMP_PHOTO_SIGN = new HashSet<HRMS_EMP_PHOTO_SIGN>();
             this.HRMS_EMP_ReferenceDetail = new HashSet<HRMS_EMP_ReferenceDetail>();
             this.HRMS_Emp_Details = new HashSet<HRMS_Emp_Details>();
+            this.HRMS_Travel_Application = new HashSet<HRMS_Travel_Application>();
+            this.HRMS_Travel_Application1 = new HashSet<HRMS_Travel_Application>();
+            this.Sample = new HashSet<Sample>();
         }
-        [DisplayName("Employee ID")]
+    
         public long ID { get; set; }
-        [DisplayName("UserName")]
-        [Required]
-        [DataType(DataType.EmailAddress, ErrorMessage = "Username mast be Email ID!")]
         public string UserName { get; set; }
-
-        //for registration only
-        [DisplayName("Confirm UserName")]
         public string ConfirmUsername { get; set; }
-        [Required]
         public string password { get; set; }
         public string role { get; set; }
     
@@ -56,5 +49,11 @@ namespace HRMS.Models
         public virtual ICollection<HRMS_EMP_ReferenceDetail> HRMS_EMP_ReferenceDetail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HRMS_Emp_Details> HRMS_Emp_Details { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HRMS_Travel_Application> HRMS_Travel_Application { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HRMS_Travel_Application> HRMS_Travel_Application1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Sample> Sample { get; set; }
     }
 }

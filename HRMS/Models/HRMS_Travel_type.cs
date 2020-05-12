@@ -14,9 +14,18 @@ namespace HRMS.Models
     
     public partial class HRMS_Travel_type
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public HRMS_Travel_type()
+        {
+            this.HRMS_Travel_Application = new HashSet<HRMS_Travel_Application>();
+        }
+    
         public int ID { get; set; }
         public string Short_Name { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HRMS_Travel_Application> HRMS_Travel_Application { get; set; }
     }
 }

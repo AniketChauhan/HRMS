@@ -11,24 +11,18 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class HRMS_DESG_MS
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public HRMS_DESG_MS()
         {
             this.HRMS_Emp_Details = new HashSet<HRMS_Emp_Details>();
+            this.HRMS_Travel_Application = new HashSet<HRMS_Travel_Application>();
         }
-        [DisplayName("ID")]
+    
         public long Desg_Id { get; set; }
-        [Required]
-
-        [DisplayName("Designation Name")]
         public string Desg_Name { get; set; }
-        [Required]
-        [DisplayName("Designation ShortName")]
         public string Desg_Short_Name { get; set; }
         public Nullable<long> Desg_Parent_ID { get; set; }
         public bool IsActive { get; set; }
@@ -39,5 +33,7 @@ namespace HRMS.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HRMS_Emp_Details> HRMS_Emp_Details { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HRMS_Travel_Application> HRMS_Travel_Application { get; set; }
     }
 }
