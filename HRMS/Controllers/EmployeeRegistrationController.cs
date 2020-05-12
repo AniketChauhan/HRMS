@@ -34,6 +34,27 @@ namespace HRMS.Controllers
             return View(db.Accounts.ToList());
         }
 
+
+        //FillUP Employee Details
+        public ActionResult FillData()
+        {
+            //var employeeRecord = from e in employees
+            //                     join d in departments on e.Department_Id equals d.DepartmentId into table1
+            //                     from d in table1.ToList()
+            //                     join i in incentives on e.Incentive_Id equals i.IncentiveId into table2
+            //                     from i in table2.ToList()
+            //                     select new ViewModel
+            //                     {
+            //                         employee = e,
+            //                         department = d,
+            //                         incentive = i
+            //                     };
+
+
+            var list= db.Accounts.SqlQuery("select Accounts.ID from Accounts except(select Employee_Personal_Detail.EMP_ID from Employee_Personal_Detail inner join HRMS_Emp_Details on Employee_Personal_Detail.EMP_ID = HRMS_Emp_Details.EMP_ID inner join HRMS_EMP_ReferenceDetail on HRMS_EMP_ReferenceDetail.EMP_ID = HRMS_Emp_Details.EMP_ID inner join HRMS_Contact on HRMS_Contact.Employee_ID = HRMS_EMP_ReferenceDetail.EMP_ID inner join HRMS_EMP_Attachment_Details on HRMS_EMP_Attachment_Details.EMP_ID = HRMS_Contact.Employee_ID inner join HRMS_EMP_PHOTO_SIGN on HRMS_EMP_PHOTO_SIGN.EMP_ID = HRMS_EMP_Attachment_Details.EMP_ID)").ToList();
+            return View(list);
+        }
+
         // GET: EmployeeRegistration/Details/5
         //public ActionResult Details(long? id)
         //{
