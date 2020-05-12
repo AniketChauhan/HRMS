@@ -6,9 +6,13 @@
 
 <h2>Index</h2>
 
+
+    @*@Html.ActionLink("Create New", "Create")*@
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink(" Create Employee", "Create", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Fill Employee Data", "FillData", null, new { @class = "btn btn-primary" })
 </p>
+
 <table class="table table-bordered table-responsive table-striped">
     <tr>
         <th>

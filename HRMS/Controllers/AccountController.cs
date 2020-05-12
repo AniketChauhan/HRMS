@@ -64,7 +64,7 @@ namespace HRMS.Controllers
                         // return RedirectToAction("LogIn", "Account", new { area = "Admin" });
                         Session["id"] = acc.ID;
                         FormsAuthentication.SetAuthCookie(obj.UserName ,false);
-                        return RedirectToAction("Index", "EmployeeDetail");
+                        return RedirectToAction("Index", "EmployeeRegistration");
                     
                     }
                     else
