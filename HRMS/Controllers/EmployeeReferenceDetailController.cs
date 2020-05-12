@@ -41,13 +41,29 @@ namespace HRMS.Controllers
 
         // GET: EmployeeReferenceDetail/Details/5
         [Authorize(Roles = "admin,emp")]
-        public ActionResult Details(long? id)
+        public ActionResult Details(long? id,string name)
         {
             long emp_id = Convert.ToInt64(Session["id"]);
             string role = db.Accounts.Where(x => x.ID == emp_id).Select(x => x.role).FirstOrDefault();
             if (role == "admin")
             {
                 ViewBag.Role = "admin";
+
+                if (name != null)
+                {
+                    bool isThere = db.HRMS_EMP_ReferenceDetail.Any(x => x.EMP_ID == id.Value);
+                    if (!isThere)
+                    {
+                        return RedirectToAction("Create", "EmployeeReferenceDetail", new { ID = id.Value });
+                    }
+                    else
+                    {
+                        ViewBag.EditVisible = "No";
+                        HRMS_EMP_ReferenceDetail employee_Personal_Detail = db.HRMS_EMP_ReferenceDetail.Where(x => x.EMP_ID == id.Value).FirstOrDefault();
+                        return View(employee_Personal_Detail);
+                    }
+
+                }
             }
 
             //if no entry it will redirect to create

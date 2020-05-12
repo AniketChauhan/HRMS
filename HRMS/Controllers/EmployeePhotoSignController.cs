@@ -28,13 +28,29 @@ namespace HRMS.Controllers
         //}
         // GET: HRMS_EMP_PHOTO_SIGN/Details/5
         [Authorize(Roles = "admin,emp")]
-        public ActionResult Details(long? id)
+        public ActionResult Details(long? id, string name)
         {
             long emp_id = Convert.ToInt64(Session["id"]);
             string role = db.Accounts.Where(x => x.ID == emp_id).Select(x => x.role).FirstOrDefault();
             if (role == "admin")
             {
                 ViewBag.Role = "admin";
+
+                if (name != null)
+                {
+                    bool isThere = db.HRMS_EMP_PHOTO_SIGN.Any(x => x.Emp_ID == id.Value);
+                    if (!isThere)
+                    {
+                        return RedirectToAction("Create", "EmployeePhotoSign", new { ID = id.Value });
+                    }
+                    else
+                    {
+                        ViewBag.EditVisible = "No";
+                        HRMS_EMP_PHOTO_SIGN employee_Personal_Detail = db.HRMS_EMP_PHOTO_SIGN.Where(x => x.Emp_ID == id.Value).FirstOrDefault();
+                        return View(employee_Personal_Detail);
+                    }
+
+                }
             }
 
             bool isExist = db.HRMS_EMP_PHOTO_SIGN.Any(x => x.Emp_ID == emp_id);
@@ -95,7 +111,7 @@ namespace HRMS.Controllers
 
 
             ViewBag.Emp_ID = new SelectList(db.Accounts, "ID", "ID");
-            return View();
+            return View(obj);
         }
 
         // POST: HRMS_EMP_PHOTO_SIGN/Create

@@ -31,13 +31,31 @@ namespace HRMS.Controllers
 
         // GET: EmployeePersonalDetail/Details/5
         [Authorize(Roles = "admin,emp")]
-        public ActionResult Details(long? id)
+        public ActionResult Details(long? id, string name)
         {
             long emp_id = Convert.ToInt64(Session["id"]);
             string role = db.Accounts.Where(x => x.ID == emp_id).Select(x => x.role).FirstOrDefault();
             if (role == "admin")
             {
                 ViewBag.Role = "admin";
+
+                if (name != null)
+                {
+                    bool isThere = db.Employee_Personal_Detail.Any(x => x.EMP_ID == id.Value);
+                    if (!isThere)
+                    {
+                        return RedirectToAction("Create", "EmployeePersonalDetail", new { ID = id.Value });
+                    }
+                    else
+                    {
+                        ViewBag.EditVisible = "No";
+                        Employee_Personal_Detail employee_Personal_Detail = db.Employee_Personal_Detail.Where(x => x.EMP_ID == id.Value).FirstOrDefault();
+                        return View(employee_Personal_Detail);
+                    }
+
+                }
+
+
             }
 
             bool isExist = db.Employee_Personal_Detail.Any(x => x.EMP_ID == emp_id);

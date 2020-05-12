@@ -22,7 +22,7 @@ namespace HRMS.Controllers
             return View(hRMS_Emp_Details.ToList());
         }
         [Authorize(Roles = "admin,emp")]
-        public ActionResult Details(long? id)
+        public ActionResult Details(long? id, string name)
         {
             long emp_id = Convert.ToInt64(Session["id"]);
             string role = db.Accounts.Where(x => x.ID == emp_id).Select(x => x.role).FirstOrDefault();
@@ -30,6 +30,21 @@ namespace HRMS.Controllers
             {
                 ViewBag.Role = "admin";
 
+                if (name != null)
+                {
+                    bool isThere = db.HRMS_Emp_Details.Any(x => x.EMP_ID == id.Value);
+                    if (!isThere)
+                    {
+                        return RedirectToAction("Create", "EmployeeDetail", new { ID = id.Value });
+                    }
+                    else
+                    {
+                        ViewBag.EditVisible = "No";
+                        HRMS_Emp_Details employee_Personal_Detail = db.HRMS_Emp_Details.Where(x => x.EMP_ID == id.Value).FirstOrDefault();
+                        return View(employee_Personal_Detail);
+                    }
+
+                }
             }
 
             //if no entry it will redirect to create
