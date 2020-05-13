@@ -49,9 +49,9 @@
                 @Html.DisplayFor(modelItem => item.Accounts.ID)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Emp_Photos_ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Emp_Photos_ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Emp_Photos_ID })
+                @Html.ActionLink("Edit", "Edit", new { id = item.Emp_Photos_ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Emp_Photos_ID }, new { @class = "btn btn-warning btn-sm glyphicon glyphicon-list-alt" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Emp_Photos_ID }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-trash" })
             </td>
         </tr>
     }
