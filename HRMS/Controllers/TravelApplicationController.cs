@@ -112,7 +112,7 @@ namespace HRMS.Controllers
 
                     ViewBag.EntidadList = new SelectList(db.HRMS_TravelMode_MS, "Mode_ID", "Mode_Name");
                     ModelState.Clear();
-                    return View(hRMS_Travel_Application);
+                    return View();
                 }
                  else if (result > 0)
                 {
@@ -215,7 +215,7 @@ namespace HRMS.Controllers
         public ActionResult Cancel(long id)
         {
             var application = db.HRMS_Travel_Application.Where(rec => rec.ID == id).SingleOrDefault();
-            application.Status = 1;
+            application.Status = 3;
             db.Entry(application).State = EntityState.Modified;
             db.SaveChanges();
             ModelState.Clear();
