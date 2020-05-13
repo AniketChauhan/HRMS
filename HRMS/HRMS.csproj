@@ -159,6 +159,7 @@
     <Compile Include="Controllers\ReligionMasterController.cs" />
     <Compile Include="Controllers\SALUTATIONController.cs" />
     <Compile Include="Controllers\SegmentMasterController.cs" />
+    <Compile Include="Controllers\TravelApplicationController.cs" />
     <Compile Include="Controllers\TravelGroupTypeController.cs" />
     <Compile Include="Controllers\TravelMealExpenseController.cs" />
     <Compile Include="Controllers\TravelModeMasterController.cs" />
@@ -558,6 +559,11 @@
     <Content Include="Views\EmployeeRegistration\Edit.cshtml" />
     <Content Include="Views\EmployeeRegistration\Index.cshtml" />
     <Content Include="Views\EmployeeRegistration\FillData.cshtml" />
+    <Content Include="Views\TravelApplication\Create.cshtml" />
+    <Content Include="Views\TravelApplication\Delete.cshtml" />
+    <Content Include="Views\TravelApplication\Details.cshtml" />
+    <Content Include="Views\TravelApplication\Edit.cshtml" />
+    <Content Include="Views\TravelApplication\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

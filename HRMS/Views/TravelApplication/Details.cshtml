@@ -1,0 +1,130 @@
+﻿@model HRMS.Models.HRMS_Travel_Application
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>HRMS_Travel_Application</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Travel_Application_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Travel_Application_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.From_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.From_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.To_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.To_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remark)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remark)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Approved_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Approved_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Approval_Remark)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Approval_Remark)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Accounts.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Accounts.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Accounts1.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Accounts1.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HRMS_CATEGORY_GRADE.Category_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HRMS_CATEGORY_GRADE.Category_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HRMS_DESG_MS.Desg_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HRMS_DESG_MS.Desg_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HRMS_Travel_Purpose.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HRMS_Travel_Purpose.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HRMS_Travel_type.Short_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HRMS_Travel_type.Short_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HRMS_TravelMode_MS.Mode_Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HRMS_TravelMode_MS.Mode_Type)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

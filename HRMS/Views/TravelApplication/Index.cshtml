@@ -1,0 +1,169 @@
+﻿@model IEnumerable<HRMS.Models.HRMS_Travel_Application>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@if (User.IsInRole("admin")) { 
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    }
+@if (Model.Count<HRMS.Models.HRMS_Travel_Application>() > 0 && Model != null)
+{
+
+    <table class="table table-responsive table-striped table-bordered">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Travel_Application_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.From_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.To_Date)
+            </th>
+
+
+            @if (User.IsInRole("admin"))
+            {
+                <th>
+                    Employee
+                </th>
+            }
+
+            @if (User.IsInRole("admin"))
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.HRMS_CATEGORY_GRADE.Grade_Name)
+                </th>
+            }
+            @if (User.IsInRole("admin"))
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.HRMS_DESG_MS.Desg_Name)
+                </th>
+            }
+            <th>
+                Purpose
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HRMS_Travel_type.Short_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HRMS_TravelMode_MS.Mode_Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            @if (User.IsInRole("emp"))
+            {
+                <th>
+                    Approved By
+                </th>
+            }
+            <th><center><i class="glyphicon glyphicon-wrench"> </i> Operations</center></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Travel_Application_Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.From_Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.To_Date)
+                </td>
+
+
+
+
+                @if (User.IsInRole("admin"))
+                {
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Accounts.UserName)
+                    </td>
+                }
+
+                @if (User.IsInRole("admin"))
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HRMS_CATEGORY_GRADE.Grade_Name)
+                    </td>
+                }
+                @if (User.IsInRole("admin"))
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HRMS_DESG_MS.Desg_Name)
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.HRMS_Travel_Purpose.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HRMS_Travel_type.Short_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HRMS_TravelMode_MS.Mode_Type)
+                </td>
+                <td>
+                    @if (item.Status == 0)
+                    {
+                        <b class="label label-primary">panding</b>
+                    }
+                    @if (item.Status == 1)
+                    {
+                        <b class="label label-success">Approved</b>
+                    }
+                    @if (item.Status == 2)
+                    {
+                        <b class="label label-danger">cancelled</b>
+                    }
+                </td>
+                @if (User.IsInRole("emp"))
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Accounts1.UserName)
+                    </td>
+                }
+                <td>
+
+                    @if (User.IsInRole("emp"))
+                    {
+                        <span>
+                            @Html.ActionLink(" View", "Details", new { id = item.ID }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-edit" })
+                        </span>
+
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                <span>
+                    @Html.ActionLink("View", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" })
+                   @if (item.Status == 0)
+                   {
+                    <span>
+                        @Html.ActionLink("Approve", "Approve", new { id = item.ID }, new { @class = "btn btn-success btn-sm glyphicon glyphicon-edit" })
+                    </span>
+
+                       @Html.ActionLink("Cancel", "Cancel", new { id = item.ID }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-edit" })
+                   }
+                </span>
+
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <div class="container">
+        <h2 class="text-center text-primary">sorry!!! We don't have any Grade Data Right Now...</h2>
+    </div>
+}

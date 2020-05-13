@@ -185,8 +185,9 @@
         {
             @Html.ActionLink("Account", "Index", "EmployeeRegistration", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
         }
-
-
+        @if (User.Identity.IsAuthenticated) { 
+                    @Html.ActionLink("Travel Application", "Index", "TravelApplication", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
+        }
 
 
         @*---------------------------fourth here----------------------------*@
