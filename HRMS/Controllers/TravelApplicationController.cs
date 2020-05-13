@@ -102,6 +102,8 @@ namespace HRMS.Controllers
                 int result = DateTime.Compare(fromdate, todate);
 
                 if (result < 0) {
+                    var samedate = db.HRMS_Travel_Application.Where(rec => rec.emp_id == hRMS_Travel_Application.emp_id && rec.From_Date == hRMS_Travel_Application.From_Date && rec.To_Date == hRMS_Travel_Application.To_Date).FirstOrDefault();
+                    if(samedate == null) {     
                     db.HRMS_Travel_Application.Add(hRMS_Travel_Application);
                     db.SaveChanges();
                     ViewBag.ApplicationStatus = "Application generated successfully.";
@@ -113,6 +115,18 @@ namespace HRMS.Controllers
                     ViewBag.EntidadList = new SelectList(db.HRMS_TravelMode_MS, "Mode_ID", "Mode_Name");
                     ModelState.Clear();
                     return View();
+                    }
+                    else
+                    {
+                        ViewBag.ApplicationStatus = "You have a trip with same From date and To date";
+
+                        ViewBag.dataTravelPurpose = new SelectList(db.HRMS_Travel_Purpose, "ID", "Name");
+
+                        ViewBag.dataTravelType = new SelectList(db.HRMS_Travel_type, "ID", "Short_Name");
+
+                        ViewBag.EntidadList = new SelectList(db.HRMS_TravelMode_MS, "Mode_ID", "Mode_Name");
+                        return View();
+                    }
                 }
                  else if (result > 0)
                 {
