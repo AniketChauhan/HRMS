@@ -1,57 +1,101 @@
-﻿@model IEnumerable<HRMS.Models.Accounts>
+﻿@using PagedList
+@using PagedList.Mvc
+@model IPagedList<HRMS.Models.Accounts>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
 
-    @*@Html.ActionLink("Create New", "Create")*@
+
+@*@Html.ActionLink("Create New", "Create")*@
+
+<br />
 <p>
-    @Html.ActionLink(" Create Employee", "Create", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink(" Create Employee", "Create", null, new { @class = "btn btn-danger" })
     @Html.ActionLink("Fill Employee Data", "FillData", null, new { @class = "btn btn-primary" })
 </p>
+
+<br />
+<div class="form-inline">
+
+    @using (Html.BeginForm("Index", "EmployeeRegistration", FormMethod.Get))
+    {
+        <table class="col-md-4 table-bordered">
+            <tr>
+                <td>
+                    @Html.DropDownList("Data", new List<SelectListItem>
+                           {
+                           new SelectListItem{ Text="Employee ID", Value = "1" },
+                           new SelectListItem{ Text="UserName", Value = "2" },
+
+
+                           }, "--Select--", htmlAttributes: new { @class = "form-control" })
+
+
+                </td>
+                <td>
+
+                    @Html.TextBox("Search", null, new { @class = "form-control", @placeholder = "Search Here" })
+                </td>
+                <td>
+
+                    <input type="submit" value="Search" class="form-control btn-success" />
+                </td>
+            </tr>
+        </table>
+    }
+
+</div>
+<br>
+<br>
+
 
 <table class="table table-bordered table-responsive table-striped">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ID)
+            Employee ID
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UserName)
+            @Html.DisplayNameFor(model => model.First().UserName)
         </th>
-       
+
         <th>
-            @Html.DisplayNameFor(model => model.role)
+            @Html.DisplayNameFor(model => model.First().role)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(momodelItemdel =>item.ID)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.UserName)
-    </td>
-    
-    <td>
-        @Html.DisplayFor(modelItem => item.role)
-    </td>
-    
-    <td class="btn-group-sm">
-        @Html.ActionLink(" Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" })
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(momodelItemdel => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
 
-        <button class="btn btn-danger  btn-sm " onclick="return removeFromList(this, '@item.ID') "> <i class="glyphicon glyphicon-trash"> </i> Delete</button>
+            <td>
+                @Html.DisplayFor(modelItem => item.role)
+            </td>
+
+            <td class="btn-group-sm">
+                @Html.ActionLink(" Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" })
+
+                <button class="btn btn-danger  btn-sm " onclick="return removeFromList(this, '@item.ID') "> <i class="glyphicon glyphicon-trash"> </i> Delete</button>
 
 
-    </td>
-</tr>
-}
+            </td>
+        </tr>
+    }
 
 </table>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, Search = Request.QueryString["Search"], Data = Request.QueryString["Data"] }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
+
+
 <script>
     function removeFromList(thisobj, id) {
         if (confirm("Are you sure?") == true) {

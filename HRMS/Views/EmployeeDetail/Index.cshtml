@@ -1,46 +1,87 @@
-﻿@model IEnumerable<HRMS.Models.HRMS_Emp_Details>
+﻿@using PagedList
+@using PagedList.Mvc
+@model IPagedList<HRMS.Models.HRMS_Emp_Details>
 
 @{
     ViewBag.Title = "Index";
 }
 
 @*<p>@Session["id"]</p>
-<p>@Session["id"]</p>
-@if (User.Identity.IsAuthenticated)
-{
     <p>@Session["id"]</p>
-    <p>@Session["id"]</p>
-    <p>@Session["id"]</p>
-    <p>@Session["id"]</p>
-}*@
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p>@Session["id"]</p>
+        <p>@Session["id"]</p>
+        <p>@Session["id"]</p>
+        <p>@Session["id"]</p>
+    }*@
 
 <h2>Employees data</h2>
 <br />
 @*<p>
-    @Html.ActionLink("Add New Employee", "Create")
-</p>*@
+        @Html.ActionLink("Add New Employee", "Create")
+    </p>*@
+
+
+<br />
+<div class="form-inline">
+
+    @using (Html.BeginForm("Index", "EmployeeDetail", FormMethod.Get))
+    {
+        <table class="col-md-4 table-bordered">
+            <tr>
+                <td>
+                    @Html.DropDownList("Data", new List<SelectListItem>
+                           {
+                           new SelectListItem{ Text="Employee ID", Value = "1" },
+                           new SelectListItem{ Text="Employee Name", Value = "2" },
+                           new SelectListItem{ Text="Unit Name", Value = "3" },
+
+                           }, "--Select--", htmlAttributes: new { @class = "form-control" })
+                    
+
+                </td>
+                <td>
+
+                    @Html.TextBox("Search", null, new { @class= "form-control",@placeholder="Search Here"})
+                </td>
+                <td>
+
+                    <input type="submit" value="Search" class="form-control btn-success" />
+                </td>
+            </tr>
+        </table>
+    }
+
+</div>
+<br>
+<br>
+
+
+
+
 <table class="table table-bordered table-responsive table-striped">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.EMP_ID)
+            @Html.DisplayNameFor(model => model.First().EMP_ID)
         </th>
 
         <th>
-            @Html.DisplayNameFor(model => model.HRMS_SALUTATION.Salutation_Name)
+            @Html.DisplayNameFor(model => model.First().HRMS_SALUTATION.Salutation_Name)
         </th>
 
         <th>
-            @Html.DisplayNameFor(model => model.Display_Name)
+            @Html.DisplayNameFor(model => model.First().Display_Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HRMS_DEPT.Dept_Name)
+            @Html.DisplayNameFor(model => model.First().HRMS_DEPT.Dept_Name)
         </th>
         <th>
             Designation
         </th>
 
         <th>
-            @Html.DisplayNameFor(model => model.UnitMaster.UnitName)
+            @Html.DisplayNameFor(model => model.First().UnitMaster.UnitName)
         </th>
 
         <th><i class="glyphicon glyphicon-wrench" style="font-size:large"> </i> Operations</th>
@@ -79,6 +120,9 @@
     }
 
 </table>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, Search = Request.QueryString["Search"], Data = Request.QueryString["Data"] }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
+
 <script>
     function removeFromList(thisobj, id) {
         if (confirm("Are you sure?") == true) {

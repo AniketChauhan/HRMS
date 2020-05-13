@@ -1,4 +1,6 @@
-﻿@model IEnumerable<HRMS.Models.FillEmployee_Result>
+﻿@using PagedList
+@using PagedList.Mvc
+@model IPagedList<HRMS.Models.FillEmployee_Result>
 
 @{
     ViewBag.Title = "FillData";
@@ -7,32 +9,73 @@
 <h2>FillData</h2>
 
 @*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+
+
+<br />
+<div class="form-inline">
+
+    @using (Html.BeginForm("FillData", "EmployeeRegistration", FormMethod.Get))
+    {
+        <table class="col-md-4 table-bordered">
+            <tr>
+                <td>
+                    @Html.DropDownList("Data", new List<SelectListItem>
+                           {
+                           new SelectListItem{ Text="Employee ID", Value = "1" },
+                           new SelectListItem{ Text="UserName", Value = "2" },
+
+
+                           }, "--Select--", htmlAttributes: new { @class = "form-control" })
+
+
+                </td>
+                <td>
+
+                    @Html.TextBox("Search", null, new { @class = "form-control", @placeholder = "Search Here" })
+                </td>
+                <td>
+
+                    <input type="submit" value="Search" class="form-control btn-success" />
+                </td>
+            </tr>
+        </table>
+    }
+
+</div>
+<br>
+<br>
+
+
+
 <table class="table table-bordered table-responsive table-striped">
     <tr>
-      
+
         <th>
-            @Html.DisplayNameFor(model => model.ID)
+            Employee ID
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UserName)
+            @Html.DisplayNameFor(model => model.First().UserName)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.ActionLink("Fill Detail", "Create","EmployeeDetail", new {item.ID }, new { @class = "btn btn-primary" })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.ActionLink("Fill Detail", "Create", "EmployeeDetail", new { item.ID }, new { @class = "btn btn-primary" })
+            </td>
+        </tr>
+    }
 
 </table>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, Search = Request.QueryString["Search"], Data = Request.QueryString["Data"] }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })

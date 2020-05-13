@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HRMS.Models;
+using PagedList;
+using PagedList.Mvc;
 
 namespace HRMS.Controllers
 {
@@ -16,10 +18,25 @@ namespace HRMS.Controllers
 
         // GET: EmployeeContactDetails
         [Authorize(Roles = "admin")]
-        public ActionResult Index()
+        public ActionResult Index(string Data, string Search, int? page)
         {
-            var hRMS_Contact = db.HRMS_Contact.Include(h => h.Accounts);
-            return View(hRMS_Contact.ToList());
+            //var hRMS_Contact = db.HRMS_Contact.Include(h => h.Accounts);
+            //return View(hRMS_Contact.ToList());
+
+            if (Data == "1" && Search != "")
+            {
+                long ser = Convert.ToInt64(Search);
+                return View(db.HRMS_Contact.Include(h => h.Accounts).Where(x => x.Employee_ID == ser).ToList().ToPagedList(page ?? 1, 7));
+            }
+            else if (Data == "2")
+            {
+                return View(db.HRMS_Contact.Include(h => h.Accounts).Where(x => x.Phone_Work.StartsWith(Search) || Search == null).ToList().ToPagedList(page ?? 1, 7));
+            }
+            else
+            {
+                return View(db.HRMS_Contact.Include(h => h.Accounts).Where(x => x.Corporate_Email.StartsWith(Search) || Search == null).ToList().ToPagedList(page ?? 1, 7));
+            }
+
         }
 
         // GET: EmployeeContactDetails/Details/5

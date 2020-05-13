@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HRMS.Models;
+using PagedList;
+using PagedList.Mvc;
 
 namespace HRMS.Controllers
 {
@@ -23,10 +25,22 @@ namespace HRMS.Controllers
 
         // GET: EmployeePersonalDetail
         [Authorize(Roles = "admin")]
-        public ActionResult Index()
+        public ActionResult Index(string Data, string Search, int? page)
         {
-            var employee_Personal_Detail = db.Employee_Personal_Detail.Include(e => e.CastMaster).Include(e => e.HRMS_CATEGORY_GRADE).Include(e => e.HRMS_EMP_CITIZENSHIP_MS).Include(e => e.HRMS_EMP_GENDER_MS).Include(e => e.MaritalMaster).Include(e => e.ReligionMaster);
-            return View(employee_Personal_Detail.ToList());
+            //var employee_Personal_Detail = db.Employee_Personal_Detail.Include(e => e.CastMaster).Include(e => e.HRMS_CATEGORY_GRADE).Include(e => e.HRMS_EMP_CITIZENSHIP_MS).Include(e => e.HRMS_EMP_GENDER_MS).Include(e => e.MaritalMaster).Include(e => e.ReligionMaster);
+            //return View(employee_Personal_Detail.ToList());
+
+            
+            if (Data == "1" && Search != "")
+            {
+                long ser = Convert.ToInt64(Search);
+                return View(db.Employee_Personal_Detail.Include(e => e.CastMaster).Include(e => e.HRMS_CATEGORY_GRADE).Include(e => e.HRMS_EMP_CITIZENSHIP_MS).Include(e => e.HRMS_EMP_GENDER_MS).Include(e => e.MaritalMaster).Include(e => e.ReligionMaster).Where(x => x.EMP_ID==ser).ToList().ToPagedList(page ?? 1, 7));
+            }
+            else
+            {
+                return View(db.Employee_Personal_Detail.Include(e => e.CastMaster).Include(e => e.HRMS_CATEGORY_GRADE).Include(e => e.HRMS_EMP_CITIZENSHIP_MS).Include(e => e.HRMS_EMP_GENDER_MS).Include(e => e.MaritalMaster).Include(e => e.ReligionMaster).Where(x=>Search==null).ToList().ToPagedList(page ?? 1, 7));
+            }
+
         }
 
         // GET: EmployeePersonalDetail/Details/5

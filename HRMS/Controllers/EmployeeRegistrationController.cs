@@ -10,6 +10,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using HRMS.Models;
+using PagedList;
+using PagedList.Mvc;
 
 
 namespace HRMS.Controllers
@@ -29,19 +31,42 @@ namespace HRMS.Controllers
         }
 
         // GET: EmployeeRegistration
-        public ActionResult Index()
+        public ActionResult Index(string Data, string Search, int? page)
         {
-            return View(db.Accounts.ToList());
+            //return View(db.Accounts.ToList());
+            if (Data == "1" && Search != "")
+            {
+                long ser = Convert.ToInt64(Search);
+                return View(db.Accounts.Where(x => x.ID == ser).ToList().ToPagedList(page ?? 1, 10));
+            }
+            else 
+            {
+                return View(db.Accounts.Where(x => x.UserName.StartsWith(Search) || Search == null).ToList().ToPagedList(page ?? 1, 10));
+            }
+            //else
+            //{
+            //    return View(db.HRMS_Emp_Details.Include(h => h.HRMS_COST_CENTER).Include(h => h.HRMS_DEPT).Include(h => h.HRMS_DESG_MS).Include(h => h.HRMS_SALUTATION).Include(h => h.UnitMaster).Include(h => h.WorkLocationMaster).Where(x => x.UnitMaster.UnitName.StartsWith(Search) || Search == null).ToList().ToPagedList(page ?? 1, 7));
+            //}
+
         }
 
 
         //FillUP Employee Details
-        public ActionResult FillData()
+        public ActionResult FillData(string Data, string Search, int? page)
         {
-            
 
-            //var list= db.Accounts.SqlQuery("select Accounts.ID from Accounts except(select Employee_Personal_Detail.EMP_ID from Employee_Personal_Detail inner join HRMS_Emp_Details on Employee_Personal_Detail.EMP_ID = HRMS_Emp_Details.EMP_ID inner join HRMS_EMP_ReferenceDetail on HRMS_EMP_ReferenceDetail.EMP_ID = HRMS_Emp_Details.EMP_ID inner join HRMS_Contact on HRMS_Contact.Employee_ID = HRMS_EMP_ReferenceDetail.EMP_ID inner join HRMS_EMP_Attachment_Details on HRMS_EMP_Attachment_Details.EMP_ID = HRMS_Contact.Employee_ID inner join HRMS_EMP_PHOTO_SIGN on HRMS_EMP_PHOTO_SIGN.EMP_ID = HRMS_EMP_Attachment_Details.EMP_ID)").ToList();
-            return View(db.FillEmployee().ToList());
+
+            //return View(db.FillEmployee().ToList());
+
+            if (Data == "1" && Search != "")
+            {
+                long ser = Convert.ToInt64(Search);
+                return View(db.FillEmployee().Where(x => x.ID == ser).ToList().ToPagedList(page ?? 1, 10));
+            }
+            else
+            {
+                return View(db.FillEmployee().Where(x =>Search == null || x.UserName.StartsWith(Search)).ToList().ToPagedList(page ?? 1, 10));
+            }
         }
 
         // GET: EmployeeRegistration/Details/5
