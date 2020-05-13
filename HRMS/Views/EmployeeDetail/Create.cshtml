@@ -13,13 +13,12 @@
 
     @if (ViewBag.Role == "admin")
     {
-        @*<div>
-                @Html.ActionLink("Back to List", "Index")
-            </div>*@
+
         <div class="w3-right-align">
             @Html.ActionLink("Next>>", "Details", "EmployeePersonalDetail", new { ID = Model.EMP_ID, name = "yes" }, new { @class = "btn btn-primary" })
         </div>
     }
+
 
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })

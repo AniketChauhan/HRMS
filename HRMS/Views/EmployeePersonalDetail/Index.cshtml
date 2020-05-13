@@ -1,171 +1,214 @@
-﻿@model IEnumerable<HRMS.Models.Employee_Personal_Detail>
+﻿@using PagedList
+@using PagedList.Mvc
+@model IPagedList<HRMS.Models.Employee_Personal_Detail>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Employee Personal Details</h2>
 <br />
 
 @*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+
+<br />
+<div class="form-inline">
+
+    @using (Html.BeginForm("Index", "EmployeePersonalDetail", FormMethod.Get))
+    {
+        <table class="col-md-4 table-bordered">
+            <tr>
+                <td>
+                    @Html.DropDownList("Data", new List<SelectListItem>
+               {
+                   new SelectListItem{ Text="Employee ID", Value = "1" },
+                   //new SelectListItem{ Text="Employee Name", Value = "2" },
+                   //new SelectListItem{ Text="Unit Name", Value = "3" },
+
+               }, "--Select--", htmlAttributes: new { @class = "form-control" })
+
+
+                </td>
+                <td>
+
+                    @Html.TextBox("Search", null, new { @class = "form-control", @placeholder = "Search Here" })
+                </td>
+                <td>
+
+                    <input type="submit" value="Search" class="form-control btn-success" />
+                </td>
+            </tr>
+        </table>
+    }
+
+</div>
+<br>
+<br>
+
+
+
 <table class="table table-bordered table-responsive table-striped">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.EMP_ID)
+            @Html.DisplayNameFor(model => model.First().EMP_ID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DOB)
+            @Html.DisplayNameFor(model => model.First().DOB)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.IdentityMark1)
-        </th>
+                @Html.DisplayNameFor(model => model.IdentityMark1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdentityMark2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Race)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MarraigeDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NoOfChild)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NoOfDependents)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AadharNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SIN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AKA)
+            </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.IdentityMark2)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Race)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MarraigeDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NoOfChild)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NoOfDependents)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AadharNo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SIN)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AKA)
-        </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.MilitaryService)
+            @Html.DisplayNameFor(model => model.First().MilitaryService)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.BirthCity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Note)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Hobbies)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MilitaryServiceDetail)
-        </th>*@
-        
+                @Html.DisplayNameFor(model => model.BirthCity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Note)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hobbies)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MilitaryServiceDetail)
+            </th>*@
+
         @*<th>
-            @Html.DisplayNameFor(model => model.CastMaster.CastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HRMS_CATEGORY_GRADE.Category_Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HRMS_EMP_CITIZENSHIP_MS.CitizenShip_Country_NM)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HRMS_EMP_GENDER_MS.Gender_Value)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MaritalMaster.MaritalName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ReligionMaster.ReligionShortName)
-        </th>*@
+                @Html.DisplayNameFor(model => model.CastMaster.CastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HRMS_CATEGORY_GRADE.Category_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HRMS_EMP_CITIZENSHIP_MS.CitizenShip_Country_NM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HRMS_EMP_GENDER_MS.Gender_Value)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaritalMaster.MaritalName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReligionMaster.ReligionShortName)
+            </th>*@
         <th><center><i class="glyphicon glyphicon-wrench"> </i> Operations</center></th>
     </tr>
 
     @foreach (var item in Model)
     { //   var DOB = @item.DOB.ToShortDateString();
       //    var MDATE = @item.MarraigeDate?.ToShortDateString();
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.EMP_ID)
-    </td>
-    
-    <td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EMP_ID)
+            </td>
 
-        @Html.DisplayFor(modelItem => item.DOB)
-    </td>
-    @*<td>
-            @Html.DisplayFor(modelItem => item.IdentityMark1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdentityMark2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Race)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MarraigeDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NoOfChild)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NoOfDependents)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AadharNo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SIN)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AKA)
-        </td>*@
-    <td>
-        @Html.DisplayFor(modelItem => item.MilitaryService)
-    </td>
-    @*<td>
-            @Html.DisplayFor(modelItem => item.BirthCity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Note)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Hobbies)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MilitaryServiceDetail)
-        </td>*@
-    
-    @*<td>
-            @Html.DisplayFor(modelItem => item.CastMaster.CastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HRMS_CATEGORY_GRADE.Category_Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HRMS_EMP_CITIZENSHIP_MS.CitizenShip_Country_NM)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HRMS_EMP_GENDER_MS.Gender_Value)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaritalMaster.MaritalName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReligionMaster.ReligionShortName)
-        </td>*@
-  
-    <td class="btn-group-sm">
-        @Html.ActionLink(" Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" })
-        @Html.ActionLink(" Details", "Details", new { id = item.ID }, new { @class = "btn btn-warning btn-sm glyphicon glyphicon-list-alt" })
+            <td>
 
-        <button class="btn btn-danger  btn-sm " onclick="return removeFromList(this, '@item.ID') "> <i class="glyphicon glyphicon-trash"> </i> Delete</button>
-    </td>
-</tr>
-}
+                @Html.DisplayFor(modelItem => item.DOB)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.IdentityMark1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdentityMark2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Race)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MarraigeDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NoOfChild)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NoOfDependents)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AadharNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SIN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AKA)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.MilitaryService)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.BirthCity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Note)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hobbies)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MilitaryServiceDetail)
+                </td>*@
+
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.CastMaster.CastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HRMS_CATEGORY_GRADE.Category_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HRMS_EMP_CITIZENSHIP_MS.CitizenShip_Country_NM)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HRMS_EMP_GENDER_MS.Gender_Value)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaritalMaster.MaritalName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReligionMaster.ReligionShortName)
+                </td>*@
+
+            <td class="btn-group-sm">
+                @Html.ActionLink(" Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" })
+                @Html.ActionLink(" Details", "Details", new { id = item.ID }, new { @class = "btn btn-warning btn-sm glyphicon glyphicon-list-alt" })
+
+                <button class="btn btn-danger  btn-sm " onclick="return removeFromList(this, '@item.ID') "> <i class="glyphicon glyphicon-trash"> </i> Delete</button>
+            </td>
+        </tr>
+    }
 
 </table>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, Search = Request.QueryString["Search"], Data = Request.QueryString["Data"] }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
+
+
 <script>
     function removeFromList(thisobj, id) {
         if (confirm("Are you sure?") == true) {

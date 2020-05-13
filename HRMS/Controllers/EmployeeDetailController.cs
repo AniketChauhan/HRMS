@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HRMS.Models;
+using PagedList;
+using PagedList.Mvc;
 
 namespace HRMS.Controllers
 {
@@ -15,11 +17,26 @@ namespace HRMS.Controllers
         private HRMSEntities db = new HRMSEntities();
 
         [Authorize(Roles = "admin")]
-        public ActionResult Index()
+        public ActionResult Index(string Data, string Search, int? page)
         {
             //return Content(Session["id"].ToString());
-            var hRMS_Emp_Details = db.HRMS_Emp_Details.Include(h => h.HRMS_COST_CENTER).Include(h => h.HRMS_DEPT).Include(h => h.HRMS_DESG_MS).Include(h => h.HRMS_SALUTATION).Include(h => h.UnitMaster).Include(h => h.WorkLocationMaster);
-            return View(hRMS_Emp_Details.ToList());
+            //var hRMS_Emp_Details = db.HRMS_Emp_Details.Include(h => h.HRMS_COST_CENTER).Include(h => h.HRMS_DEPT).Include(h => h.HRMS_DESG_MS).Include(h => h.HRMS_SALUTATION).Include(h => h.UnitMaster).Include(h => h.WorkLocationMaster);
+            //return View(hRMS_Emp_Details.ToList());
+
+            if (Data == "1" && Search!="")
+            {
+                long ser = Convert.ToInt64(Search);
+                return View(db.HRMS_Emp_Details.Include(h => h.HRMS_COST_CENTER).Include(h => h.HRMS_DEPT).Include(h => h.HRMS_DESG_MS).Include(h => h.HRMS_SALUTATION).Include(h => h.UnitMaster).Include(h => h.WorkLocationMaster).Where(x => x.EMP_ID==ser).ToList().ToPagedList(page ?? 1, 7));
+            }
+            else if (Data == "2")
+            {
+                return View(db.HRMS_Emp_Details.Include(h => h.HRMS_COST_CENTER).Include(h => h.HRMS_DEPT).Include(h => h.HRMS_DESG_MS).Include(h => h.HRMS_SALUTATION).Include(h => h.UnitMaster).Include(h => h.WorkLocationMaster).Where(x => x.Display_Name.StartsWith(Search) || Search == null).ToList().ToPagedList(page ?? 1, 7));
+            }
+            else
+            {
+                return View(db.HRMS_Emp_Details.Include(h => h.HRMS_COST_CENTER).Include(h => h.HRMS_DEPT).Include(h => h.HRMS_DESG_MS).Include(h => h.HRMS_SALUTATION).Include(h => h.UnitMaster).Include(h => h.WorkLocationMaster).Where(x => x.UnitMaster.UnitName.StartsWith(Search) || Search == null).ToList().ToPagedList(page ?? 1, 7));
+            }
+
         }
         [Authorize(Roles = "admin,emp")]
         public ActionResult Details(long? id, string name)
@@ -112,6 +129,8 @@ namespace HRMS.Controllers
             ViewBag.Unit = db.UnitMaster;
             ViewBag.Work_Location = db.WorkLocationMaster;
             ViewBag.DivisionData = db.HRMS_DEPT.Where(rec => rec.Parent_ID == null && rec.IsActive == true);
+
+           // obj.Join_Date = ;
             return View(obj);
         }
 
@@ -200,7 +219,7 @@ namespace HRMS.Controllers
                         {
                             ViewBag.Role = "admin";
                         }
-                        return View();
+                        return View(hRMS_Emp_Details);
                         }
                     
                     
@@ -220,7 +239,7 @@ namespace HRMS.Controllers
                     {
                         ViewBag.Role = "admin";
                     }
-                    return View();
+                    return View(hRMS_Emp_Details);
                 }
             }
 
@@ -325,7 +344,7 @@ namespace HRMS.Controllers
                     {
                         ViewBag.Role = "admin";
                     }
-                    return View();
+                    return View(hRMS_Emp_Details);
                     }
                     else
                     {
@@ -344,7 +363,7 @@ namespace HRMS.Controllers
                     {
                         ViewBag.Role = "admin";
                     }
-                    return View();
+                    return View(hRMS_Emp_Details);
                     }
                 //}
                 //else

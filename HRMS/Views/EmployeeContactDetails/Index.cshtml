@@ -1,4 +1,6 @@
-﻿@model IEnumerable<HRMS.Models.HRMS_Contact>
+﻿@using PagedList
+@using PagedList.Mvc
+@model IPagedList<HRMS.Models.HRMS_Contact>
 
 @{
     ViewBag.Title = "Index";
@@ -7,57 +9,95 @@
 <h2>Index</h2>
 <br />
 @*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+
+
+<br />
+<div class="form-inline">
+
+    @using (Html.BeginForm("Index", "EmployeeContactDetails", FormMethod.Get))
+    {
+        <table class="col-md-4 table-bordered">
+            <tr>
+                <td>
+                    @Html.DropDownList("Data", new List<SelectListItem>
+                           {
+                           new SelectListItem{ Text="Employee ID", Value = "1" },
+                           new SelectListItem{ Text="Phone No", Value = "2" },
+                           new SelectListItem{ Text="Corporate Email", Value = "3" },
+
+                           }, "--Select--", htmlAttributes: new { @class = "form-control" })
+
+
+                </td>
+                <td>
+
+                    @Html.TextBox("Search", null, new { @class = "form-control", @placeholder = "Search Here" })
+                </td>
+                <td>
+
+                    <input type="submit" value="Search" class="form-control btn-success" />
+                </td>
+            </tr>
+        </table>
+    }
+
+</div>
+<br>
+<br>
+
+
+
 @if (Model.Count<HRMS.Models.HRMS_Contact>() > 0 && Model != null)
 {
     <table class="table table-striped table-hover table-bordered table-responsive">
         <tr>
             @*<th>
-            @Html.DisplayNameFor(model => model.HRMS_Emp_Details.Display_Name)
-        </th>*@
+                    @Html.DisplayNameFor(model => model.HRMS_Emp_Details.Display_Name)
+                </th>*@
             <th>
-                @Html.DisplayNameFor(model => model.Employee_ID)
+                @Html.DisplayNameFor(model => model.First().Employee_ID)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Corporate_Email)
+                @Html.DisplayNameFor(model => model.First().Corporate_Email)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ext)
+                @Html.DisplayNameFor(model => model.First().Ext)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Phone_Work)
+                @Html.DisplayNameFor(model => model.First().Phone_Work)
             </th>
             <th><i class="glyphicon glyphicon-wrench"> </i> Operations</th>
         </tr>
 
         @foreach (var item in Model)
         {
-    <tr>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.HRMS_Emp_Details.Display_Name)
-        </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.Employee_ID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Corporate_Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ext)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Phone_Work)
-        </td>
+            <tr>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.HRMS_Emp_Details.Display_Name)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Employee_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Corporate_Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ext)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone_Work)
+                </td>
 
 
-        <td class="btn-group-sm">
-            @Html.ActionLink(" Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" })
-            @Html.ActionLink(" Details", "Details", new { id = item.ID }, new { @class = "btn btn-warning btn-sm glyphicon glyphicon-list-alt" })
+                <td class="btn-group-sm">
+                    @Html.ActionLink(" Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" })
+                    @Html.ActionLink(" Details", "Details", new { id = item.ID }, new { @class = "btn btn-warning btn-sm glyphicon glyphicon-list-alt" })
 
-            <button class="btn btn-danger  btn-sm " onclick="return removeFromList(this, '@item.ID') "> <i class="glyphicon glyphicon-trash"> </i> Delete</button>
-        </td>
-    </tr>
+                    <button class="btn btn-danger  btn-sm " onclick="return removeFromList(this, '@item.ID') "> <i class="glyphicon glyphicon-trash"> </i> Delete</button>
+                </td>
+            </tr>
         }
 
     </table>
@@ -68,6 +108,9 @@ else
         <h2>sorry!!! We don't have any Employee Contact Details Right Now...</h2>
     </div>
 }
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, Search = Request.QueryString["Search"], Data = Request.QueryString["Data"] }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
+
 <script>
     function removeFromList(thisobj, id) {
         if (confirm("Are you sure?") == true) {

@@ -180,7 +180,7 @@ namespace HRMS.Controllers
                     return RedirectToAction("FillData", "EmployeeRegistration");
                 }
 
-                return View();
+                return View(hRMS_EMP_PHOTO_SIGN);
                 //return RedirectToAction("Index");
             }
 

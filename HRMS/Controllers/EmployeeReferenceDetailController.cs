@@ -277,7 +277,7 @@ namespace HRMS.Controllers
                     {
                         ViewBag.Role = "admin";
                     }
-                    return View();
+                    return View(hRMS_EMP_ReferenceDetail);
                 }
                 else
                 {
@@ -289,7 +289,7 @@ namespace HRMS.Controllers
                     {
                         ViewBag.Role = "admin";
                     }
-                    return View();
+                    return View(hRMS_EMP_ReferenceDetail);
                     
                 }
             }
