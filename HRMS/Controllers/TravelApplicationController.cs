@@ -261,7 +261,14 @@ namespace HRMS.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        public int getTravelCount()
+        {
+            int Count = 0;
 
+            Count = db.HRMS_Travel_Application.Where(rec => rec.Status == 0).Count();
+
+            return Count;
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

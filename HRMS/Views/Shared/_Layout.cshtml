@@ -185,8 +185,13 @@
         {
             @Html.ActionLink("Account", "Index", "EmployeeRegistration", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
         }
-        @if (User.Identity.IsAuthenticated) { 
-                    @Html.ActionLink("Travel Application", "Index", "TravelApplication", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
+        @if (User.IsInRole("emp"))
+        {
+            @Html.ActionLink("Travel Application", "Index", "TravelApplication", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
+        }
+        @if (User.IsInRole("admin"))
+        {
+            @Html.ActionLink("Travel Application(0)", "Index", "TravelApplication", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile",@id="TravelCount" })
         }
 
 
@@ -294,8 +299,23 @@
        $("#navbutton").click(function () {
            $("#contant").slideToggle();
        });
+       UpdateTravelCount();
 
-});
+   });
+      function UpdateTravelCount() {
+            $.ajax({
+                type: "GET",
+                contentType: "application/json",
+                url: '@Url.Action("getTravelCount","TravelApplication")',
+                dataType: "json",
+                data: '{}',
+                success: function (res) {
+                    $("#TravelCount").text("Travel Application(" + res + ")");
+                }
+            });
+
+            return false;
+        }
         </script>
 
 
