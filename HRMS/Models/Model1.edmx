@@ -279,6 +279,25 @@
           <Property Name="Approved_by" Type="bigint" />
           <Property Name="Approved_date" Type="date" />
           <Property Name="Approval_Remark" Type="varchar" MaxLength="250" />
+          <Property Name="ExpenseSubmitted" Type="int" />
+        </EntityType>
+        <EntityType Name="HRMS_Travel_Expense_App">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Travel_App_ID" Type="bigint" Nullable="false" />
+          <Property Name="Travel_Date" Type="date" Nullable="false" />
+          <Property Name="Journey_Mode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="From_Place" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="To_Place" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Distance" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Purpose" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="FileName" Type="varchar" MaxLength="100" />
+          <Property Name="FileUrl" Type="varchar(max)" />
+          <Property Name="EMP_ID" Type="bigint" Nullable="false" />
+          <Property Name="Status" Type="int" />
         </EntityType>
         <EntityType Name="HRMS_TRAVEL_MEAL_EXPENSE_MS">
           <Key>
@@ -806,6 +825,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_HRMS_Travel_Expense_App_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="HRMS_Travel_Expense_App" Type="Self.HRMS_Travel_Expense_App" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_Travel_Expense_App">
+              <PropertyRef Name="EMP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_Travel_Expense_App_HRMS_Travel_Application">
+          <End Role="HRMS_Travel_Application" Type="Self.HRMS_Travel_Application" Multiplicity="1" />
+          <End Role="HRMS_Travel_Expense_App" Type="Self.HRMS_Travel_Expense_App" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_Travel_Application">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_Travel_Expense_App">
+              <PropertyRef Name="Travel_App_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_HRMS_TravelGroupType_MS_HRMS_TravelMode_MS">
           <End Role="HRMS_TravelMode_MS" Type="Self.HRMS_TravelMode_MS" Multiplicity="1" />
           <End Role="HRMS_TravelGroupType_MS" Type="Self.HRMS_TravelGroupType_MS" Multiplicity="*" />
@@ -868,6 +911,7 @@
           <EntitySet Name="HRMS_EMP_ReferenceDetail" EntityType="Self.HRMS_EMP_ReferenceDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_SALUTATION" EntityType="Self.HRMS_SALUTATION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_Travel_Application" EntityType="Self.HRMS_Travel_Application" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_Travel_Expense_App" EntityType="Self.HRMS_Travel_Expense_App" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_TRAVEL_MEAL_EXPENSE_MS" EntityType="Self.HRMS_TRAVEL_MEAL_EXPENSE_MS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_TRAVEL_OTHER_DETAILS_MS" EntityType="Self.HRMS_TRAVEL_OTHER_DETAILS_MS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_Travel_Purpose" EntityType="Self.HRMS_Travel_Purpose" Schema="dbo" store:Type="Tables" />
@@ -1018,6 +1062,14 @@
             <End Role="HRMS_TravelMode_MS" EntitySet="HRMS_TravelMode_MS" />
             <End Role="HRMS_Travel_Application" EntitySet="HRMS_Travel_Application" />
           </AssociationSet>
+          <AssociationSet Name="FK_HRMS_Travel_Expense_App_Accounts" Association="Self.FK_HRMS_Travel_Expense_App_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="HRMS_Travel_Expense_App" EntitySet="HRMS_Travel_Expense_App" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_Travel_Expense_App_HRMS_Travel_Application" Association="Self.FK_HRMS_Travel_Expense_App_HRMS_Travel_Application">
+            <End Role="HRMS_Travel_Application" EntitySet="HRMS_Travel_Application" />
+            <End Role="HRMS_Travel_Expense_App" EntitySet="HRMS_Travel_Expense_App" />
+          </AssociationSet>
           <AssociationSet Name="FK_HRMS_TravelGroupType_MS_HRMS_TravelMode_MS" Association="Self.FK_HRMS_TravelGroupType_MS_HRMS_TravelMode_MS">
             <End Role="HRMS_TravelMode_MS" EntitySet="HRMS_TravelMode_MS" />
             <End Role="HRMS_TravelGroupType_MS" EntitySet="HRMS_TravelGroupType_MS" />
@@ -1053,6 +1105,7 @@
           <NavigationProperty Name="HRMS_Travel_Application" Relationship="HRMS5Model.FK_HRMS_Travel_Application_Accounts" FromRole="Accounts" ToRole="HRMS_Travel_Application" />
           <NavigationProperty Name="HRMS_Travel_Application1" Relationship="HRMS5Model.FK_HRMS_Travel_Application_Accounts1" FromRole="Accounts" ToRole="HRMS_Travel_Application" />
           <NavigationProperty Name="Sample" Relationship="HRMS5Model.FK_Sample_Accounts" FromRole="Accounts" ToRole="Sample" />
+          <NavigationProperty Name="HRMS_Travel_Expense_App" Relationship="HRMS5Model.FK_HRMS_Travel_Expense_App_Accounts" FromRole="Accounts" ToRole="HRMS_Travel_Expense_App" />
         </EntityType>
         <EntityType Name="BankMaster">
           <Key>
@@ -1859,6 +1912,15 @@
             <End Role="HRMS_Travel_Application" EntitySet="HRMS_Travel_Application" />
           </AssociationSet>
           <FunctionImport Name="FillEmployee" ReturnType="Collection(HRMS5Model.FillEmployee_Result)" />
+          <EntitySet Name="HRMS_Travel_Expense_App" EntityType="HRMS5Model.HRMS_Travel_Expense_App" />
+          <AssociationSet Name="FK_HRMS_Travel_Expense_App_HRMS_Travel_Application" Association="HRMS5Model.FK_HRMS_Travel_Expense_App_HRMS_Travel_Application">
+            <End Role="HRMS_Travel_Application" EntitySet="HRMS_Travel_Application" />
+            <End Role="HRMS_Travel_Expense_App" EntitySet="HRMS_Travel_Expense_App" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_Travel_Expense_App_Accounts" Association="HRMS5Model.FK_HRMS_Travel_Expense_App_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="HRMS_Travel_Expense_App" EntitySet="HRMS_Travel_Expense_App" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="DepartmentData_Result">
           <Property Type="Int64" Name="Dept_Id" Nullable="false" />
@@ -2036,6 +2098,8 @@
           <NavigationProperty Name="HRMS_Travel_Purpose" Relationship="HRMS5Model.FK_HRMS_Travel_Application_HRMS_Travel_Purpose" FromRole="HRMS_Travel_Application" ToRole="HRMS_Travel_Purpose" />
           <NavigationProperty Name="HRMS_Travel_type" Relationship="HRMS5Model.FK_HRMS_Travel_Application_HRMS_Travel_type" FromRole="HRMS_Travel_Application" ToRole="HRMS_Travel_type" />
           <NavigationProperty Name="HRMS_TravelMode_MS" Relationship="HRMS5Model.FK_HRMS_Travel_Application_HRMS_TravelMode_MS" FromRole="HRMS_Travel_Application" ToRole="HRMS_TravelMode_MS" />
+          <NavigationProperty Name="HRMS_Travel_Expense_App" Relationship="HRMS5Model.FK_HRMS_Travel_Expense_App_HRMS_Travel_Application" FromRole="HRMS_Travel_Application" ToRole="HRMS_Travel_Expense_App" />
+          <Property Name="ExpenseSubmitted" Type="Int32" />
         </EntityType>
         <EntityType Name="Sample">
           <Key>
@@ -2146,6 +2210,50 @@
           <Property Type="Int64" Name="ID" Nullable="false" />
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="250" />
         </ComplexType>
+        <EntityType Name="HRMS_Travel_Expense_App">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Travel_App_ID" Type="Int64" Nullable="false" />
+          <Property Name="Travel_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Journey_Mode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="From_Place" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="To_Place" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Distance" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Purpose" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FileName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FileUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="HRMS_Travel_Application" Relationship="HRMS5Model.FK_HRMS_Travel_Expense_App_HRMS_Travel_Application" FromRole="HRMS_Travel_Expense_App" ToRole="HRMS_Travel_Application" />
+          <Property Name="EMP_ID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="HRMS5Model.FK_HRMS_Travel_Expense_App_Accounts" FromRole="HRMS_Travel_Expense_App" ToRole="Accounts" />
+          <Property Name="Status" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_HRMS_Travel_Expense_App_HRMS_Travel_Application">
+          <End Type="HRMS5Model.HRMS_Travel_Application" Role="HRMS_Travel_Application" Multiplicity="1" />
+          <End Type="HRMS5Model.HRMS_Travel_Expense_App" Role="HRMS_Travel_Expense_App" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_Travel_Application">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_Travel_Expense_App">
+              <PropertyRef Name="Travel_App_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_Travel_Expense_App_Accounts">
+          <End Type="HRMS5Model.Accounts" Role="Accounts" Multiplicity="1" />
+          <End Type="HRMS5Model.HRMS_Travel_Expense_App" Role="HRMS_Travel_Expense_App" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_Travel_Expense_App">
+              <PropertyRef Name="EMP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2566,6 +2674,7 @@
           <EntitySetMapping Name="HRMS_Travel_Application">
             <EntityTypeMapping TypeName="HRMS5Model.HRMS_Travel_Application">
               <MappingFragment StoreEntitySet="HRMS_Travel_Application">
+                <ScalarProperty Name="ExpenseSubmitted" ColumnName="ExpenseSubmitted" />
                 <ScalarProperty Name="Approval_Remark" ColumnName="Approval_Remark" />
                 <ScalarProperty Name="Approved_date" ColumnName="Approved_date" />
                 <ScalarProperty Name="Approved_by" ColumnName="Approved_by" />
@@ -2601,6 +2710,25 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="HRMS_Travel_Expense_App">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_Travel_Expense_App">
+              <MappingFragment StoreEntitySet="HRMS_Travel_Expense_App">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EMP_ID" ColumnName="EMP_ID" />
+                <ScalarProperty Name="FileUrl" ColumnName="FileUrl" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="To_Place" ColumnName="To_Place" />
+                <ScalarProperty Name="From_Place" ColumnName="From_Place" />
+                <ScalarProperty Name="Journey_Mode" ColumnName="Journey_Mode" />
+                <ScalarProperty Name="Travel_Date" ColumnName="Travel_Date" />
+                <ScalarProperty Name="Travel_App_ID" ColumnName="Travel_App_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

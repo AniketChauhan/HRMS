@@ -64,6 +64,7 @@ namespace HRMS.Models
         public virtual DbSet<HRMS_TRAVEL_OTHER_DETAILS_MS> HRMS_TRAVEL_OTHER_DETAILS_MS { get; set; }
         public virtual DbSet<HRMS_Travel_Application> HRMS_Travel_Application { get; set; }
         public virtual DbSet<Sample> Sample { get; set; }
+        public virtual DbSet<HRMS_Travel_Expense_App> HRMS_Travel_Expense_App { get; set; }
     
         public virtual ObjectResult<DepartmentData_Result> DepartmentData()
         {

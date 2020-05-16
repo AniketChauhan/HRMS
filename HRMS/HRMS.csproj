@@ -160,6 +160,7 @@
     <Compile Include="Controllers\SALUTATIONController.cs" />
     <Compile Include="Controllers\SegmentMasterController.cs" />
     <Compile Include="Controllers\TravelApplicationController.cs" />
+    <Compile Include="Controllers\TravelExpenseApplicationController.cs" />
     <Compile Include="Controllers\TravelGroupTypeController.cs" />
     <Compile Include="Controllers\TravelMealExpenseController.cs" />
     <Compile Include="Controllers\TravelModeMasterController.cs" />
@@ -250,6 +251,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HRMS_Travel_Application.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HRMS_Travel_Expense_App.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HRMS_TRAVEL_MEAL_EXPENSE_MS.cs">
@@ -564,6 +568,12 @@
     <Content Include="Views\TravelApplication\Details.cshtml" />
     <Content Include="Views\TravelApplication\Edit.cshtml" />
     <Content Include="Views\TravelApplication\Index.cshtml" />
+    <Content Include="Views\TravelExpenseApplication\TravelList.cshtml" />
+    <Content Include="Views\TravelExpenseApplication\TravelView.cshtml" />
+    <Content Include="Views\TravelExpenseApplication\AddExpense.cshtml" />
+    <Content Include="Views\TravelExpenseApplication\Edit.cshtml" />
+    <Content Include="Views\TravelExpenseApplication\ViewExpense.cshtml" />
+    <Content Include="Views\TravelExpenseApplication\AdminExpenseList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

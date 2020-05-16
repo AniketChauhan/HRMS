@@ -11,8 +11,7 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class HRMS_SALUTATION
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,11 +21,6 @@ namespace HRMS.Models
         }
     
         public long Salutation_ID { get; set; }
-        [Required]
-        [Display(Name = "Salutation Name")]
-        [RegularExpression(@"^[A-Za-z]+", ErrorMessage = "Only Alphabetic values are allowed!")]
-        [DataType(DataType.Text, ErrorMessage = "Only Alphabetic value are allowed")]
-        [MaxLength(10, ErrorMessage = "Salutation name can have 10 characters maximum!")]
         public string Salutation_Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -188,10 +188,12 @@
         @if (User.IsInRole("emp"))
         {
             @Html.ActionLink("Travel Application", "Index", "TravelApplication", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
+            @Html.ActionLink("Travel Expense", "TravelList", "TravelExpenseApplication", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
         }
         @if (User.IsInRole("admin"))
         {
-            @Html.ActionLink("Travel Application(0)", "Index", "TravelApplication", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile",@id="TravelCount" })
+            @Html.ActionLink("Travel Application(0)", "Index", "TravelApplication", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile", @id = "TravelCount" })
+            @Html.ActionLink("Travel Expense", "AdminExpenseList", "TravelExpenseApplication", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
         }
 
 

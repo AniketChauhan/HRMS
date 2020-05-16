@@ -12,7 +12,7 @@
 <table class="table table-bordered table-responsive table-striped">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Emp_ID)
+            @Html.DisplayNameFor(model => model.EMP_ID)
         </th>
         <th>
 
@@ -24,12 +24,12 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Emp_ID)
+                @Html.DisplayFor(modelItem => item.EMP_ID)
                 @*<p id=@item.Emp_ID>@item.Emp_ID</p>*@
 
             </td>
             <td>
-                @Html.DropDownList("Grade_ID", null, "--Select--", htmlAttributes: new { @class = "form-control xyz",@id=item.Emp_ID })
+                @Html.DropDownList("Grade_ID", null, "--Select--", htmlAttributes: new { @class = "form-control xyz",@id=item.EMP_ID })
                 @*, @id = item.Emp_ID*@
 
             </td>

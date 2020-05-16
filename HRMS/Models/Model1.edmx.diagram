@@ -79,6 +79,9 @@
         <AssociationConnector Association="HRMS5Model.FK_HRMS_Travel_Application_HRMS_Travel_Purpose" />
         <AssociationConnector Association="HRMS5Model.FK_HRMS_Travel_Application_HRMS_Travel_type" />
         <AssociationConnector Association="HRMS5Model.FK_HRMS_Travel_Application_HRMS_TravelMode_MS" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_Travel_Expense_App" Width="1.5" PointX="16.25" PointY="19.25" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_Travel_Expense_App_HRMS_Travel_Application" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_Travel_Expense_App_Accounts" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

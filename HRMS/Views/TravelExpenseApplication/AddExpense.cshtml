@@ -1,0 +1,295 @@
+﻿@model HRMS.Models.HRMS_Travel_Expense_App
+
+@{
+    ViewBag.Title = "AddExpense";
+}
+<head>
+    <link href="~/StyleSheet/UnitStyleSheet.css" rel="stylesheet" />
+
+</head>
+<h2>AddExpense</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Travel_App_ID, "Travel_App_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("Travel_App_ID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Travel_App_ID, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+        @Html.HiddenFor(model => model.Travel_App_ID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Travel_Date, htmlAttributes: new { @class = "control-label col-md-2 required" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Travel_Date, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                @Html.ValidationMessageFor(model => model.Travel_Date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Journey_Mode, htmlAttributes: new { @class = "control-label col-md-2 required" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.Journey_Mode, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.DropDownList("Journey_Mode", new List<SelectListItem>
+                   {
+                       new SelectListItem{ Text="Auto", Value = "Auto" },
+                       new SelectListItem{ Text="Bus", Value = "Bus" },
+                       new SelectListItem{ Text="Texi", Value = "Texi" },
+                    }, "--Select--", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Journey_Mode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.From_Place, htmlAttributes: new { @class = "control-label col-md-2 required" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.From_Place, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.From_Place, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.To_Place, htmlAttributes: new { @class = "control-label col-md-2 required" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.To_Place, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.To_Place, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Distance, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Distance, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Distance, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2 required" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Purpose, htmlAttributes: new { @class = "control-label col-md-2 required" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Purpose)
+                @Html.ValidationMessageFor(model => model.Purpose, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.FileName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FileName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FileName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.FileUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FileUrl, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FileUrl, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.EMP_ID, "EMP_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("EMP_ID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.EMP_ID, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+
+<br />
+@*<h3><b>Uploaded File Details</b></h3>*@
+<table class="table table-bordered table-responsive table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Travel_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Journey_Mode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.From_Place)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.To_Place)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Distance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+
+    </tr>
+
+    @foreach (var item in (IEnumerable<HRMS.Models.HRMS_Travel_Expense_App>)ViewData["users"])
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Travel_Date)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Journey_Mode)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.From_Place)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.To_Place)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Distance)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Amount)
+    </td>
+    <td>
+        @*@Html.DisplayFor(modelItem => item.Amount)*@
+        @if (item.Status == 0)
+        {
+            <b class="label label-primary">pending</b>
+        }
+        @if (item.Status == 1)
+        {
+            <b class="label label-success">Approved</b>
+        }
+        @if (item.Status == 2)
+        {
+            <b class="label label-danger">cancelled</b>
+        }
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-sm btn-primary" })
+        @*@Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-sm btn-danger" })*@
+        <button class="btn btn-danger  btn-sm " onclick="return removeFromList(this, '@item.ID') ">Delete</button>
+
+    </td>
+
+</tr>
+    }
+
+</table>
+
+<div class="form-horizontal">
+    <div class="form-group form-horizontal">
+        @Html.LabelFor(model => model.TotalAmount, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-3">
+            @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "form-control", @id = "xyz", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.TotalAmount, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-7">
+            @Html.ActionLink("Save Changes", "SaveChanges", new { id = Model.Travel_App_ID }, new { @class = "btn btn-warning" })
+        </div>
+    </div>
+
+    <div>
+        @Html.ActionLink("Back to List", "TravelList")
+    </div>
+
+    @if (ViewBag.Error != null)
+    {
+        <script>alert("@ViewBag.Error");</script>
+    }
+
+
+
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script>
+    $(document).ready(function(){
+    UpdateTotalAmount();
+
+    });
+    function UpdateTotalAmount() {
+    $.ajax({
+    type: "GET",
+    contentType: "application/json",
+    @*url: '@Html.ActionLink("UpdateTotalAmount", "TravelExpenseApplication",new {id = Model.Travel_App_ID})',*@
+     url: '@Url.Action("TotalAmount","TravelExpenseApplication",new {id = Model.Travel_App_ID})',
+    dataType: "json",
+    data: '{}',
+        success: function (res) {
+            $("#xyz").val(res);
+    }
+    });
+
+    return false;
+    }
+    </script>
+
+
+    <script>
+    function removeFromList(thisobj, id) {
+        if (confirm("Are you sure?") == true) {
+            var data = JSON.stringify({
+                'id': id
+            });
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "@Url.Action("Delete","TravelExpenseApplication")",
+                datatype: "json",
+                data: data,
+                success: function (response) {
+                    var tr = $(thisobj).closest("tr");
+                    $(tr).remove();
+                     window.location.reload();
+                }
+            });
+        }
+    }
+    </script>
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    }
+
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+    <script>
+        $(function () {
+            $(".datepicker").datepicker({
+                dateFormat: "yy-mm-dd",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "1920:2020",
+                orientation: "right top",
+                maxDate: new Date()
+
+
+
+            });
+
+        });
+    </script>
+

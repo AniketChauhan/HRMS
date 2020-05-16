@@ -11,51 +11,31 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+    
     public partial class HRMS_Travel_Application
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public HRMS_Travel_Application()
+        {
+            this.HRMS_Travel_Expense_App = new HashSet<HRMS_Travel_Expense_App>();
+        }
+    
         public long ID { get; set; }
-
         public long Travel_App_Type { get; set; }
-        [Required]
-        [Display(Name = "Travel Application Date")]
-        // [DataType(DataType.Date, ErrorMessage = "Only Date allowed")]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
-        public Nullable<System.DateTime> Travel_Application_Date { get; set; }
+        public System.DateTime Travel_Application_Date { get; set; }
         public long emp_id { get; set; }
         public Nullable<long> Designation { get; set; }
         public Nullable<long> Grade { get; set; }
-        [Required]
-        [Display(Name ="Travel Type")]
         public int Travel_Type { get; set; }
-        [Required]
-        [Display(Name = "Travel Purpose")]
         public long Travel_Purpose { get; set; }
-        [Required]
-        [Display(Name = "From_Date")]
-        [DataType(DataType.Date, ErrorMessage = "Only Date allowed")]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
-        public Nullable<System.DateTime> From_Date { get; set; }
-        [Required]
-        [Display(Name = "To Date")]
-        [DataType(DataType.Date, ErrorMessage = "Only Date allowed")]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
-        public Nullable<System.DateTime> To_Date { get; set; }
-
-        [RegularExpression(@"^[A-Za-z0-9_ ]*$", ErrorMessage = "Only AlphNumeric values are allowed!")]
-
+        public System.DateTime From_Date { get; set; }
+        public System.DateTime To_Date { get; set; }
         public string Remark { get; set; }
-        
         public int Status { get; set; }
         public Nullable<long> Approved_by { get; set; }
-        [Display(Name = "Approved Date")]
-        // [DataType(DataType.Date, ErrorMessage = "Only Date allowed")]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> Approved_date { get; set; }
-        [Display(Name ="Approval Remark")]
-        [RegularExpression(@"^[A-Za-z0-9_ ]*$", ErrorMessage = "Only AlphNumeric values are allowed!")]
-
         public string Approval_Remark { get; set; }
+        public Nullable<int> ExpenseSubmitted { get; set; }
     
         public virtual Accounts Accounts { get; set; }
         public virtual Accounts Accounts1 { get; set; }
@@ -64,5 +44,7 @@ namespace HRMS.Models
         public virtual HRMS_Travel_Purpose HRMS_Travel_Purpose { get; set; }
         public virtual HRMS_Travel_type HRMS_Travel_type { get; set; }
         public virtual HRMS_TravelMode_MS HRMS_TravelMode_MS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HRMS_Travel_Expense_App> HRMS_Travel_Expense_App { get; set; }
     }
 }

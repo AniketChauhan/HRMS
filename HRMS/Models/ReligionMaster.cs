@@ -11,9 +11,7 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class ReligionMaster
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,25 +20,11 @@ namespace HRMS.Models
             this.CastMaster = new HashSet<CastMaster>();
             this.Employee_Personal_Detail = new HashSet<Employee_Personal_Detail>();
         }
-
-        //public long ReligionID { get; set; }
-        //public string ReligionShortName { get; set; }
-        //public string ReligionName { get; set; }
-
+    
         public long ReligionID { get; set; }
-        [Required]
-        [DisplayName("Religion Short Name")]
-        [RegularExpression(@"^[A-Za-z]+", ErrorMessage = "Only Alphabetic values are allowed!")]
-        [MaxLength(50, ErrorMessage = "Religion Short  name can have 50 characters maximum!")]
-
         public string ReligionShortName { get; set; }
-        [Required]
-        [DisplayName("Religion Name")]
-        [RegularExpression(@"^[A-Za-z]+", ErrorMessage = "Only Alphabetic values are allowed!")]
-        [MaxLength(50, ErrorMessage = "Religion name can have 50 characters maximum!")]
-
         public string ReligionName { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CastMaster> CastMaster { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -11,7 +11,7 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+    
     public partial class HRMS_Travel_Purpose
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,11 +21,6 @@ namespace HRMS.Models
         }
     
         public long ID { get; set; }
-        [Required]
-        [Display(Name = "Name")]
-        [RegularExpression(@"^[A-Za-z_ ]*$", ErrorMessage = "Only Alphabetic values are allowed!")]
-        [DataType(DataType.Text, ErrorMessage = "Only Alphabetic value are allowed")]
-        [MaxLength(250, ErrorMessage = "Display name can have 250 characters maximum!")]
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

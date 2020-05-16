@@ -1,0 +1,171 @@
+﻿@model IEnumerable<HRMS.Models.HRMS_Travel_Expense_App>
+
+@{
+    ViewBag.Title = "ViewExpense";
+}
+
+<h2>View Expense</h2>
+<br />
+@if (User.IsInRole("emp"))
+{
+    <p>
+        @Html.ActionLink("<<Back", "TravelList")
+    </p>
+}
+else
+{
+    <p>
+        @Html.ActionLink("<<Back", "AdminExpenseList")
+    </p>
+}
+
+<table class="table table-bordered table-bordered table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Travel_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Journey_Mode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.From_Place)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.To_Place)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Distance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Purpose)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.FileName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FileUrl)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+
+        @if (User.IsInRole("admin"))
+        {
+            <th></th>
+        }
+        @*<th>
+                @Html.DisplayNameFor(model => model.HRMS_Travel_Application.Remark)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Accounts.UserName)
+            </th>*@
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Travel_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Journey_Mode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.From_Place)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.To_Place)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Distance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Purpose)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.FileName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FileUrl)
+                </td>*@
+            <td>
+                @*@Html.DisplayFor(modelItem => item.Status)*@
+                @if (item.Status == 0)
+                {
+                    <b class="label label-primary">pending</b>
+                }
+                @if (item.Status == 1)
+                {
+                    <b class="label label-success">Approved</b>
+                }
+                @if (item.Status == 2)
+                {
+                    <b class="label label-danger">cancelled</b>
+                }
+            </td>
+
+            @if (User.IsInRole("admin"))
+            {
+        <td>
+            @if (item.Status == 0)
+            {
+                @Html.ActionLink("Approve", "Approve", new { id = item.ID }, new { @class = "btn btn-sm btn-success", @id = item.ID + "Approve" })
+                @Html.ActionLink("Cancel", "Cancel", new { id = item.ID }, new { @class = "btn btn-sm btn-danger", @id = item.ID + "Cancel" })
+            }
+            else
+            {
+                @*@Html.ActionLink("Edit", "", new { id = item.ID }, new { @class = "btn  btn-warning xyz", @id = item.ID + "Edit" })*@
+                <button class="btn btn-warning edit_btn" id="@item.ID"> Edit</button>
+                //onclick="return removeFromList(this, '@item.ID') "
+                @Html.ActionLink("Approve", "Approve", new { id = item.ID }, new { @class = "btn btn-sm btn-success", @id = item.ID + "Approve",@style = "display:none" })
+                @Html.ActionLink("Cancel", "Cancel", new { id = item.ID }, new { @class = "btn btn-sm btn-danger", @id = item.ID + "Cancel", @style = "display:none"})
+            }
+        </td>
+            }
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.HRMS_Travel_Application.Remark)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Accounts.UserName)
+                </td>*@
+
+        </tr>
+    }
+
+</table>
+
+<div class="w3-right-align" style="font-size:large">
+    <label>Total Amount: </label>
+    <label style="color:crimson">@ViewBag.TotalAmount</label>
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script>
+    @*function removeFromList(thisobj, id) {
+        alert(id);
+        var item = $(this);
+        $(this).hide();
+         $("@this+Approve").show();
+        //$($(this).attr("id")).show();*@ 
+    $(document).ready(function () {
+        $(".edit_btn").click(function () {
+            var item = $(this); 
+         
+            item.hide();
+            $("#" + item.attr("id") + "Approve").show();
+            $("#" + item.attr("id") + "Cancel").show();
+
+               //   item.attr("value")
+
+        });
+    });
+    
+      
+</script>
