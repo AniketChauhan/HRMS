@@ -1,0 +1,121 @@
+﻿@model IEnumerable<HRMS.Models.EmployeeReport_Result>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<div class="container-fluid">
+    <center>
+        @using (Html.BeginForm("Index", "EmployeeReport", FormMethod.Post, new { @class = "form-inline" }))
+        {
+            <span>
+                <label>
+                    Department
+                </label>
+                @Html.DropDownList("Department", new SelectList(ViewBag.Department, "Dept_Id", "Dept_Name"), "Select Department", htmlAttributes: new { @class = "form-control" })
+            </span>
+            <span>&nbsp; &nbsp; &nbsp; &nbsp;</span>
+            <span>
+                <label>
+                    Work Location
+                </label>
+                @Html.DropDownList("WorkLocation", new SelectList(ViewBag.WorkLocation, "WorkID", "WorkLocationName"), "Select Work location ", htmlAttributes: new { @class = "form-control" })
+            </span>
+            <span>&nbsp; &nbsp; &nbsp; &nbsp;</span>
+            <span>
+                <label>
+                    From Date
+                </label>
+                <input type="date" name="FromDate" class="form-control" />
+            </span>
+            <span>&nbsp; &nbsp; &nbsp; &nbsp;</span>
+            <span>
+                <label>
+                    To Date
+                </label>
+                <input type="date" name="ToDate" class="form-control" />
+
+            </span>
+            <span>&nbsp; &nbsp; &nbsp; &nbsp;</span>
+            <span>
+                <button type="submit" class="btn btn-primary">Submit</button>
+
+            </span>
+        }
+    </center>
+    @if (Model != null)
+    {
+        <table class="table table-bordered table-responsive table-striped">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmployeeCode)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.EmployeeName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.JoinDate)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Department)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WorkLocation)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Gender_Value)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.DateOfBirth)
+                </th>
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmployeeCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmployeeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JoinDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Department)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.WorkLocation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Gender_Value)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateOfBirth)
+                    </td>
+                </tr>
+
+            }
+        </table>
+        <center>
+            <button class="btn btn-primary">Download</button>
+        </center>
+    }
+
+</div>
+@if (ViewBag.EmployeeReportStatus != null)
+{
+    <div class="alert alert-success alert-dismissible " style="width:50%;">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <span>
+            @ViewBag.EmployeeReportStatus
+        </span>
+    </div>
+}
