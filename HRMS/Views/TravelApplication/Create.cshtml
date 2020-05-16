@@ -16,7 +16,9 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Travel_App_Type, "Travel_App_Type", htmlAttributes: new { @class = "control-label col-md-2 required" })
             <div class="col-md-10">
-                @Html.DropDownList("Travel_App_Type", (SelectList)ViewBag.EntidadList, "select application type", htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("Travel Application Type", (SelectList)ViewBag.EntidadList, htmlAttributes: new { @class = "form-control", @name = @Html.NameFor(c => c.Travel_App_Type), @readonly = "readonly" })
+                @*@Html.EditorFor(model => model.HRMS_TravelMode_MS.Mode_Type, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })*@
+
                 @Html.ValidationMessageFor(model => model.Travel_App_Type, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -56,7 +58,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Travel_Type, "Travel_Type", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Travel_Type", (SelectList)ViewBag.dataTravelType, "select a type", htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("Travel_Type", (SelectList)ViewBag.dataTravelType, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+                @*@Html.EditorFor(model => model.HRMS_Travel_type.Short_Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })*@
 
                 @Html.ValidationMessageFor(model => model.Travel_Type, "", new { @class = "text-danger" })
             </div>

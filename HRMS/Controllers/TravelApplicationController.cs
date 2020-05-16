@@ -50,19 +50,29 @@ namespace HRMS.Controllers
             var user = Convert.ToInt64(Session["id"]);
             HRMS_Travel_Application hRMS_Travel_Application = new HRMS_Travel_Application();
             hRMS_Travel_Application.emp_id = user;
+            //HRMS_TravelMode_MS hRMS_TravelMode_MS = db.HRMS_TravelMode_MS.Where(rec => rec.Mode_Type == "Local Coveyance").FirstOrDefault();
+            //HRMS_Travel_type hRMS_Travel_Type = db.HRMS_Travel_type.Where(rec => rec.Name == "Domestic").FirstOrDefault();
+            //hRMS_Travel_Application.Travel_Type = hRMS_Travel_Type.ID;
+            //hRMS_Travel_Application.Travel_App_Type = hRMS_TravelMode_MS.Mode_ID;
+
             //ViewBag.emp_id = new SelectList(db.Accounts, "ID", "UserName");
             //hRMS_Travel_Application.Grade = db.EMP_Grade_Assignment.Where(rec => rec.EMP_ID == user).Select(rec => rec.Grade_ID);
             //ViewBag.Approved_by = new SelectList(db.Accounts, "ID", "UserName");
             // ViewBag.Grade = new SelectList(db.HRMS_CATEGORY_GRADE, "Category_ID", "Category_Name");
             //ViewBag.Designation = new SelectList(db.HRMS_DESG_MS, "Desg_Id", "Desg_Name");
-           // ViewBag.Travel_Purpose = db.HRMS_Travel_Purpose;
-            ViewBag.dataTravelPurpose = new SelectList(db.HRMS_Travel_Purpose, "ID", "Name");
+            // ViewBag.Travel_Purpose = db.HRMS_Travel_Purpose;
 
             //ViewBag.Travel_Type = db.HRMS_Travel_type;
-            ViewBag.dataTravelType = new SelectList(db.HRMS_Travel_type, "ID", "Short_Name");
-
             //ViewBag.Travel_App_Type = db.HRMS_TravelMode_MS;
-            ViewBag.EntidadList = new SelectList(db.HRMS_TravelMode_MS, "Mode_ID", "Mode_Name");
+            ViewBag.dataTravelPurpose = new SelectList(db.HRMS_Travel_Purpose, "ID", "Name");
+            HRMS_TravelMode_MS hRMS_TravelMode_MS = db.HRMS_TravelMode_MS.Where(rec => rec.Mode_Type == "Local Coveyance").FirstOrDefault();
+            HRMS_Travel_type hRMS_Travel_Type = db.HRMS_Travel_type.Where(rec => rec.Name == "Domestic").FirstOrDefault();
+            //hRMS_Travel_Application.Travel_Type = hRMS_Travel_Type.ID;
+            //hRMS_Travel_Application.Travel_App_Type = hRMS_TravelMode_MS.Mode_ID;
+            ////hRMS_Travel_Application.Travel_Type = hRMS_Travel_Type.ID;
+            ViewBag.dataTravelType = new SelectList(db.HRMS_Travel_type, "ID", "Short_Name", hRMS_Travel_Type.ID);
+
+            ViewBag.EntidadList = new SelectList(db.HRMS_TravelMode_MS, "Mode_ID", "Mode_Type", hRMS_TravelMode_MS.Mode_ID);
             return View(hRMS_Travel_Application);
         }
 
@@ -77,6 +87,14 @@ namespace HRMS.Controllers
         [Authorize(Roles = "emp")]
         public ActionResult Create( HRMS_Travel_Application hRMS_Travel_Application)
         {
+            HRMS_TravelMode_MS hRMS_TravelMode_MS = db.HRMS_TravelMode_MS.Where(rec => rec.Mode_Type == "Local Coveyance").FirstOrDefault();
+            HRMS_Travel_type hRMS_Travel_Type = db.HRMS_Travel_type.Where(rec => rec.Name == "Domestic").FirstOrDefault();
+            ModelState.Remove("Travel_Type");
+
+            hRMS_Travel_Application.Travel_Type = hRMS_Travel_Type.ID;
+            ModelState.Remove("Travel_App_Type");
+
+            hRMS_Travel_Application.Travel_App_Type = hRMS_TravelMode_MS.Mode_ID;
             ModelState.Remove("Travel_Application_Date");
             hRMS_Travel_Application.Travel_Application_Date = DateTime.Now;
             
@@ -90,10 +108,6 @@ namespace HRMS.Controllers
 
             hRMS_Travel_Application.Status = 0;
 
-
-
-
-
             if (ModelState.IsValid)
             {
                
@@ -106,36 +120,37 @@ namespace HRMS.Controllers
                     if(samedate == null) {     
                     db.HRMS_Travel_Application.Add(hRMS_Travel_Application);
                     db.SaveChanges();
-                    ViewBag.ApplicationStatus = "Application generated successfully.";
-
-                    ViewBag.dataTravelPurpose = new SelectList(db.HRMS_Travel_Purpose, "ID", "Name");
-
-                    ViewBag.dataTravelType = new SelectList(db.HRMS_Travel_type, "ID", "Short_Name");
-
-                    ViewBag.EntidadList = new SelectList(db.HRMS_TravelMode_MS, "Mode_ID", "Mode_Name");
                     ModelState.Clear();
-                    return View();
+
+                        ViewBag.ApplicationStatus = "Application generated successfully.";
+
+                        ViewBag.dataTravelPurpose = new SelectList(db.HRMS_Travel_Purpose, "ID", "Name");
+
+                        ViewBag.dataTravelType = new SelectList(db.HRMS_Travel_type, "ID", "Short_Name", hRMS_Travel_Type.ID);
+
+                        ViewBag.EntidadList = new SelectList(db.HRMS_TravelMode_MS, "Mode_ID", "Mode_Type", hRMS_TravelMode_MS.Mode_ID);
+                        return View();
                     }
                     else
                     {
                         ViewBag.ApplicationStatus = "You have a trip with same From date and To date";
 
                         ViewBag.dataTravelPurpose = new SelectList(db.HRMS_Travel_Purpose, "ID", "Name");
-
+               
                         ViewBag.dataTravelType = new SelectList(db.HRMS_Travel_type, "ID", "Short_Name");
 
-                        ViewBag.EntidadList = new SelectList(db.HRMS_TravelMode_MS, "Mode_ID", "Mode_Name");
-                        return View();
+                        ViewBag.EntidadList = new SelectList(db.HRMS_TravelMode_MS, "Mode_ID", "Mode_Type");
+                        return View(hRMS_Travel_Application);
                     }
                 }
                  else if (result > 0)
                 {
                     ViewBag.ApplicationStatus = "from date is greater then two date!!!";
                     ViewBag.dataTravelPurpose = new SelectList(db.HRMS_Travel_Purpose, "ID", "Name");
-
+                   
                     ViewBag.dataTravelType = new SelectList(db.HRMS_Travel_type, "ID", "Short_Name");
 
-                    ViewBag.EntidadList = new SelectList(db.HRMS_TravelMode_MS, "Mode_ID", "Mode_Name");
+                    ViewBag.EntidadList = new SelectList(db.HRMS_TravelMode_MS, "Mode_ID", "Mode_Type");
                     return View(hRMS_Travel_Application);
                 }
                
@@ -143,15 +158,16 @@ namespace HRMS.Controllers
             ViewBag.ApplicationStatus = "model is in invalid state.";
 
 
-                    ViewBag.dataTravelPurpose = new SelectList(db.HRMS_Travel_Purpose, "ID", "Name");
+            ViewBag.dataTravelPurpose = new SelectList(db.HRMS_Travel_Purpose, "ID", "Name");
+        
+            ViewBag.dataTravelType = new SelectList(db.HRMS_Travel_type, "ID", "Short_Name");
 
-                    ViewBag.dataTravelType = new SelectList(db.HRMS_Travel_type, "ID", "Short_Name");
-
-                    ViewBag.EntidadList = new SelectList(db.HRMS_TravelMode_MS, "Mode_ID", "Mode_Name");
+            ViewBag.EntidadList = new SelectList(db.HRMS_TravelMode_MS, "Mode_ID", "Mode_Type");
             return View(hRMS_Travel_Application);
         }
 
         // GET: TravelApplication/Edit/5
+        [Authorize(Roles = "admin")]
         public ActionResult Edit(long? id)
         {
             
@@ -177,7 +193,7 @@ namespace HRMS.Controllers
         // POST: TravelApplication/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [Authorize(Roles = "admin")]
         public ActionResult Edit(HRMS_Travel_Application hRMS_Travel_Application)
         {
 
@@ -208,11 +224,12 @@ namespace HRMS.Controllers
                 //ViewBag.Travel_Purpose = new SelectList(db.HRMS_Travel_Purpose, "ID", "Name", hRMS_Travel_Application.Travel_Purpose);
                 //ViewBag.Travel_Type = new SelectList(db.HRMS_Travel_type, "ID", "Short_Name", hRMS_Travel_Application.Travel_Type);
                 //ViewBag.Travel_App_Type = new SelectList(db.HRMS_TravelMode_MS, "Mode_ID", "Mode_Type", hRMS_Travel_Application.Travel_App_Type);
-                return RedirectToAction("Index");
             }
             return RedirectToAction("Index");
 
         }
+        [Authorize(Roles = "admin")]
+
         public ActionResult Approve(long id)
         {
             var application = db.HRMS_Travel_Application.Where(rec => rec.ID == id).SingleOrDefault();
@@ -226,6 +243,8 @@ namespace HRMS.Controllers
             ModelState.Clear();
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "admin")]
+
         public ActionResult Cancel(long id)
         {
             var application = db.HRMS_Travel_Application.Where(rec => rec.ID == id).SingleOrDefault();
