@@ -6,7 +6,7 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm("Create","TravelApplication"))
+@using (Html.BeginForm("Create", "TravelApplication"))
 {
 
     <div class="form-horizontal">
@@ -68,7 +68,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Travel_Purpose, "Travel_Purpose", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Travel_Purpose",(SelectList)ViewBag.dataTravelPurpose, "select a purpose", htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("Travel_Purpose", (SelectList)ViewBag.dataTravelPurpose, "select a purpose", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Travel_Purpose, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -144,13 +144,19 @@
 </div>
 @if (ViewBag.ApplicationStatus != null)
 {
-<div class="alert alert-success alert-dismissible " style="width:50%;">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <span>
-        @ViewBag.ApplicationStatus
-    </span>
-</div>
+    <div class="alert alert-success alert-dismissible " style="width:50%;">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <span>
+            @ViewBag.ApplicationStatus
+        </span>
+    </div>
 }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
 
 <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
 <link href="~/Content/themes/base/jquery-ui.css" />
@@ -160,10 +166,8 @@
             dateFormat: "yy-mm-dd",
             changeMonth: true,
             changeYear: true,
-            yearRange: "1920:2020",
-            orientation: "right top",
-            maxDate: new Date()
-
+            yearRange: "2019:2030",
+            orientation: "right top"
 
 
         });

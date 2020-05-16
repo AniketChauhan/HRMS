@@ -129,7 +129,7 @@ namespace HRMS.Controllers
                         ViewBag.dataTravelType = new SelectList(db.HRMS_Travel_type, "ID", "Short_Name", hRMS_Travel_Type.ID);
 
                         ViewBag.EntidadList = new SelectList(db.HRMS_TravelMode_MS, "Mode_ID", "Mode_Type", hRMS_TravelMode_MS.Mode_ID);
-                        return View();
+                        return RedirectToAction("Index");
                     }
                     else
                     {
@@ -194,6 +194,7 @@ namespace HRMS.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize(Roles = "admin")]
+        [HttpPost]
         public ActionResult Edit(HRMS_Travel_Application hRMS_Travel_Application)
         {
 
