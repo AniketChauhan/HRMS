@@ -886,6 +886,12 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="DepartmentData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="EmployeeReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="department" Type="bigint" Mode="In" />
+          <Parameter Name="WorkLocation" Type="bigint" Mode="In" />
+          <Parameter Name="fromdate" Type="date" Mode="In" />
+          <Parameter Name="todate" Type="date" Mode="In" />
+        </Function>
         <Function Name="FillEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="HRMS5ModelStoreContainer">
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
@@ -1921,6 +1927,12 @@
             <End Role="Accounts" EntitySet="Accounts" />
             <End Role="HRMS_Travel_Expense_App" EntitySet="HRMS_Travel_Expense_App" />
           </AssociationSet>
+          <FunctionImport Name="EmployeeReport" ReturnType="Collection(HRMS5Model.EmployeeReport_Result)">
+            <Parameter Name="department" Mode="In" Type="Int64" />
+            <Parameter Name="WorkLocation" Mode="In" Type="Int64" />
+            <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+            <Parameter Name="todate" Mode="In" Type="DateTime" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="DepartmentData_Result">
           <Property Type="Int64" Name="Dept_Id" Nullable="false" />
@@ -2254,6 +2266,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="EmployeeReport_Result">
+          <Property Type="Int64" Name="EmployeeCode" Nullable="false" />
+          <Property Type="String" Name="EmployeeName" Nullable="false" MaxLength="250" />
+          <Property Type="DateTime" Name="JoinDate" Nullable="false" />
+          <Property Type="String" Name="Department" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="WorkLocation" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Gender_Value" Nullable="false" MaxLength="10" />
+          <Property Type="DateTime" Name="DateOfBirth" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2729,6 +2750,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="EmployeeReport" FunctionName="HRMS5Model.Store.EmployeeReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HRMS5Model.EmployeeReport_Result">
+                <ScalarProperty Name="EmployeeCode" ColumnName="EmployeeCode" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="WorkLocation" ColumnName="WorkLocation" />
+                <ScalarProperty Name="Gender_Value" ColumnName="Gender_Value" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

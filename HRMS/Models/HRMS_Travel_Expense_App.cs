@@ -16,8 +16,7 @@ namespace HRMS.Models
     {
         public long ID { get; set; }
         public long Travel_App_ID { get; set; }
-        //public System.DateTime Travel_Date { get; set; }
-        public Nullable<System.DateTime> Travel_Date { get; set; }
+        public System.DateTime Travel_Date { get; set; }
         public string Journey_Mode { get; set; }
         public string From_Place { get; set; }
         public string To_Place { get; set; }
@@ -28,8 +27,6 @@ namespace HRMS.Models
         public string FileUrl { get; set; }
         public long EMP_ID { get; set; }
         public Nullable<int> Status { get; set; }
-
-        public decimal TotalAmount { get; set; }
     
         public virtual HRMS_Travel_Application HRMS_Travel_Application { get; set; }
         public virtual Accounts Accounts { get; set; }

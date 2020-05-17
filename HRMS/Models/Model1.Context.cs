@@ -75,5 +75,26 @@ namespace HRMS.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FillEmployee_Result>("FillEmployee");
         }
+    
+        public virtual ObjectResult<EmployeeReport_Result> EmployeeReport(Nullable<long> department, Nullable<long> workLocation, Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate)
+        {
+            var departmentParameter = department.HasValue ?
+                new ObjectParameter("department", department) :
+                new ObjectParameter("department", typeof(long));
+    
+            var workLocationParameter = workLocation.HasValue ?
+                new ObjectParameter("WorkLocation", workLocation) :
+                new ObjectParameter("WorkLocation", typeof(long));
+    
+            var fromdateParameter = fromdate.HasValue ?
+                new ObjectParameter("fromdate", fromdate) :
+                new ObjectParameter("fromdate", typeof(System.DateTime));
+    
+            var todateParameter = todate.HasValue ?
+                new ObjectParameter("todate", todate) :
+                new ObjectParameter("todate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmployeeReport_Result>("EmployeeReport", departmentParameter, workLocationParameter, fromdateParameter, todateParameter);
+        }
     }
 }

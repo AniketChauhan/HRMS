@@ -21,9 +21,11 @@ namespace HRMS.Models
         public string Emp_Photo_Path { get; set; }
         public string Emp_Sign_Title { get; set; }
         public string Emp_Sign_Path { get; set; }
+        
 
         public HttpPostedFileBase ImageFile { get; set; }
         public HttpPostedFileBase SignFile { get; set; }
+
 
         public virtual Accounts Accounts { get; set; }
     }
