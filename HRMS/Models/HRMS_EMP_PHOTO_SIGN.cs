@@ -12,7 +12,6 @@ namespace HRMS.Models
     using System;
     using System.Collections.Generic;
     using System.Web;
-
     public partial class HRMS_EMP_PHOTO_SIGN
     {
         public long Emp_Photos_ID { get; set; }
@@ -21,7 +20,6 @@ namespace HRMS.Models
         public string Emp_Photo_Path { get; set; }
         public string Emp_Sign_Title { get; set; }
         public string Emp_Sign_Path { get; set; }
-
         public HttpPostedFileBase ImageFile { get; set; }
         public HttpPostedFileBase SignFile { get; set; }
         public virtual Accounts Accounts { get; set; }

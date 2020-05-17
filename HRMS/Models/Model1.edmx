@@ -964,6 +964,20 @@
           <Parameter Name="todate" Type="date" Mode="In" />
         </Function>
         <Function Name="FillEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="TravelApplicationExpanseReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fromdate" Type="date" Mode="In" />
+          <Parameter Name="todate" Type="date" Mode="In" />
+          <Parameter Name="TravelPurpose" Type="bigint" Mode="In" />
+          <Parameter Name="Grade" Type="bigint" Mode="In" />
+          <Parameter Name="designation" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="TravelApplicationReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fromdate" Type="date" Mode="In" />
+          <Parameter Name="todate" Type="date" Mode="In" />
+          <Parameter Name="grade" Type="bigint" Mode="In" />
+          <Parameter Name="designation" Type="bigint" Mode="In" />
+          <Parameter Name="status" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="HRMS5ModelStoreContainer">
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BankMaster" EntityType="Self.BankMaster" Schema="dbo" store:Type="Tables" />
@@ -2037,6 +2051,20 @@
             <End Role="HRMS_TravelGroupType_MS" EntitySet="HRMS_TravelGroupType_MS" />
             <End Role="HRMS_EMP_GRA_POL" EntitySet="HRMS_EMP_GRA_POL" />
           </AssociationSet>
+          <FunctionImport Name="TravelApplicationExpanseReport" ReturnType="Collection(HRMS5Model.TravelApplicationExpanseReport_Result)">
+            <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+            <Parameter Name="todate" Mode="In" Type="DateTime" />
+            <Parameter Name="TravelPurpose" Mode="In" Type="Int64" />
+            <Parameter Name="Grade" Mode="In" Type="Int64" />
+            <Parameter Name="designation" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="TravelApplicationReport" ReturnType="Collection(HRMS5Model.TravelApplicationReport_Result)">
+            <Parameter Name="fromdate" Mode="In" Type="DateTime" />
+            <Parameter Name="todate" Mode="In" Type="DateTime" />
+            <Parameter Name="grade" Mode="In" Type="Int64" />
+            <Parameter Name="designation" Mode="In" Type="Int64" />
+            <Parameter Name="status" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="DepartmentData_Result">
           <Property Type="Int64" Name="Dept_Id" Nullable="false" />
@@ -2453,6 +2481,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="TravelApplicationExpanseReport_Result">
+          <Property Type="Int64" Name="employeeCode" Nullable="false" />
+          <Property Type="String" Name="EmployeeName" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="Designation" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Grade" Nullable="false" MaxLength="20" />
+          <Property Type="DateTime" Name="FromDate" Nullable="false" />
+          <Property Type="DateTime" Name="ToDate" Nullable="false" />
+          <Property Type="String" Name="TravelPurpose" Nullable="false" />
+          <Property Type="Decimal" Name="TotalExpanse" Nullable="true" Precision="38" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="TravelApplicationReport_Result">
+          <Property Type="Int64" Name="employeeCode" Nullable="false" />
+          <Property Type="String" Name="EmployeeName" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="Designation" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Grade" Nullable="false" MaxLength="20" />
+          <Property Type="DateTime" Name="FromDate" Nullable="false" />
+          <Property Type="DateTime" Name="ToDate" Nullable="false" />
+          <Property Type="String" Name="TravelPurpose" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2977,6 +3024,33 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="TravelApplicationExpanseReport" FunctionName="HRMS5Model.Store.TravelApplicationExpanseReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HRMS5Model.TravelApplicationExpanseReport_Result">
+                <ScalarProperty Name="employeeCode" ColumnName="employeeCode" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="TravelPurpose" ColumnName="TravelPurpose" />
+                <ScalarProperty Name="TotalExpanse" ColumnName="TotalExpanse" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TravelApplicationReport" FunctionName="HRMS5Model.Store.TravelApplicationReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HRMS5Model.TravelApplicationReport_Result">
+                <ScalarProperty Name="employeeCode" ColumnName="employeeCode" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="TravelPurpose" ColumnName="TravelPurpose" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
