@@ -96,5 +96,55 @@ namespace HRMS.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<EmployeeReport_Result>("EmployeeReport", departmentParameter, workLocationParameter, fromdateParameter, todateParameter);
         }
+    
+        public virtual ObjectResult<TravelApplicationExpanseReport_Result> TravelApplicationExpanseReport(Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate, Nullable<long> travelPurpose, Nullable<long> grade, Nullable<long> designation)
+        {
+            var fromdateParameter = fromdate.HasValue ?
+                new ObjectParameter("fromdate", fromdate) :
+                new ObjectParameter("fromdate", typeof(System.DateTime));
+    
+            var todateParameter = todate.HasValue ?
+                new ObjectParameter("todate", todate) :
+                new ObjectParameter("todate", typeof(System.DateTime));
+    
+            var travelPurposeParameter = travelPurpose.HasValue ?
+                new ObjectParameter("TravelPurpose", travelPurpose) :
+                new ObjectParameter("TravelPurpose", typeof(long));
+    
+            var gradeParameter = grade.HasValue ?
+                new ObjectParameter("Grade", grade) :
+                new ObjectParameter("Grade", typeof(long));
+    
+            var designationParameter = designation.HasValue ?
+                new ObjectParameter("designation", designation) :
+                new ObjectParameter("designation", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TravelApplicationExpanseReport_Result>("TravelApplicationExpanseReport", fromdateParameter, todateParameter, travelPurposeParameter, gradeParameter, designationParameter);
+        }
+    
+        public virtual ObjectResult<TravelApplicationReport_Result> TravelApplicationReport(Nullable<System.DateTime> fromdate, Nullable<System.DateTime> todate, Nullable<long> grade, Nullable<long> designation, Nullable<int> status)
+        {
+            var fromdateParameter = fromdate.HasValue ?
+                new ObjectParameter("fromdate", fromdate) :
+                new ObjectParameter("fromdate", typeof(System.DateTime));
+    
+            var todateParameter = todate.HasValue ?
+                new ObjectParameter("todate", todate) :
+                new ObjectParameter("todate", typeof(System.DateTime));
+    
+            var gradeParameter = grade.HasValue ?
+                new ObjectParameter("grade", grade) :
+                new ObjectParameter("grade", typeof(long));
+    
+            var designationParameter = designation.HasValue ?
+                new ObjectParameter("designation", designation) :
+                new ObjectParameter("designation", typeof(long));
+    
+            var statusParameter = status.HasValue ?
+                new ObjectParameter("status", status) :
+                new ObjectParameter("status", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TravelApplicationReport_Result>("TravelApplicationReport", fromdateParameter, todateParameter, gradeParameter, designationParameter, statusParameter);
+        }
     }
 }

@@ -329,6 +329,12 @@
     <Compile Include="Models\State.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TravelApplicationExpanseReport_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TravelApplicationReport_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UnitMaster.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
