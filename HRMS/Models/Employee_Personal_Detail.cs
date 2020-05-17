@@ -11,33 +11,97 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel;
+
+
     public partial class Employee_Personal_Detail
     {
+        //public long ID { get; set; }
+        //public long Gender { get; set; }
+        //public System.DateTime DOB { get; set; }
+        //public long Category { get; set; }
+        //public string IdentityMark1 { get; set; }
+        //public string IdentityMark2 { get; set; }
+        //public Nullable<long> Religion { get; set; }
+        //public Nullable<long> Citizenship { get; set; }
+        //public Nullable<long> Caste { get; set; }
+        //public string Race { get; set; }
+        //public Nullable<long> MarraigeStatus { get; set; }
+        //public Nullable<System.DateTime> MarraigeDate { get; set; }
+        //public Nullable<int> NoOfChild { get; set; }
+        //public Nullable<int> NoOfDependents { get; set; }
+        //public string AadharNo { get; set; }
+        //public string SIN { get; set; }
+        //public string AKA { get; set; }
+        //public string MilitaryService { get; set; }
+        //public string BirthCity { get; set; }
+        //public string Note { get; set; }
+        //public string Hobbies { get; set; }
+        //public string MilitaryServiceDetail { get; set; }
+        //public Nullable<long> EMP_ID { get; set; }
+
         public long ID { get; set; }
+        [Required]
         public long Gender { get; set; }
-        public System.DateTime DOB { get; set; }
+        [Required]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
+        [DisplayName("Birth Date")]
+        public Nullable<System.DateTime> DOB { get; set; }
+        [Required]
         public long Category { get; set; }
+        [DisplayName("Identity Mark 1")]
+        [MaxLength(50, ErrorMessage = "Display name can have 50 characters maximum!")]
+
         public string IdentityMark1 { get; set; }
+        [DisplayName("Identity Mark 2")]
+        [MaxLength(50, ErrorMessage = "Display name can have 50 characters maximum!")]
+
         public string IdentityMark2 { get; set; }
         public Nullable<long> Religion { get; set; }
         public Nullable<long> Citizenship { get; set; }
         public Nullable<long> Caste { get; set; }
         public string Race { get; set; }
+        [DisplayName("Marraige Status")]
         public Nullable<long> MarraigeStatus { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
+        [DisplayName("Marraige Date")]
         public Nullable<System.DateTime> MarraigeDate { get; set; }
+        [DisplayName("No. Of Children")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "please Enter Numeric value!")]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter valid number")]
         public Nullable<int> NoOfChild { get; set; }
+        [DisplayName("No. Of Dependents")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "please Enter Numeric value!")]
+        [Range(0, int.MaxValue, ErrorMessage = "Please enter valid number")]
+
         public Nullable<int> NoOfDependents { get; set; }
+        [RegularExpression(@"^[0-9]{12}$", ErrorMessage = "Aadhar No. must be in valid format")]
+        [DisplayName("Aadhar No.")]
         public string AadharNo { get; set; }
+        [DisplayName("SIN No.")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "please Enter Numeric value!")]
+
         public string SIN { get; set; }
         public string AKA { get; set; }
+        [DisplayName("Ex Military Service")]
         public string MilitaryService { get; set; }
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+        [DisplayName("Birth City")]
         public string BirthCity { get; set; }
+        [RegularExpression(@"^[A-Za-z0-9_ ]*$", ErrorMessage = "Only AlphNumeric values are allowed!")]
+
         public string Note { get; set; }
+        [RegularExpression(@"^[A-Za-z_ ]*$", ErrorMessage = "Only Alphabetic values are allowed!")]
+
         public string Hobbies { get; set; }
+        [DisplayName("Ex Military Service Detail")]
+        [RegularExpression(@"^[A-Za-z0-9_ ]*$", ErrorMessage = "Only AlphNumeric values are allowed!")]
+
         public string MilitaryServiceDetail { get; set; }
         public Nullable<long> EMP_ID { get; set; }
-    
+
+
         public virtual Accounts Accounts { get; set; }
         public virtual CastMaster CastMaster { get; set; }
         public virtual HRMS_CATEGORY_GRADE HRMS_CATEGORY_GRADE { get; set; }
