@@ -1,0 +1,212 @@
+﻿@model dynamic
+
+@*@model transactions.Models.HRMS_TRAVEL_MODE_CONFIG*@
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Local Conveyance</h3>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    HRMS.Models.HRMS_TRAVEL_MODE_CONFIG hRMS_TRAVEL_MODE_CONFIG2 = Model.hRMS_TRAVEL_MODE_CONFIG;
+    IEnumerable<HRMS.Models.HRMS_CATEGORY_GRADE> hRMS_CATEGORY_GRADEs2 = Model.hRMS_CATEGORY_GRADEs;
+    List<HRMS.Models.HRMS_TravelGroupType_MS> hRMS_TravelGroupType_Ms2 = Model.hRMS_TravelGroupType_Ms;
+
+<div class="form-horizontal">
+    
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    <div class="form-group row">
+    @Html.LabelFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_Group, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-2">
+        @Html.EditorFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_Group, new { htmlAttributes = new { @class = "form-control", @Name = "T_group", @readonly = "readonly" } })
+        @Html.ValidationMessageFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_Group, "", new { @class = "text-danger" })
+    </div>
+
+    @Html.LabelFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_Policy, htmlAttributes: new { @class = "control-label col-md-2" })
+
+    <div class="col-md-6">
+        <select name="T_policy" class="form-control">
+            <option>--Select---</option>
+            @foreach (var i in hRMS_TravelGroupType_Ms2)
+            {
+                <option id="@i.ID" value="@i.Group_Name">@i.Group_Name</option>
+            }
+        </select>
+
+        @*@Html.EditorFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_Policy, new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.ValidationMessageFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_Policy, "", new { @class = "text-danger" })
+    </div>
+    
+
+
+    </div>
+
+    @*<div class="form-group">
+
+        @Html.LabelFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_Policy, htmlAttributes: new { @class = "control-label col-md-2" })
+
+        <div class="col-md-10">
+            <select name="T_policy">
+
+                @foreach (var i in hRMS_TravelGroupType_Ms2)
+                {
+                    <option id="@i.ID" value="@i.Group_Name">@i.Group_Name</option>
+                }
+            </select>
+
+            @Html.EditorFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_Policy, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_Policy, "", new { @class = "text-danger" })
+        </div>
+    </div>*@
+    <hr />
+    <div class="form-group">
+        
+        
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_By_Auto, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            <div class="checkbox">
+                @Html.EditorFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_By_Auto, new { htmlAttributes = new { @Name = "T_auto" } })
+                @Html.ValidationMessageFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_By_Auto, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_By_Taxi, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            <div class="checkbox">
+                @Html.EditorFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_By_Taxi, new { htmlAttributes = new { @Name = "T_taxi" } })
+                @Html.ValidationMessageFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_By_Taxi, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <hr />
+
+    <div class="form-group">
+        @Html.LabelFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_Local_Conveyance_Max, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_Local_Conveyance_Max, new { htmlAttributes = new { @class = "form-control", @Name = "T_max" } })
+            @Html.ValidationMessageFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_Local_Conveyance_Max, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_Emp_Grade, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+
+            @Html.EditorFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_Emp_Grade, new { htmlAttributes = new { @class = "form-control", @Name = "T_grade", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_Emp_Grade, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <table id="grades" class="table table-bordered table-responsive table-striped">
+        <tr>
+            <th></th>
+            <th>
+                <h4>Grade Code</h4>
+            </th>
+            <th>
+                <h4>Grade Details</h4>
+            </th>
+
+
+        </tr>
+
+        @foreach (var item in hRMS_CATEGORY_GRADEs2)
+        {
+            <tr>
+                <td>
+                    <input type="checkbox" value="@item.Category_ID">
+                    <label for="@item.Category_ID">@item.Category_ID</label>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Grade_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Grade_Detail)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+
+    @*<input type="button" id="btnGet" value="Create" class="btn btn-default" />*@
+
+    <div class="form-group">
+        <center>
+            <input type="submit" id="btnGet" value="Create" class="btn btn-primary" />
+        </center>
+    </div>
+</div>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('select').on('change', function () {
+                //alert(this.value);
+                //alert($(this).find('option:selected').attr('id'));
+                document.getElementById("hRMS_TRAVEL_MODE_CONFIG2_Travel_Group").value = $(this).find('option:selected').attr('id');
+                 //$.get("/HRMS_TRAVEL_MODE_CONFIG/GetgradeList", { gradeX: $("#hRMS_TRAVEL_MODE_CONFIG2_Travel_Group").val() }, function (data) {
+                
+                              
+
+                 //   $.each(data, function (index, row) {
+
+                 //   $("#State").append("<option value='" + row.StateName + "'>" + row.StateName + "</option>")
+                 //   });
+
+                 //});
+
+
+            });
+
+            $("#btnGet").click(function () {
+                //Create an Array.
+                var selected = new Array();
+
+                //Reference the CheckBoxes and insert the checked CheckBox value in Array.
+                $("#grades input[type=checkbox]:checked").each(function () {
+                    selected.push(this.value);
+                });
+
+                //Display the selected CheckBox values.
+                if (selected.length > 0) {
+
+                    var a = selected.join(",");
+                    $('#hRMS_TRAVEL_MODE_CONFIG2_Travel_Emp_Grade').val(a);
+                }
+            });
+        });
+    </script>
+}
+
+@if (ViewBag.status != null)
+{
+    <div class="alert alert-success alert-dismissible " style="width:50%;">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <span>
+            @*@ViewBag.status*@
+            @Html.Raw(@ViewBag.status.Replace(Environment.NewLine, "<br/>"))
+        </span>
+    </div>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

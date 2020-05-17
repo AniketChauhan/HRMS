@@ -11,19 +11,16 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Web;
-
-    public partial class HRMS_EMP_PHOTO_SIGN
+    
+    public partial class HRMS_EMP_GRA_POL
     {
-        public long Emp_Photos_ID { get; set; }
+        public long Emp_Gra_Pol_ID { get; set; }
         public long Emp_ID { get; set; }
-        public string Emp_Photo_Title { get; set; }
-        public string Emp_Photo_Path { get; set; }
-        public string Emp_Sign_Title { get; set; }
-        public string Emp_Sign_Path { get; set; }
-
-        public HttpPostedFileBase ImageFile { get; set; }
-        public HttpPostedFileBase SignFile { get; set; }
+        public long Gra_ID { get; set; }
+        public long Pol_ID { get; set; }
+    
         public virtual Accounts Accounts { get; set; }
+        public virtual HRMS_CATEGORY_GRADE HRMS_CATEGORY_GRADE { get; set; }
+        public virtual HRMS_TravelGroupType_MS HRMS_TravelGroupType_MS { get; set; }
     }
 }

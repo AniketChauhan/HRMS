@@ -1,0 +1,156 @@
+﻿@model HRMS.Models.HRMS_TRAVEL_MODE_CONFIG
+@using HRMS.Models;
+@{
+    ViewBag.Title = "Edit1";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit1</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>HRMS_TRAVEL_MODE_CONFIG</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Travel_Mode_ID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Travel_Group, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Travel_Group, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Travel_Group, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Travel_Policy, "Travel_policy", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("Travel_policy", null, "--Select--", htmlAttributes: new { @class = "form-control" , @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.Travel_Policy, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.Travel_Policy, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Travel_Policy, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Travel_Policy, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Travel_By_Auto, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Travel_By_Auto)
+                    @Html.ValidationMessageFor(model => model.Travel_By_Auto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Travel_By_Taxi, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Travel_By_Taxi)
+                    @Html.ValidationMessageFor(model => model.Travel_By_Taxi, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Travel_Local_Conveyance_Max, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Travel_Local_Conveyance_Max, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Travel_Local_Conveyance_Max, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Travel_Emp_Grade, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Travel_Emp_Grade, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Travel_Emp_Grade, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<table id="grades" class="table">
+                <tr>
+                    <th></th>
+                    <th>
+                        <h4>Grade Code</h4>
+                    </th>
+                    <th>
+                        <h4>Grade Details</h4>
+                    </th>
+
+
+                </tr>
+
+                @foreach (HRMS_CATEGORY_GRADE item in (List<HRMS_CATEGORY_GRADE>) ViewBag.Emp_grade)
+                {
+                    <tr>
+                        <td>
+                            <input type="checkbox" id="@item.Category_ID" value="@item.Category_ID">
+                            <label for="@item.Category_ID">@item.Category_ID</label>
+                        </td>
+                        <td>
+                            @item.Grade_Name
+                        </td>
+                        <td>
+                            @item.Grade_Detail
+                        </td>
+
+                    </tr>
+                }
+
+            </table>*@
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" id="btnGet" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    @*<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script type="text/javascript">
+
+            $(function () {
+
+
+                //$('select').on('change', function () {
+                //    //alert(this.value);
+                //    //alert($(this).find('option:selected').attr('id'));
+                //    document.getElementById("Travel_Group").value = alert(this.value);;
+                //});
+
+                //$("#btnGet").click(function () {
+                //    //Create an Array.
+                //    var selected = new Array();
+
+                //    //Reference the CheckBoxes and insert the checked CheckBox value in Array.
+                //    $("#grades input[type=checkbox]:checked").each(function () {
+                //        selected.push(this.value);
+                //    });
+
+                //    //Display the selected CheckBox values.
+                //    if (selected.length > 0) {
+
+                //        var a = selected.join(",");
+                //        $('#Travel_Emp_Grade').val(a);
+                //    }
+                //});
+            });
+        </script>*@
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

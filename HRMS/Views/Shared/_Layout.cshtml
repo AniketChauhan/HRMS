@@ -179,13 +179,108 @@
         }
 
 
-        @*---------------------------Add Employee--------------------------------*@
+        @*----------------------------Employee Transaction 2-----------------------------------------*@
+        @if (User.IsInRole("emp"))
+        {
+            <div class="w3-dropdown-hover DixDiv">
+                <button class="w3-button  @color">Transactions <i class="glyphicon glyphicon-chevron-down"> </i></button>
+                <div class="w3-dropdown-content w3-center w3-bar-block w3-card-4 DIVINSIDE">
+                    <div class="w3-bar-item w3-button w3-mobile">
+                        <i class="glyphicon glyphicon-move"> </i>
+                        @Html.ActionLink("Travel Application", "Index", "TravelApplication", new { area = "" }, new { @class = "" })
+                    </div>
+                    <div class="w3-bar-item w3-button w3-mobile">
+                        <i class="glyphicon glyphicon-adjust"> </i>
+                        @Html.ActionLink("Travel Expense", "TravelList", "TravelExpenseApplication", new { area = "" }, new { @class = "" })
+                    </div>
 
+                </div>
+
+            </div>
+
+        }
+
+
+        @*----------------------------Admin Transaction 2---------------------------------*@
+
+
+        @if (User.IsInRole("admin"))
+        {
+            <div class="w3-dropdown-hover DixDiv">
+                <button class="w3-button  @color">Transactions <i class="glyphicon glyphicon-chevron-down"> </i></button>
+                <div class="w3-dropdown-content w3-center w3-bar-block w3-card-4 DIVINSIDE">
+                    <div class="w3-bar-item w3-button w3-mobile">
+                        <i class="glyphicon glyphicon-move"> </i>
+                        @Html.ActionLink("Travel Application", "Index", "TravelApplication", new { area = "" }, new { @class = "", @id = "TravelCount" })
+                    </div>
+                    <div class="w3-bar-item w3-button w3-mobile">
+                        <i class="glyphicon glyphicon-adjust"> </i>
+                        @Html.ActionLink("Travel Expense", "AdminExpenseList", "TravelExpenseApplication", new { area = "" }, new { @class = "" })
+                    </div>
+
+                </div>
+
+            </div>
+
+        }
+
+
+        @*-----------------------------Admin Configuration-------------------------*@
+
+        @if (User.IsInRole("admin"))
+        {
+            <div class="w3-dropdown-hover DixDiv">
+                <button class="w3-button  @color">Configuration <i class="glyphicon glyphicon-chevron-down"> </i></button>
+                <div class="w3-dropdown-content w3-center w3-bar-block w3-card-4 DIVINSIDE">
+                    <div class="w3-bar-item w3-button w3-mobile">
+                        <i class="glyphicon glyphicon-move"> </i>
+                        @Html.ActionLink("Travel Mode", "Create", "TravelModeConfiguration", new { area = "" }, new { @class = ""})
+                    </div>
+                    <div class="w3-bar-item w3-button w3-mobile">
+                        <i class="glyphicon glyphicon-adjust"> </i>
+                        @Html.ActionLink("Travel Mileage", "Create", "TravelMileageConfiguration", new { area = "" }, new { @class = "" })
+                    </div>
+
+                </div>
+
+            </div>
+
+        }
+
+
+
+        @*---------------------------Admin Report--------------------------------------*@
+
+        @if (User.IsInRole("admin"))
+        {
+            <div class="w3-dropdown-hover DixDiv">
+                <button class="w3-button  @color">Reports <i class="glyphicon glyphicon-chevron-down"> </i></button>
+                <div class="w3-dropdown-content w3-center w3-bar-block w3-card-4 DIVINSIDE">
+                    <div class="w3-bar-item w3-button w3-mobile">
+                        <i class="glyphicon glyphicon-move"> </i>
+                        @Html.ActionLink("Employee Report", "Index", "EmployeeReport", new { area = "" }, new { @class = "" })
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        }
+
+
+
+        @*--------------------------Admin Account-----------------------------*@
         @if (User.IsInRole("admin"))
         {
             @Html.ActionLink("Account", "Index", "EmployeeRegistration", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
         }
-        @if (User.IsInRole("emp"))
+
+
+        @*---------------------------Add Employee--------------------------------*@
+
+
+        @*@if (User.IsInRole("emp"))
         {
             @Html.ActionLink("Travel Application", "Index", "TravelApplication", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
             @Html.ActionLink("Travel Expense", "TravelList", "TravelExpenseApplication", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
@@ -197,8 +292,8 @@
         }
         @if (User.IsInRole("admin"))
         {
-              @Html.ActionLink("Employee Report", "Index", "EmployeeReport", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
-        }
+            @Html.ActionLink("Employee Report", "Index", "EmployeeReport", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
+        }*@
 
 
         @*---------------------------fourth here----------------------------*@
@@ -326,18 +421,18 @@
 
 
     </div>
-    <div class=" body-content container">
-        @RenderBody()
-        <hr />
-        <footer>
-            <center>
-                <p>&copy; @DateTime.Now.Year - H.R.M.S. - HUMAN RESOURCE MANAGEMENT SYSTEM</p>
-            </center>
-                </footer>
-    </div>
+                <div class=" body-content container">
+                    @RenderBody()
+                    <hr />
+                    <footer>
+                        <center>
+                            <p>&copy; @DateTime.Now.Year - H.R.M.S. - HUMAN RESOURCE MANAGEMENT SYSTEM</p>
+                        </center>
+                    </footer>
+                </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+                @Scripts.Render("~/bundles/jquery")
+                @Scripts.Render("~/bundles/bootstrap")
+                @RenderSection("scripts", required: false)
 </body>
 </html>

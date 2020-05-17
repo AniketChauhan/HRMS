@@ -222,6 +222,15 @@
           <Property Name="Gender_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Gender_Value" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
+        <EntityType Name="HRMS_EMP_GRA_POL">
+          <Key>
+            <PropertyRef Name="Emp_Gra_Pol_ID" />
+          </Key>
+          <Property Name="Emp_Gra_Pol_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Emp_ID" Type="bigint" Nullable="false" />
+          <Property Name="Gra_ID" Type="bigint" Nullable="false" />
+          <Property Name="Pol_ID" Type="bigint" Nullable="false" />
+        </EntityType>
         <EntityType Name="HRMS_EMP_PHOTO_SIGN">
           <Key>
             <PropertyRef Name="Emp_Photos_ID" />
@@ -306,6 +315,30 @@
           <Property Name="Meal_Expense_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Meal_Expense_NM" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Meal_Expense_Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HRMS_TRAVEL_MILEAGE_CONFIG">
+          <Key>
+            <PropertyRef Name="Travel_Mileage_ID" />
+          </Key>
+          <Property Name="Travel_Mileage_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Travel_Group" Type="bigint" Nullable="false" />
+          <Property Name="Travel_Policy" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Travel_Mileage_Two" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Travel_Mileage_Four" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Travel_Mileage_Moped" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Travel_Mileage_Emp_Grade" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HRMS_TRAVEL_MODE_CONFIG">
+          <Key>
+            <PropertyRef Name="Travel_Mode_ID" />
+          </Key>
+          <Property Name="Travel_Mode_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Travel_Group" Type="bigint" Nullable="false" />
+          <Property Name="Travel_Policy" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Travel_By_Auto" Type="bit" Nullable="false" />
+          <Property Name="Travel_By_Taxi" Type="bit" Nullable="false" />
+          <Property Name="Travel_Local_Conveyance_Max" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Travel_Emp_Grade" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="HRMS_TRAVEL_OTHER_DETAILS_MS">
           <Key>
@@ -681,6 +714,44 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_HRMS_EMP_GRA_POL_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="HRMS_EMP_GRA_POL" Type="Self.HRMS_EMP_GRA_POL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_EMP_GRA_POL">
+              <PropertyRef Name="Emp_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_EMP_GRA_POL_HRMS_CATEGORY_GRADE">
+          <End Role="HRMS_CATEGORY_GRADE" Type="Self.HRMS_CATEGORY_GRADE" Multiplicity="1" />
+          <End Role="HRMS_EMP_GRA_POL" Type="Self.HRMS_EMP_GRA_POL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_CATEGORY_GRADE">
+              <PropertyRef Name="Category_ID" />
+            </Principal>
+            <Dependent Role="HRMS_EMP_GRA_POL">
+              <PropertyRef Name="Gra_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_EMP_GRA_POL_HRMS_TravelGroupType_MS">
+          <End Role="HRMS_TravelGroupType_MS" Type="Self.HRMS_TravelGroupType_MS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HRMS_EMP_GRA_POL" Type="Self.HRMS_EMP_GRA_POL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_TravelGroupType_MS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_EMP_GRA_POL">
+              <PropertyRef Name="Pol_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_HRMS_EMP_PHOTO_SIGN_Accounts">
           <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
           <End Role="HRMS_EMP_PHOTO_SIGN" Type="Self.HRMS_EMP_PHOTO_SIGN" Multiplicity="*" />
@@ -913,12 +984,15 @@
           <EntitySet Name="HRMS_EMP_CITIZENSHIP_MS" EntityType="Self.HRMS_EMP_CITIZENSHIP_MS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_Emp_Details" EntityType="Self.HRMS_Emp_Details" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_EMP_GENDER_MS" EntityType="Self.HRMS_EMP_GENDER_MS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_EMP_GRA_POL" EntityType="Self.HRMS_EMP_GRA_POL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_EMP_PHOTO_SIGN" EntityType="Self.HRMS_EMP_PHOTO_SIGN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_EMP_ReferenceDetail" EntityType="Self.HRMS_EMP_ReferenceDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_SALUTATION" EntityType="Self.HRMS_SALUTATION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_Travel_Application" EntityType="Self.HRMS_Travel_Application" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_Travel_Expense_App" EntityType="Self.HRMS_Travel_Expense_App" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_TRAVEL_MEAL_EXPENSE_MS" EntityType="Self.HRMS_TRAVEL_MEAL_EXPENSE_MS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_TRAVEL_MILEAGE_CONFIG" EntityType="Self.HRMS_TRAVEL_MILEAGE_CONFIG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_TRAVEL_MODE_CONFIG" EntityType="Self.HRMS_TRAVEL_MODE_CONFIG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_TRAVEL_OTHER_DETAILS_MS" EntityType="Self.HRMS_TRAVEL_OTHER_DETAILS_MS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_Travel_Purpose" EntityType="Self.HRMS_Travel_Purpose" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_Travel_type" EntityType="Self.HRMS_Travel_type" Schema="dbo" store:Type="Tables" />
@@ -1020,6 +1094,18 @@
             <End Role="WorkLocationMaster" EntitySet="WorkLocationMaster" />
             <End Role="HRMS_Emp_Details" EntitySet="HRMS_Emp_Details" />
           </AssociationSet>
+          <AssociationSet Name="FK_HRMS_EMP_GRA_POL_Accounts" Association="Self.FK_HRMS_EMP_GRA_POL_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="HRMS_EMP_GRA_POL" EntitySet="HRMS_EMP_GRA_POL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_EMP_GRA_POL_HRMS_CATEGORY_GRADE" Association="Self.FK_HRMS_EMP_GRA_POL_HRMS_CATEGORY_GRADE">
+            <End Role="HRMS_CATEGORY_GRADE" EntitySet="HRMS_CATEGORY_GRADE" />
+            <End Role="HRMS_EMP_GRA_POL" EntitySet="HRMS_EMP_GRA_POL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_EMP_GRA_POL_HRMS_TravelGroupType_MS" Association="Self.FK_HRMS_EMP_GRA_POL_HRMS_TravelGroupType_MS">
+            <End Role="HRMS_TravelGroupType_MS" EntitySet="HRMS_TravelGroupType_MS" />
+            <End Role="HRMS_EMP_GRA_POL" EntitySet="HRMS_EMP_GRA_POL" />
+          </AssociationSet>
           <AssociationSet Name="FK_HRMS_EMP_PHOTO_SIGN_Accounts" Association="Self.FK_HRMS_EMP_PHOTO_SIGN_Accounts">
             <End Role="Accounts" EntitySet="Accounts" />
             <End Role="HRMS_EMP_PHOTO_SIGN" EntitySet="HRMS_EMP_PHOTO_SIGN" />
@@ -1112,6 +1198,7 @@
           <NavigationProperty Name="HRMS_Travel_Application1" Relationship="HRMS5Model.FK_HRMS_Travel_Application_Accounts1" FromRole="Accounts" ToRole="HRMS_Travel_Application" />
           <NavigationProperty Name="Sample" Relationship="HRMS5Model.FK_Sample_Accounts" FromRole="Accounts" ToRole="Sample" />
           <NavigationProperty Name="HRMS_Travel_Expense_App" Relationship="HRMS5Model.FK_HRMS_Travel_Expense_App_Accounts" FromRole="Accounts" ToRole="HRMS_Travel_Expense_App" />
+          <NavigationProperty Name="HRMS_EMP_GRA_POL" Relationship="HRMS5Model.FK_HRMS_EMP_GRA_POL_Accounts" FromRole="Accounts" ToRole="HRMS_EMP_GRA_POL" />
         </EntityType>
         <EntityType Name="BankMaster">
           <Key>
@@ -1233,6 +1320,7 @@
           <NavigationProperty Name="EMP_Grade_Assignment" Relationship="Self.FK_EMP_Grade_Assignment_HRMS_CATEGORY_GRADE" FromRole="HRMS_CATEGORY_GRADE" ToRole="EMP_Grade_Assignment" />
           <NavigationProperty Name="Employee_Personal_Detail" Relationship="Self.FK_Employee_Personal_Detail_HRMS_CATEGORY_GRADE" FromRole="HRMS_CATEGORY_GRADE" ToRole="Employee_Personal_Detail" />
           <NavigationProperty Name="HRMS_Travel_Application" Relationship="HRMS5Model.FK_HRMS_Travel_Application_HRMS_CATEGORY_GRADE" FromRole="HRMS_CATEGORY_GRADE" ToRole="HRMS_Travel_Application" />
+          <NavigationProperty Name="HRMS_EMP_GRA_POL" Relationship="HRMS5Model.FK_HRMS_EMP_GRA_POL_HRMS_CATEGORY_GRADE" FromRole="HRMS_CATEGORY_GRADE" ToRole="HRMS_EMP_GRA_POL" />
         </EntityType>
         <EntityType Name="HRMS_Contact">
           <Key>
@@ -1385,6 +1473,7 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Group_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="HRMS_TravelMode_MS" Relationship="Self.FK_HRMS_TravelGroupType_MS_HRMS_TravelMode_MS" FromRole="HRMS_TravelGroupType_MS" ToRole="HRMS_TravelMode_MS" />
+          <NavigationProperty Name="HRMS_EMP_GRA_POL" Relationship="HRMS5Model.FK_HRMS_EMP_GRA_POL_HRMS_TravelGroupType_MS" FromRole="HRMS_TravelGroupType_MS" ToRole="HRMS_EMP_GRA_POL" />
         </EntityType>
         <EntityType Name="HRMS_TravelMode_MS">
           <Key>
@@ -1933,6 +2022,21 @@
             <Parameter Name="fromdate" Mode="In" Type="DateTime" />
             <Parameter Name="todate" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="HRMS_EMP_GRA_POL" EntityType="HRMS5Model.HRMS_EMP_GRA_POL" />
+          <EntitySet Name="HRMS_TRAVEL_MILEAGE_CONFIG" EntityType="HRMS5Model.HRMS_TRAVEL_MILEAGE_CONFIG" />
+          <EntitySet Name="HRMS_TRAVEL_MODE_CONFIG" EntityType="HRMS5Model.HRMS_TRAVEL_MODE_CONFIG" />
+          <AssociationSet Name="FK_HRMS_EMP_GRA_POL_Accounts" Association="HRMS5Model.FK_HRMS_EMP_GRA_POL_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="HRMS_EMP_GRA_POL" EntitySet="HRMS_EMP_GRA_POL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_EMP_GRA_POL_HRMS_CATEGORY_GRADE" Association="HRMS5Model.FK_HRMS_EMP_GRA_POL_HRMS_CATEGORY_GRADE">
+            <End Role="HRMS_CATEGORY_GRADE" EntitySet="HRMS_CATEGORY_GRADE" />
+            <End Role="HRMS_EMP_GRA_POL" EntitySet="HRMS_EMP_GRA_POL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_EMP_GRA_POL_HRMS_TravelGroupType_MS" Association="HRMS5Model.FK_HRMS_EMP_GRA_POL_HRMS_TravelGroupType_MS">
+            <End Role="HRMS_TravelGroupType_MS" EntitySet="HRMS_TravelGroupType_MS" />
+            <End Role="HRMS_EMP_GRA_POL" EntitySet="HRMS_EMP_GRA_POL" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="DepartmentData_Result">
           <Property Type="Int64" Name="Dept_Id" Nullable="false" />
@@ -2275,6 +2379,80 @@
           <Property Type="String" Name="Gender_Value" Nullable="false" MaxLength="10" />
           <Property Type="DateTime" Name="DateOfBirth" Nullable="false" />
         </ComplexType>
+        <EntityType Name="HRMS_EMP_GRA_POL">
+          <Key>
+            <PropertyRef Name="Emp_Gra_Pol_ID" />
+          </Key>
+          <Property Name="Emp_Gra_Pol_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Emp_ID" Type="Int64" Nullable="false" />
+          <Property Name="Gra_ID" Type="Int64" Nullable="false" />
+          <Property Name="Pol_ID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="HRMS5Model.FK_HRMS_EMP_GRA_POL_Accounts" FromRole="HRMS_EMP_GRA_POL" ToRole="Accounts" />
+          <NavigationProperty Name="HRMS_CATEGORY_GRADE" Relationship="HRMS5Model.FK_HRMS_EMP_GRA_POL_HRMS_CATEGORY_GRADE" FromRole="HRMS_EMP_GRA_POL" ToRole="HRMS_CATEGORY_GRADE" />
+          <NavigationProperty Name="HRMS_TravelGroupType_MS" Relationship="HRMS5Model.FK_HRMS_EMP_GRA_POL_HRMS_TravelGroupType_MS" FromRole="HRMS_EMP_GRA_POL" ToRole="HRMS_TravelGroupType_MS" />
+        </EntityType>
+        <EntityType Name="HRMS_TRAVEL_MILEAGE_CONFIG">
+          <Key>
+            <PropertyRef Name="Travel_Mileage_ID" />
+          </Key>
+          <Property Name="Travel_Mileage_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Travel_Group" Type="Int64" Nullable="false" />
+          <Property Name="Travel_Policy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Travel_Mileage_Two" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Travel_Mileage_Four" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Travel_Mileage_Moped" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Travel_Mileage_Emp_Grade" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="HRMS_TRAVEL_MODE_CONFIG">
+          <Key>
+            <PropertyRef Name="Travel_Mode_ID" />
+          </Key>
+          <Property Name="Travel_Mode_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Travel_Group" Type="Int64" Nullable="false" />
+          <Property Name="Travel_Policy" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Travel_By_Auto" Type="Boolean" Nullable="false" />
+          <Property Name="Travel_By_Taxi" Type="Boolean" Nullable="false" />
+          <Property Name="Travel_Local_Conveyance_Max" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Travel_Emp_Grade" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_HRMS_EMP_GRA_POL_Accounts">
+          <End Type="HRMS5Model.Accounts" Role="Accounts" Multiplicity="1" />
+          <End Type="HRMS5Model.HRMS_EMP_GRA_POL" Role="HRMS_EMP_GRA_POL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_EMP_GRA_POL">
+              <PropertyRef Name="Emp_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_EMP_GRA_POL_HRMS_CATEGORY_GRADE">
+          <End Type="HRMS5Model.HRMS_CATEGORY_GRADE" Role="HRMS_CATEGORY_GRADE" Multiplicity="1" />
+          <End Type="HRMS5Model.HRMS_EMP_GRA_POL" Role="HRMS_EMP_GRA_POL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_CATEGORY_GRADE">
+              <PropertyRef Name="Category_ID" />
+            </Principal>
+            <Dependent Role="HRMS_EMP_GRA_POL">
+              <PropertyRef Name="Gra_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_EMP_GRA_POL_HRMS_TravelGroupType_MS">
+          <End Type="HRMS5Model.HRMS_TravelGroupType_MS" Role="HRMS_TravelGroupType_MS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="HRMS5Model.HRMS_EMP_GRA_POL" Role="HRMS_EMP_GRA_POL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_TravelGroupType_MS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_EMP_GRA_POL">
+              <PropertyRef Name="Pol_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2763,6 +2941,42 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="HRMS_EMP_GRA_POL">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_EMP_GRA_POL">
+              <MappingFragment StoreEntitySet="HRMS_EMP_GRA_POL">
+                <ScalarProperty Name="Pol_ID" ColumnName="Pol_ID" />
+                <ScalarProperty Name="Gra_ID" ColumnName="Gra_ID" />
+                <ScalarProperty Name="Emp_ID" ColumnName="Emp_ID" />
+                <ScalarProperty Name="Emp_Gra_Pol_ID" ColumnName="Emp_Gra_Pol_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_TRAVEL_MILEAGE_CONFIG">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_TRAVEL_MILEAGE_CONFIG">
+              <MappingFragment StoreEntitySet="HRMS_TRAVEL_MILEAGE_CONFIG">
+                <ScalarProperty Name="Travel_Mileage_Emp_Grade" ColumnName="Travel_Mileage_Emp_Grade" />
+                <ScalarProperty Name="Travel_Mileage_Moped" ColumnName="Travel_Mileage_Moped" />
+                <ScalarProperty Name="Travel_Mileage_Four" ColumnName="Travel_Mileage_Four" />
+                <ScalarProperty Name="Travel_Mileage_Two" ColumnName="Travel_Mileage_Two" />
+                <ScalarProperty Name="Travel_Policy" ColumnName="Travel_Policy" />
+                <ScalarProperty Name="Travel_Group" ColumnName="Travel_Group" />
+                <ScalarProperty Name="Travel_Mileage_ID" ColumnName="Travel_Mileage_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_TRAVEL_MODE_CONFIG">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_TRAVEL_MODE_CONFIG">
+              <MappingFragment StoreEntitySet="HRMS_TRAVEL_MODE_CONFIG">
+                <ScalarProperty Name="Travel_Emp_Grade" ColumnName="Travel_Emp_Grade" />
+                <ScalarProperty Name="Travel_Local_Conveyance_Max" ColumnName="Travel_Local_Conveyance_Max" />
+                <ScalarProperty Name="Travel_By_Taxi" ColumnName="Travel_By_Taxi" />
+                <ScalarProperty Name="Travel_By_Auto" ColumnName="Travel_By_Auto" />
+                <ScalarProperty Name="Travel_Policy" ColumnName="Travel_Policy" />
+                <ScalarProperty Name="Travel_Group" ColumnName="Travel_Group" />
+                <ScalarProperty Name="Travel_Mode_ID" ColumnName="Travel_Mode_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

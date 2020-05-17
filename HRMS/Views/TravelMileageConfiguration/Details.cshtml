@@ -1,0 +1,67 @@
+﻿@model HRMS.Models.HRMS_TRAVEL_MILEAGE_CONFIG
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>HRMS TRAVEL MILEAGE CONFIG</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Travel_Group)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Travel_Group)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Travel_Policy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Travel_Policy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Travel_Mileage_Two)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Travel_Mileage_Two)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Travel_Mileage_Four)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Travel_Mileage_Four)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Travel_Mileage_Moped)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Travel_Mileage_Moped)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Travel_Mileage_Emp_Grade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Travel_Mileage_Emp_Grade)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Travel_Mileage_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

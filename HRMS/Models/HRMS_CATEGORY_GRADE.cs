@@ -20,6 +20,7 @@ namespace HRMS.Models
             this.EMP_Grade_Assignment = new HashSet<EMP_Grade_Assignment>();
             this.Employee_Personal_Detail = new HashSet<Employee_Personal_Detail>();
             this.HRMS_Travel_Application = new HashSet<HRMS_Travel_Application>();
+            this.HRMS_EMP_GRA_POL = new HashSet<HRMS_EMP_GRA_POL>();
         }
     
         public long Category_ID { get; set; }
@@ -33,5 +34,7 @@ namespace HRMS.Models
         public virtual ICollection<Employee_Personal_Detail> Employee_Personal_Detail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HRMS_Travel_Application> HRMS_Travel_Application { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HRMS_EMP_GRA_POL> HRMS_EMP_GRA_POL { get; set; }
     }
 }

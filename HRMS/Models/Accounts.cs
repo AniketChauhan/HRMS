@@ -28,14 +28,15 @@ namespace HRMS.Models
             this.HRMS_Travel_Application1 = new HashSet<HRMS_Travel_Application>();
             this.Sample = new HashSet<Sample>();
             this.HRMS_Travel_Expense_App = new HashSet<HRMS_Travel_Expense_App>();
+            this.HRMS_EMP_GRA_POL = new HashSet<HRMS_EMP_GRA_POL>();
         }
     
         public long ID { get; set; }
         public string UserName { get; set; }
+        public string ConfirmUsername { get; set; }
         public string password { get; set; }
         public string role { get; set; }
-        public string ConfirmUsername { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EMP_Grade_Assignment> EMP_Grade_Assignment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -58,5 +59,7 @@ namespace HRMS.Models
         public virtual ICollection<Sample> Sample { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HRMS_Travel_Expense_App> HRMS_Travel_Expense_App { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HRMS_EMP_GRA_POL> HRMS_EMP_GRA_POL { get; set; }
     }
 }

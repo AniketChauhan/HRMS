@@ -1,0 +1,65 @@
+﻿@model IEnumerable<HRMS.Models.HRMS_TRAVEL_MILEAGE_CONFIG>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-bordered table-striped table-responsive">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Travel_Group)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Travel_Policy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Travel_Mileage_Two)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Travel_Mileage_Four)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Travel_Mileage_Moped)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Travel_Mileage_Emp_Grade)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Travel_Group)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Travel_Policy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Travel_Mileage_Two)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Travel_Mileage_Four)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Travel_Mileage_Moped)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Travel_Mileage_Emp_Grade)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit1", new { id = item.Travel_Mileage_ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Travel_Mileage_ID }, new { @class = "btn btn-warning btn-sm glyphicon glyphicon-list-alt" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Travel_Mileage_ID }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-trash" })
+            </td>
+        </tr>
+    }
+
+</table>

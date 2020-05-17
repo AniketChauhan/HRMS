@@ -82,6 +82,12 @@
         <EntityTypeShape EntityType="HRMS5Model.HRMS_Travel_Expense_App" Width="1.5" PointX="16.25" PointY="19.25" />
         <AssociationConnector Association="HRMS5Model.FK_HRMS_Travel_Expense_App_HRMS_Travel_Application" />
         <AssociationConnector Association="HRMS5Model.FK_HRMS_Travel_Expense_App_Accounts" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_EMP_GRA_POL" Width="1.5" PointX="11.25" PointY="15.125" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_TRAVEL_MILEAGE_CONFIG" Width="1.5" PointX="14.375" PointY="11.75" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_TRAVEL_MODE_CONFIG" Width="1.5" PointX="15.375" PointY="3.75" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_EMP_GRA_POL_Accounts" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_EMP_GRA_POL_HRMS_CATEGORY_GRADE" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_EMP_GRA_POL_HRMS_TravelGroupType_MS" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

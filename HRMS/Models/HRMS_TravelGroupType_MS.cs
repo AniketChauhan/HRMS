@@ -14,11 +14,19 @@ namespace HRMS.Models
     
     public partial class HRMS_TravelGroupType_MS
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public HRMS_TravelGroupType_MS()
+        {
+            this.HRMS_EMP_GRA_POL = new HashSet<HRMS_EMP_GRA_POL>();
+        }
+    
         public long ID { get; set; }
         public long Mode_ID { get; set; }
         public System.DateTime Date { get; set; }
         public string Group_Name { get; set; }
     
         public virtual HRMS_TravelMode_MS HRMS_TravelMode_MS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HRMS_EMP_GRA_POL> HRMS_EMP_GRA_POL { get; set; }
     }
 }

@@ -1,0 +1,67 @@
+﻿@model HRMS.Models.HRMS_TRAVEL_MODE_CONFIG
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>HRMS TRAVEL MODE CONFIG</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Travel_Group)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Travel_Group)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Travel_Policy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Travel_Policy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Travel_By_Auto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Travel_By_Auto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Travel_By_Taxi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Travel_By_Taxi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Travel_Local_Conveyance_Max)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Travel_Local_Conveyance_Max)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Travel_Emp_Grade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Travel_Emp_Grade)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Travel_Mode_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
