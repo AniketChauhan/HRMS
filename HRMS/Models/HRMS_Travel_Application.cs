@@ -36,6 +36,7 @@ namespace HRMS.Models
         public Nullable<System.DateTime> Approved_date { get; set; }
         public string Approval_Remark { get; set; }
         public Nullable<int> ExpenseSubmitted { get; set; }
+        public Nullable<decimal> ExpenseAmount { get; set; }
     
         public virtual Accounts Accounts { get; set; }
         public virtual Accounts Accounts1 { get; set; }

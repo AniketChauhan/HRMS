@@ -4,57 +4,74 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Travel Application Report</h2>
+<h3>Travel Application Report</h3>
+<br />
 <div class="container-fluid">
     <center>
         @using (Html.BeginForm("Index", "TravelAppReport", FormMethod.Post, new { @class = "form-inline" }))
         {
-            <span>
-                <label>
-                    Department
-                </label>
-                @Html.DropDownList("Designation", new SelectList(ViewBag.Designation, "Desg_Id", "Desg_Name"), "Select Designation", htmlAttributes: new { @class = "form-control" })
-            </span>
-            <span>&nbsp; &nbsp; &nbsp; &nbsp;</span>
-            <span>
-                <label>
-                    Work Location
-                </label>
-                @Html.DropDownList("Grade", new SelectList(ViewBag.Grade, "Category_ID", "Grade_Name"), "Select Grade ", htmlAttributes: new { @class = "form-control" })
-            </span>
-            <span>&nbsp; &nbsp; &nbsp; &nbsp;</span>
-            <span>
-                <select name="status">
-                    <option value="">Select Status</option>
-                    <option value="0">Panding</option>
-                    <option value="1">
-                        Approve
-                    </option>
-                    <option value="3">
-                        Cancel
-                    </option>
-                </select>
-            </span>
-            <span>
-                <label>
-                    From Date
-                </label>
-                <input type="date" name="FromDate" class="form-control" />
-            </span>
-            <span>&nbsp; &nbsp; &nbsp; &nbsp;</span>
-            <span>
-                <label>
-                    To Date
-                </label>
-                <input type="date" name="ToDate" class="form-control" />
+        <table class="table table-bordered">
+            <tr>
+                <td>
+                    <span>
+                        @*<label>
+                Department
+            </label>*@
+                        @Html.DropDownList("Designation", new SelectList(ViewBag.Designation, "Desg_Id", "Desg_Name"), "Select Designation", htmlAttributes: new { @class = "form-control" })
+                    </span>
+                </td>
+                <td>
+                    @*<span>&nbsp; &nbsp; &nbsp; &nbsp;</span>*@
+                    <span>
+                        @*<label>
+                Work Location
+            </label>*@
+                        @Html.DropDownList("Grade", new SelectList(ViewBag.Grade, "Category_ID", "Grade_Name"), "Select Grade ", htmlAttributes: new { @class = "form-control" })
+                    </span>
+                </td>
+                <td>
+                    @*<span>&nbsp; &nbsp; &nbsp; &nbsp;</span>*@
+                    <span>
+                        <select name="status" class="form-control">
+                            <option value="">Select Status</option>
+                            <option value="0">Panding</option>
+                            <option value="1">
+                                Approve
+                            </option>
+                            <option value="3">
+                                Cancel
+                            </option>
+                        </select>
+                    </span>
+                </td>
+                <td>
+                    <span>
+                        <label>
+                From 
+            </label>
+                        <input type="date" name="FromDate" class="form-control" />
+                    </span>
+                </td>
+                @*<span>&nbsp; &nbsp; &nbsp; &nbsp;</span>*@
+            <td>
+                <span>
+                    <label>
+                To 
+            </label>
+                    <input type="date" name="ToDate" class="form-control" />
 
-            </span>
-            <span>&nbsp; &nbsp; &nbsp; &nbsp;</span>
-            <span>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                </span>
+            </td>
+                @*<span>&nbsp; &nbsp; &nbsp; &nbsp;</span>*@
+            <td>
+                <span>
+                    <button type="submit" class="btn btn-success">Submit</button>
 
-            </span>
-        }
+                </span>
+            </td>
+            </tr>
+        </table>
+               }
     </center>
     @if (Model != null)
     {

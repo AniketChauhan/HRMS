@@ -208,6 +208,15 @@ namespace HRMS.Controllers
             obj.Status = 1;
             db.Entry(obj).State = EntityState.Modified;
             db.SaveChanges();
+
+            //storing total amount in Db
+            long AppID = db.HRMS_Travel_Expense_App.Where(x => x.ID == id).Select(x => x.Travel_App_ID).FirstOrDefault();
+            decimal TotalAmount = db.HRMS_Travel_Expense_App.Where(x => x.Travel_App_ID == AppID && (x.Status == 0 || x.Status == 1)).Sum(x => x.Amount);
+            HRMS_Travel_Application obj1 = db.HRMS_Travel_Application.Find(AppID);
+            obj1.ExpenseAmount = TotalAmount;
+            db.Entry(obj1).State = EntityState.Modified;
+            db.SaveChanges();
+
             return RedirectToAction("ViewExpense",new { id = obj.Travel_App_ID});
         }
 
@@ -218,6 +227,25 @@ namespace HRMS.Controllers
             obj.Status = 2;
             db.Entry(obj).State = EntityState.Modified;
             db.SaveChanges();
+
+            //storing total amount in Db
+            decimal TotalAmount;
+            long AppID = db.HRMS_Travel_Expense_App.Where(x => x.ID == id).Select(x => x.Travel_App_ID).FirstOrDefault();
+            int TotalCount = db.HRMS_Travel_Expense_App.Where(x => x.Travel_App_ID == AppID).Count();
+            int CancelCount = db.HRMS_Travel_Expense_App.Where(x=>x.Travel_App_ID==AppID && x.Status==2).Count();
+            if (TotalCount == CancelCount)
+            {
+                TotalAmount = 0;
+            }
+            else
+            {
+                TotalAmount = db.HRMS_Travel_Expense_App.Where(x => x.Travel_App_ID == AppID && (x.Status == 0 || x.Status == 1)).Sum(x => x.Amount);
+            }
+                HRMS_Travel_Application obj1 = db.HRMS_Travel_Application.Find(AppID);
+            obj1.ExpenseAmount = TotalAmount;
+            db.Entry(obj1).State = EntityState.Modified;
+            db.SaveChanges();
+
             return RedirectToAction("ViewExpense", new { id = obj.Travel_App_ID });
         }
 

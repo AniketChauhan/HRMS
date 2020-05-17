@@ -11,9 +11,7 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class MaritalMaster
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,18 +19,10 @@ namespace HRMS.Models
         {
             this.Employee_Personal_Detail = new HashSet<Employee_Personal_Detail>();
         }
-
-        //public long MaritalID { get; set; }
-        //public string MaritalName { get; set; }
-
+    
         public long MaritalID { get; set; }
-        [Required]
-        [DisplayName("Marital Name")]
-        [RegularExpression(@"^[A-Za-z]+", ErrorMessage = "Only Alphabet values are allowed!")]
-        [MaxLength(50, ErrorMessage = "Marital name can have 50 characters maximum!")]
-
         public string MaritalName { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employee_Personal_Detail> Employee_Personal_Detail { get; set; }
     }

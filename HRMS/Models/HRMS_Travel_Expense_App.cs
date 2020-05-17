@@ -27,6 +27,8 @@ namespace HRMS.Models
         public string FileUrl { get; set; }
         public long EMP_ID { get; set; }
         public Nullable<int> Status { get; set; }
+
+        public decimal TotalAmount { set; get; }
     
         public virtual HRMS_Travel_Application HRMS_Travel_Application { get; set; }
         public virtual Accounts Accounts { get; set; }
