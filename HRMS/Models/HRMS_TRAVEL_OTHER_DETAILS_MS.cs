@@ -11,10 +11,18 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
+
+
     public partial class HRMS_TRAVEL_OTHER_DETAILS_MS
     {
         public long Travel_Other_Details_ID { get; set; }
+        [Required]
+        [DisplayName("Travel Other Detail")]
+        [RegularExpression(@"^[A-Za-z_ ]*$", ErrorMessage = "Only Alphabetic values are allowed!")]
+        [DataType(DataType.Text, ErrorMessage = "Only Alphabetic value are allowed")]
         public string Travel_Other_Details_NM { get; set; }
     }
 }

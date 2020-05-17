@@ -11,7 +11,8 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class HRMS_ATTACHMENT_TYPE
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,10 +20,15 @@ namespace HRMS.Models
         {
             this.HRMS_EMP_Attachment_Details = new HashSet<HRMS_EMP_Attachment_Details>();
         }
-    
+
         public long Attachment_Type_ID { get; set; }
+        [Required]
+        [Display(Name = "Attachment Type Name")]
+        [RegularExpression(@"^[A-Za-z_ ]*$", ErrorMessage = "Only Alphabetic values are allowed!")]
+        [DataType(DataType.Text, ErrorMessage = "Only Alphabetic value are allowed")]
+        [MaxLength(50, ErrorMessage = "Attachment Type Name can have 50 characters maximum!")]
         public string Attachment_Type_Name { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HRMS_EMP_Attachment_Details> HRMS_EMP_Attachment_Details { get; set; }
     }
