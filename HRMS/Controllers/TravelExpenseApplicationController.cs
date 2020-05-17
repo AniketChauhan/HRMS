@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -69,13 +70,25 @@ namespace HRMS.Controllers
 
         [Authorize(Roles = ("admin,emp"))]
         [HttpPost]
-        public ActionResult AddExpense(HRMS_Travel_Expense_App obj)
+        public ActionResult AddExpense(HRMS_Travel_Expense_App obj, HttpPostedFileBase files)
         {
 
             long emp_id = Convert.ToInt64(Session["id"]);
             string role = db.Accounts.Where(x => x.ID == emp_id).Select(x => x.role).FirstOrDefault();
             obj.EMP_ID = emp_id;
             obj.Status = 0;
+
+            //file
+            if (files != null)
+            {
+                var Extension = Path.GetExtension(files.FileName);
+                var fileName = obj.Travel_App_ID + "_" + obj.From_Place +obj.To_Place+ Extension;
+                string path = Path.Combine(Server.MapPath("~/ExpenseAttach"), fileName);
+                obj.FileUrl = Url.Content(Path.Combine("~/ExpenseAttach/", fileName));
+                obj.FileName = fileName;
+                files.SaveAs(path);
+            }
+
             db.HRMS_Travel_Expense_App.Add(obj);
             db.SaveChanges();
 
@@ -208,6 +221,25 @@ namespace HRMS.Controllers
             return RedirectToAction("ViewExpense", new { id = obj.Travel_App_ID });
         }
 
+        [Authorize(Roles = "admin,emp")]
+        public ActionResult DownloadFile(string filePath)
+        {
+            string fullName = Server.MapPath("~" + filePath);
+
+            byte[] fileBytes = GetFile(fullName);
+            var fn = Path.GetFileName(filePath);
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fn);
+        }
+
+        byte[] GetFile(string s)
+        {
+            System.IO.FileStream fs = System.IO.File.OpenRead(s);
+            byte[] data = new byte[fs.Length];
+            int br = fs.Read(data, 0, data.Length);
+            if (br != fs.Length)
+                throw new System.IO.IOException(s);
+            return data;
+        }
 
         //public ActionResult Index()
         //{

@@ -10,115 +10,123 @@
 <h2>AddExpense</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("AddExpense", "TravelExpenseApplication", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.Travel_App_ID, "Travel_App_ID", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("Travel_App_ID", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Travel_App_ID, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-        @Html.HiddenFor(model => model.Travel_App_ID)
+<div class="form-horizontal">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Travel_Date, htmlAttributes: new { @class = "control-label col-md-2 required" })
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.Travel_App_ID, "Travel_App_ID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Travel_Date, new { htmlAttributes = new { @class = "form-control datepicker" } })
-                @Html.ValidationMessageFor(model => model.Travel_Date, "", new { @class = "text-danger" })
+                @Html.DropDownList("Travel_App_ID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Travel_App_ID, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
+    @Html.HiddenFor(model => model.Travel_App_ID)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Journey_Mode, htmlAttributes: new { @class = "control-label col-md-2 required" })
-            <div class="col-md-10">
-                @*@Html.EditorFor(model => model.Journey_Mode, new { htmlAttributes = new { @class = "form-control" } })*@
-                @Html.DropDownList("Journey_Mode", new List<SelectListItem>
-                   {
-                       new SelectListItem{ Text="Auto", Value = "Auto" },
-                       new SelectListItem{ Text="Bus", Value = "Bus" },
-                       new SelectListItem{ Text="Texi", Value = "Texi" },
-                    }, "--Select--", htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Journey_Mode, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.From_Place, htmlAttributes: new { @class = "control-label col-md-2 required" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.From_Place, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.From_Place, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.To_Place, htmlAttributes: new { @class = "control-label col-md-2 required" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.To_Place, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.To_Place, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Distance, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Distance, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Distance, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2 required" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Purpose, htmlAttributes: new { @class = "control-label col-md-2 required" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Purpose)
-                @Html.ValidationMessageFor(model => model.Purpose, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.FileName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.FileName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.FileName, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.FileUrl, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.FileUrl, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.FileUrl, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.EMP_ID, "EMP_ID", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("EMP_ID", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.EMP_ID, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Travel_Date, htmlAttributes: new { @class = "control-label col-md-2 required" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Travel_Date, new { htmlAttributes = new { @class = "form-control datepicker" } })
+            @Html.ValidationMessageFor(model => model.Travel_Date, "", new { @class = "text-danger" })
         </div>
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Journey_Mode, htmlAttributes: new { @class = "control-label col-md-2 required" })
+        <div class="col-md-10">
+            @*@Html.EditorFor(model => model.Journey_Mode, new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.DropDownList("Journey_Mode", new List<SelectListItem>
+               {
+                   new SelectListItem{ Text="Auto", Value = "Auto" },
+                   new SelectListItem{ Text="Bus", Value = "Bus" },
+                   new SelectListItem{ Text="Texi", Value = "Texi" },
+                }, "--Select--", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Journey_Mode, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.From_Place, htmlAttributes: new { @class = "control-label col-md-2 required" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.From_Place, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.From_Place, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.To_Place, htmlAttributes: new { @class = "control-label col-md-2 required" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.To_Place, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.To_Place, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Distance, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Distance, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Distance, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2 required" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Purpose, htmlAttributes: new { @class = "control-label col-md-2 required" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Purpose)
+            @Html.ValidationMessageFor(model => model.Purpose, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-2 control-label">Has Attachment?</label>
+        <div class="col-md-10">
+            <input type="file" id="files" name="files" class="form-control"><br />
+        </div>
+    </div>
+
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.FileName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FileName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FileName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FileUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FileUrl, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FileUrl, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.EMP_ID, "EMP_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("EMP_ID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.EMP_ID, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
 }
 
 
@@ -143,6 +151,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            Download
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Status)
@@ -172,6 +183,13 @@
     <td>
         @Html.DisplayFor(modelItem => item.Amount)
     </td>
+    <td>
+        @if (item.FileName != null && item.FileUrl != null)
+        {
+        <a href="~/TravelExpenseApplication/DownloadFile?filePath=@item.FileUrl"><img src="~/Images/download.png" style="width: 20px; height: 20px" title="Download" /></a>
+        }
+    </td>
+
     <td>
         @*@Html.DisplayFor(modelItem => item.Amount)*@
         @if (item.Status == 0)

@@ -42,6 +42,7 @@ else
         <th>
             @Html.DisplayNameFor(model => model.Purpose)
         </th>
+        <th>Download</th>
         @*<th>
                 @Html.DisplayNameFor(model => model.FileName)
             </th>
@@ -86,8 +87,15 @@ else
             <td>
                 @Html.DisplayFor(modelItem => item.Amount)
             </td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.Purpose)
+            </td>
+            <td>
+                @if (item.FileName != null && item.FileUrl != null)
+                {
+                    <a href="~/TravelExpenseApplication/DownloadFile?filePath=@item.FileUrl"><img src="~/Images/download.png" style="width: 20px; height: 20px" title="Download" /></a>
+                }
             </td>
             @*<td>
                     @Html.DisplayFor(modelItem => item.FileName)
