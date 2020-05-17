@@ -103,8 +103,8 @@ namespace HRMS.Controllers
             hRMS_Travel_Application.Designation = designation.Designation;
 
             ModelState.Remove("Grade");
-            var grade = db.EMP_Grade_Assignment.Where(r => r.EMP_ID == hRMS_Travel_Application.emp_id).SingleOrDefault();
-            hRMS_Travel_Application.Grade = grade.Grade_ID;
+            var grade = db.HRMS_EMP_GRA_POL.Where(r => r.Emp_ID == hRMS_Travel_Application.emp_id).SingleOrDefault();
+            hRMS_Travel_Application.Grade = grade.Gra_ID;
 
             hRMS_Travel_Application.Status = 0;
 

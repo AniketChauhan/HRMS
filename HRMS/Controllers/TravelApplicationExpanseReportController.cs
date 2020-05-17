@@ -7,41 +7,48 @@ using System.Web.Mvc;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using HRMS.Models;
+
 namespace HRMS.Controllers
 {
     [Authorize(Roles = "admin")]
-
-    public class EmployeeReportController : Controller
+    public class TravelApplicationExpanseReportController : Controller
     {
         private HRMSEntities db = new HRMSEntities();
 
-        // GET: EmployeeReport
+        // GET: TravelApplicationExpanseReport
         public ActionResult Index()
         {
-            ViewBag.departments = ViewBag.Department = db.HRMS_DEPT.Where(rec => rec.Parent_ID != null && rec.IsActive == true);
-            ViewBag.WorkLocation = db.WorkLocationMaster;
-
+            ViewBag.Designation = db.HRMS_DESG_MS.Where(rec => rec.IsActive == true);
+            ViewBag.Grade = db.HRMS_CATEGORY_GRADE;
+            ViewBag.dataTravelPurpose = new SelectList(db.HRMS_Travel_Purpose, "ID", "Name");
             return View();
         }
-        //public ActionResult search(long Department,long Work_Location,DateTime FromDate,DateTime ToDate)
         [HttpPost]
         public ActionResult Index(FormCollection collection)
         {
-            string Departmentt = collection["Department"];
-            string WorkLocationn = collection["WorkLocation"];
+            string Designationn = collection["Designation"];
+            string Gradee = collection["Grade"];
+            string Travel_Purposee = collection["Travel_Purpose"];
             string fromdatee = collection["FromDate"];
             string todatee = collection["ToDate"];
-            long? Department = null;
-            long? Work_Location = null;
+
+
+            long? Designation = null;
+            long? Grade = null;
+            long? Travel_Purpose = null;
             DateTime? FromDate = null;
             DateTime? ToDate = null;
-            if (Departmentt != "")
+            if (Designationn != "")
             {
-                Department = Convert.ToInt64(collection["Department"]);
+                Designation = Convert.ToInt64(collection["Designation"]);
             }
-            if (WorkLocationn != "")
+            if (Gradee != "")
             {
-                Work_Location = Convert.ToInt64(collection["WorkLocation"]);
+                Grade = Convert.ToInt64(collection["Grade"]);
+            }
+            if (Travel_Purposee != "")
+            {
+                Travel_Purpose = Convert.ToInt32(collection["Travel_Purpose"]);
             }
             if (fromdatee != "")
             {
@@ -51,45 +58,40 @@ namespace HRMS.Controllers
             {
                 ToDate = Convert.ToDateTime(collection["ToDate"]);
             }
-            //long? Department = Convert.ToInt64(collection["Department"]);
-            //long? Work_Location = Convert.ToInt64(collection["WorkLocation"]);
-            //DateTime? FromDate = Convert.ToDateTime(collection["FromDate"]);
-            //DateTime? ToDate = Convert.ToDateTime(collection["ToDate"]);
 
             if (FromDate != null && ToDate == null)
             {
                 ViewBag.EmployeeReportStatus = "please enter ToDate!";
-                ViewBag.departments = ViewBag.Department = db.HRMS_DEPT.Where(rec => rec.Parent_ID != null && rec.IsActive == true);
-                ViewBag.WorkLocation = db.WorkLocationMaster;
+                ViewBag.Designation = db.HRMS_DESG_MS.Where(rec => rec.IsActive == true);
+                ViewBag.Grade = db.HRMS_CATEGORY_GRADE;
+                ViewBag.dataTravelPurpose = new SelectList(db.HRMS_Travel_Purpose, "ID", "Name");
                 return View();
             }
             if (FromDate == null && ToDate != null)
             {
                 ViewBag.EmployeeReportStatus = "please enter FromDate!";
-                ViewBag.departments = ViewBag.Department = db.HRMS_DEPT.Where(rec => rec.Parent_ID != null && rec.IsActive == true);
-                ViewBag.WorkLocation = db.WorkLocationMaster;
+                ViewBag.Designation = db.HRMS_DESG_MS.Where(rec => rec.IsActive == true);
+                ViewBag.Grade = db.HRMS_CATEGORY_GRADE;
+                ViewBag.dataTravelPurpose = new SelectList(db.HRMS_Travel_Purpose, "ID", "Name");
                 return View();
             }
-            if (Department == null && Work_Location == null && FromDate == null && ToDate == null)
+            if (Designation == null && Grade == null && Travel_Purpose == null && FromDate == null && ToDate == null)
             {
                 ViewBag.EmployeeReportStatus = "Please enter anyone option!";
-                ViewBag.departments = ViewBag.Department = db.HRMS_DEPT.Where(rec => rec.Parent_ID != null && rec.IsActive == true);
-                ViewBag.WorkLocation = db.WorkLocationMaster;
+                ViewBag.Designation = db.HRMS_DESG_MS.Where(rec => rec.IsActive == true);
+                ViewBag.Grade = db.HRMS_CATEGORY_GRADE;
+                ViewBag.dataTravelPurpose = new SelectList(db.HRMS_Travel_Purpose, "ID", "Name");
                 return View();
             }
-            
-            var modeldata = db.EmployeeReport(Department, Work_Location, FromDate, ToDate).ToList();
+
+            var modeldata = db.TravelApplicationExpanseReport(FromDate, ToDate,Travel_Purpose, Grade, Designation).ToList();
             TempData["Data"] = modeldata;
-            ViewBag.departments = ViewBag.Department = db.HRMS_DEPT.Where(rec => rec.Parent_ID != null && rec.IsActive == true);
-            ViewBag.WorkLocation = db.WorkLocationMaster;
-            ViewBag.departments = ViewBag.Department = db.HRMS_DEPT.Where(rec => rec.Parent_ID != null && rec.IsActive == true);
-            ViewBag.WorkLocation = db.WorkLocationMaster;
+            ViewBag.Designation = db.HRMS_DESG_MS.Where(rec => rec.IsActive == true);
+            ViewBag.Grade = db.HRMS_CATEGORY_GRADE;
+            ViewBag.dataTravelPurpose = new SelectList(db.HRMS_Travel_Purpose, "ID", "Name");
             return View(modeldata);
 
         }
-
-       
-
         public JsonResult Download()
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -113,5 +115,7 @@ namespace HRMS.Controllers
             return Json(true, JsonRequestBehavior.AllowGet);
             //return Content("Index");
         }
+
     }
 }
+ 

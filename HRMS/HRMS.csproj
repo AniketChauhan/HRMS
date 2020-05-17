@@ -185,6 +185,8 @@
     <Compile Include="Controllers\SALUTATIONController.cs" />
     <Compile Include="Controllers\SegmentMasterController.cs" />
     <Compile Include="Controllers\TravelApplicationController.cs" />
+    <Compile Include="Controllers\TravelApplicationExpanseReportController.cs" />
+    <Compile Include="Controllers\TravelAppReportController.cs" />
     <Compile Include="Controllers\TravelExpenseApplicationController.cs" />
     <Compile Include="Controllers\TravelGroupTypeController.cs" />
     <Compile Include="Controllers\TravelMealExpenseController.cs" />
@@ -632,6 +634,8 @@
     <Content Include="Views\TravelMileageConfiguration\Edit.cshtml" />
     <Content Include="Views\TravelMileageConfiguration\Index.cshtml" />
     <Content Include="Views\TravelMileageConfiguration\Edit1.cshtml" />
+    <Content Include="Views\TravelAppReport\Index.cshtml" />
+    <Content Include="Views\TravelApplicationExpanseReport\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

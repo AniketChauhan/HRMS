@@ -1,25 +1,33 @@
-﻿@model IEnumerable<HRMS.Models.EmployeeReport_Result>
+﻿
+@model IEnumerable<HRMS.Models.TravelApplicationExpanseReport_Result>
 @{
     ViewBag.Title = "Index";
 }
 
-    <h2>Employee Report</h2>
+<h2>Travel Expanse Report</h2>
 <div class="container-fluid">
     <center>
-        @using (Html.BeginForm("Index", "EmployeeReport", FormMethod.Post, new { @class = "form-inline" }))
+        @using (Html.BeginForm("Index", "TravelApplicationExpanseReport", FormMethod.Post, new { @class = "form-inline" }))
         {
             <span>
                 <label>
-                    Department
+                    Travel Purpose
                 </label>
-                @Html.DropDownList("Department", new SelectList(ViewBag.Department, "Dept_Id", "Dept_Name"), "Select Department", htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("Travel_Purpose", (SelectList)ViewBag.dataTravelPurpose, "select a purpose", htmlAttributes: new { @class = "form-control" })
             </span>
             <span>&nbsp; &nbsp; &nbsp; &nbsp;</span>
             <span>
                 <label>
                     Work Location
                 </label>
-                @Html.DropDownList("WorkLocation", new SelectList(ViewBag.WorkLocation, "WorkID", "WorkLocationName"), "Select Work location ", htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("Grade", new SelectList(ViewBag.Grade, "Category_ID", "Grade_Name"), "Select Grade ", htmlAttributes: new { @class = "form-control" })
+            </span>
+            <span>&nbsp; &nbsp; &nbsp; &nbsp;</span>
+            <span>
+                <label>
+                    Department
+                </label>
+                @Html.DropDownList("Designation", new SelectList(ViewBag.Designation, "Desg_Id", "Desg_Name"), "Select Designation", htmlAttributes: new { @class = "form-control" })
             </span>
             <span>&nbsp; &nbsp; &nbsp; &nbsp;</span>
             <span>
@@ -48,59 +56,66 @@
         <table class="table table-bordered table-responsive table-striped">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.EmployeeCode)
+                    @Html.DisplayNameFor(model => model.employeeCode)
                 </th>
 
                 <th>
                     @Html.DisplayNameFor(model => model.EmployeeName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.JoinDate)
+                    @Html.DisplayNameFor(model => model.TravelPurpose)
                 </th>
 
                 <th>
-                    @Html.DisplayNameFor(model => model.Department)
+                    @Html.DisplayNameFor(model => model.FromDate)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.WorkLocation)
-                </th>
-
-                <th>
-                    @Html.DisplayNameFor(model => model.Gender_Value)
+                    @Html.DisplayNameFor(model => model.ToDate)
                 </th>
 
                 <th>
-                    @Html.DisplayNameFor(model => model.DateOfBirth)
+                    @Html.DisplayNameFor(model => model.Designation)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Grade)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalExpanse)
                 </th>
 
             </tr>
 
             @foreach (var item in Model)
             {
-                <tr>
+        <tr>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EmployeeCode)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EmployeeName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.JoinDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Department)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.WorkLocation)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Gender_Value)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DateOfBirth)
-                    </td>
-                </tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.employeeCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TravelPurpose)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FromDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ToDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Designation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Grade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalExpanse)
+            </td>
+            
+
+        </tr>
 
             }
         </table>
@@ -128,10 +143,12 @@
 <script>
     $(document).ready(function () {
         $("/download").click(function () {
-            $.get("/EmployeeReport/Download", function (data) {
+            $.get("/TravelApplicationExpanseReport/Download", function (data) {
 
 
             });
         });
     });
 </script>
+
+
