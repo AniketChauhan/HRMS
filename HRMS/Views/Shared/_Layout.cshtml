@@ -195,6 +195,10 @@
             @Html.ActionLink("Travel Application(0)", "Index", "TravelApplication", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile", @id = "TravelCount" })
             @Html.ActionLink("Travel Expense", "AdminExpenseList", "TravelExpenseApplication", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
         }
+        @if (User.IsInRole("admin"))
+        {
+              @Html.ActionLink("Employee Report", "Index", "EmployeeReport", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
+        }
 
 
         @*---------------------------fourth here----------------------------*@
@@ -322,7 +326,7 @@
 
 
     </div>
-    <div class=" body-content">
+    <div class=" body-content container">
         @RenderBody()
         <hr />
         <footer>

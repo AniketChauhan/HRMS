@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using HRMS.Models;
 namespace HRMS.Controllers
 {
@@ -74,12 +77,39 @@ namespace HRMS.Controllers
             }
             
             var modeldata = db.EmployeeReport(Department, Work_Location, FromDate, ToDate).ToList();
+            TempData["Data"] = modeldata;
             ViewBag.departments = ViewBag.Department = db.HRMS_DEPT.Where(rec => rec.Parent_ID != null && rec.IsActive == true);
             ViewBag.WorkLocation = db.WorkLocationMaster;
             ViewBag.departments = ViewBag.Department = db.HRMS_DEPT.Where(rec => rec.Parent_ID != null && rec.IsActive == true);
             ViewBag.WorkLocation = db.WorkLocationMaster;
             return View(modeldata);
 
+        }
+
+       
+
+        public JsonResult Download()
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            var modeldata = TempData["Data"];
+
+            var gv = new GridView();
+            //gv.DataSource = db.Student.ToList();
+            gv.DataSource = modeldata;
+            gv.DataBind();
+            Response.ClearContent();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment; filename=DemoExcel.xls");
+            Response.ContentType = "application/ms-excel";
+            Response.Charset = "";
+            StringWriter objStringWriter = new StringWriter();
+            HtmlTextWriter objHtmlTextWriter = new HtmlTextWriter(objStringWriter);
+            gv.RenderControl(objHtmlTextWriter);
+            Response.Output.Write(objStringWriter.ToString());
+            Response.Flush();
+            Response.End();
+            return Json(true, JsonRequestBehavior.AllowGet);
+            //return Content("Index");
         }
     }
 }

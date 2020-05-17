@@ -105,7 +105,8 @@
             }
         </table>
         <center>
-            <button class="btn btn-primary">Download</button>
+            @*<button class="btn btn-primary">Download</button>*@
+            @Html.ActionLink("Download", "Download", null, new { @class = "btn btn-success download" })
         </center>
     }
 
@@ -119,3 +120,18 @@
         </span>
     </div>
 }
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("/download").click(function () {
+            $.get("/EmployeeReport/Download", function (data) {
+
+
+            });
+        });
+    });
+</script>
