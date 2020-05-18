@@ -10,7 +10,8 @@
 namespace HRMS.Models
 {
     using System;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class EmployeeReport_Result
     {
         public long EmployeeCode { get; set; }
