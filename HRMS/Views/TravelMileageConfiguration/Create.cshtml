@@ -47,32 +47,32 @@
 
 
         <div class="form-group">
-            @Html.LabelFor(model => hRMS_TRAVEL_MILEAGE_CONFIG2.Travel_Mileage_Two, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => hRMS_TRAVEL_MILEAGE_CONFIG2.Travel_Mileage_Two,"Two Wheeler(Rs/Km)", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
                 @Html.EditorFor(model => hRMS_TRAVEL_MILEAGE_CONFIG2.Travel_Mileage_Two, new { htmlAttributes = new { @class = "form-control", @Name = "T_M_two" } })
                 @Html.ValidationMessageFor(model => hRMS_TRAVEL_MILEAGE_CONFIG2.Travel_Mileage_Two, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => hRMS_TRAVEL_MILEAGE_CONFIG2.Travel_Mileage_Four, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => hRMS_TRAVEL_MILEAGE_CONFIG2.Travel_Mileage_Four,"Four Wheeler(Rs/Km)", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
                 @Html.EditorFor(model => hRMS_TRAVEL_MILEAGE_CONFIG2.Travel_Mileage_Four, new { htmlAttributes = new { @class = "form-control", @Name = "T_M_four" } })
                 @Html.ValidationMessageFor(model => hRMS_TRAVEL_MILEAGE_CONFIG2.Travel_Mileage_Four, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => hRMS_TRAVEL_MILEAGE_CONFIG2.Travel_Mileage_Moped, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => hRMS_TRAVEL_MILEAGE_CONFIG2.Travel_Mileage_Moped,"Moped(Rs/Km)", htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
                 @Html.EditorFor(model => hRMS_TRAVEL_MILEAGE_CONFIG2.Travel_Mileage_Moped, new { htmlAttributes = new { @class = "form-control", @Name = "T_M_moped" } })
                 @Html.ValidationMessageFor(model => hRMS_TRAVEL_MILEAGE_CONFIG2.Travel_Mileage_Moped, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => hRMS_TRAVEL_MILEAGE_CONFIG2.Travel_Mileage_Emp_Grade, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => hRMS_TRAVEL_MILEAGE_CONFIG2.Travel_Mileage_Emp_Grade, "Employee Grade",htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-9">
                 @Html.EditorFor(model => hRMS_TRAVEL_MILEAGE_CONFIG2.Travel_Mileage_Emp_Grade, new { htmlAttributes = new { @class = "form-control", @Name = "T_M_grade", @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => hRMS_TRAVEL_MILEAGE_CONFIG2.Travel_Mileage_Emp_Grade, "", new { @class = "text-danger" })
             </div>

@@ -24,13 +24,13 @@
 
 
     <div class="form-group row">
-    @Html.LabelFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_Group, htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.LabelFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_Group,"Travel Group", htmlAttributes: new { @class = "control-label col-md-2" })
     <div class="col-md-2">
         @Html.EditorFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_Group, new { htmlAttributes = new { @class = "form-control", @Name = "T_group", @readonly = "readonly" } })
         @Html.ValidationMessageFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_Group, "", new { @class = "text-danger" })
     </div>
 
-    @Html.LabelFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_Policy, htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.LabelFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_Policy, "Travel Policy",htmlAttributes: new { @class = "control-label col-md-2" })
 
     <div class="col-md-6">
         <select name="T_policy" class="form-control">
@@ -72,7 +72,7 @@
         
     </div>
     <div class="form-group">
-        @Html.LabelFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_By_Auto, htmlAttributes: new { @class = "control-label col-md-3" })
+        @Html.LabelFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_By_Auto, "Travel By Auto",htmlAttributes: new { @class = "control-label col-md-3" })
         <div class="col-md-9">
             <div class="checkbox">
                 @Html.EditorFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_By_Auto, new { htmlAttributes = new { @Name = "T_auto" } })
@@ -82,7 +82,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_By_Taxi, htmlAttributes: new { @class = "control-label col-md-3" })
+        @Html.LabelFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_By_Taxi,"Travel By Taxi", htmlAttributes: new { @class = "control-label col-md-3" })
         <div class="col-md-9">
             <div class="checkbox">
                 @Html.EditorFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_By_Taxi, new { htmlAttributes = new { @Name = "T_taxi" } })
@@ -93,16 +93,16 @@
     <hr />
 
     <div class="form-group">
-        @Html.LabelFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_Local_Conveyance_Max, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        @Html.LabelFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_Local_Conveyance_Max, "Local Conveyance Max(per Day)",htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
             @Html.EditorFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_Local_Conveyance_Max, new { htmlAttributes = new { @class = "form-control", @Name = "T_max" } })
             @Html.ValidationMessageFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_Local_Conveyance_Max, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_Emp_Grade, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        @Html.LabelFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_Emp_Grade, "Tavel Emp Grade",htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
 
             @Html.EditorFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_Emp_Grade, new { htmlAttributes = new { @class = "form-control", @Name = "T_grade", @readonly = "readonly" } })
             @Html.ValidationMessageFor(model => hRMS_TRAVEL_MODE_CONFIG2.Travel_Emp_Grade, "", new { @class = "text-danger" })

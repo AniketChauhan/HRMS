@@ -84,7 +84,7 @@ namespace HRMS.Controllers
             decimal val = db.HRMS_TRAVEL_MILEAGE_CONFIG.Where(x => x.Travel_Mileage_Emp_Grade.StartsWith( obj1.Gra_ID.ToString()) && x.Travel_Group == obj1.Pol_ID).Select(x=>x.Travel_Mileage_Four).FirstOrDefault();
             if (obj.Amount > (obj.Distance * val))
             {
-                TempData["Config"] = "Amount limit id Not Matched!";
+                TempData["Config"] = "Amount limit Crossed!";
                 return RedirectToAction("AddExpense", new { id = obj.Travel_App_ID });
             }
 
