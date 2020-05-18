@@ -23,7 +23,7 @@ namespace HRMS.Models
             this.HRMS_Travel_Application = new HashSet<HRMS_Travel_Application>();
             this.HRMS_EMP_GRA_POL = new HashSet<HRMS_EMP_GRA_POL>();
         }
-    
+
         public long Category_ID { get; set; }
         [Required]
         [Display(Name = "Category Name")]
@@ -42,7 +42,7 @@ namespace HRMS.Models
         [DataType(DataType.Text, ErrorMessage = "Only Alphabetic value are allowed")]
         [MaxLength(150, ErrorMessage = "Grade Detail can have 150 characters maximum!")]
         public string Grade_Detail { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EMP_Grade_Assignment> EMP_Grade_Assignment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

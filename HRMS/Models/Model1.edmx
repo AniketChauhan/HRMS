@@ -289,6 +289,7 @@
           <Property Name="Approved_date" Type="date" />
           <Property Name="Approval_Remark" Type="varchar" MaxLength="250" />
           <Property Name="ExpenseSubmitted" Type="int" />
+          <Property Name="ExpenseAmount" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="HRMS_Travel_Expense_App">
           <Key>
@@ -2244,6 +2245,7 @@
           <NavigationProperty Name="HRMS_TravelMode_MS" Relationship="HRMS5Model.FK_HRMS_Travel_Application_HRMS_TravelMode_MS" FromRole="HRMS_Travel_Application" ToRole="HRMS_TravelMode_MS" />
           <NavigationProperty Name="HRMS_Travel_Expense_App" Relationship="HRMS5Model.FK_HRMS_Travel_Expense_App_HRMS_Travel_Application" FromRole="HRMS_Travel_Application" ToRole="HRMS_Travel_Expense_App" />
           <Property Name="ExpenseSubmitted" Type="Int32" />
+          <Property Name="ExpenseAmount" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="Sample">
           <Key>
@@ -2920,6 +2922,7 @@
           <EntitySetMapping Name="HRMS_Travel_Application">
             <EntityTypeMapping TypeName="HRMS5Model.HRMS_Travel_Application">
               <MappingFragment StoreEntitySet="HRMS_Travel_Application">
+                <ScalarProperty Name="ExpenseAmount" ColumnName="ExpenseAmount" />
                 <ScalarProperty Name="ExpenseSubmitted" ColumnName="ExpenseSubmitted" />
                 <ScalarProperty Name="Approval_Remark" ColumnName="Approval_Remark" />
                 <ScalarProperty Name="Approved_date" ColumnName="Approved_date" />

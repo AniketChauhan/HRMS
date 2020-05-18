@@ -21,6 +21,7 @@ namespace HRMS.Models
             this.HRMS_Emp_Details = new HashSet<HRMS_Emp_Details>();
             this.HRMS_Travel_Application = new HashSet<HRMS_Travel_Application>();
         }
+
         [Display(Name = "ID")]
         public long Desg_Id { get; set; }
         [Required]
@@ -41,6 +42,7 @@ namespace HRMS.Models
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<long> ModifyBy { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }
+
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HRMS_Emp_Details> HRMS_Emp_Details { get; set; }

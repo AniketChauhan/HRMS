@@ -29,6 +29,7 @@ namespace HRMS.Models
         [MaxLength(250, ErrorMessage = "Display name can have 250 characters maximum!")]
         public string Name { get; set; }
 
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HRMS_Travel_Application> HRMS_Travel_Application { get; set; }
     }

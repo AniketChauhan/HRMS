@@ -4,51 +4,58 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Travel Expanse Report</h2>
+<h3>Travel Expanse Report</h3>
+<br />
 <div class="container-fluid">
     <center>
         @using (Html.BeginForm("Index", "TravelApplicationExpanseReport", FormMethod.Post, new { @class = "form-inline" }))
         {
-            <span>
-                <label>
-                    Travel Purpose
-                </label>
-                @Html.DropDownList("Travel_Purpose", (SelectList)ViewBag.dataTravelPurpose, "select a purpose", htmlAttributes: new { @class = "form-control" })
-            </span>
-            <span>&nbsp; &nbsp; &nbsp; &nbsp;</span>
-            <span>
-                <label>
-                    Work Location
-                </label>
-                @Html.DropDownList("Grade", new SelectList(ViewBag.Grade, "Category_ID", "Grade_Name"), "Select Grade ", htmlAttributes: new { @class = "form-control" })
-            </span>
-            <span>&nbsp; &nbsp; &nbsp; &nbsp;</span>
-            <span>
-                <label>
-                    Department
-                </label>
-                @Html.DropDownList("Designation", new SelectList(ViewBag.Designation, "Desg_Id", "Desg_Name"), "Select Designation", htmlAttributes: new { @class = "form-control" })
-            </span>
-            <span>&nbsp; &nbsp; &nbsp; &nbsp;</span>
-            <span>
-                <label>
-                    From Date
-                </label>
-                <input type="date" name="FromDate" class="form-control" />
-            </span>
-            <span>&nbsp; &nbsp; &nbsp; &nbsp;</span>
-            <span>
-                <label>
-                    To Date
-                </label>
-                <input type="date" name="ToDate" class="form-control" />
+        <table class="table table-bordered">
+            <tr>
+                <td>
+                    <span>
 
-            </span>
-            <span>&nbsp; &nbsp; &nbsp; &nbsp;</span>
-            <span>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                        @Html.DropDownList("Travel_Purpose", (SelectList)ViewBag.dataTravelPurpose, "select purpose", htmlAttributes: new { @class = "form-control" })
+                    </span>
+                </td>
+                <td>
+                    <span>
 
-            </span>
+                        @Html.DropDownList("Grade", new SelectList(ViewBag.Grade, "Category_ID", "Grade_Name"), "Select Grade ", htmlAttributes: new { @class = "form-control" })
+                    </span>
+                </td>
+                <td>
+                    <span>
+
+                        @Html.DropDownList("Designation", new SelectList(ViewBag.Designation, "Desg_Id", "Desg_Name"), "Select Designation", htmlAttributes: new { @class = "form-control" })
+                    </span>
+                </td>
+                <td>
+                    <span>
+                        <label>
+                            From 
+                        </label>
+
+                        <input type="date" name="FromDate" class="form-control" />
+                    </span>
+                </td>
+                <td>
+                    <span>
+                        <label>
+                            To 
+                        </label>
+                        <input type="date" name="ToDate" class="form-control" />
+
+                    </span>
+                </td>
+                <td>
+                    <span>
+                        <button type="submit" class="btn btn-success">Submit</button>
+
+                    </span>
+                </td>
+                    </tr>
+        </table>
         }
     </center>
     @if (Model != null)

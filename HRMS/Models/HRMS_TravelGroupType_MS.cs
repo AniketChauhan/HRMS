@@ -23,7 +23,7 @@ namespace HRMS.Models
         {
             this.HRMS_EMP_GRA_POL = new HashSet<HRMS_EMP_GRA_POL>();
         }
-       
+
         public long ID { get; set; }
         [DisplayName("Type")]
         public long Mode_ID { get; set; }
@@ -37,7 +37,7 @@ namespace HRMS.Models
         [MaxLength(100, ErrorMessage = "name can have 100 characters maximum!")]
 
         public string Group_Name { get; set; }
-    
+
         public virtual HRMS_TravelMode_MS HRMS_TravelMode_MS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HRMS_EMP_GRA_POL> HRMS_EMP_GRA_POL { get; set; }

@@ -60,6 +60,7 @@ namespace HRMS.Models
         [MaxLength(250, ErrorMessage = "Approval Remark can have 250 characters maximum!")]
         public string Approval_Remark { get; set; }
         public Nullable<int> ExpenseSubmitted { get; set; }
+        public Nullable<decimal> ExpenseAmount { get; set; }
     
         public virtual Accounts Accounts { get; set; }
         public virtual Accounts Accounts1 { get; set; }
