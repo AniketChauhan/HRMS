@@ -11,17 +11,42 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class HRMS_Travel_Expense_App
     {
         public long ID { get; set; }
         public long Travel_App_ID { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "Travel Date")]
+
         public System.DateTime Travel_Date { get; set; }
+
         public string Journey_Mode { get; set; }
+        [Required]
+        [Display(Name = "From Place")]
+        [RegularExpression(@"^[A-Za-z]+", ErrorMessage = "Only Alphabetic values are allowed!")]
+        [DataType(DataType.Text, ErrorMessage = "Only Alphabetic value are allowed")]
+        [MaxLength(50, ErrorMessage = "From Place can have 50 characters maximum!")]
         public string From_Place { get; set; }
+        [Required]
+        [Display(Name = "From Place")]
+        [RegularExpression(@"^[A-Za-z]+", ErrorMessage = "Only Alphabetic values are allowed!")]
+        [DataType(DataType.Text, ErrorMessage = "Only Alphabetic value are allowed")]
+        [MaxLength(50, ErrorMessage = "From Place can have 50 characters maximum!")]
         public string To_Place { get; set; }
+        [Display(Name = "Distance")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Distance must be in valid format")]
         public Nullable<decimal> Distance { get; set; }
+        [Display(Name = "Amount")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Amount must be in valid format")]
         public decimal Amount { get; set; }
+        [Required]
+        [Display(Name = "Purpose")]
+        [RegularExpression(@"^[A-Za-z_ ]*$", ErrorMessage = "Only Alphabetic values are allowed!")]
+        [DataType(DataType.Text, ErrorMessage = "Only Alphabetic value are allowed")]
+        [MaxLength(200, ErrorMessage = "Purpose can have 200 characters maximum!")]
         public string Purpose { get; set; }
         public string FileName { get; set; }
         public string FileUrl { get; set; }

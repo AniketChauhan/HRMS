@@ -15,10 +15,14 @@ namespace HRMS.Models
     {
         public long EmployeeCode { get; set; }
         public string EmployeeName { get; set; }
+        [DataType(DataType.Date)]
+
         public System.DateTime JoinDate { get; set; }
         public string Department { get; set; }
         public string WorkLocation { get; set; }
         public string Gender_Value { get; set; }
+        [DataType(DataType.Date)]
+
         public System.DateTime DateOfBirth { get; set; }
     }
 }
