@@ -25,6 +25,7 @@ namespace HRMS.Models
         public HttpPostedFileBase ImageFile { get; set; }
         public HttpPostedFileBase SignFile { get; set; }
 
+
         public virtual Accounts Accounts { get; set; }
     }
 }

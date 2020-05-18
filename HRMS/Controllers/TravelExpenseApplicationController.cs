@@ -27,6 +27,25 @@ namespace HRMS.Controllers
             return Total;
         }
 
+
+        //ajax
+        public decimal CountAmount(decimal? id)
+        {
+            if (id == null)
+            {
+                return 0;
+            }
+            long emp_id = Convert.ToInt64(Session["id"]);
+            //checking for configuration
+            HRMS_EMP_GRA_POL obj1 = db.HRMS_EMP_GRA_POL.Where(x => x.Emp_ID == emp_id).FirstOrDefault();
+            decimal val = db.HRMS_TRAVEL_MILEAGE_CONFIG.Where(x => x.Travel_Mileage_Emp_Grade.StartsWith( obj1.Gra_ID.ToString()) && x.Travel_Group == obj1.Pol_ID).Select(x=>x.Travel_Mileage_Four).FirstOrDefault();
+            decimal Amount = val * id.Value;
+            return Amount;
+           
+
+        }
+
+
         // GET: TravelExpenseApplication
         [Authorize(Roles =("admin,emp"))]
         public ActionResult TravelList()
@@ -61,7 +80,7 @@ namespace HRMS.Controllers
             //savechanges without any rows
             ViewBag.Error = TempData["Error"];
 
-            ViewBag.Config = TempData["Config"];
+            //ViewBag.Config = TempData["Config"];
             return View(obj);
 
 
@@ -79,13 +98,13 @@ namespace HRMS.Controllers
 
             //checking for configuration
             HRMS_EMP_GRA_POL obj1 = db.HRMS_EMP_GRA_POL.Where(x => x.Emp_ID == obj.EMP_ID).FirstOrDefault();
-            
 
-            decimal val = db.HRMS_TRAVEL_MILEAGE_CONFIG.Where(x => x.Travel_Mileage_Emp_Grade.StartsWith( obj1.Gra_ID.ToString()) && x.Travel_Group == obj1.Pol_ID).Select(x=>x.Travel_Mileage_Four).FirstOrDefault();
+
+            decimal val = db.HRMS_TRAVEL_MILEAGE_CONFIG.Where(x => x.Travel_Mileage_Emp_Grade.StartsWith(obj1.Gra_ID.ToString()) && x.Travel_Group == obj1.Pol_ID).Select(x => x.Travel_Mileage_Four).FirstOrDefault();
             if (obj.Amount > (obj.Distance * val))
             {
-                TempData["Config"] = "Amount limit Crossed!";
-                return RedirectToAction("AddExpense", new { id = obj.Travel_App_ID });
+                obj.Warning = 1;
+                
             }
 
             obj.Status = 0;

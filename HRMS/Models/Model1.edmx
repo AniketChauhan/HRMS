@@ -308,6 +308,8 @@
           <Property Name="FileUrl" Type="varchar(max)" />
           <Property Name="EMP_ID" Type="bigint" Nullable="false" />
           <Property Name="Status" Type="int" />
+          <Property Name="DateLimit" Type="bit" Nullable="false" />
+          <Property Name="Warning" Type="int" />
         </EntityType>
         <EntityType Name="HRMS_TRAVEL_MEAL_EXPENSE_MS">
           <Key>
@@ -2375,6 +2377,8 @@
           <Property Name="EMP_ID" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Accounts" Relationship="HRMS5Model.FK_HRMS_Travel_Expense_App_Accounts" FromRole="HRMS_Travel_Expense_App" ToRole="Accounts" />
           <Property Name="Status" Type="Int32" />
+          <Property Name="DateLimit" Type="Boolean" Nullable="false" />
+          <Property Name="Warning" Type="Int32" />
         </EntityType>
         <Association Name="FK_HRMS_Travel_Expense_App_HRMS_Travel_Application">
           <End Type="HRMS5Model.HRMS_Travel_Application" Role="HRMS_Travel_Application" Multiplicity="1" />
@@ -2962,6 +2966,8 @@
           <EntitySetMapping Name="HRMS_Travel_Expense_App">
             <EntityTypeMapping TypeName="HRMS5Model.HRMS_Travel_Expense_App">
               <MappingFragment StoreEntitySet="HRMS_Travel_Expense_App">
+                <ScalarProperty Name="Warning" ColumnName="Warning" />
+                <ScalarProperty Name="DateLimit" ColumnName="DateLimit" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="EMP_ID" ColumnName="EMP_ID" />
                 <ScalarProperty Name="FileUrl" ColumnName="FileUrl" />
