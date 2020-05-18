@@ -137,9 +137,52 @@ namespace HRMS.Controllers
             {
 
 
-                if (hRMS_EMP_PHOTO_SIGN.ImageFile.FileName == null || hRMS_EMP_PHOTO_SIGN.ImageFile.FileName == "")
+                //if (hRMS_EMP_PHOTO_SIGN.ImageFile.FileName == null || hRMS_EMP_PHOTO_SIGN.ImageFile.FileName == "")
+                //{
+                //    hRMS_EMP_PHOTO_SIGN.Emp_Photo_Path = "~/EmpPhoto/default_image.png";
+                //}
+                //else
+                //{
+                //    string photo_file_name = Path.GetFileNameWithoutExtension(hRMS_EMP_PHOTO_SIGN.ImageFile.FileName);
+                //    string photo_extension = Path.GetExtension(hRMS_EMP_PHOTO_SIGN.ImageFile.FileName);
+                //    photo_file_name = photo_file_name + DateTime.Now.ToString("yymmssfff") + photo_extension;
+                //    hRMS_EMP_PHOTO_SIGN.Emp_Photo_Path = "~/EmpPhoto/" + photo_file_name;
+                //    photo_file_name = Path.Combine(Server.MapPath("~/EmpPhoto/"), photo_file_name);
+                //    hRMS_EMP_PHOTO_SIGN.ImageFile.SaveAs(photo_file_name);
+                //}
+
+
+                //if (hRMS_EMP_PHOTO_SIGN.SignFile.FileName == null || hRMS_EMP_PHOTO_SIGN.SignFile.FileName == "")
+                //{
+                //    hRMS_EMP_PHOTO_SIGN.Emp_Sign_Path = "~/EmpPhoto/default_image.png";
+                //}
+                //else
+                //{
+                //    string sign_file_name = Path.GetFileNameWithoutExtension(hRMS_EMP_PHOTO_SIGN.SignFile.FileName);
+                //    string sign_extension = Path.GetExtension(hRMS_EMP_PHOTO_SIGN.SignFile.FileName);
+                //    sign_file_name = sign_file_name + DateTime.Now.ToString("yymmssfff") + sign_extension;
+                //    hRMS_EMP_PHOTO_SIGN.Emp_Sign_Path = "~/EmpSign/" + sign_file_name;
+                //    sign_file_name = Path.Combine(Server.MapPath("~/EmpSign/"), sign_file_name);
+                //    hRMS_EMP_PHOTO_SIGN.SignFile.SaveAs(sign_file_name);
+                //}
+
+                if (hRMS_EMP_PHOTO_SIGN.ImageFile == null)
                 {
+
                     hRMS_EMP_PHOTO_SIGN.Emp_Photo_Path = "~/EmpPhoto/default_image.png";
+                    if (hRMS_EMP_PHOTO_SIGN.SignFile == null)
+                    {
+                        hRMS_EMP_PHOTO_SIGN.Emp_Sign_Path = "~/EmpPhoto/default_image.png";
+                    }
+                    else
+                    {
+                        string sign_file_name = Path.GetFileNameWithoutExtension(hRMS_EMP_PHOTO_SIGN.SignFile.FileName);
+                        string sign_extension = Path.GetExtension(hRMS_EMP_PHOTO_SIGN.SignFile.FileName);
+                        sign_file_name = sign_file_name + DateTime.Now.ToString("yymmssfff") + sign_extension;
+                        hRMS_EMP_PHOTO_SIGN.Emp_Sign_Path = "~/EmpSign/" + sign_file_name;
+                        sign_file_name = Path.Combine(Server.MapPath("~/EmpSign/"), sign_file_name);
+                        hRMS_EMP_PHOTO_SIGN.SignFile.SaveAs(sign_file_name);
+                    }
                 }
                 else
                 {
@@ -149,21 +192,19 @@ namespace HRMS.Controllers
                     hRMS_EMP_PHOTO_SIGN.Emp_Photo_Path = "~/EmpPhoto/" + photo_file_name;
                     photo_file_name = Path.Combine(Server.MapPath("~/EmpPhoto/"), photo_file_name);
                     hRMS_EMP_PHOTO_SIGN.ImageFile.SaveAs(photo_file_name);
-                }
-
-
-                if (hRMS_EMP_PHOTO_SIGN.SignFile.FileName == null || hRMS_EMP_PHOTO_SIGN.SignFile.FileName == "")
-                {
-                    hRMS_EMP_PHOTO_SIGN.Emp_Sign_Path = "~/EmpPhoto/default_image.png";
-                }
-                else
-                {
-                    string sign_file_name = Path.GetFileNameWithoutExtension(hRMS_EMP_PHOTO_SIGN.SignFile.FileName);
-                    string sign_extension = Path.GetExtension(hRMS_EMP_PHOTO_SIGN.SignFile.FileName);
-                    sign_file_name = sign_file_name + DateTime.Now.ToString("yymmssfff") + sign_extension;
-                    hRMS_EMP_PHOTO_SIGN.Emp_Sign_Path = "~/EmpSign/" + sign_file_name;
-                    sign_file_name = Path.Combine(Server.MapPath("~/EmpSign/"), sign_file_name);
-                    hRMS_EMP_PHOTO_SIGN.SignFile.SaveAs(sign_file_name);
+                    if (hRMS_EMP_PHOTO_SIGN.SignFile == null)
+                    {
+                        hRMS_EMP_PHOTO_SIGN.Emp_Sign_Path = "~/EmpPhoto/default_image.png";
+                    }
+                    else
+                    {
+                        string sign_file_name = Path.GetFileNameWithoutExtension(hRMS_EMP_PHOTO_SIGN.SignFile.FileName);
+                        string sign_extension = Path.GetExtension(hRMS_EMP_PHOTO_SIGN.SignFile.FileName);
+                        sign_file_name = sign_file_name + DateTime.Now.ToString("yymmssfff") + sign_extension;
+                        hRMS_EMP_PHOTO_SIGN.Emp_Sign_Path = "~/EmpSign/" + sign_file_name;
+                        sign_file_name = Path.Combine(Server.MapPath("~/EmpSign/"), sign_file_name);
+                        hRMS_EMP_PHOTO_SIGN.SignFile.SaveAs(sign_file_name);
+                    }
                 }
 
                 db.HRMS_EMP_PHOTO_SIGN.Add(hRMS_EMP_PHOTO_SIGN);
@@ -224,7 +265,7 @@ namespace HRMS.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "admin,emp")]
-        public ActionResult Edit([Bind(Include = "Emp_Photos_ID,Emp_ID,Emp_Photo_Title,Emp_Photo_Path,Emp_Sign_Title,Emp_Sign_Path")] HRMS_EMP_PHOTO_SIGN hRMS_EMP_PHOTO_SIGN)
+        public ActionResult Edit( HRMS_EMP_PHOTO_SIGN hRMS_EMP_PHOTO_SIGN)
         {
             long emp_id = Convert.ToInt64(Session["id"]);
             string role = db.Accounts.Where(x => x.ID == emp_id).Select(x => x.role).FirstOrDefault();
@@ -237,11 +278,37 @@ namespace HRMS.Controllers
 
             if (ModelState.IsValid)
             {
-                if (hRMS_EMP_PHOTO_SIGN.ImageFile.FileName == null || hRMS_EMP_PHOTO_SIGN.ImageFile.FileName == "")
-                {
-                    hRMS_EMP_PHOTO_SIGN.Emp_Photo_Path = "~/EmpPhoto/default_image.png";
-                }
-                else
+                //if (hRMS_EMP_PHOTO_SIGN.ImageFile.FileName == null || hRMS_EMP_PHOTO_SIGN.ImageFile.FileName == "")
+                //{
+                //    hRMS_EMP_PHOTO_SIGN.Emp_Photo_Path = "~/EmpPhoto/default_image.png";
+                //}
+                //else
+                //{
+                //    string photo_file_name = Path.GetFileNameWithoutExtension(hRMS_EMP_PHOTO_SIGN.ImageFile.FileName);
+                //    string photo_extension = Path.GetExtension(hRMS_EMP_PHOTO_SIGN.ImageFile.FileName);
+                //    photo_file_name = photo_file_name + DateTime.Now.ToString("yymmssfff") + photo_extension;
+                //    hRMS_EMP_PHOTO_SIGN.Emp_Photo_Path = "~/EmpPhoto/" + photo_file_name;
+                //    photo_file_name = Path.Combine(Server.MapPath("~/EmpPhoto/"), photo_file_name);
+                //    hRMS_EMP_PHOTO_SIGN.ImageFile.SaveAs(photo_file_name);
+                //}
+
+
+                //if (hRMS_EMP_PHOTO_SIGN.SignFile.FileName == null || hRMS_EMP_PHOTO_SIGN.SignFile.FileName == "")
+                //{
+                //    hRMS_EMP_PHOTO_SIGN.Emp_Sign_Path = "~/EmpPhoto/default_image.png";
+                //}
+                //else
+                //{
+                //    string sign_file_name = Path.GetFileNameWithoutExtension(hRMS_EMP_PHOTO_SIGN.SignFile.FileName);
+                //    string sign_extension = Path.GetExtension(hRMS_EMP_PHOTO_SIGN.SignFile.FileName);
+                //    sign_file_name = sign_file_name + DateTime.Now.ToString("yymmssfff") + sign_extension;
+                //    hRMS_EMP_PHOTO_SIGN.Emp_Sign_Path = "~/EmpSign/" + sign_file_name;
+                //    sign_file_name = Path.Combine(Server.MapPath("~/EmpSign/"), sign_file_name);
+                //    hRMS_EMP_PHOTO_SIGN.SignFile.SaveAs(sign_file_name);
+                //}
+
+
+                if (hRMS_EMP_PHOTO_SIGN.ImageFile != null)
                 {
                     string photo_file_name = Path.GetFileNameWithoutExtension(hRMS_EMP_PHOTO_SIGN.ImageFile.FileName);
                     string photo_extension = Path.GetExtension(hRMS_EMP_PHOTO_SIGN.ImageFile.FileName);
@@ -249,14 +316,23 @@ namespace HRMS.Controllers
                     hRMS_EMP_PHOTO_SIGN.Emp_Photo_Path = "~/EmpPhoto/" + photo_file_name;
                     photo_file_name = Path.Combine(Server.MapPath("~/EmpPhoto/"), photo_file_name);
                     hRMS_EMP_PHOTO_SIGN.ImageFile.SaveAs(photo_file_name);
+                    if (hRMS_EMP_PHOTO_SIGN.SignFile != null)
+                    {
+                        string sign_file_name = Path.GetFileNameWithoutExtension(hRMS_EMP_PHOTO_SIGN.SignFile.FileName);
+                        string sign_extension = Path.GetExtension(hRMS_EMP_PHOTO_SIGN.SignFile.FileName);
+                        sign_file_name = sign_file_name + DateTime.Now.ToString("yymmssfff") + sign_extension;
+                        hRMS_EMP_PHOTO_SIGN.Emp_Sign_Path = "~/EmpSign/" + sign_file_name;
+                        sign_file_name = Path.Combine(Server.MapPath("~/EmpSign/"), sign_file_name);
+                        hRMS_EMP_PHOTO_SIGN.SignFile.SaveAs(sign_file_name);
+                    }
+                    else
+                    {
+                        db.Entry(hRMS_EMP_PHOTO_SIGN).State = EntityState.Modified;
+                        db.SaveChanges();
+                        //return RedirectToAction("Index");
+                    }
                 }
-
-
-                if (hRMS_EMP_PHOTO_SIGN.SignFile.FileName == null || hRMS_EMP_PHOTO_SIGN.SignFile.FileName == "")
-                {
-                    hRMS_EMP_PHOTO_SIGN.Emp_Sign_Path = "~/EmpPhoto/default_image.png";
-                }
-                else
+                else if (hRMS_EMP_PHOTO_SIGN.SignFile != null)
                 {
                     string sign_file_name = Path.GetFileNameWithoutExtension(hRMS_EMP_PHOTO_SIGN.SignFile.FileName);
                     string sign_extension = Path.GetExtension(hRMS_EMP_PHOTO_SIGN.SignFile.FileName);
@@ -265,6 +341,13 @@ namespace HRMS.Controllers
                     sign_file_name = Path.Combine(Server.MapPath("~/EmpSign/"), sign_file_name);
                     hRMS_EMP_PHOTO_SIGN.SignFile.SaveAs(sign_file_name);
                 }
+                else
+                {
+                    db.Entry(hRMS_EMP_PHOTO_SIGN).State = EntityState.Modified;
+                    db.SaveChanges();
+                    //return RedirectToAction("Index");
+                }
+
 
 
                 db.Entry(hRMS_EMP_PHOTO_SIGN).State = EntityState.Modified;

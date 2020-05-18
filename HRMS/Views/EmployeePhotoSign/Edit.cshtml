@@ -8,7 +8,7 @@
 <h2>Edit</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit","EmployeePhotoSign", FormMethod.Post, new { @enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -23,7 +23,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Emp_ID, "Emp_ID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Emp_ID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.EditorFor(model => model.Emp_ID, new { htmlAttributes = new { @class = "form-control",@readonly="readonly" } })
                 @Html.ValidationMessageFor(model => model.Emp_ID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -65,7 +65,7 @@
         <div class="col-md-10">
 
             <input type="file" name="ImageFile">
-            @*@Html.EditorFor(model => model.Emp_Photo_Path, new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.EditorFor(model => model.Emp_Photo_Path, new { htmlAttributes = new { @class = "form-control",@readonly="readonly" } })
             @Html.ValidationMessageFor(model => model.Emp_Photo_Path, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -74,7 +74,7 @@
         @Html.LabelFor(model => model.Emp_Sign_Path, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <input type="file" name="SignFile">
-            @*@Html.EditorFor(model => model.Emp_Sign_Path, new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.EditorFor(model => model.Emp_Sign_Path, new { htmlAttributes = new { @class = "form-control",@readonly="readonly" } })
             @Html.ValidationMessageFor(model => model.Emp_Sign_Path, "", new { @class = "text-danger" })
         </div>
     </div>

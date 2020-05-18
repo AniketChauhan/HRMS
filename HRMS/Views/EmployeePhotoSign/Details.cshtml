@@ -8,7 +8,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>HRMS_EMP_PHOTO_SIGN</h4>
+    <h4>Employee Photo Sign</h4>
 
     @if (ViewBag.Role == "admin")
     {
@@ -19,55 +19,52 @@
     }
 
     <hr />
-    <dl class="dl-horizontal">
+    <div class="dl-horizontal">
 
+        <div class="col-md-6">
+            @{ if (Model.Emp_Photo_Path != null)
+                {
+                    <dd>
 
-        <dt>
-            @*@Html.DisplayNameFor(model => model.Emp_Photo_Path)*@
-        </dt>
-        @{ if (Model.Emp_Photo_Path != null)
-            {
-                <dd>
+                        <img src="@Url.Content(Model.Emp_Photo_Path)" height="200" width="200">
+                        @*@Html.DisplayFor(model => model.Emp_Photo_Path)*@
+                    </dd>
+                }
+                else
 
-                    <img src="@Url.Content(Model.Emp_Photo_Path)" height="200" width="200">
-                    @*@Html.DisplayFor(model => model.Emp_Photo_Path)*@
-                </dd>
+                {
+                    <dd>
+                        //Image not found
+                        <img src="~/Image/default_image.png" height="200" width="200">
+                    </dd>
+                }
             }
-            else
+        </div>
 
-            {
-                <dd>
-                    //Image not found
-                    <img src="~/Image/default_image.png" height="200" width="200">
-                </dd>
+        <div class="col-md-6">
+
+
+            @{ if (Model.Emp_Sign_Path != null)
+                {
+                    <dd>
+                        <img src="@Url.Content(Model.Emp_Sign_Path)" height="200" width="200">
+                        @*@Html.DisplayFor(model => model.Emp_Sign_Path)*@
+                    </dd>
+                }
+                else
+
+                {
+                    <dd>
+                        //Image not found
+                        <img src="~/Image/default_image.png" height="200" width="200">
+                    </dd>
+                }
             }
-        }
 
-        <dt>
-            @*@Html.DisplayNameFor(model => model.Emp_Sign_Path)*@
-        </dt>
-
-        @{ if (Model.Emp_Sign_Path != null)
-            {
-                <dd>
-                    <img src="@Url.Content(Model.Emp_Sign_Path)" height="200" width="200">
-                    @*@Html.DisplayFor(model => model.Emp_Sign_Path)*@
-                </dd>
-            }
-            else
-
-            {
-                <dd>
-                    //Image not found
-                    <img src="~/Image/default_image.png" height="200" width="200">
-                </dd>
-            }
-        }
+        </div>
 
 
-
-
-    </dl>
+    </div>
 </div>
 <p>
    @if (ViewBag.EditVisible == null)
