@@ -213,13 +213,13 @@ namespace HRMS.Controllers
 
             }
 
-            if (CancelCount == TotalCount)
+            if (CancelCount == TotalCount || PendingCount==TotalCount)
             {
                 ViewBag.TotalAmount = 0;
             }
             else
             {
-                ViewBag.TotalAmount = db.HRMS_Travel_Expense_App.Where(x => x.Travel_App_ID == id && (x.Status == 0 || x.Status == 1)).Sum(x => x.Amount);
+                ViewBag.TotalAmount = db.HRMS_Travel_Expense_App.Where(x => x.Travel_App_ID == id && ( x.Status == 1)).Sum(x => x.Amount);
             }
                 return View(db.HRMS_Travel_Expense_App.Where(x => x.Travel_App_ID == id).ToList());
             
