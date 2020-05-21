@@ -21,6 +21,7 @@ else
 
 <table class="table table-bordered table-bordered table-striped">
     <tr>
+        <th></th>
         <th>
             @Html.DisplayNameFor(model => model.Travel_Date)
         </th>
@@ -52,6 +53,7 @@ else
         <th>
             @Html.DisplayNameFor(model => model.Status)
         </th>
+        <th>Warning</th>
 
         @if (User.IsInRole("admin"))
         {
@@ -69,6 +71,12 @@ else
     @foreach (var item in Model)
     {
         <tr>
+            <td>
+                @if (item.DateLimit == true)
+                {
+                <b class="label label-primary">Date Exceed</b>
+                }
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Travel_Date)
             </td>
@@ -119,6 +127,13 @@ else
                 }
             </td>
 
+            <td>
+                @if (item.Warning == 1)
+                {
+                <b class="label label-warning">Amount Exceed</b>
+                }
+            </td>
+
             @if (User.IsInRole("admin"))
             {
         <td>
@@ -150,7 +165,7 @@ else
 </table>
 
 <div class="w3-right-align" style="font-size:large">
-    <label>Total Amount: </label>
+    <label>Approved Amount: </label>
     <label style="color:crimson">@ViewBag.TotalAmount</label>
 </div>
 

@@ -10,7 +10,6 @@
 namespace HRMS.Models
 {
     using System;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class TravelApplicationReport_Result
     {
@@ -18,11 +17,7 @@ namespace HRMS.Models
         public string EmployeeName { get; set; }
         public string Designation { get; set; }
         public string Grade { get; set; }
-        [DataType(DataType.Date)]
-
         public System.DateTime FromDate { get; set; }
-        [DataType(DataType.Date)]
-
         public System.DateTime ToDate { get; set; }
         public string TravelPurpose { get; set; }
     }
