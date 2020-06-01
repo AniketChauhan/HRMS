@@ -21,7 +21,7 @@ namespace HRMS.Controllers
             rptViewer.Width = Unit.Percentage(100);
             rptViewer.Height = Unit.Percentage(100);
             rptViewer.AsyncRendering = true;
-            rptViewer.ServerReport.ReportServerUrl = new Uri("http://ak:80/ReportServerNew");
+            rptViewer.ServerReport.ReportServerUrl = new Uri("http://DESKTOP-5FDC8M5:80/ReportServer");
             rptViewer.ServerReport.ReportPath = "/Report Project1/EmployeeReport";
             ViewBag.ReportViewer = rptViewer;
 
@@ -36,7 +36,7 @@ namespace HRMS.Controllers
             rptViewer.Width = Unit.Percentage(100);
             rptViewer.Height = Unit.Percentage(100);
             rptViewer.AsyncRendering = true;
-            rptViewer.ServerReport.ReportServerUrl = new Uri("http://ak:80/ReportServerNew");
+            rptViewer.ServerReport.ReportServerUrl = new Uri("http://DESKTOP-5FDC8M5:80/ReportServer");
             rptViewer.ServerReport.ReportPath = "/Report Project1/TravelReport";
             ViewBag.ReportViewer = rptViewer;
 
@@ -51,7 +51,7 @@ namespace HRMS.Controllers
             rptViewer.Width = Unit.Percentage(100);
             rptViewer.Height = Unit.Percentage(100);
             rptViewer.AsyncRendering = true;
-            rptViewer.ServerReport.ReportServerUrl = new Uri("http://ak:80/ReportServerNew");
+            rptViewer.ServerReport.ReportServerUrl = new Uri("http://DESKTOP-5FDC8M5:80/ReportServer");
             rptViewer.ServerReport.ReportPath = "/Report Project1/TravelExpanseReport";
             ViewBag.ReportViewer = rptViewer;
 

@@ -11,7 +11,8 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class HRMS_Travel_Application
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,25 +20,49 @@ namespace HRMS.Models
         {
             this.HRMS_Travel_Expense_App = new HashSet<HRMS_Travel_Expense_App>();
         }
-    
+
         public long ID { get; set; }
+        [Display(Name = "Travel application type")]
         public long Travel_App_Type { get; set; }
+
+        [Display(Name = "Travel_Application_Date")]
+        [DataType(DataType.Date)]
+
         public System.DateTime Travel_Application_Date { get; set; }
         public long emp_id { get; set; }
         public Nullable<long> Designation { get; set; }
         public Nullable<long> Grade { get; set; }
+        [Display(Name = "Travel Type")]
+
         public int Travel_Type { get; set; }
+        [Display(Name = "Travel Purpose")]
+
         public long Travel_Purpose { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "From Date")]
+
         public System.DateTime From_Date { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "To Date")]
         public System.DateTime To_Date { get; set; }
+        [Display(Name = "Remark")]
+        [RegularExpression(@"^[A-Za-z_ ]*$", ErrorMessage = "Only Alphabetic values are allowed!")]
+        [DataType(DataType.Text, ErrorMessage = "Only Alphabetic value are allowed")]
+        [MaxLength(250, ErrorMessage = "Remark can have 250 characters maximum!")]
         public string Remark { get; set; }
         public int Status { get; set; }
         public Nullable<long> Approved_by { get; set; }
         public Nullable<System.DateTime> Approved_date { get; set; }
+        [Display(Name = "Approval Remark")]
+        [RegularExpression(@"^[A-Za-z_ ]*$", ErrorMessage = "Only Alphabetic values are allowed!")]
+        [DataType(DataType.Text, ErrorMessage = "Only Alphabetic value are allowed")]
+        [MaxLength(250, ErrorMessage = "Approval Remark can have 250 characters maximum!")]
         public string Approval_Remark { get; set; }
         public Nullable<int> ExpenseSubmitted { get; set; }
         public Nullable<decimal> ExpenseAmount { get; set; }
-    
+
         public virtual Accounts Accounts { get; set; }
         public virtual Accounts Accounts1 { get; set; }
         public virtual HRMS_CATEGORY_GRADE HRMS_CATEGORY_GRADE { get; set; }

@@ -751,7 +751,7 @@
                   <ChartDataPoints>
                     <ChartDataPoint>
                       <ChartDataPointValues>
-                        <Y>=Sum(Fields!EmployeeCode.Value)</Y>
+                        <Y>=Count(Fields!Gender.Value)</Y>
                       </ChartDataPointValues>
                       <ChartDataLabel>
                         <Style />

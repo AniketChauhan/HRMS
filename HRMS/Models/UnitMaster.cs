@@ -11,7 +11,9 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class UnitMaster
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,18 +21,45 @@ namespace HRMS.Models
         {
             this.HRMS_Emp_Details = new HashSet<HRMS_Emp_Details>();
         }
-    
+
+        //public long UnitCode { get; set; }
+        //public string UnitName { get; set; }
+        //public string Address { get; set; }
+        //public string Country { get; set; }
+        //public string City { get; set; }
+        //public long Pincode { get; set; }
+        //public long Priority { get; set; }
+        //public bool PaySlip { get; set; }
+        //public bool IsActive { get; set; }
+        //public string State { get; set; }
+
         public long UnitCode { get; set; }
+        [Required]
+        [DisplayName("Unit Name")]
+        [MaxLength(50, ErrorMessage = "Unit name can have 50 characters maximum!")]
+
         public string UnitName { get; set; }
+        [Required]
         public string Address { get; set; }
+        [Required]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
         public string Country { get; set; }
+        [Required]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
         public string City { get; set; }
+        [Required]
+        [RegularExpression(@"^[1-9][0-9]{5}$", ErrorMessage = "Pincode must be in valid format")]
         public long Pincode { get; set; }
+        [Required]
+        [Range(1, long.MaxValue, ErrorMessage = "Priority must be greater than 0")]
         public long Priority { get; set; }
+        [DisplayName("PaySlip View")]
         public bool PaySlip { get; set; }
         public bool IsActive { get; set; }
+        [Required]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
         public string State { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HRMS_Emp_Details> HRMS_Emp_Details { get; set; }
     }
