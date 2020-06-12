@@ -262,6 +262,15 @@
           <Property Name="MobileNo" Type="varchar" MaxLength="15" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="HRMS_Evalution_Question">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Question" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="IsDescription" Type="bit" Nullable="false" />
+          <Property Name="Header_ID" Type="bigint" Nullable="false" />
+        </EntityType>
         <EntityType Name="HRMS_Faculty_MS">
           <Key>
             <PropertyRef Name="ID" />
@@ -351,6 +360,15 @@
           <Property Name="Skill_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Skill_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Skill_Remark" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="HRMS_TrainingEvalution_Header">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Header" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreateDate" Type="date" />
         </EntityType>
         <EntityType Name="HRMS_Travel_Application">
           <Key>
@@ -898,6 +916,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_HRMS_Evalution_Question_HRMS_TrainingEvalution_Header">
+          <End Role="HRMS_TrainingEvalution_Header" Type="Self.HRMS_TrainingEvalution_Header" Multiplicity="1" />
+          <End Role="HRMS_Evalution_Question" Type="Self.HRMS_Evalution_Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_TrainingEvalution_Header">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_Evalution_Question">
+              <PropertyRef Name="Header_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_HRMS_ProgramDetail_HRMS_Training_Request_Application">
           <End Role="HRMS_Training_Request_Application" Type="Self.HRMS_Training_Request_Application" Multiplicity="1" />
           <End Role="HRMS_ProgramDetail" Type="Self.HRMS_ProgramDetail" Multiplicity="*" />
@@ -1159,12 +1189,14 @@
           <EntitySet Name="HRMS_EMP_GRA_POL" EntityType="Self.HRMS_EMP_GRA_POL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_EMP_PHOTO_SIGN" EntityType="Self.HRMS_EMP_PHOTO_SIGN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_EMP_ReferenceDetail" EntityType="Self.HRMS_EMP_ReferenceDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_Evalution_Question" EntityType="Self.HRMS_Evalution_Question" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_Faculty_MS" EntityType="Self.HRMS_Faculty_MS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_ProgramDetail" EntityType="Self.HRMS_ProgramDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_SALUTATION" EntityType="Self.HRMS_SALUTATION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_TRAINING_MATERIAL_MS" EntityType="Self.HRMS_TRAINING_MATERIAL_MS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_Training_Request_Application" EntityType="Self.HRMS_Training_Request_Application" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_TRAINING_SKILL_MS" EntityType="Self.HRMS_TRAINING_SKILL_MS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_TrainingEvalution_Header" EntityType="Self.HRMS_TrainingEvalution_Header" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_Travel_Application" EntityType="Self.HRMS_Travel_Application" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_Travel_Expense_App" EntityType="Self.HRMS_Travel_Expense_App" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_TRAVEL_MEAL_EXPENSE_MS" EntityType="Self.HRMS_TRAVEL_MEAL_EXPENSE_MS" Schema="dbo" store:Type="Tables" />
@@ -1302,6 +1334,10 @@
           <AssociationSet Name="FK_HRMS_EMP_ReferenceDetail_State" Association="Self.FK_HRMS_EMP_ReferenceDetail_State">
             <End Role="State" EntitySet="State" />
             <End Role="HRMS_EMP_ReferenceDetail" EntitySet="HRMS_EMP_ReferenceDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_Evalution_Question_HRMS_TrainingEvalution_Header" Association="Self.FK_HRMS_Evalution_Question_HRMS_TrainingEvalution_Header">
+            <End Role="HRMS_TrainingEvalution_Header" EntitySet="HRMS_TrainingEvalution_Header" />
+            <End Role="HRMS_Evalution_Question" EntitySet="HRMS_Evalution_Question" />
           </AssociationSet>
           <AssociationSet Name="FK_HRMS_ProgramDetail_HRMS_Training_Request_Application" Association="Self.FK_HRMS_ProgramDetail_HRMS_Training_Request_Application">
             <End Role="HRMS_Training_Request_Application" EntitySet="HRMS_Training_Request_Application" />
@@ -2284,6 +2320,12 @@
             <End Role="HRMS_Training_Request_Application" EntitySet="HRMS_Training_Request_Application" />
             <End Role="HRMS_ProgramDetail" EntitySet="HRMS_ProgramDetail" />
           </AssociationSet>
+          <EntitySet Name="HRMS_Evalution_Question" EntityType="HRMS5Model.HRMS_Evalution_Question" />
+          <EntitySet Name="HRMS_TrainingEvalution_Header" EntityType="HRMS5Model.HRMS_TrainingEvalution_Header" />
+          <AssociationSet Name="FK_HRMS_Evalution_Question_HRMS_TrainingEvalution_Header" Association="HRMS5Model.FK_HRMS_Evalution_Question_HRMS_TrainingEvalution_Header">
+            <End Role="HRMS_TrainingEvalution_Header" EntitySet="HRMS_TrainingEvalution_Header" />
+            <End Role="HRMS_Evalution_Question" EntitySet="HRMS_Evalution_Question" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="DepartmentData_Result">
           <Property Type="Int64" Name="Dept_Id" Nullable="false" />
@@ -2883,6 +2925,38 @@
             </Principal>
             <Dependent Role="HRMS_ProgramDetail">
               <PropertyRef Name="TrainingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="HRMS_Evalution_Question">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Question" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IsDescription" Type="Boolean" Nullable="false" />
+          <Property Name="Header_ID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="HRMS_TrainingEvalution_Header" Relationship="HRMS5Model.FK_HRMS_Evalution_Question_HRMS_TrainingEvalution_Header" FromRole="HRMS_Evalution_Question" ToRole="HRMS_TrainingEvalution_Header" />
+        </EntityType>
+        <EntityType Name="HRMS_TrainingEvalution_Header">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Header" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="HRMS_Evalution_Question" Relationship="HRMS5Model.FK_HRMS_Evalution_Question_HRMS_TrainingEvalution_Header" FromRole="HRMS_TrainingEvalution_Header" ToRole="HRMS_Evalution_Question" />
+        </EntityType>
+        <Association Name="FK_HRMS_Evalution_Question_HRMS_TrainingEvalution_Header">
+          <End Type="HRMS5Model.HRMS_TrainingEvalution_Header" Role="HRMS_TrainingEvalution_Header" Multiplicity="1" />
+          <End Type="HRMS5Model.HRMS_Evalution_Question" Role="HRMS_Evalution_Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_TrainingEvalution_Header">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_Evalution_Question">
+              <PropertyRef Name="Header_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3525,6 +3599,26 @@
                 <ScalarProperty Name="EmpID" ColumnName="EmpID" />
                 <ScalarProperty Name="request_date" ColumnName="request_date" />
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_Evalution_Question">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_Evalution_Question">
+              <MappingFragment StoreEntitySet="HRMS_Evalution_Question">
+                <ScalarProperty Name="Header_ID" ColumnName="Header_ID" />
+                <ScalarProperty Name="IsDescription" ColumnName="IsDescription" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_TrainingEvalution_Header">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_TrainingEvalution_Header">
+              <MappingFragment StoreEntitySet="HRMS_TrainingEvalution_Header">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Header" ColumnName="Header" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -99,6 +99,9 @@
         <AssociationConnector Association="HRMS5Model.FK_HRMS_Training_Request_Application_HRMS_DESG_MS" />
         <AssociationConnector Association="HRMS5Model.FK_HRMS_Training_Request_Application_HRMS_TRAINING_SKILL_MS" />
         <AssociationConnector Association="HRMS5Model.FK_HRMS_ProgramDetail_HRMS_Training_Request_Application" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_Evalution_Question" Width="1.5" PointX="18.625" PointY="12.875" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_TrainingEvalution_Header" Width="1.5" PointX="16.375" PointY="12.875" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_Evalution_Question_HRMS_TrainingEvalution_Header" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
