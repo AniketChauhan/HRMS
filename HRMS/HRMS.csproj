@@ -214,6 +214,7 @@
     <Compile Include="Controllers\SALUTATIONController.cs" />
     <Compile Include="Controllers\SegmentMasterController.cs" />
     <Compile Include="Controllers\TrainingEvaluationController.cs" />
+    <Compile Include="Controllers\TrainingProgramDetailController.cs" />
     <Compile Include="Controllers\TrainingSkillMasterController.cs" />
     <Compile Include="Controllers\TraningMaterialMasterController.cs" />
     <Compile Include="Controllers\TravelApplicationController.cs" />
@@ -714,6 +715,11 @@
     <Content Include="Views\EmpReport\Index.cshtml" />
     <Content Include="Views\EmpReport\TravelReporttt.cshtml" />
     <Content Include="Views\EmpReport\TravelExpanseReporttt.cshtml" />
+    <Content Include="Views\TrainingProgramDetail\Create.cshtml" />
+    <Content Include="Views\TrainingProgramDetail\Delete.cshtml" />
+    <Content Include="Views\TrainingProgramDetail\Details.cshtml" />
+    <Content Include="Views\TrainingProgramDetail\Edit.cshtml" />
+    <Content Include="Views\TrainingProgramDetail\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

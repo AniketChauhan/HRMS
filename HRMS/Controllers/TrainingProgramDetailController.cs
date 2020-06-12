@@ -42,8 +42,8 @@ namespace HRMS.Controllers
         {
             HRMS_ProgramDetail obj = new HRMS_ProgramDetail();
             obj.TransactionDate = DateTime.Now;
-           
-            ViewBag.TrainingID = new SelectList(db.HRMS_Training_Request_Application.Where(x=>x.ApplicationId==id.Value), "ApplicationId", "Training_Name");
+
+            ViewBag.TrainingID = new SelectList(db.HRMS_Training_Request_Application.Where(x => x.ApplicationId == id.Value), "ApplicationId", "Training_Name");
             return View(obj);
         }
 
