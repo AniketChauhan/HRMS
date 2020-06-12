@@ -40,5 +40,7 @@ namespace HRMS.Models
         public Nullable<System.DateTime> CompleteDate { get; set; }
         public string RemarksOther { get; set; }
         public Nullable<long> Flag { get; set; }
+    
+        public virtual HRMS_Training_Request_Application HRMS_Training_Request_Application { get; set; }
     }
 }

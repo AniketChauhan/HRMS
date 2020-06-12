@@ -11,22 +11,13 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class HRMS_TRAINING_MATERIAL_MS
     {
-        [DisplayName("Material Code")]
         public long Material_ID { get; set; }
-        [Required]
-        [DisplayName("Material Name")]
         public string Material_Name { get; set; }
-        [Required]
-        [DisplayName("Default Rate")]
         public decimal Material_Rate { get; set; }
-        [DisplayName("Remark")]
         public string Material_Remarks { get; set; }
-        [DisplayName("Active")]
         public bool Material_IsActive { get; set; }
     }
 }

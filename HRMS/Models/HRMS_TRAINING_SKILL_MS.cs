@@ -11,18 +11,20 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class HRMS_TRAINING_SKILL_MS
     {
-        [DisplayName("Skill Code")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public HRMS_TRAINING_SKILL_MS()
+        {
+            this.HRMS_Training_Request_Application = new HashSet<HRMS_Training_Request_Application>();
+        }
+    
         public long Skill_ID { get; set; }
-        [Required]
-        [DisplayName("Skill Name")]
-
         public string Skill_Name { get; set; }
-        [DisplayName("Remark")]
         public string Skill_Remark { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HRMS_Training_Request_Application> HRMS_Training_Request_Application { get; set; }
     }
 }

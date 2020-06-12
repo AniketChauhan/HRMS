@@ -319,6 +319,9 @@
     <Compile Include="Models\HRMS_TRAINING_MATERIAL_MS.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\HRMS_Training_Request_Application.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\HRMS_TRAINING_SKILL_MS.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

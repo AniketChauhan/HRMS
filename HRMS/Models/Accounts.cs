@@ -29,6 +29,8 @@ namespace HRMS.Models
             this.Sample = new HashSet<Sample>();
             this.HRMS_Travel_Expense_App = new HashSet<HRMS_Travel_Expense_App>();
             this.HRMS_EMP_GRA_POL = new HashSet<HRMS_EMP_GRA_POL>();
+            this.HRMS_Training_Request_Application = new HashSet<HRMS_Training_Request_Application>();
+            this.HRMS_Training_Request_Application1 = new HashSet<HRMS_Training_Request_Application>();
         }
     
         public long ID { get; set; }
@@ -36,6 +38,7 @@ namespace HRMS.Models
         public string password { get; set; }
         public string role { get; set; }
         public string ConfirmUsername { get; set; }
+
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EMP_Grade_Assignment> EMP_Grade_Assignment { get; set; }
@@ -61,5 +64,9 @@ namespace HRMS.Models
         public virtual ICollection<HRMS_Travel_Expense_App> HRMS_Travel_Expense_App { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HRMS_EMP_GRA_POL> HRMS_EMP_GRA_POL { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HRMS_Training_Request_Application> HRMS_Training_Request_Application { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HRMS_Training_Request_Application> HRMS_Training_Request_Application1 { get; set; }
     }
 }

@@ -31,6 +31,7 @@ namespace HRMS.Models
         public Nullable<int> Warning { get; set; }
         public decimal TotalAmount { get; set; }
 
+
         public virtual HRMS_Travel_Application HRMS_Travel_Application { get; set; }
         public virtual Accounts Accounts { get; set; }
     }
