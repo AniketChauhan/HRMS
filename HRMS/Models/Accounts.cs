@@ -11,8 +11,7 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Accounts
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -30,21 +29,15 @@ namespace HRMS.Models
             this.Sample = new HashSet<Sample>();
             this.HRMS_Travel_Expense_App = new HashSet<HRMS_Travel_Expense_App>();
             this.HRMS_EMP_GRA_POL = new HashSet<HRMS_EMP_GRA_POL>();
+            this.HRMS_Training_Request_Application = new HashSet<HRMS_Training_Request_Application>();
+            this.HRMS_Training_Request_Application1 = new HashSet<HRMS_Training_Request_Application>();
         }
-
-        [Display(Name = "Employee ID")]
+    
         public long ID { get; set; }
-        [Display(Name = "UserName")]
-        [Required]
-        [DataType(DataType.EmailAddress, ErrorMessage = "Username mast be Email ID!")]
         public string UserName { get; set; }
-
-        //for registration only
-        [Display(Name = "Confirm UserName")]
-        public string ConfirmUsername { get; set; }
-        [Required]
         public string password { get; set; }
         public string role { get; set; }
+        public string ConfirmUsername { get; set; }
 
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -71,5 +64,9 @@ namespace HRMS.Models
         public virtual ICollection<HRMS_Travel_Expense_App> HRMS_Travel_Expense_App { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HRMS_EMP_GRA_POL> HRMS_EMP_GRA_POL { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HRMS_Training_Request_Application> HRMS_Training_Request_Application { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HRMS_Training_Request_Application> HRMS_Training_Request_Application1 { get; set; }
     }
 }

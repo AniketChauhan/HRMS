@@ -88,6 +88,17 @@
         <AssociationConnector Association="HRMS5Model.FK_HRMS_EMP_GRA_POL_Accounts" />
         <AssociationConnector Association="HRMS5Model.FK_HRMS_EMP_GRA_POL_HRMS_CATEGORY_GRADE" />
         <AssociationConnector Association="HRMS5Model.FK_HRMS_EMP_GRA_POL_HRMS_TravelGroupType_MS" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_Faculty_MS" Width="1.5" PointX="16.375" PointY="7.75" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_ProgramDetail" Width="1.5" PointX="17.375" PointY="0.75" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_TRAINING_MATERIAL_MS" Width="1.5" PointX="8.375" PointY="15.75" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_TRAINING_SKILL_MS" Width="1.5" PointX="13.375" PointY="15.75" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_Training_Request_Application" Width="1.5" PointX="15.625" PointY="26.25" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_Training_Request_Application_Accounts" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_Training_Request_Application_Accounts1" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_Training_Request_Application_HRMS_DEPT" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_Training_Request_Application_HRMS_DESG_MS" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_Training_Request_Application_HRMS_TRAINING_SKILL_MS" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_ProgramDetail_HRMS_Training_Request_Application" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

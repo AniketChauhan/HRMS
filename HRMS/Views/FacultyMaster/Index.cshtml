@@ -1,0 +1,136 @@
+﻿@model IEnumerable<HRMS.Models.HRMS_Faculty_MS>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+
+<body>
+    <h2>Index</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table table-bordered table-responsive table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FacultyType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EMP_ID)
+            </th>
+            <th>
+                <text>Faculty Name</text>
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.PAN_No)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ServiceTaxNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Qualification)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Contact)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Remark)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Empty)
+                </th>*@
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FacultyType)
+                </td>
+                <td>
+                    @if (item.EMP_ID != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.EMP_ID)
+                    }
+                    else
+                    {
+                        <text>-</text>
+                    }
+
+                </td>
+                <td>
+                   
+                        @Html.DisplayFor(modelItem => item.External_Name)
+                   
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.PAN_No)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ServiceTaxNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Qualification)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Contact)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Remark)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Empty)
+                    </td>*@
+                <td class="btn-group-sm">
+                    @Html.ActionLink(" Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" })
+                    @Html.ActionLink(" Details", "Details", new { id = item.ID }, new { @class = "btn btn-warning btn-sm glyphicon glyphicon-list-alt" })
+
+                    <button class="btn btn-danger  btn-sm " onclick="return removeFromList(this, '@item.ID') "> <i class="glyphicon glyphicon-trash"> </i> Delete</button>
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>
+<script>
+    function removeFromList(thisobj, id) {
+        if (confirm("Are you sure?") == true) {
+            var data = JSON.stringify({
+                'id': id
+            });
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "@Url.Action("Delete","FacultyMaster")",
+                datatype: "json",
+                data: data,
+                success: function (response) {
+                    var tr = $(thisobj).closest("tr");
+                    $(tr).remove();
+
+                }
+            });
+        }
+    }
+</script>

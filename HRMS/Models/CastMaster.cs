@@ -11,9 +11,7 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class CastMaster
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,16 +19,11 @@ namespace HRMS.Models
         {
             this.Employee_Personal_Detail = new HashSet<Employee_Personal_Detail>();
         }
-
+    
         public long CastCode { get; set; }
         public long ReligionID { get; set; }
-        [Required]
-        [DisplayName("Cast Name")]
-        [RegularExpression(@"^[A-Za-z]+", ErrorMessage = "Only Alphabetic values are allowed!")]
-        [MaxLength(50, ErrorMessage = "Cast name can have 50 characters maximum!")]
-
         public string CastName { get; set; }
-
+    
         public virtual ReligionMaster ReligionMaster { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employee_Personal_Detail> Employee_Personal_Detail { get; set; }
