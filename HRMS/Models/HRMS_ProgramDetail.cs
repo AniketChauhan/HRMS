@@ -11,18 +11,24 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class HRMS_ProgramDetail
     {
         public long ID { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public System.DateTime TransactionDate { get; set; }
         public long TrainingID { get; set; }
         public string ProgramName { get; set; }
         public string Subject { get; set; }
-        public System.DateTime FromDate { get; set; }
-        public System.DateTime ToDate { get; set; }
-        public System.TimeSpan FromTime { get; set; }
-        public System.TimeSpan ToTime { get; set; }
+        public Nullable<System.DateTime> FromDate { get; set; }
+        public Nullable<System.DateTime> ToDate { get; set; }
+        [DataType(DataType.Time)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:H:mm}")]
+        public Nullable<System.TimeSpan> FromTime { get; set; }
+        [DataType(DataType.Time)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:H:mm}")]
+        public Nullable<System.TimeSpan> ToTime { get; set; }
         public string TrainingType { get; set; }
         public string ProgramType { get; set; }
         public string SubjectType { get; set; }

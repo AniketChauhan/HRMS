@@ -213,6 +213,7 @@
     <Compile Include="Controllers\ReligionMasterController.cs" />
     <Compile Include="Controllers\SALUTATIONController.cs" />
     <Compile Include="Controllers\SegmentMasterController.cs" />
+    <Compile Include="Controllers\TrainingProgramDetailController.cs" />
     <Compile Include="Controllers\TrainingSkillMasterController.cs" />
     <Compile Include="Controllers\TraningMaterialMasterController.cs" />
     <Compile Include="Controllers\TravelApplicationController.cs" />
@@ -719,6 +720,11 @@
     <Content Include="Views\TraningMaterialMaster\Details.cshtml" />
     <Content Include="Views\TraningMaterialMaster\Edit.cshtml" />
     <Content Include="Views\TraningMaterialMaster\Index.cshtml" />
+    <Content Include="Views\TrainingProgramDetail\Create.cshtml" />
+    <Content Include="Views\TrainingProgramDetail\Delete.cshtml" />
+    <Content Include="Views\TrainingProgramDetail\Details.cshtml" />
+    <Content Include="Views\TrainingProgramDetail\Edit.cshtml" />
+    <Content Include="Views\TrainingProgramDetail\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
