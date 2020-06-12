@@ -1,0 +1,64 @@
+﻿@model IEnumerable<HRMS.Models.HRMS_TrainingEvalution_Header>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+<h2>HEADERS</h2>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@if (Model.Count<HRMS.Models.HRMS_TrainingEvalution_Header>() > 0 && Model != null)
+{
+
+    <table class="table table-bordered table-responsive table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Header)
+            </th>
+            <th><center><i class="glyphicon glyphicon-wrench"> </i> Operations</center></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr id="@item.ID">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Header)
+                </td>
+                <td><center>
+    @Html.ActionLink(" Edit", "EditHeader", new { id = item.ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" }) |
+    <button class="btn btn-danger btn-sm" onclick="return removeFromList(this, '@item.ID') "><i class="glyphicon glyphicon-trash"> </i> Delete</button>
+</center>
+                    </td>
+            </tr>
+        }
+
+
+    </table>
+}
+else
+{
+    <div class="container">
+        <h2>sorry!!! We don't have any HEADERS  Right Now...</h2>
+    </div>
+}
+<script>
+    function removeFromList(thisobj,id) {
+        var data = JSON.stringify({
+            'id': id
+        });
+        $.ajax({
+        type: "POST",
+            contentType: "application/json",
+            url: "@Url.Action("deleteHeader", "TrainingEvaluation")",
+            datatype: "json",
+            data: data,
+            success: function (response) {
+                    var tr = $(thisobj).closest("tr");
+                    $(tr).remove();
+            }
+        });
+    }
+</script>

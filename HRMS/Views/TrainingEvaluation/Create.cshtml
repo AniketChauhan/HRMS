@@ -1,0 +1,375 @@
+﻿@model HRMS.ViewModel.EvalutionCommon
+@using HRMS.Models;
+<style type="text/css">
+    #questionform {
+        display: none;
+    }
+
+    #questiontable {
+        display: none;
+    }
+
+    #MainQuestionContainer {
+        display: none;
+    }
+    .btn_save{
+        display:none;
+    }
+    .btn_cancel{display:none;}
+    #saveQuestionsList{
+        display:none;
+    }
+</style>
+
+@{
+    ViewBag.Title = "Create";
+    ViewBag.HeaderID = null;
+}
+
+<h2>Create</h2>
+
+
+
+@*@using (Html.BeginForm("Create", "TrainingEvaluation", FormMethod.Post))*@
+@using (Ajax.BeginForm("Create", "TrainingEvaluation", new AjaxOptions { HttpMethod = "POST", OnSuccess = "successHeader", OnFailure = "Failureheader" }))
+{
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.header.Header, htmlAttributes: new { @class = "control-label col-md-5 required" })
+            <div class="col-md-7">
+                @Html.Editor("Head", new { htmlAttributes = new { @class = "form-control", @id = "headerpart" } })
+                @*@Html.Editor("Header", new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.ValidationMessageFor(model => model.header.Header, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+    </div>
+    <div class="form-group">
+        <center>
+            <input type="submit" value="Add Header" id="addHeader" class="btn btn-primary btn-sm" />
+        </center>
+    </div>
+}
+<hr />
+<div class="container" id="questionform">
+    @using (Ajax.BeginForm("CreateQuestion", "TrainingEvaluation", new AjaxOptions { HttpMethod = "POST", OnSuccess = "successQuestion", OnFailure = "FailureQuestion" }))
+    {
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.HiddenFor(model => model.question.Header_ID, htmlAttributes: new { @id = "headerID" })
+                @Html.LabelFor(model => model.question.Question, htmlAttributes: new { @class = "control-label col-md-5 required" })
+                <div class="col-md-7">
+                    @Html.EditorFor(model => model.question.Question, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.question.Question, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.question.IsDescription, htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-7">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.question.IsDescription)
+                        @Html.ValidationMessageFor(model => model.question.IsDescription, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <center>
+                <input type="submit" value="Add Question" class="btn btn-primary btn-sm"  />
+                @Html.ActionLink("Save Questions", "index", new {area =""}, new { @class = "btn btn-primary btn-sm " ,@id="saveQuestionsList"  }) 
+            </center>
+        </div>
+    }
+</div>
+@*here is code for table*@
+<div id="MainQuestionContainer">
+    @if (Model.QuestionLists != null)
+    {
+        <table class="table table-bordered table-responsive table-striped">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.question.Question)
+                </th>
+                <th>
+                    <center>
+                        @Html.DisplayNameFor(model => model.question.IsDescription)
+                    </center>
+                </th>
+                <th><center><i class="glyphicon glyphicon-wrench"> </i> Operations</center></th>
+            </tr>
+            <tbody id="questiontable">
+                @*@foreach (var item in Model.QuestionLists)
+                    {*@
+                <tr id="">
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.Question)*@
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.IsDescription)*@
+                    </td>
+                    <td>
+                        @*@Html.ActionLink(" Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" }) |
+                            <button class="btn btn-danger btn-sm" onclick="return removeFromList(this, '@item.ID') "><i class="glyphicon glyphicon-trash"> </i> Delete</button>*@
+                    </td>
+                </tr>
+                @*}*@
+            </tbody>
+
+        </table>
+    }
+</div>
+@if (ViewBag.HeaderStatus != null)
+{
+    <div class="alert alert-success alert-dismissible " style="width:50%;">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <span>
+            @ViewBag.HeaderStatus
+        </span>
+    </div>
+}
+@if (ViewBag.QuestionStatus != null)
+{
+    <div class="alert alert-success alert-dismissible " style="width:50%;">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <span>
+            @ViewBag.QuestionStatus
+        </span>
+    </div>
+}
+
+
+<script type="text/javascript">
+    $(document).find('btn_edit').show();
+    $(document).find('.btn_save').hide();
+    $(document).find('.btn_cancel').hide();
+
+    var headerrrcode;
+    //for header ajax
+    function successHeader(data) {
+        if (data.headerId != 0) {
+            document.getElementById("headerpart").readOnly = true;
+
+            document.getElementById("addHeader").disabled = true;
+
+            document.getElementById("headerID").value = data.headerId;
+
+            $("#questionform").show();
+            //$("#headerID").val(data.headerId);
+
+            //alert('HTTP Status Code: ' + data.headerId + "  " + data.headername);
+        }
+        else {
+            alert('This header is already exist!');
+        }
+    }
+    function Failureheader(data) {
+        alert('Ajax is failed!');
+    }
+    //for queston ajax ajax
+    function successQuestion(res) {
+        $("#questiontable").show();
+        $("#MainQuestionContainer").show();
+
+        if (res != null) {
+            if (res == "this Question is already exist!") {
+                alert(res);
+            }
+            else {
+                //alert(res[0].Question);
+                //alert(res[0].Header_ID);
+                var headrID = res[0].Header_ID;
+                headerrrcode = headrID;
+                getQuestionList(headrID);
+
+
+             }
+        }
+    }
+    function FailureQuestion(data) {
+        //debugger;
+
+        //alert(headerrrcode);
+        getQuestionList(headerrrcode);
+
+
+    }
+    function getQuestionList(headerID) {
+        //debugger;
+        //document.getElementById("").disabled = false;
+        $("#saveQuestionsList").show();
+
+        $.get("/TrainingEvaluation/GetQuestions", { headerId: headerID }, function (data) {
+
+            $("#questiontable").empty();
+            $.each(data, function (index, item) {
+                var tbody = "";
+
+                tbody += "<tr row_id='" + item.ID+"' id='" + item.ID +"'>";
+                tbody += "<td class='text-left'><div class='row_data' edit_type='click' col_name='Questiondata'>" + item.Question + "</div></td>";
+                tbody += "<td class='text-left'><center>" + item.IsDescription + "</center></td>";
+
+                tbody += "<td class=''><center><span class='btn_edit' > <a href='#' class='btn btn-link ' row_id='" + item.ID + "'>Edit</a> </span> &nbsp; <span class='btn_save' > <a href='#' class='btn btn-link ' row_id='" + item.ID + "'>Save</a></span>&nbsp;<span class='btn_cancel' ><a href='#' class='btn btn-link ' row_id='" + item.ID +"'>Cancel</a> </span> &nbsp; <button class='btn btn-danger btn-sm glyphicon glyphicon-trash btn_cancelQuestion' onclick='return RemoveFromList(" + item.ID + ")'>Remove</button></center></td>";
+
+                tbody += "</tr>";
+                $("#questiontable").append(tbody);
+            });
+
+
+        });
+    }
+    function RemoveFromList(id) {
+         var data = JSON.stringify({
+            'id': id
+        });
+        $.ajax({
+        type: "POST",
+            contentType: "application/json",
+            url: "@Url.Action("deleteQuestion", "TrainingEvaluation")",
+            datatype: "json",
+            data: data,
+            success: function (response) {
+                //debugger;
+                getQuestionList(headerrrcode);
+
+            }
+        });
+    }
+
+
+    //code for edit table
+   
+    //$(document).on('click', '.row_data', function (event) {
+    //    event.preventDefault();
+
+    //    if ($(this).attr('edit_type') == 'button') {
+    //        return false;
+    //    }
+
+    //    //make div editable
+    //    $(this).closest('div').attr('contenteditable', 'true');
+    //    //add bg css
+    //    $(this).addClass('bg-warning').css('padding', '5px');
+
+    //    $(this).focus();
+    //})
+    //make whole row editable
+    $(document).on('click', '.btn_edit', function (event) {
+        event.preventDefault();
+        var tbl_row = $(this).closest('tr');
+
+        var row_id = tbl_row.attr('row_id');
+
+        tbl_row.find('.btn_save').show();
+        tbl_row.find('.btn_cancel').show();
+        tbl_row.find('.btn_cancelQuestion').hide();
+
+        //hide edit button
+        tbl_row.find('.btn_edit').hide();
+
+        //make the whole row editable
+        tbl_row.find('.row_data')
+            .attr('contenteditable', 'true')
+            .attr('edit_type', 'button')
+            .addClass('bg-warning')
+            .css('padding', '3px')
+
+        //--->add the original entry > start
+        tbl_row.find('.row_data').each(function (index, val) {
+            //this will help in case user decided to click on cancel button
+            $(this).attr('original_entry', $(this).html());
+        });
+        //--->add the original entry > end
+
+    });
+    //function for cancel button
+    $(document).on('click', '.btn_cancel', function (event) {
+        event.preventDefault();
+
+        var tbl_row = $(this).closest('tr');
+
+        var row_id = tbl_row.attr('row_id');
+
+        //hide save and cacel buttons
+        tbl_row.find('.btn_save').hide();
+        tbl_row.find('.btn_cancel').hide();
+
+        //show edit button
+        tbl_row.find('.btn_edit').show();
+        tbl_row.find('.btn_cancelQuestion').show();
+
+        //make the whole row editable
+        tbl_row.find('.row_data')
+            .attr('edit_type', 'click')
+            .removeClass('bg-warning')
+            .css('padding', '')
+
+        tbl_row.find('.row_data').each(function (index, val) {
+            $(this).html($(this).attr('original_entry'));
+        });
+    });
+    //function for save button
+    //--->save whole row entery > start
+    $(document).on('click','.btn_save', function (event) {
+        //debugger;
+        event.preventDefault();
+        var tbl_row = $(this).closest('tr');
+
+        var row_id = tbl_row.attr('row_id');
+
+
+        //hide save and cacel buttons
+        tbl_row.find('.btn_save').hide();
+        tbl_row.find('.btn_cancel').hide();
+
+        //show edit button
+        tbl_row.find('.btn_edit').show();
+        tbl_row.find('.btn_cancelQuestion').show();
+
+
+        //make the whole row editable
+        tbl_row.find('.row_data')
+            .attr('edit_type', 'click')
+            .removeClass('bg-warning')
+            .css('padding', '')
+
+        //--->get row data > start
+        var arr = {};
+        tbl_row.find('.row_data').each(function (index, val) {
+            var col_name = $(this).attr('col_name');
+            var col_val = $(this).html();
+            arr[col_name] = col_val;
+        });
+        //--->get row data > end
+
+        //use the "arr"	object for your ajax call
+        $.extend(arr, { row_id: row_id });
+        QuestionData(arr);
+        //out put to show
+        //$('.post_msg').html('<pre class="bg-success">' + JSON.stringify(arr, null, 2) + '</pre>')
+
+
+    });
+    //--->save whole row entery > end
+    function QuestionData(arr) {
+        //debugger;
+         var data = JSON.stringify({
+             'id': arr.row_id,
+             'Question': arr.Questiondata
+        });
+        $.ajax({
+        type: "POST",
+            contentType: "application/json",
+            url: "@Url.Action("UpdateQuestiondata", "TrainingEvaluation")",
+            datatype: "json",
+            data: data,
+            success: function (response) {
+                alert(response);
+                getQuestionList(headerrrcode);
+
+            }
+        });
+    }
+
+</script>
