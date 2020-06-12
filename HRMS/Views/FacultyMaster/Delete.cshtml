@@ -1,0 +1,120 @@
+﻿@model HRMS.Models.HRMS_Faculty_MS
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>HRMS_Faculty_MS</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FacultyType)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.FacultyType)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.EMP_ID)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.EMP_ID)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.External_Name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.External_Name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.PAN_No)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.PAN_No)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ServiceTaxNo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ServiceTaxNo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Qualification)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Qualification)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Contact)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Contact)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Remark)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Remark)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.IsActive)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Empty)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Empty)
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+</body>
+</html>

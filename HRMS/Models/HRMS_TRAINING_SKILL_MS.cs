@@ -11,10 +11,18 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class HRMS_TRAVEL_OTHER_DETAILS_MS
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
+    public partial class HRMS_TRAINING_SKILL_MS
     {
-        public long Travel_Other_Details_ID { get; set; }
-        public string Travel_Other_Details_NM { get; set; }
+        [DisplayName("Skill Code")]
+        public long Skill_ID { get; set; }
+        [Required]
+        [DisplayName("Skill Name")]
+
+        public string Skill_Name { get; set; }
+        [DisplayName("Remark")]
+        public string Skill_Remark { get; set; }
     }
 }

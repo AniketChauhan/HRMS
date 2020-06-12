@@ -12,17 +12,19 @@ namespace HRMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class HRMS_EMP_Attachment_Details
+    public partial class HRMS_Faculty_MS
     {
         public long ID { get; set; }
-        public long EMP_ID { get; set; }
-        public string Attachment_Title { get; set; }
-        public long Attachment_Type_ID { get; set; }
-        public string FILENAME { get; set; }
-        public string FILEURL { get; set; }
-        public string Note { get; set; }
-    
-        public virtual Accounts Accounts { get; set; }
-        public virtual HRMS_ATTACHMENT_TYPE HRMS_ATTACHMENT_TYPE { get; set; }
+        public string FacultyType { get; set; }
+        public Nullable<long> EMP_ID { get; set; }
+        public string External_Name { get; set; }
+        public string PAN_No { get; set; }
+        public string ServiceTaxNo { get; set; }
+        public string Qualification { get; set; }
+        public string Contact { get; set; }
+        public string Email { get; set; }
+        public string Remark { get; set; }
+        public bool IsActive { get; set; }
+        public string Empty { get; set; }
     }
 }

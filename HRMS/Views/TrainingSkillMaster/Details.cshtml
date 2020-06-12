@@ -1,0 +1,43 @@
+﻿@model HRMS.Models.HRMS_TRAINING_SKILL_MS
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>HRMS TRAINING SKILL MS</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Skill_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Skill_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Skill_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Skill_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Skill_Remark)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Skill_Remark)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Skill_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

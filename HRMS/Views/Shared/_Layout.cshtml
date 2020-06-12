@@ -23,7 +23,7 @@
         <div class="  @color" id="mobTogDiv"> H.R.M.S.<button class="w3-button" id="navbutton"> <i class="glyphicon glyphicon-align-justify"></i></button></div>
     </div>
     <div id="contant" class="w3-bar @color  w3-card-2">
-        @Html.ActionLink("H.R.M.S", "", "", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile mainhrms" })
+        @*@Html.ActionLink("H.R.M.S", "", "", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile mainhrms" })*@
 
         @if (User.IsInRole("admin"))
         {
@@ -223,6 +223,36 @@
             </div>
 
         }
+
+        @*-----------------Admin MAster 3 --------------------*@
+
+        @if (User.IsInRole("admin"))
+        {
+            <div class="w3-dropdown-hover DixDiv">
+                <button class="w3-button  @color">Traning MS <i class="glyphicon glyphicon-chevron-down"> </i></button>
+                <div class="w3-dropdown-content w3-center w3-bar-block w3-card-4 DIVINSIDE">
+                    <div class="w3-bar-item w3-button w3-mobile">
+                        <i class="glyphicon glyphicon-move"> </i>
+                        @Html.ActionLink("Faculty", "Index", "FacultyMaster", new { area = "" }, new { @class = " " })
+                    </div>
+                    <div class="w3-bar-item w3-button w3-mobile">
+                        <i class="glyphicon glyphicon-transfer"> </i>
+                        @Html.ActionLink("Skill", "Index", "TrainingSkillMaster", new { area = "" }, new { @class = " " })
+                    </div>
+                    <div class="w3-bar-item w3-button w3-mobile">
+                        <i class="glyphicon glyphicon-grain"> </i>
+                        @Html.ActionLink("Material", "Index", "TraningMaterialMaster", new { area = "" }, new { @class = " " })
+                    </div>
+                    @*<div class="w3-bar-item w3-button w3-mobile">
+            <i class="glyphicon glyphicon-ruble"> </i>
+            @Html.ActionLink("Meal Expense", "Index", "TravelMealExpense", new { area = "" }, new { @class = " " })
+        </div>*@
+
+                </div>
+            </div>
+        }
+
+
 
 
         @*-----------------------------Admin Configuration-------------------------*@

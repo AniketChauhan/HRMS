@@ -206,12 +206,15 @@
     <Compile Include="Controllers\EmployeeRegistrationController.cs" />
     <Compile Include="Controllers\EmployeeReportController.cs" />
     <Compile Include="Controllers\EmpReportController.cs" />
+    <Compile Include="Controllers\FacultyMasterController.cs" />
     <Compile Include="Controllers\GenderController.cs" />
     <Compile Include="Controllers\MaritalMasterController.cs" />
     <Compile Include="Controllers\PayRollMasterControllerv.cs" />
     <Compile Include="Controllers\ReligionMasterController.cs" />
     <Compile Include="Controllers\SALUTATIONController.cs" />
     <Compile Include="Controllers\SegmentMasterController.cs" />
+    <Compile Include="Controllers\TrainingSkillMasterController.cs" />
+    <Compile Include="Controllers\TraningMaterialMasterController.cs" />
     <Compile Include="Controllers\TravelApplicationController.cs" />
     <Compile Include="Controllers\TravelApplicationExpanseReportController.cs" />
     <Compile Include="Controllers\TravelAppReportController.cs" />
@@ -304,7 +307,19 @@
     <Compile Include="Models\HRMS_EMP_ReferenceDetail.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\HRMS_Faculty_MS.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HRMS_ProgramDetail.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\HRMS_SALUTATION.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HRMS_TRAINING_MATERIAL_MS.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HRMS_TRAINING_SKILL_MS.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HRMS_TravelGroupType_MS.cs">
@@ -686,6 +701,21 @@
     <Content Include="Views\EmpReport\Index.cshtml" />
     <Content Include="Views\EmpReport\TravelReporttt.cshtml" />
     <Content Include="Views\EmpReport\TravelExpanseReporttt.cshtml" />
+    <Content Include="Views\FacultyMaster\Create.cshtml" />
+    <Content Include="Views\FacultyMaster\Delete.cshtml" />
+    <Content Include="Views\FacultyMaster\Details.cshtml" />
+    <Content Include="Views\FacultyMaster\Edit.cshtml" />
+    <Content Include="Views\FacultyMaster\Index.cshtml" />
+    <Content Include="Views\TrainingSkillMaster\Create.cshtml" />
+    <Content Include="Views\TrainingSkillMaster\Delete.cshtml" />
+    <Content Include="Views\TrainingSkillMaster\Details.cshtml" />
+    <Content Include="Views\TrainingSkillMaster\Edit.cshtml" />
+    <Content Include="Views\TrainingSkillMaster\Index.cshtml" />
+    <Content Include="Views\TraningMaterialMaster\Create.cshtml" />
+    <Content Include="Views\TraningMaterialMaster\Delete.cshtml" />
+    <Content Include="Views\TraningMaterialMaster\Details.cshtml" />
+    <Content Include="Views\TraningMaterialMaster\Edit.cshtml" />
+    <Content Include="Views\TraningMaterialMaster\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

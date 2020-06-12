@@ -262,12 +262,78 @@
           <Property Name="MobileNo" Type="varchar" MaxLength="15" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="HRMS_Faculty_MS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FacultyType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EMP_ID" Type="bigint" />
+          <Property Name="External_Name" Type="varchar" MaxLength="50" />
+          <Property Name="PAN_No" Type="varchar" MaxLength="50" />
+          <Property Name="ServiceTaxNo" Type="varchar" MaxLength="50" />
+          <Property Name="Qualification" Type="varchar" MaxLength="50" />
+          <Property Name="Contact" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Remark" Type="varchar" MaxLength="200" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Empty" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="HRMS_ProgramDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransactionDate" Type="date" Nullable="false" />
+          <Property Name="TrainingID" Type="bigint" Nullable="false" />
+          <Property Name="ProgramName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Subject" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FromDate" Type="date" Nullable="false" />
+          <Property Name="ToDate" Type="date" Nullable="false" />
+          <Property Name="FromTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="ToTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="TrainingType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProgramType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SubjectType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProgramMode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Venue" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Budget" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Address" Type="varchar(max)" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="BenefitsToOrg" Type="varchar" MaxLength="200" />
+          <Property Name="Remarks" Type="varchar" MaxLength="200" />
+          <Property Name="RatingMethod" Type="varchar" MaxLength="50" />
+          <Property Name="TrainingStatus" Type="varchar" MaxLength="50" />
+          <Property Name="CompletedBy" Type="bigint" />
+          <Property Name="CompleteDate" Type="date" />
+          <Property Name="RemarksOther" Type="varchar" MaxLength="200" />
+          <Property Name="Flag" Type="bigint" />
+        </EntityType>
         <EntityType Name="HRMS_SALUTATION">
           <Key>
             <PropertyRef Name="Salutation_ID" />
           </Key>
           <Property Name="Salutation_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Salutation_Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HRMS_TRAINING_MATERIAL_MS">
+          <Key>
+            <PropertyRef Name="Material_ID" />
+          </Key>
+          <Property Name="Material_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Material_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Material_Rate" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Material_Remarks" Type="nvarchar" MaxLength="50" />
+          <Property Name="Material_IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HRMS_TRAINING_SKILL_MS">
+          <Key>
+            <PropertyRef Name="Skill_ID" />
+          </Key>
+          <Property Name="Skill_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Skill_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Skill_Remark" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="HRMS_Travel_Application">
           <Key>
@@ -1004,7 +1070,11 @@
           <EntitySet Name="HRMS_EMP_GRA_POL" EntityType="Self.HRMS_EMP_GRA_POL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_EMP_PHOTO_SIGN" EntityType="Self.HRMS_EMP_PHOTO_SIGN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_EMP_ReferenceDetail" EntityType="Self.HRMS_EMP_ReferenceDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_Faculty_MS" EntityType="Self.HRMS_Faculty_MS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_ProgramDetail" EntityType="Self.HRMS_ProgramDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_SALUTATION" EntityType="Self.HRMS_SALUTATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_TRAINING_MATERIAL_MS" EntityType="Self.HRMS_TRAINING_MATERIAL_MS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_TRAINING_SKILL_MS" EntityType="Self.HRMS_TRAINING_SKILL_MS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_Travel_Application" EntityType="Self.HRMS_Travel_Application" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_Travel_Expense_App" EntityType="Self.HRMS_Travel_Expense_App" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_TRAVEL_MEAL_EXPENSE_MS" EntityType="Self.HRMS_TRAVEL_MEAL_EXPENSE_MS" Schema="dbo" store:Type="Tables" />
@@ -2068,6 +2138,10 @@
             <Parameter Name="designation" Mode="In" Type="Int64" />
             <Parameter Name="status" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="HRMS_Faculty_MS" EntityType="HRMS5Model.HRMS_Faculty_MS" />
+          <EntitySet Name="HRMS_ProgramDetail" EntityType="HRMS5Model.HRMS_ProgramDetail" />
+          <EntitySet Name="HRMS_TRAINING_MATERIAL_MS" EntityType="HRMS5Model.HRMS_TRAINING_MATERIAL_MS" />
+          <EntitySet Name="HRMS_TRAINING_SKILL_MS" EntityType="HRMS5Model.HRMS_TRAINING_SKILL_MS" />
         </EntityContainer>
         <ComplexType Name="DepartmentData_Result">
           <Property Type="Int64" Name="Dept_Id" Nullable="false" />
@@ -2506,6 +2580,72 @@
           <Property Type="DateTime" Name="ToDate" Nullable="false" />
           <Property Type="String" Name="TravelPurpose" Nullable="false" />
         </ComplexType>
+        <EntityType Name="HRMS_Faculty_MS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FacultyType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EMP_ID" Type="Int64" />
+          <Property Name="External_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PAN_No" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ServiceTaxNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Qualification" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contact" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Empty" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="HRMS_ProgramDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransactionDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TrainingID" Type="Int64" Nullable="false" />
+          <Property Name="ProgramName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Subject" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FromDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ToDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FromTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="ToTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="TrainingType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProgramType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SubjectType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProgramMode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Venue" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Budget" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BenefitsToOrg" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RatingMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TrainingStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CompletedBy" Type="Int64" />
+          <Property Name="CompleteDate" Type="DateTime" Precision="0" />
+          <Property Name="RemarksOther" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Flag" Type="Int64" />
+        </EntityType>
+        <EntityType Name="HRMS_TRAINING_MATERIAL_MS">
+          <Key>
+            <PropertyRef Name="Material_ID" />
+          </Key>
+          <Property Name="Material_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Material_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Material_Rate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Material_Remarks" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Material_IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HRMS_TRAINING_SKILL_MS">
+          <Key>
+            <PropertyRef Name="Skill_ID" />
+          </Key>
+          <Property Name="Skill_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Skill_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Skill_Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3060,6 +3200,76 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="HRMS_Faculty_MS">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_Faculty_MS">
+              <MappingFragment StoreEntitySet="HRMS_Faculty_MS">
+                <ScalarProperty Name="Empty" ColumnName="Empty" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Qualification" ColumnName="Qualification" />
+                <ScalarProperty Name="ServiceTaxNo" ColumnName="ServiceTaxNo" />
+                <ScalarProperty Name="PAN_No" ColumnName="PAN_No" />
+                <ScalarProperty Name="External_Name" ColumnName="External_Name" />
+                <ScalarProperty Name="EMP_ID" ColumnName="EMP_ID" />
+                <ScalarProperty Name="FacultyType" ColumnName="FacultyType" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_ProgramDetail">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_ProgramDetail">
+              <MappingFragment StoreEntitySet="HRMS_ProgramDetail">
+                <ScalarProperty Name="Flag" ColumnName="Flag" />
+                <ScalarProperty Name="RemarksOther" ColumnName="RemarksOther" />
+                <ScalarProperty Name="CompleteDate" ColumnName="CompleteDate" />
+                <ScalarProperty Name="CompletedBy" ColumnName="CompletedBy" />
+                <ScalarProperty Name="TrainingStatus" ColumnName="TrainingStatus" />
+                <ScalarProperty Name="RatingMethod" ColumnName="RatingMethod" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="BenefitsToOrg" ColumnName="BenefitsToOrg" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Budget" ColumnName="Budget" />
+                <ScalarProperty Name="Venue" ColumnName="Venue" />
+                <ScalarProperty Name="ProgramMode" ColumnName="ProgramMode" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="SubjectType" ColumnName="SubjectType" />
+                <ScalarProperty Name="ProgramType" ColumnName="ProgramType" />
+                <ScalarProperty Name="TrainingType" ColumnName="TrainingType" />
+                <ScalarProperty Name="ToTime" ColumnName="ToTime" />
+                <ScalarProperty Name="FromTime" ColumnName="FromTime" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+                <ScalarProperty Name="TrainingID" ColumnName="TrainingID" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_TRAINING_MATERIAL_MS">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_TRAINING_MATERIAL_MS">
+              <MappingFragment StoreEntitySet="HRMS_TRAINING_MATERIAL_MS">
+                <ScalarProperty Name="Material_IsActive" ColumnName="Material_IsActive" />
+                <ScalarProperty Name="Material_Remarks" ColumnName="Material_Remarks" />
+                <ScalarProperty Name="Material_Rate" ColumnName="Material_Rate" />
+                <ScalarProperty Name="Material_Name" ColumnName="Material_Name" />
+                <ScalarProperty Name="Material_ID" ColumnName="Material_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_TRAINING_SKILL_MS">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_TRAINING_SKILL_MS">
+              <MappingFragment StoreEntitySet="HRMS_TRAINING_SKILL_MS">
+                <ScalarProperty Name="Skill_Remark" ColumnName="Skill_Remark" />
+                <ScalarProperty Name="Skill_Name" ColumnName="Skill_Name" />
+                <ScalarProperty Name="Skill_ID" ColumnName="Skill_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
