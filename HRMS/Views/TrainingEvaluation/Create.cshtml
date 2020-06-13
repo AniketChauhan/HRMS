@@ -12,12 +12,17 @@
     #MainQuestionContainer {
         display: none;
     }
-    .btn_save{
-        display:none;
+
+    .btn_save {
+        display: none;
     }
-    .btn_cancel{display:none;}
-    #saveQuestionsList{
-        display:none;
+
+    .btn_cancel {
+        display: none;
+    }
+
+    #saveQuestionsList {
+        display: none;
     }
 </style>
 
@@ -30,7 +35,7 @@
 
 
 
-@*@*@using (Html.BeginForm("Create", "TrainingEvaluation", FormMethod.Post))*@*@
+@*@using (Html.BeginForm("Create", "TrainingEvaluation", FormMethod.Post))*@
 @using (Ajax.BeginForm("Create", "TrainingEvaluation", new AjaxOptions { HttpMethod = "POST", OnSuccess = "successHeader", OnFailure = "Failureheader" }))
 {
 
@@ -77,8 +82,8 @@
         </div>
         <div class="form-group">
             <center>
-                <input type="submit" value="Add Question" class="btn btn-primary btn-sm"  />
-                @Html.ActionLink("Save Questions", "index", new {area =""}, new { @class = "btn btn-primary btn-sm " ,@id="saveQuestionsList"  }) 
+                <input type="submit" value="Add Question" class="btn btn-primary btn-sm" />
+                @Html.ActionLink("Save Questions", "index", new { area = "" }, new { @class = "btn btn-primary btn-sm ", @id = "saveQuestionsList" })
             </center>
         </div>
     }
@@ -239,7 +244,7 @@
 
 
     //code for edit table
-   
+
     //$(document).on('click', '.row_data', function (event) {
     //    event.preventDefault();
 

@@ -23,20 +23,20 @@
 
     @foreach (var item in Model)
     {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Skill_Name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Skill_Remark)
-    </td>
-    <td class="btn-group-sm">
-        @Html.ActionLink(" Edit", "Edit", new { id = item.Skill_ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" })
-        @Html.ActionLink(" Details", "Details", new { id = item.Skill_ID }, new { @class = "btn btn-warning btn-sm glyphicon glyphicon-list-alt" })
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Skill_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Skill_Remark)
+            </td>
+            <td class="btn-group-sm">
+                @Html.ActionLink(" Edit", "Edit", new { id = item.Skill_ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" })
+                @Html.ActionLink(" Details", "Details", new { id = item.Skill_ID }, new { @class = "btn btn-warning btn-sm glyphicon glyphicon-list-alt" })
 
-        <button class="btn btn-danger  btn-sm " onclick="return removeFromList(this, '@item.Skill_ID') "> <i class="glyphicon glyphicon-trash"> </i> Delete</button>
-    </td>
-</tr>
+                <button class="btn btn-danger  btn-sm " onclick="return removeFromList(this, '@item.Skill_ID') "> <i class="glyphicon glyphicon-trash"> </i> Delete</button>
+            </td>
+        </tr>
     }
 
 </table>

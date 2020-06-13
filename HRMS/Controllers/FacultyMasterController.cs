@@ -27,7 +27,7 @@ namespace HRMS.Controllers
                     var result = new { Mo = obj.Mobile_No_Work, Email = obj.Corporate_Email };
                     return Json(result, JsonRequestBehavior.AllowGet);
                 }
-                    
+
             }
             return Json(false, JsonRequestBehavior.AllowGet);
         }
@@ -35,14 +35,14 @@ namespace HRMS.Controllers
         [HttpPost]
         public JsonResult AutoComplete(string prefix)
         {
-            
+
             var Result1 = (from Result in db.HRMS_Emp_Details
-                             where Result.First_Name.StartsWith(prefix) || Result.Last_Name.StartsWith(prefix)
-                             select new
-                             {
-                                 label = Result.First_Name +" "+Result.Last_Name+" "+Result.EMP_ID,
-                                 val = Result.EMP_ID
-                             }).ToList();
+                           where Result.First_Name.StartsWith(prefix) || Result.Last_Name.StartsWith(prefix)
+                           select new
+                           {
+                               label = Result.First_Name + " " + Result.Last_Name + " " + Result.EMP_ID,
+                               val = Result.EMP_ID
+                           }).ToList();
 
             return Json(Result1);
         }
@@ -94,7 +94,7 @@ namespace HRMS.Controllers
                     }
                     else
                     {
-                        HRMS_Emp_Details obj = db.HRMS_Emp_Details.Where(x=>x.EMP_ID==hRMS_Faculty_MS.EMP_ID).FirstOrDefault();
+                        HRMS_Emp_Details obj = db.HRMS_Emp_Details.Where(x => x.EMP_ID == hRMS_Faculty_MS.EMP_ID).FirstOrDefault();
                         string name = obj.First_Name + " " + obj.Last_Name;
                         hRMS_Faculty_MS.External_Name = name;
                         db.HRMS_Faculty_MS.Add(hRMS_Faculty_MS);
@@ -157,13 +157,13 @@ namespace HRMS.Controllers
 
                 else
                 {
-                        db.Entry(hRMS_Faculty_MS).State = EntityState.Modified;
-                        db.SaveChanges();
-                        ViewBag.success = "Data Successfully changed!";
-                        return View(hRMS_Faculty_MS);
+                    db.Entry(hRMS_Faculty_MS).State = EntityState.Modified;
+                    db.SaveChanges();
+                    ViewBag.success = "Data Successfully changed!";
+                    return View(hRMS_Faculty_MS);
                 }
 
-                
+
             }
             return View(hRMS_Faculty_MS);
         }

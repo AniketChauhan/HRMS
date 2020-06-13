@@ -9,7 +9,7 @@
 
 <html>
 <head>
-  
+
     <link href="~/StyleSheet/UnitStyleSheet.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width" />
     <title>Create</title>
@@ -173,7 +173,7 @@
             switch ($(this).val()) {
                 case 'Internal':
                     //alert("Internal");
-                   
+
                     $("#Here").val("");  //clear textbox
                     $(".Ext").hide();
                     $(".Emp").show();
@@ -181,7 +181,7 @@
                     break;
                 case 'External':
                     //alert("External");
-                    
+
                     $("#Employee").val("");  //clear textbox
                     $("#Search").val("");
                     $("#Contact").removeAttr('readonly'); //remove readonly
@@ -241,9 +241,9 @@
                 //  alert(data.Mo);
                 //  alert(data.Email);
 
-                   
+
                     $(function(){
-       
+
                         $.get("/FacultyMaster/Data", { id: $("#Employee").val() }, function (data) {
                             //alert("External");
                             //alert(data.Mo);
@@ -253,9 +253,9 @@
                             $("#Contact").attr('readonly','readonly');
                             $("#Email").attr('readonly','readonly');
                         });
-           
-        
-   
+
+
+
                });
             },
             minLength: 1

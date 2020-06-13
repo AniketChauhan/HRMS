@@ -2,29 +2,30 @@
 @model HRMS.ViewModel.EvalutionCommon
 @using HRMS.Models;
 <style type="text/css">
-    #questionform {
-        display: block;
-    }
+        #questionform {
+            display: block;
+        }
 
-    #questiontable {
-/*        display: inline;
-*/    }
+        #questiontable {
+            /*        display: inline;
+    */
+        }
 
-    #MainQuestionContainer {
-        display: block;
-    }
+        #MainQuestionContainer {
+            display: block;
+        }
 
-    .btn_save {
-        display: none;
-    }
+        .btn_save {
+            display: none;
+        }
 
-    .btn_cancel {
-        display: none;
-    }
+        .btn_cancel {
+            display: none;
+        }
 
-    #saveQuestionsList {
-        display: inline;
-    }
+        #saveQuestionsList {
+            display: inline;
+        }
 </style>
 
 @{
@@ -39,13 +40,13 @@
 @*@using (Html.BeginForm("Create", "TrainingEvaluation", FormMethod.Post))*@
 @using (Ajax.BeginForm("EditHeader", "TrainingEvaluation", new AjaxOptions { HttpMethod = "POST", OnSuccess = "successHeader", OnFailure = "Failureheader" }))
 {
-    @Html.HiddenFor(model=>model.header.ID)
+    @Html.HiddenFor(model => model.header.ID)
     <div class="form-horizontal">
         <div class="form-group">
             @Html.LabelFor(model => model.header.Header, htmlAttributes: new { @class = "control-label col-md-5 required" })
             <div class="col-md-7">
                 @*@Html.Editor("Head", new { htmlAttributes = new { @class = "form-control", @id = "headerpart"  } })*@
-@Html.EditorFor(model => model.header.Header , new { htmlAttributes = new { @class = "form-control", @id = "headerpart" } })
+                @Html.EditorFor(model => model.header.Header, new { htmlAttributes = new { @class = "form-control", @id = "headerpart" } })
                 @Html.ValidationMessageFor(model => model.header.Header, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -81,7 +82,7 @@
                 </div>
             </div>
         </div>
-       
+
         <div class="form-group">
             <center>
                 <input type="submit" value="Add Question" class="btn btn-primary btn-sm" />
@@ -92,21 +93,21 @@
 </div>
 @*here is code for table*@
 <div id="MainQuestionContainer">
-   
-        <table class="table table-bordered table-responsive table-striped">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.question.Question)
-                </th>
-                <th>
-                    <center>
-                        @Html.DisplayNameFor(model => model.question.IsDescription)
-                    </center>
-                </th>
-                <th><center><i class="glyphicon glyphicon-wrench"> </i> Operations</center></th>
-            </tr>
-            <tbody id="questiontable">
-                @*@foreach (var item in Model.QuestionLists)
+
+    <table class="table table-bordered table-responsive table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.question.Question)
+            </th>
+            <th>
+                <center>
+                    @Html.DisplayNameFor(model => model.question.IsDescription)
+                </center>
+            </th>
+            <th><center><i class="glyphicon glyphicon-wrench"> </i> Operations</center></th>
+        </tr>
+        <tbody id="questiontable">
+            @*@foreach (var item in Model.QuestionLists)
                     {
                 <tr id="">
                     <td>
@@ -121,10 +122,10 @@
                     </td>
                 </tr>
                 }*@
-            </tbody>
+        </tbody>
 
-        </table>
-    
+    </table>
+
 </div>
 @if (ViewBag.HeaderStatus != null)
 {
@@ -159,7 +160,7 @@
     $(document).find('.btn_save').hide();
     $(document).find('.btn_cancel').hide();
 
-   
+
     //for header ajax
     function successHeader(data) {
         if (data.headerId != 0) {

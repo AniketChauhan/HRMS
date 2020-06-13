@@ -27,11 +27,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Header)
                 </td>
-                <td><center>
-    @Html.ActionLink(" Edit", "EditHeader", new { id = item.ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" }) |
-    <button class="btn btn-danger btn-sm" onclick="return removeFromList(this, '@item.ID') "><i class="glyphicon glyphicon-trash"> </i> Delete</button>
-</center>
-                    </td>
+                <td>
+                    <center>
+                        @Html.ActionLink(" Edit", "EditHeader", new { id = item.ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" }) |
+                        <button class="btn btn-danger btn-sm" onclick="return removeFromList(this, '@item.ID') "><i class="glyphicon glyphicon-trash"> </i> Delete</button>
+                    </center>
+                </td>
             </tr>
         }
 

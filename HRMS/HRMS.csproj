@@ -720,6 +720,24 @@
     <Content Include="Views\TrainingProgramDetail\Details.cshtml" />
     <Content Include="Views\TrainingProgramDetail\Edit.cshtml" />
     <Content Include="Views\TrainingProgramDetail\Index.cshtml" />
+    <Content Include="Views\TrainingEvaluation\Create.cshtml" />
+    <Content Include="Views\TrainingEvaluation\EditHeader.cshtml" />
+    <Content Include="Views\TrainingEvaluation\Index.cshtml" />
+    <Content Include="Views\TrainingSkillMaster\Create.cshtml" />
+    <Content Include="Views\TrainingSkillMaster\Delete.cshtml" />
+    <Content Include="Views\TrainingSkillMaster\Details.cshtml" />
+    <Content Include="Views\TrainingSkillMaster\Edit.cshtml" />
+    <Content Include="Views\TrainingSkillMaster\Index.cshtml" />
+    <Content Include="Views\TraningMaterialMaster\Create.cshtml" />
+    <Content Include="Views\TraningMaterialMaster\Delete.cshtml" />
+    <Content Include="Views\TraningMaterialMaster\Details.cshtml" />
+    <Content Include="Views\TraningMaterialMaster\Edit.cshtml" />
+    <Content Include="Views\TraningMaterialMaster\Index.cshtml" />
+    <Content Include="Views\FacultyMaster\Create.cshtml" />
+    <Content Include="Views\FacultyMaster\Delete.cshtml" />
+    <Content Include="Views\FacultyMaster\Details.cshtml" />
+    <Content Include="Views\FacultyMaster\Edit.cshtml" />
+    <Content Include="Views\FacultyMaster\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
