@@ -143,9 +143,11 @@ namespace HRMS.Controllers
         {
             var question = db.HRMS_Evalution_Question.Where(rec => rec.ID == id).FirstOrDefault();
 
+
             var exist = db.HRMS_Evalution_Question.Where(rec => rec.Question == Question && rec.ID != id && rec.Header_ID == question.Header_ID).Any();
             if (exist == false)
             {
+                question.Question = Question;
                 db.Entry(question).State = EntityState.Modified;
                 db.SaveChanges(); ModelState.Clear();
                 return ("Data Updated Successfully.");
