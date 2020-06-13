@@ -319,6 +319,16 @@
           <Property Name="RemarksOther" Type="varchar" MaxLength="200" />
           <Property Name="Flag" Type="bigint" />
         </EntityType>
+        <EntityType Name="HRMS_ProgramFaculty">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FacultyName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FacultyID" Type="bigint" Nullable="false" />
+          <Property Name="ProgramID" Type="bigint" Nullable="false" />
+        </EntityType>
         <EntityType Name="HRMS_SALUTATION">
           <Key>
             <PropertyRef Name="Salutation_ID" />
@@ -940,6 +950,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_HRMS_ProgramFaculty_HRMS_Faculty_MS">
+          <End Role="HRMS_Faculty_MS" Type="Self.HRMS_Faculty_MS" Multiplicity="1" />
+          <End Role="HRMS_ProgramFaculty" Type="Self.HRMS_ProgramFaculty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_Faculty_MS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_ProgramFaculty">
+              <PropertyRef Name="FacultyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_ProgramFaculty_HRMS_ProgramDetail">
+          <End Role="HRMS_ProgramDetail" Type="Self.HRMS_ProgramDetail" Multiplicity="1" />
+          <End Role="HRMS_ProgramFaculty" Type="Self.HRMS_ProgramFaculty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_ProgramDetail">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_ProgramFaculty">
+              <PropertyRef Name="ProgramID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_HRMS_Training_Request_Application_Accounts">
           <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
           <End Role="HRMS_Training_Request_Application" Type="Self.HRMS_Training_Request_Application" Multiplicity="*" />
@@ -1192,6 +1226,7 @@
           <EntitySet Name="HRMS_Evalution_Question" EntityType="Self.HRMS_Evalution_Question" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_Faculty_MS" EntityType="Self.HRMS_Faculty_MS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_ProgramDetail" EntityType="Self.HRMS_ProgramDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_ProgramFaculty" EntityType="Self.HRMS_ProgramFaculty" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_SALUTATION" EntityType="Self.HRMS_SALUTATION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_TRAINING_MATERIAL_MS" EntityType="Self.HRMS_TRAINING_MATERIAL_MS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_Training_Request_Application" EntityType="Self.HRMS_Training_Request_Application" Schema="dbo" store:Type="Tables" />
@@ -1342,6 +1377,14 @@
           <AssociationSet Name="FK_HRMS_ProgramDetail_HRMS_Training_Request_Application" Association="Self.FK_HRMS_ProgramDetail_HRMS_Training_Request_Application">
             <End Role="HRMS_Training_Request_Application" EntitySet="HRMS_Training_Request_Application" />
             <End Role="HRMS_ProgramDetail" EntitySet="HRMS_ProgramDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_ProgramFaculty_HRMS_Faculty_MS" Association="Self.FK_HRMS_ProgramFaculty_HRMS_Faculty_MS">
+            <End Role="HRMS_Faculty_MS" EntitySet="HRMS_Faculty_MS" />
+            <End Role="HRMS_ProgramFaculty" EntitySet="HRMS_ProgramFaculty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_ProgramFaculty_HRMS_ProgramDetail" Association="Self.FK_HRMS_ProgramFaculty_HRMS_ProgramDetail">
+            <End Role="HRMS_ProgramDetail" EntitySet="HRMS_ProgramDetail" />
+            <End Role="HRMS_ProgramFaculty" EntitySet="HRMS_ProgramFaculty" />
           </AssociationSet>
           <AssociationSet Name="FK_HRMS_Training_Request_Application_Accounts" Association="Self.FK_HRMS_Training_Request_Application_Accounts">
             <End Role="Accounts" EntitySet="Accounts" />
@@ -2326,6 +2369,15 @@
             <End Role="HRMS_TrainingEvalution_Header" EntitySet="HRMS_TrainingEvalution_Header" />
             <End Role="HRMS_Evalution_Question" EntitySet="HRMS_Evalution_Question" />
           </AssociationSet>
+          <EntitySet Name="HRMS_ProgramFaculty" EntityType="HRMS5Model.HRMS_ProgramFaculty" />
+          <AssociationSet Name="FK_HRMS_ProgramFaculty_HRMS_Faculty_MS" Association="HRMS5Model.FK_HRMS_ProgramFaculty_HRMS_Faculty_MS">
+            <End Role="HRMS_Faculty_MS" EntitySet="HRMS_Faculty_MS" />
+            <End Role="HRMS_ProgramFaculty" EntitySet="HRMS_ProgramFaculty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_ProgramFaculty_HRMS_ProgramDetail" Association="HRMS5Model.FK_HRMS_ProgramFaculty_HRMS_ProgramDetail">
+            <End Role="HRMS_ProgramDetail" EntitySet="HRMS_ProgramDetail" />
+            <End Role="HRMS_ProgramFaculty" EntitySet="HRMS_ProgramFaculty" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="DepartmentData_Result">
           <Property Type="Int64" Name="Dept_Id" Nullable="false" />
@@ -2781,6 +2833,7 @@
           <Property Name="Remark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="Empty" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="HRMS_ProgramFaculty" Relationship="HRMS5Model.FK_HRMS_ProgramFaculty_HRMS_Faculty_MS" FromRole="HRMS_Faculty_MS" ToRole="HRMS_ProgramFaculty" />
         </EntityType>
         <EntityType Name="HRMS_ProgramDetail">
           <Key>
@@ -2813,6 +2866,7 @@
           <Property Name="RemarksOther" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Flag" Type="Int64" />
           <NavigationProperty Name="HRMS_Training_Request_Application" Relationship="HRMS5Model.FK_HRMS_ProgramDetail_HRMS_Training_Request_Application" FromRole="HRMS_ProgramDetail" ToRole="HRMS_Training_Request_Application" />
+          <NavigationProperty Name="HRMS_ProgramFaculty" Relationship="HRMS5Model.FK_HRMS_ProgramFaculty_HRMS_ProgramDetail" FromRole="HRMS_ProgramDetail" ToRole="HRMS_ProgramFaculty" />
         </EntityType>
         <EntityType Name="HRMS_TRAINING_MATERIAL_MS">
           <Key>
@@ -2957,6 +3011,42 @@
             </Principal>
             <Dependent Role="HRMS_Evalution_Question">
               <PropertyRef Name="Header_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="HRMS_ProgramFaculty">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FacultyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FacultyID" Type="Int64" Nullable="false" />
+          <Property Name="ProgramID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="HRMS_Faculty_MS" Relationship="HRMS5Model.FK_HRMS_ProgramFaculty_HRMS_Faculty_MS" FromRole="HRMS_ProgramFaculty" ToRole="HRMS_Faculty_MS" />
+          <NavigationProperty Name="HRMS_ProgramDetail" Relationship="HRMS5Model.FK_HRMS_ProgramFaculty_HRMS_ProgramDetail" FromRole="HRMS_ProgramFaculty" ToRole="HRMS_ProgramDetail" />
+        </EntityType>
+        <Association Name="FK_HRMS_ProgramFaculty_HRMS_Faculty_MS">
+          <End Type="HRMS5Model.HRMS_Faculty_MS" Role="HRMS_Faculty_MS" Multiplicity="1" />
+          <End Type="HRMS5Model.HRMS_ProgramFaculty" Role="HRMS_ProgramFaculty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_Faculty_MS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_ProgramFaculty">
+              <PropertyRef Name="FacultyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_ProgramFaculty_HRMS_ProgramDetail">
+          <End Type="HRMS5Model.HRMS_ProgramDetail" Role="HRMS_ProgramDetail" Multiplicity="1" />
+          <End Type="HRMS5Model.HRMS_ProgramFaculty" Role="HRMS_ProgramFaculty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_ProgramDetail">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_ProgramFaculty">
+              <PropertyRef Name="ProgramID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3618,6 +3708,17 @@
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="Header" ColumnName="Header" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_ProgramFaculty">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_ProgramFaculty">
+              <MappingFragment StoreEntitySet="HRMS_ProgramFaculty">
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+                <ScalarProperty Name="FacultyID" ColumnName="FacultyID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FacultyName" ColumnName="FacultyName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

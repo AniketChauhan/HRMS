@@ -35,10 +35,10 @@ namespace HRMS.Models
     
         public long ID { get; set; }
         public string UserName { get; set; }
+        public string ConfirmUsername { get; set; }
         public string password { get; set; }
         public string role { get; set; }
-        public string ConfirmUsername { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EMP_Grade_Assignment> EMP_Grade_Assignment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

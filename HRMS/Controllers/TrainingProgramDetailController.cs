@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HRMS.Models;
+using HRMS.ViewModel;
 
 namespace HRMS.Controllers
 {
@@ -14,6 +15,64 @@ namespace HRMS.Controllers
     {
         private HRMSEntities db = new HRMSEntities();
 
+        public JsonResult GetFacultyList(string ProgrammID)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            long PID = Convert.ToInt64(ProgrammID);
+
+            List<HRMS_ProgramFaculty> Flist = db.HRMS_ProgramFaculty.Where(x => x.ProgramID == PID).ToList();
+            return Json(Flist, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult AutoComplete(string prefix)
+        {
+
+            var Result1 = (from Result in db.HRMS_Faculty_MS
+                           where Result.External_Name.StartsWith(prefix)
+                           select new
+                           {
+                               label = Result.External_Name +" "+Result.Email,
+                               val = Result.ID
+                           }).ToList();
+
+            return Json(Result1);
+        }
+
+        [HttpPost]
+        public JsonResult AddFacultyy(string facid, string proid)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+
+            //adding into table 
+            long fac_id = Convert.ToInt64(facid);
+            long pro_id = Convert.ToInt64(proid);
+
+            bool IsExist = db.HRMS_ProgramFaculty.Any(x=>x.ProgramID==pro_id && x.FacultyID==fac_id);
+            if (!IsExist)
+            {
+                HRMS_Faculty_MS obj = db.HRMS_Faculty_MS.Where(x => x.ID == fac_id).FirstOrDefault();
+
+                HRMS_ProgramFaculty obj1 = new HRMS_ProgramFaculty();
+                obj1.FacultyID = fac_id;
+                obj1.FacultyName = obj.External_Name;
+                obj1.Email = obj.Email;
+                obj1.ProgramID = pro_id;
+
+                db.HRMS_ProgramFaculty.Add(obj1);
+                db.SaveChanges();
+
+
+                //List<HRMS_ProgramFaculty> FacList = db.HRMS_ProgramFaculty.Where(x => x.ProgramID == pro_id).ToList();
+                var FacList = pro_id;
+                return Json(FacList, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var FacList = "Faculty Already Exist!";
+                return Json(FacList, JsonRequestBehavior.AllowGet);
+            }
+        }
         // GET: TrainingProgramDetail
         public ActionResult Index()
         {
@@ -42,27 +101,31 @@ namespace HRMS.Controllers
         {
             HRMS_ProgramDetail obj = new HRMS_ProgramDetail();
             obj.TransactionDate = DateTime.Now;
+            obj.TrainingID = id.Value;
+            TrainingProgramCommon O = new TrainingProgramCommon();
+            O.ProDetail = obj;
 
-            ViewBag.TrainingID = new SelectList(db.HRMS_Training_Request_Application.Where(x => x.ApplicationId == id.Value), "ApplicationId", "Training_Name");
-            return View(obj);
+
+            //ViewBag.TrainingID = new SelectList(db.HRMS_Training_Request_Application.Where(x => x.ApplicationId == id.Value), "ApplicationId", "Training_Name");
+            return View(O);
         }
 
         // POST: TrainingProgramDetail/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,TransactionDate,TrainingID,ProgramName,Subject,FromDate,ToDate,FromTime,ToTime,TrainingType,ProgramType,SubjectType,Type,ProgramMode,Venue,Budget,Address,City,BenefitsToOrg,Remarks,RatingMethod,TrainingStatus,CompletedBy,CompleteDate,RemarksOther,Flag")] HRMS_ProgramDetail hRMS_ProgramDetail)
+        //[ValidateAntiForgeryToken]
+        public JsonResult Create(TrainingProgramCommon hRMS_ProgramDetail)
         {
-            if (ModelState.IsValid)
-            {
-                db.HRMS_ProgramDetail.Add(hRMS_ProgramDetail);
+            
+                HRMS_ProgramDetail obj = hRMS_ProgramDetail.ProDetail;
+                db.HRMS_ProgramDetail.Add(obj);
                 db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.TrainingID = new SelectList(db.HRMS_Training_Request_Application, "ApplicationId", "Training_Name", hRMS_ProgramDetail.TrainingID);
-            return View(hRMS_ProgramDetail);
+                ViewBag.msg = "Program Added Succesfully! Now Add Faculty!";
+                var ID = db.HRMS_ProgramDetail.Where(x => x.TrainingID == obj.TrainingID).Select(x => x.ID).FirstOrDefault();
+                return Json(ID, JsonRequestBehavior.AllowGet);
+                //return RedirectToAction("Index");
+           
         }
 
         // GET: TrainingProgramDetail/Edit/5

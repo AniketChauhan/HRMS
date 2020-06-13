@@ -14,6 +14,12 @@ namespace HRMS.Models
     
     public partial class HRMS_Faculty_MS
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public HRMS_Faculty_MS()
+        {
+            this.HRMS_ProgramFaculty = new HashSet<HRMS_ProgramFaculty>();
+        }
+    
         public long ID { get; set; }
         public string FacultyType { get; set; }
         public Nullable<long> EMP_ID { get; set; }
@@ -26,5 +32,8 @@ namespace HRMS.Models
         public string Remark { get; set; }
         public bool IsActive { get; set; }
         public string Empty { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HRMS_ProgramFaculty> HRMS_ProgramFaculty { get; set; }
     }
 }

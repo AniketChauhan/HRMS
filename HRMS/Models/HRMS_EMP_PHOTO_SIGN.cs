@@ -12,6 +12,7 @@ namespace HRMS.Models
     using System;
     using System.Collections.Generic;
     using System.Web;
+
     public partial class HRMS_EMP_PHOTO_SIGN
     {
         public long Emp_Photos_ID { get; set; }

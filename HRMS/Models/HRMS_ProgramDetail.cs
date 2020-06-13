@@ -15,12 +15,23 @@ namespace HRMS.Models
 
     public partial class HRMS_ProgramDetail
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public HRMS_ProgramDetail()
+        {
+            this.HRMS_ProgramFaculty = new HashSet<HRMS_ProgramFaculty>();
+        }
+    
         public long ID { get; set; }
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public System.DateTime TransactionDate { get; set; }
         public long TrainingID { get; set; }
         public string ProgramName { get; set; }
         public string Subject { get; set; }
+        //public System.DateTime FromDate { get; set; }
+        //public System.DateTime ToDate { get; set; }
+        //public System.TimeSpan FromTime { get; set; }
+        //public System.TimeSpan ToTime { get; set; }
+        public string TrainingType { get; set; }
         public Nullable<System.DateTime> FromDate { get; set; }
         public Nullable<System.DateTime> ToDate { get; set; }
         [DataType(DataType.Time)]
@@ -29,13 +40,12 @@ namespace HRMS.Models
         [DataType(DataType.Time)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:H:mm}")]
         public Nullable<System.TimeSpan> ToTime { get; set; }
-        public string TrainingType { get; set; }
         public string ProgramType { get; set; }
         public string SubjectType { get; set; }
         public string Type { get; set; }
         public string ProgramMode { get; set; }
         public string Venue { get; set; }
-        public decimal Budget { get; set; }
+        public Nullable<decimal> Budget { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
         public string BenefitsToOrg { get; set; }
@@ -48,5 +58,7 @@ namespace HRMS.Models
         public Nullable<long> Flag { get; set; }
     
         public virtual HRMS_Training_Request_Application HRMS_Training_Request_Application { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HRMS_ProgramFaculty> HRMS_ProgramFaculty { get; set; }
     }
 }
