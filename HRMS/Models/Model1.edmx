@@ -362,6 +362,7 @@
           <Property Name="ApprovedBy_ID" Type="bigint" />
           <Property Name="Approved_Remarks" Type="varchar(max)" />
           <Property Name="Skill" Type="bigint" Nullable="false" />
+          <Property Name="ProgramFlag" Type="bigint" />
         </EntityType>
         <EntityType Name="HRMS_TRAINING_SKILL_MS">
           <Key>
@@ -2909,6 +2910,7 @@
           <NavigationProperty Name="HRMS_DESG_MS" Relationship="HRMS5Model.FK_HRMS_Training_Request_Application_HRMS_DESG_MS" FromRole="HRMS_Training_Request_Application" ToRole="HRMS_DESG_MS" />
           <NavigationProperty Name="HRMS_TRAINING_SKILL_MS" Relationship="HRMS5Model.FK_HRMS_Training_Request_Application_HRMS_TRAINING_SKILL_MS" FromRole="HRMS_Training_Request_Application" ToRole="HRMS_TRAINING_SKILL_MS" />
           <NavigationProperty Name="HRMS_ProgramDetail" Relationship="HRMS5Model.FK_HRMS_ProgramDetail_HRMS_Training_Request_Application" FromRole="HRMS_Training_Request_Application" ToRole="HRMS_ProgramDetail" />
+          <Property Name="ProgramFlag" Type="Int64" />
         </EntityType>
         <Association Name="FK_HRMS_Training_Request_Application_Accounts">
           <End Type="HRMS5Model.Accounts" Role="Accounts" Multiplicity="1" />
@@ -3677,6 +3679,7 @@
           <EntitySetMapping Name="HRMS_Training_Request_Application">
             <EntityTypeMapping TypeName="HRMS5Model.HRMS_Training_Request_Application">
               <MappingFragment StoreEntitySet="HRMS_Training_Request_Application">
+                <ScalarProperty Name="ProgramFlag" ColumnName="ProgramFlag" />
                 <ScalarProperty Name="Skill" ColumnName="Skill" />
                 <ScalarProperty Name="Approved_Remarks" ColumnName="Approved_Remarks" />
                 <ScalarProperty Name="ApprovedBy_ID" ColumnName="ApprovedBy_ID" />

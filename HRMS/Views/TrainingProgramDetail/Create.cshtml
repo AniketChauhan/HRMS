@@ -21,7 +21,8 @@
     @using (Ajax.BeginForm("Create", "TrainingProgramDetail", new AjaxOptions { HttpMethod = "POST", OnSuccess = "successHeader", OnFailure = "Failureheader" }))
     {
 
-    <div class="form-horizontal row">
+            
+    <div class="form-horizontal row FormP" >
         <h4>HRMS_ProgramDetail</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -395,49 +396,60 @@
 
 
     @*----------------------------TABLE------------------------------------*@
-    <div id="facultytable" style="display:none">
+<div id="facultytable" style="display:none">
 
-        <div class="form-inline w3-right-align">
-            <center>
-                <table class="table-bordered">
-                    <tr>
-                        <td>
-
-                            @Html.TextBox("Search", null, new { @class = "form-control", @placeholder = "Search Faculty" })
-                        </td>
-                        <td>
-
-                            <input type="button" value="Add" class="form-control btn-success btn-group-lg" onclick="return AddFaculty() " />
-                        </td>
-                    </tr>
-                </table>
-            </center>
-        </div>
-        <br />
-
-        <table class="table table-bordered table-striped table-responsive">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.ProFaculty.FacultyName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ProFaculty.Email)
-                </th>
-                <th><i class="glyphicon glyphicon-wrench"> </i> Operations</th>
-            </tr>
-            <tbody id="insidetable">
-                <tr id="">
+    <div class="form-inline w3-right-align">
+        <center>
+            <table class="table-bordered">
+                <tr>
                     <td>
+
+                        @Html.TextBox("Search", null, new { @class = "form-control", @placeholder = "Search Faculty" })
                     </td>
                     <td>
-                    </td>
-                    <td>
+
+                        <input type="button" value="Add" class="form-control btn-success btn-group-lg" id="Add1" onclick="return AddFaculty() " />
                     </td>
                 </tr>
-                </tbody>
-        </table>
+            </table>
+        </center>
     </div>
+    <br />
 
+    <table class="table table-bordered table-striped table-responsive">
+        <tr>
+            <th>
+                <center>
+                    @Html.DisplayNameFor(model => model.ProFaculty.FacultyName)
+                </center>
+            </th>
+            <th>
+                <center>
+                    @Html.DisplayNameFor(model => model.ProFaculty.Email)
+                </center>
+            </th>
+            <th> <center><i class="glyphicon glyphicon-wrench"> </i> Operations</center></th>
+        </tr>
+        <tbody id="insidetable">
+            <tr id="">
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div>
+        <center>
+            @Html.ActionLink("Save Changes", "Index", new { }, new { @class = "btn btn-warning" })
+        </center>
+    </div>
+</div>
+
+    
 
 
     <div>
@@ -577,7 +589,7 @@
 </script>
 
 
-  
+
 
 
 <script type="text/javascript">
@@ -585,24 +597,23 @@
     //$(document).find('.btn_save').hide();
     //$(document).find('.btn_cancel').hide();
 
-    var headerrrcode;
+    var ProCode;
     //for header ajax
     function successHeader(data) {
-        
-        if (data != 0) {
-            //document.getElementById("headerpart").readOnly = true;
 
-            //document.getElementById("addHeader").disabled = true;
+        if (data == "ToDate must be greater than FromDate!") {
+            alert("ToDate must be greater than FromDate!");
+        }
 
-            //document.getElementById("headerID").value = data.headerId;
-
-            //$("#questionform").show();
+        else  {
+            
             alert("Program Added Succesfully! Now Add Faculty!");
+            //document.getElementsByClassName("FormP").disabled = true;
+            $("input, select, textarea").prop('disabled', true);
+            $("#Search").prop('disabled', false);
+            $("#Add1").prop('disabled', false);
 
-            //$(function () {
-            //    $('input, select, textarea').attr('disabled', 'disabled');
-                
-            //});
+            
             $("#submit1").hide();
             $("#cancel1").hide();
 
@@ -612,9 +623,7 @@
             $("#ProgramIDHidden").val(data);
             
         }
-        else {
-            alert('This header is already exist!');
-        }
+        
     }
     function Failureheader(data) {
         alert('Ajax is failed!');
@@ -623,50 +632,52 @@
 
     //Add Faculty
     function AddFaculty() {
-         var data = JSON.stringify({
-             'facid': $("#FacultyIDHidden").val(),
-             'proid': $("#ProgramIDHidden").val()
-        });
-        $.ajax({
-        type: "POST",
-            contentType: "application/json",
-            url: "@Url.Action("AddFacultyy", "TrainingProgramDetail")",
-            datatype: "json",
-            data: data,
-            success: function (response) {
-                //debugger;
-                //getQuestionList(headerrrcode);
-        //        $("#insidetable").show();
-        //$("#MainQuestionContainer").show();
-                
-                if (response != null) {
+        if (confirm("Are you sure?") == true) {
+            var data = JSON.stringify({
+                'facid': $("#FacultyIDHidden").val(),
+                'proid': $("#ProgramIDHidden").val()
+            });
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "@Url.Action("AddFacultyy", "TrainingProgramDetail")",
+                datatype: "json",
+                data: data,
+                success: function (response) {
+                    //debugger;
+                    //getQuestionList(headerrrcode);
+                    //        $("#insidetable").show();
+                    //$("#MainQuestionContainer").show();
+                    $("#Search").val("");
+                    if (response != null) {
 
-                    if (response == "Faculty Already Exist!") {
-                        alert(response);
+                        if (response == "Faculty Already Exist!") {
+                            alert(response);
+                        }
+
+                        else {
+
+                            //var ProgID = response[0].ProgramID;
+                            var ProgID = response;
+                            //alert(ProgID);
+                            //headerrrcode = headrID;
+                            FacultyList(ProgID);
+                        }
                     }
 
                     else {
-                        alert("hello");
-                        //var ProgID = response[0].ProgramID;
-                        var ProgID = response;
-                        alert(ProgID);
-                        //headerrrcode = headrID;
-                        FacultyList(ProgID);
+                        alert("NULL");
                     }
-                }
+                },
 
-                else {
-                    alert("NULL");
+                error: function (response) {
+                    alert("error");
+                },
+                failure: function (response) {
+                    alert("fail");
                 }
-            },
-            
-                    error: function (response) {
-                        alert("error");
-                    },
-                    failure: function (response) {
-                        alert("fail");
-                    }
-        });
+            });
+        }
     }
 
     //faculty List
@@ -684,10 +695,10 @@
                 var tbody = "";
 
                 tbody += "<tr row_id='" + item.ID+"' id='" + item.ID +"'>";
-                tbody += "<td class='text-left'><div class='row_data' edit_type='click' col_name='Faculty Name'>" + item.FacultyName + "</div></td>";
+                tbody += "<td class='text-left'><center><div class='row_data' edit_type='click' col_name='Faculty Name'>" + item.FacultyName + "</div></center></td>";
                 tbody += "<td class='text-left'><center>" + item.Email + "</center></td>";
 
-                tbody += "<td class=''><center><span class='btn_edit' > <a href='#' class='btn btn-link ' row_id='" + item.ID + "'>Edit</a> </span> &nbsp; <span class='btn_save' > <a href='#' class='btn btn-link ' row_id='" + item.ID + "'>Save</a></span>&nbsp;<span class='btn_cancel' ><a href='#' class='btn btn-link ' row_id='" + item.ID +"'>Cancel</a> </span> &nbsp; <button class='btn btn-danger btn-sm glyphicon glyphicon-trash btn_cancelQuestion' onclick='return RemoveFromList(" + item.ID + ")'>Remove</button></center></td>";
+                tbody += "<td class=''><center> <button class='btn btn-danger btn-sm  btn_cancelQuestion' onclick='return RemoveFromList(" + item.ID + ")'>Remove</button></center></td>";
 
                 tbody += "</tr>";
                 $("#insidetable").append(tbody);
@@ -695,6 +706,29 @@
 
 
         });
+    }
+
+    //remove faculty
+    function RemoveFromList(id) {
+        if (confirm("Are you sure?") == true) {
+            var data = JSON.stringify({
+                'id': id
+            });
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "@Url.Action("deletefaculty", "TrainingProgramDetail")",
+                datatype: "json",
+                data: data,
+                success: function (response) {
+                    //debugger;
+                    //FacultyList(headerrrcode);
+                    var Pid = $("#ProgramIDHidden").val();
+                     FacultyList(Pid);
+
+                }
+            });
+        }
     }
 
 

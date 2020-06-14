@@ -9,8 +9,13 @@ using System.Web.Mvc;
 using HRMS.Models;
 using HRMS.ViewModel;
 
+//programflag=1 : Active
+//programflag=1 : Completed
+//programflag=1 : Cancel
+
 namespace HRMS.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class TrainingProgramDetailController : Controller
     {
         private HRMSEntities db = new HRMSEntities();
@@ -73,6 +78,34 @@ namespace HRMS.Controllers
                 return Json(FacList, JsonRequestBehavior.AllowGet);
             }
         }
+
+        //delete faculty
+        public bool deletefaculty(long id)
+        {
+            HRMS_ProgramFaculty fac = db.HRMS_ProgramFaculty.Find(id);
+            if (fac != null)
+            {
+                db.HRMS_ProgramFaculty.Remove(fac);
+                db.SaveChanges(); 
+                //ModelState.Clear();
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        //GetAdminID
+        public long GetAdminID()
+        {
+            long id =Convert.ToInt64(Session["id"]);
+            return id;
+        }
+
+
+
         // GET: TrainingProgramDetail
         public ActionResult Index()
         {
@@ -119,13 +152,29 @@ namespace HRMS.Controllers
         {
             
                 HRMS_ProgramDetail obj = hRMS_ProgramDetail.ProDetail;
+            if (obj.ToDate < obj.FromDate)
+            {
+                var msg = "ToDate must be greater than FromDate!";
+                return Json(msg, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+
                 db.HRMS_ProgramDetail.Add(obj);
                 db.SaveChanges();
                 ViewBag.msg = "Program Added Succesfully! Now Add Faculty!";
                 var ID = db.HRMS_ProgramDetail.Where(x => x.TrainingID == obj.TrainingID).Select(x => x.ID).FirstOrDefault();
+
+                //update in training request table (programFlag)
+                HRMS_Training_Request_Application req = db.HRMS_Training_Request_Application.Find(obj.TrainingID);
+                req.ProgramFlag = 1;  //admin can only edit program detail
+                db.Entry(req).State = EntityState.Modified;
+                db.SaveChanges();
+
+
                 return Json(ID, JsonRequestBehavior.AllowGet);
                 //return RedirectToAction("Index");
-           
+            }
         }
 
         // GET: TrainingProgramDetail/Edit/5
@@ -135,31 +184,78 @@ namespace HRMS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HRMS_ProgramDetail hRMS_ProgramDetail = db.HRMS_ProgramDetail.Find(id);
+            HRMS_ProgramDetail hRMS_ProgramDetail = db.HRMS_ProgramDetail.Where(x=>x.TrainingID==id.Value).FirstOrDefault();
+            System.TimeSpan y;
+            //hRMS_ProgramDetail.FromTime =y;
+
+            
+
             if (hRMS_ProgramDetail == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.TrainingID = new SelectList(db.HRMS_Training_Request_Application, "ApplicationId", "Training_Name", hRMS_ProgramDetail.TrainingID);
-            return View(hRMS_ProgramDetail);
+            TrainingProgramCommon obj = new TrainingProgramCommon();
+            obj.ProDetail = hRMS_ProgramDetail;
+            //ViewBag.TrainingID = new SelectList(db.HRMS_Training_Request_Application, "ApplicationId", "Training_Name", hRMS_ProgramDetail.TrainingID);
+            return View(obj);
         }
+
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public JsonResult Edit(TrainingProgramCommon hRMS_ProgramDetail)
+        {
+
+            HRMS_ProgramDetail obj = hRMS_ProgramDetail.ProDetail;
+
+            if (obj.ToDate < obj.FromDate)
+            {
+                var msg = "ToDate must be greater than FromDate!";
+                return Json(msg, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                if (obj.TrainingStatus == "Completed")
+                {
+                    HRMS_Training_Request_Application req = db.HRMS_Training_Request_Application.Where(x => x.ApplicationId == obj.TrainingID).FirstOrDefault();
+                    req.ProgramFlag = 2; //completed
+                    db.Entry(req).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
+                if (obj.TrainingStatus == "Cancel")
+                {
+                    HRMS_Training_Request_Application req = db.HRMS_Training_Request_Application.Where(x => x.ApplicationId == obj.TrainingID).FirstOrDefault();
+                    req.ProgramFlag = 3; //Cancel
+                    db.Entry(req).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
+                db.Entry(obj).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+
 
         // POST: TrainingProgramDetail/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,TransactionDate,TrainingID,ProgramName,Subject,FromDate,ToDate,FromTime,ToTime,TrainingType,ProgramType,SubjectType,Type,ProgramMode,Venue,Budget,Address,City,BenefitsToOrg,Remarks,RatingMethod,TrainingStatus,CompletedBy,CompleteDate,RemarksOther,Flag")] HRMS_ProgramDetail hRMS_ProgramDetail)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(hRMS_ProgramDetail).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.TrainingID = new SelectList(db.HRMS_Training_Request_Application, "ApplicationId", "Training_Name", hRMS_ProgramDetail.TrainingID);
-            return View(hRMS_ProgramDetail);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "ID,TransactionDate,TrainingID,ProgramName,Subject,FromDate,ToDate,FromTime,ToTime,TrainingType,ProgramType,SubjectType,Type,ProgramMode,Venue,Budget,Address,City,BenefitsToOrg,Remarks,RatingMethod,TrainingStatus,CompletedBy,CompleteDate,RemarksOther,Flag")] HRMS_ProgramDetail hRMS_ProgramDetail)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(hRMS_ProgramDetail).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewBag.TrainingID = new SelectList(db.HRMS_Training_Request_Application, "ApplicationId", "Training_Name", hRMS_ProgramDetail.TrainingID);
+        //    return View(hRMS_ProgramDetail);
+        //}
 
         // GET: TrainingProgramDetail/Delete/5
         public ActionResult Delete(long? id)

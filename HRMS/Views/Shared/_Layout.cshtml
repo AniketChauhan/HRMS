@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/Content/w3.css" type="text/css" />
     <link rel="stylesheet" href="~/Content/Effect.css" type="text/css" />
     <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
-    
+
 
     @Scripts.Render("~/bundles/modernizr")
     @{ string color = string.Empty;
@@ -29,7 +29,7 @@
         @if (User.IsInRole("admin"))
         {
             <div class="w3-dropdown-hover DixDiv">
-                <button class="w3-button  @color">Master Pages <i class="glyphicon glyphicon-chevron-down"> </i></button>
+                <button class="w3-button  @color">MS<i class="glyphicon glyphicon-chevron-down"> </i></button>
                 <div class="w3-dropdown-content w3-center w3-bar-block w3-card-4 DIVINSIDE">
                     <div class="w3-bar-item w3-button w3-mobile">
                         <i class="glyphicon glyphicon-euro"> </i>
@@ -107,7 +107,7 @@
         @if (User.IsInRole("admin"))
         {
             <div class="w3-dropdown-hover DixDiv">
-                <button class="w3-button  @color">Transactions <i class="glyphicon glyphicon-chevron-down"> </i></button>
+                <button class="w3-button  @color">TS <i class="glyphicon glyphicon-chevron-down"> </i></button>
                 <div class="w3-dropdown-content w3-center w3-bar-block w3-card-4 DIVINSIDE">
                     <div class="w3-bar-item w3-button w3-mobile">
                         <i class="glyphicon glyphicon-info-sign"> </i>
@@ -253,6 +253,34 @@
             </div>
         }
 
+        @*-----------------Admin Transaction 3 --------------------*@
+
+        @if (User.IsInRole("admin"))
+        {
+            <div class="w3-dropdown-hover DixDiv">
+                <button class="w3-button  @color">Training TS <i class="glyphicon glyphicon-chevron-down"> </i></button>
+                <div class="w3-dropdown-content w3-center w3-bar-block w3-card-4 DIVINSIDE">
+                    <div class="w3-bar-item w3-button w3-mobile">
+                        <i class="glyphicon glyphicon-move"> </i>
+                        @Html.ActionLink("Program Detail", "Index", "TrainingProgramDetail", new { area = "" }, new { @class = " " })
+                    </div>
+                    @*<div class="w3-bar-item w3-button w3-mobile">
+                            <i class="glyphicon glyphicon-transfer"> </i>
+                            @Html.ActionLink("Skill", "Index", "TrainingSkillMaster", new { area = "" }, new { @class = " " })
+                        </div>
+                        <div class="w3-bar-item w3-button w3-mobile">
+                            <i class="glyphicon glyphicon-grain"> </i>
+                            @Html.ActionLink("Material", "Index", "TraningMaterialMaster", new { area = "" }, new { @class = " " })
+                        </div>
+                        <div class="w3-bar-item w3-button w3-mobile">
+                            <i class="glyphicon glyphicon-grain"> </i>
+                            @Html.ActionLink("Evaluation", "Index", "TrainingEvaluation", new { area = "" }, new { @class = " " })
+                        </div>*@
+
+                </div>
+            </div>
+        }
+
 
 
 
@@ -346,19 +374,19 @@
 
 
         @*@if (User.IsInRole("emp"))
-        {
-            @Html.ActionLink("Travel Application", "Index", "TravelApplication", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
-            @Html.ActionLink("Travel Expense", "TravelList", "TravelExpenseApplication", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
-        }
-        @if (User.IsInRole("admin"))
-        {
-            @Html.ActionLink("Travel Application(0)", "Index", "TravelApplication", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile", @id = "TravelCount" })
-            @Html.ActionLink("Travel Expense", "AdminExpenseList", "TravelExpenseApplication", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
-        }
-        @if (User.IsInRole("admin"))
-        {
-            @Html.ActionLink("Employee Report", "Index", "EmployeeReport", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
-        }*@
+            {
+                @Html.ActionLink("Travel Application", "Index", "TravelApplication", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
+                @Html.ActionLink("Travel Expense", "TravelList", "TravelExpenseApplication", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
+            }
+            @if (User.IsInRole("admin"))
+            {
+                @Html.ActionLink("Travel Application(0)", "Index", "TravelApplication", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile", @id = "TravelCount" })
+                @Html.ActionLink("Travel Expense", "AdminExpenseList", "TravelExpenseApplication", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
+            }
+            @if (User.IsInRole("admin"))
+            {
+                @Html.ActionLink("Employee Report", "Index", "EmployeeReport", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
+            }*@
 
 
         @*---------------------------fourth here----------------------------*@
@@ -499,7 +527,10 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
 
     @RenderSection("scripts", required: false)
 </body>
+
 </html>

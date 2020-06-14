@@ -11,7 +11,7 @@ using HRMS.ViewModel;
 
 namespace HRMS.Controllers
 {
-    //[Authorize(Roles ="admin")]
+    [Authorize(Roles ="admin")]
     public class TrainingEvaluationController : Controller
     {
         private HRMSEntities db = new HRMSEntities();
