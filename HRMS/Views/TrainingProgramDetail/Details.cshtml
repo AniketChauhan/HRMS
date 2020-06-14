@@ -1,226 +1,481 @@
-﻿@model HRMS.Models.HRMS_ProgramDetail
+﻿@model HRMS.ViewModel.TrainingProgramCommon
+@using HRMS.Models;
 
 @{
-    Layout = null;
+    ViewBag.Title = "View";
 }
 
 <!DOCTYPE html>
 
 <html>
 <head>
+    <link href="~/StyleSheet/UnitStyleSheet.css" rel="stylesheet" />
+
     <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
+    <title>View</title>
 </head>
 <body>
+   
+        <div class="form-horizontal row FormP">
+            <h4>Detail</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.HiddenFor(model => model.ProDetail.ID, htmlAttributes: new { @class = "", @id = "PrimaryID" })
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.TransactionDate, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.ProDetail.TransactionDate, new { htmlAttributes = new { @class = "form-control ", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.ProDetail.TransactionDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.ProgramName, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.ProDetail.ProgramName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ProDetail.ProgramName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.FromDate, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.ProDetail.FromDate, new { htmlAttributes = new { @class = "form-control datepicker", @style = "width:200px" } })
+                        @Html.ValidationMessageFor(model => model.ProDetail.FromDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.ToDate, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.ProDetail.ToDate, new { htmlAttributes = new { @class = "form-control datepicker", @style = "width:200px" } })
+                        @Html.ValidationMessageFor(model => model.ProDetail.ToDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.TrainingType, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                    <div class="col-md-8">
+                        @*@Html.EditorFor(model => model.TrainingType, new { htmlAttributes = new { @class = "form-control" } })*@
+                        @Html.DropDownListFor(model => model.ProDetail.TrainingType, new List<SelectListItem>
+                       {
+                           new SelectListItem{ Text="Planned", Value = "Planned" },
+                           new SelectListItem{ Text="Unplanned", Value = "Unplanned" },
+                           new SelectListItem{ Text="Various", Value = "Various" },
+                        }, "--Select--", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ProDetail.TrainingType, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.ProgramType, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                    <div class="col-md-8">
+                        @*@Html.EditorFor(model => model.ProgramType, new { htmlAttributes = new { @class = "form-control" } })*@
+                        @Html.DropDownListFor(model => model.ProDetail.ProgramType, new List<SelectListItem>
+                      {
+                          new SelectListItem{ Text="Training", Value = "Training" },
+                          new SelectListItem{ Text="Internship", Value = "Internship" },
+                          new SelectListItem{ Text="Seminar", Value = "Seminar" },
+                       }, "--Select--", htmlAttributes: new { @class = "form-control" })
+
+                        @Html.ValidationMessageFor(model => model.ProDetail.TrainingType, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.SubjectType, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                    <div class="col-md-8">
+                        @*@Html.EditorFor(model => model.SubjectType, new { htmlAttributes = new { @class = "form-control" } })*@
+                        @Html.DropDownListFor(model => model.ProDetail.SubjectType, new List<SelectListItem>
+                     {
+                         new SelectListItem{ Text="General", Value = "General" },
+                         new SelectListItem{ Text="Language", Value = "Language" },
+                         new SelectListItem{ Text="Commnication", Value = "Commnication" },
+                      }, "--Select--", htmlAttributes: new { @class = "form-control" })
+
+                        @Html.ValidationMessageFor(model => model.ProDetail.SubjectType, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+
+            @*---------------------------------------------------------*@
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.TrainingID, "TrainingID", htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @*@Html.EditorFor(model => model.ProDetail.HRMS_Training_Request_Application.Training_Name, null, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })*@
+                        @Html.EditorFor(model => model.ProDetail.TrainingID, new { htmlAttributes = new { @class = "form-control ", @readonly = "readonly" } })
+
+                        @Html.ValidationMessageFor(model => model.ProDetail.TrainingID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.Subject, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.ProDetail.Subject, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ProDetail.Subject, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.FromTime, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                    <div class="col-md-8">
+                        @*@Model.ProDetail.FromTime?.ToString("hh\\:mm")*@
+                        @Html.EditorFor(model => model.ProDetail.FromTime, new { htmlAttributes = new { @class = "form-control", @style = "width:150px" } })
+                        @Html.ValidationMessageFor(model => model.ProDetail.FromTime, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.ToTime, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                    <div class="col-md-8">
+                        @*@Model.ProDetail.ToTime?.ToString("hh\\:mm")*@
+                        @Html.EditorFor(model => model.ProDetail.ToTime, new { htmlAttributes = new { @class = "form-control", @style = "width:150px" } })
+                        @Html.ValidationMessageFor(model => model.ProDetail.ToTime, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.Type, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                    <div class="col-md-8">
+                        @*@Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })*@
+                        @Html.DropDownListFor(model => model.ProDetail.Type, new List<SelectListItem>
+                    {
+                        new SelectListItem{ Text="Compliance", Value = "Compliance" },
+
+                     }, "--Select--", htmlAttributes: new { @class = "form-control" })
+
+                        @Html.ValidationMessageFor(model => model.ProDetail.Type, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.ProgramMode, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                    <div class="col-md-8">
+                        @*@Html.EditorFor(model => model.ProgramMode, new { htmlAttributes = new { @class = "form-control" } })*@
+                        @Html.DropDownListFor(model => model.ProDetail.ProgramMode, new List<SelectListItem>
+                    {
+                        new SelectListItem{ Text="Technical", Value = "Technical" },
+                        new SelectListItem{ Text="Theorical", Value = "Theorical" },
+
+                     }, "--Select--", htmlAttributes: new { @class = "form-control" })
+
+                        @Html.ValidationMessageFor(model => model.ProDetail.ProgramMode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.Budget, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.ProDetail.Budget, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ProDetail.Budget, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+            @*------------------------------------------------------*@
+
+
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.BenefitsToOrg, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.TextAreaFor(model => model.ProDetail.BenefitsToOrg, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ProDetail.BenefitsToOrg, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.Remarks, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.TextAreaFor(model => model.ProDetail.Remarks, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ProDetail.Remarks, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            @*-----------------------------------------------------------*@
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProDetail.Venue, htmlAttributes: new { @class = "control-label col-md-2 required" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.Venue, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.DropDownListFor(model => model.ProDetail.Venue, new List<SelectListItem>
+               {
+                   new SelectListItem{ Text="Internal", Value = "Internal" },
+                   new SelectListItem{ Text="External", Value = "External" },
+
+                }, "--Select--", htmlAttributes: new { @class = "form-control", @id = "venue" })
+
+                    @Html.ValidationMessageFor(model => model.ProDetail.Venue, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+            <div class="form-group " id="city" style="display:none">
+                @Html.LabelFor(model => model.ProDetail.City, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ProDetail.City, new { htmlAttributes = new { @class = "form-control", @id = "city1" } })
+                    @Html.ValidationMessageFor(model => model.ProDetail.City, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group " id="address" style="display:none">
+                @Html.LabelFor(model => model.ProDetail.Address, htmlAttributes: new { @class = "control-label col-md-2 " })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.ProDetail.Address, new { htmlAttributes = new { @class = "form-control", @id = "address11" } })
+                    @Html.ValidationMessageFor(model => model.ProDetail.Address, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProDetail.RatingMethod, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.RatingMethod, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.DropDownListFor(model => model.ProDetail.RatingMethod, new List<SelectListItem>
+              {
+                  new SelectListItem{ Text="A", Value = "A" },
+                  new SelectListItem{ Text="B", Value = "B" },
+
+               }, "--Select--", htmlAttributes: new { @class = "form-control", @id = "RatingMethod1" })
+
+                    @Html.ValidationMessageFor(model => model.ProDetail.RatingMethod, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group rating1" style="display:none">
+
+
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    <div class="radio-inline">
+                        @Html.RadioButton("Rating", "1", new { @name = "Rating" })
+                        1
+                    </div>
+
+                    <div class="radio-inline">
+                        @Html.RadioButton("Rating", "2", new { @name = "Rating" })
+                        2
+                    </div>
+                    <div class="radio-inline">
+                        @Html.RadioButton("Rating", "3", new { @name = "Rating" })
+                        3
+                    </div>
+                    <div class="radio-inline">
+                        @Html.RadioButton("Rating", "4", new { @name = "Rating" })
+                        4
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group rating2" style="display:none">
+
+
+                <div class="col-md-2"></div>
+                <div class="col-md-10">
+                    <div class="radio-inline">
+                        @Html.RadioButton("Rating", "1", new { @name = "Rating" })
+                        Very Bad
+                    </div>
+
+                    <div class="radio-inline">
+                        @Html.RadioButton("Rating", "2", new { @name = "Rating" })
+                        Bad
+                    </div>
+                    <div class="radio-inline">
+                        @Html.RadioButton("Rating", "3", new { @name = "Rating" })
+                        Good
+                    </div>
+                    <div class="radio-inline">
+                        @Html.RadioButton("Rating", "4", new { @name = "Rating" })
+                        Very Good
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            @Html.HiddenFor(model => model.ProDetail.Flag)
+            @Html.Hidden("FacultyIDHidden")
+            @Html.Hidden("ProgramIDHidden")
+
+            <hr />
+            @*----------------------------TABLE------------------------------------*@
+            <div id="facultytable">
+
+                <br />
+
+                <table class="table table-bordered table-striped table-responsive">
+                    <tr>
+                        <th>
+                            <center>
+                                @Html.DisplayNameFor(model => model.ProFaculty.FacultyName)
+                            </center>
+                        </th>
+                        
+                        <th> <center>
+                               Email
+                            </center></th>
+                    </tr>
+                    <tbody id="insidetable">
+                        <tr id="">
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+
+                @*<div>
+                        <center>
+                            @Html.ActionLink("Save Changes", "Index", new { }, new { @class = "btn btn-warning" })
+                        </center>
+                    </div>*@
+            </div>
+
+
+
+            @*----------------------------------------------------------*@
+
+
+            <div class="comp">
+                <hr />
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ProDetail.TrainingStatus, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @*@Html.EditorFor(model => model.TrainingStatus, new { htmlAttributes = new { @class = "form-control" } })*@
+                            <div class="radio-inline">
+                                @Html.RadioButtonFor(model => model.ProDetail.TrainingStatus, "Completed", new { @id = "R1" })
+                                Completed
+                            </div>
+
+                            <div class="radio-inline">
+                                @Html.RadioButtonFor(model => model.ProDetail.TrainingStatus, "Cancel", new { @id = "R2" })
+                                Cancel
+                            </div>
+                            @Html.ValidationMessageFor(model => model.ProDetail.TrainingStatus, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ProDetail.CompleteDate, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.ProDetail.CompleteDate, new { htmlAttributes = new { @class = "form-control datepicker1", @style = "width:200px" } })
+                            @Html.ValidationMessageFor(model => model.ProDetail.CompleteDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ProDetail.CompletedBy, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.ProDetail.CompletedBy, new { htmlAttributes = new { @class = "form-control", @id = "AdminID" } })
+                            @Html.ValidationMessageFor(model => model.ProDetail.CompletedBy, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ProDetail.RemarksOther, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.TextAreaFor(model => model.ProDetail.RemarksOther, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ProDetail.RemarksOther, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+
     <div>
-        <h4>HRMS_ProgramDetail</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.TransactionDate)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.TransactionDate)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.ProgramName)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.ProgramName)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Subject)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Subject)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.FromDate)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.FromDate)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.ToDate)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.ToDate)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.FromTime)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.FromTime)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.ToTime)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.ToTime)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.TrainingType)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.TrainingType)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.ProgramType)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.ProgramType)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.SubjectType)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.SubjectType)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Type)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Type)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.ProgramMode)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.ProgramMode)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Venue)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Venue)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Budget)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Budget)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Address)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Address)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.City)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.City)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.BenefitsToOrg)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.BenefitsToOrg)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Remarks)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Remarks)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.RatingMethod)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.RatingMethod)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.TrainingStatus)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.TrainingStatus)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.CompletedBy)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.CompletedBy)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.CompleteDate)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.CompleteDate)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.RemarksOther)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.RemarksOther)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Flag)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Flag)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.HRMS_Training_Request_Application.Training_Name)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.HRMS_Training_Request_Application.Training_Name)
-            </dd>
-    
-        </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
         @Html.ActionLink("Back to List", "Index")
-    </p>
+    </div>
 </body>
 </html>
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+@section scripts{
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+    
+}
+
+<script type="text/javascript">
+    
+    $(document).ready(function () {
+        $("input, select, textarea").prop('disabled', true);
+        if ($("#venue").val() == "External") {
+
+                $("#city").show();
+                $("#address").show();
+        }
+        
+        //for list
+        var proidd = $("#PrimaryID").val();
+        FacultyList(proidd);
+       
+
+    })
+
+
+    //faculty List
+
+    function FacultyList(ProgrID) {
+        
+        $.get("/TrainingProgramDetail/GetFacultyList", { ProgrammID: ProgrID }, function (data) {
+
+
+            $("#insidetable").empty();
+            $.each(data, function (index, item) {
+                var tbody = "";
+
+                tbody += "<tr row_id='" + item.ID+"' id='" + item.ID +"'>";
+                tbody += "<td class='text-left'><center><div class='row_data' edit_type='click' col_name='Faculty Name'>" + item.FacultyName + "</div></center></td>";
+                tbody += "<td class='text-left'><center>" + item.Email + "</center></td>";
+
+               
+                tbody += "</tr>";
+                $("#insidetable").append(tbody);
+            });
+
+
+        });
+    }
+
+    
+
+</script>

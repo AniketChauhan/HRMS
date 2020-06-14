@@ -27,8 +27,8 @@ namespace HRMS.Models
         public System.DateTime TransactionDate { get; set; }
         public long TrainingID { get; set; }
         [Required]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
-        [DisplayName("XYX")]
+        //[RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+        
         public string ProgramName { get; set; }
         [Required]
         public string Subject { get; set; }
@@ -56,9 +56,9 @@ namespace HRMS.Models
         public string ProgramType { get; set; }
         [Required]
         public string SubjectType { get; set; }
-        [Required]
+       
         public string Type { get; set; }
-        [Required]
+       
         public string ProgramMode { get; set; }
         [Required]
         public string Venue { get; set; }

@@ -101,11 +101,11 @@
                     }
                     else if (item.ProgramFlag == 2)
                     {
-                        @Html.ActionLink("View Completed", "", new { id = item.ApplicationId }, new { @class = "btn btn-success" })
+                        @Html.ActionLink("View Completed", "Details", new { id = item.ApplicationId }, new { @class = "btn btn-success" })
                     }
                     else if (item.ProgramFlag == 3)
                     {
-                        @Html.ActionLink("View Cancalled", "", new { id = item.ApplicationId }, new { @class = "btn btn-success" })
+                        @Html.ActionLink("View Cancalled", "Details", new { id = item.ApplicationId }, new { @class = "btn btn-success" })
                     }
                 </td>
             </tr>

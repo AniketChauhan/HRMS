@@ -121,12 +121,16 @@ namespace HRMS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HRMS_ProgramDetail hRMS_ProgramDetail = db.HRMS_ProgramDetail.Find(id);
+            HRMS_ProgramDetail hRMS_ProgramDetail = db.HRMS_ProgramDetail.Where(x => x.TrainingID == id.Value).FirstOrDefault();
+
+            
             if (hRMS_ProgramDetail == null)
             {
                 return HttpNotFound();
             }
-            return View(hRMS_ProgramDetail);
+            TrainingProgramCommon obj = new TrainingProgramCommon();
+            obj.ProDetail = hRMS_ProgramDetail;
+            return View(obj);
         }
 
         // GET: TrainingProgramDetail/Create
@@ -185,7 +189,7 @@ namespace HRMS.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             HRMS_ProgramDetail hRMS_ProgramDetail = db.HRMS_ProgramDetail.Where(x=>x.TrainingID==id.Value).FirstOrDefault();
-            System.TimeSpan y;
+           
             //hRMS_ProgramDetail.FromTime =y;
 
             
