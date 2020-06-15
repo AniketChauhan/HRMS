@@ -211,6 +211,12 @@ namespace HRMS.Controllers
 
             HRMS_ProgramDetail obj = hRMS_ProgramDetail.ProDetail;
 
+            if (obj.Extra == "Hello")
+            {
+                var msg = "Sorry";
+                return Json(msg, JsonRequestBehavior.AllowGet);
+            }
+
             if (obj.ToDate < obj.FromDate)
             {
                 var msg = "ToDate must be greater than FromDate!";
@@ -236,8 +242,8 @@ namespace HRMS.Controllers
 
                 db.Entry(obj).State = EntityState.Modified;
                 db.SaveChanges();
-
-                return Json(true, JsonRequestBehavior.AllowGet);
+                var msg = "Done";
+                return Json(msg, JsonRequestBehavior.AllowGet);
             }
 
         }

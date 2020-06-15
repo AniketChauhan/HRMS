@@ -75,6 +75,8 @@ namespace HRMS.Models
         public string RemarksOther { get; set; }
         public Nullable<long> Flag { get; set; }
 
+        //extra
+        public string Extra { get; set; }
         public virtual HRMS_Training_Request_Application HRMS_Training_Request_Application { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HRMS_ProgramFaculty> HRMS_ProgramFaculty { get; set; }
