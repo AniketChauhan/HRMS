@@ -15,11 +15,6 @@ namespace HRMS.ViewModel
         public List<HRMS_Evalution_Question> QuestionLists { get; set; }
     }
 
-    public class TrainingProgramCommon
-    {
-        public HRMS_ProgramFaculty ProFaculty { get; set; }
-        public HRMS_ProgramDetail  ProDetail{ get; set; }
-        public List<HRMS_ProgramFaculty> FacultyList { get; set; }
-    }
+  
    
 }
