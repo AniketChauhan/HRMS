@@ -38,6 +38,11 @@ namespace HRMS.Controllers
                     }
 
                 }
+                if (User.IsInRole("midman"))
+                {
+                    return RedirectToAction("Create", "ReuestApplication");
+
+                }
             }
             return View();
 
@@ -67,7 +72,7 @@ namespace HRMS.Controllers
                         return RedirectToAction("Index", "EmployeeRegistration");
                     
                     }
-                    else
+                    else if(acc.role == "emp")
                     {
                         Session["id"] = acc.ID;
                         FormsAuthentication.SetAuthCookie(obj.UserName, false);
@@ -85,6 +90,16 @@ namespace HRMS.Controllers
                             return RedirectToAction("Create", "EmployeeDetail");
                         }
 
+                    }
+                    else
+                    {
+                        Session["id"] = acc.ID;
+                        FormsAuthentication.SetAuthCookie(obj.UserName, false);
+
+                        //checking for Employee data is already there or not
+                       
+                            return RedirectToAction("Create", "RequestApplication");
+                       
                     }
                 }
                 else

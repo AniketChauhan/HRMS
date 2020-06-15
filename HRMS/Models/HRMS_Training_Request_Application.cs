@@ -23,6 +23,8 @@ namespace HRMS.Models
         public long ApplicationId { get; set; }
         public System.DateTime request_date { get; set; }
         public long EmpID { get; set; }
+        public string EmployeeName { get; set; }
+
         public Nullable<long> designationID { get; set; }
         public Nullable<long> DepartmentId { get; set; }
         public string Training_Name { get; set; }

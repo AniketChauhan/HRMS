@@ -24,7 +24,7 @@
         <div class="  @color" id="mobTogDiv"> H.R.M.S.<button class="w3-button" id="navbutton"> <i class="glyphicon glyphicon-align-justify"></i></button></div>
     </div>
     <div id="contant" class="w3-bar @color  w3-card-2">
-        @*@Html.ActionLink("H.R.M.S", "", "", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile mainhrms" })*@
+        @Html.ActionLink("H.R.M.S", "", "", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile mainhrms" })
 
         @if (User.IsInRole("admin"))
         {
@@ -426,6 +426,22 @@
                         <i class="glyphicon glyphicon-euro"> </i>
                         @Html.ActionLink("Photo&Sign", "Details", "EmployeePhotoSign", new { area = "" }, new { @class = " " })
                     </div>
+
+                </div>
+            </div>
+        }
+                                                                @*for mid man*@
+        @if (User.IsInRole("midman"))
+        {
+            <div class="w3-dropdown-hover DixDiv">
+                <button class="w3-button  @color">Transactions <i class="glyphicon glyphicon-chevron-down"> </i></button>
+                <div class="w3-dropdown-content w3-center w3-bar-block w3-card-4 DIVINSIDE">
+                    <div class="w3-bar-item w3-button w3-mobile">
+                        <i class="glyphicon glyphicon-info-sign"> </i>
+                        @Html.ActionLink("Travel Request Application", "Create", "RequestApplication", new { area = "" }, new { @class = " " })
+                    </div>
+
+
 
                 </div>
             </div>

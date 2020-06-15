@@ -1,0 +1,112 @@
+﻿@model HRMS.Models.HRMS_Training_Request_Application
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>HRMS_Training_Request_Application</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.request_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.request_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Training_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Training_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrainingDetails)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrainingDetails)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApprovedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApprovedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Approved_Remarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Approved_Remarks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Accounts.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Accounts.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Accounts1.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Accounts1.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HRMS_DEPT.Dept_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HRMS_DEPT.Dept_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HRMS_DESG_MS.Desg_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HRMS_DESG_MS.Desg_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HRMS_TRAINING_SKILL_MS.Skill_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HRMS_TRAINING_SKILL_MS.Skill_Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
