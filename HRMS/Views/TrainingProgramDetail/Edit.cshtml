@@ -1,237 +1,844 @@
-﻿@model HRMS.Models.HRMS_ProgramDetail
+﻿@model HRMS.ViewModel.TrainingProgramCommon
+@using HRMS.Models;
 
 @{
-    Layout = null;
+    ViewBag.Title = "Edit";
 }
 
 <!DOCTYPE html>
 
 <html>
 <head>
+    <link href="~/StyleSheet/UnitStyleSheet.css" rel="stylesheet" />
+
     <meta name="viewport" content="width=device-width" />
     <title>Edit</title>
 </head>
 <body>
-    @using (Html.BeginForm())
+    @*@using (Html.BeginForm("Create","TrainingProgramDetail",FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()*@
+    @using (Ajax.BeginForm("Edit", "TrainingProgramDetail", new AjaxOptions { HttpMethod = "POST", OnSuccess = "successHeader", OnFailure = "Failureheader" }))
     {
-        @Html.AntiForgeryToken()
-        
-        <div class="form-horizontal">
-            <h4>HRMS_ProgramDetail</h4>
+
+
+        <div class="form-horizontal row FormP">
+            <h4>Edit Program</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.ID)
-    
+
+            @Html.HiddenFor(model => model.ProDetail.ID, htmlAttributes: new { @class = "", @id = "PrimaryID" })
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.TransactionDate, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.ProDetail.TransactionDate, new { htmlAttributes = new { @class = "form-control ", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.ProDetail.TransactionDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.ProgramName, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.ProDetail.ProgramName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ProDetail.ProgramName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.FromDate, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.ProDetail.FromDate, new { htmlAttributes = new { @class = "form-control datepicker", @style = "width:200px" } })
+                        @Html.ValidationMessageFor(model => model.ProDetail.FromDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.ToDate, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.ProDetail.ToDate, new { htmlAttributes = new { @class = "form-control datepicker", @style = "width:200px" } })
+                        @Html.ValidationMessageFor(model => model.ProDetail.ToDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.TrainingType, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                    <div class="col-md-8">
+                        @*@Html.EditorFor(model => model.TrainingType, new { htmlAttributes = new { @class = "form-control" } })*@
+                        @Html.DropDownListFor(model => model.ProDetail.TrainingType, new List<SelectListItem>
+                       {
+                           new SelectListItem{ Text="Planned", Value = "Planned" },
+                           new SelectListItem{ Text="Unplanned", Value = "Unplanned" },
+                           new SelectListItem{ Text="Various", Value = "Various" },
+                        }, "--Select--", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ProDetail.TrainingType, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.ProgramType, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                    <div class="col-md-8">
+                        @*@Html.EditorFor(model => model.ProgramType, new { htmlAttributes = new { @class = "form-control" } })*@
+                        @Html.DropDownListFor(model => model.ProDetail.ProgramType, new List<SelectListItem>
+                      {
+                          new SelectListItem{ Text="Training", Value = "Training" },
+                          new SelectListItem{ Text="Internship", Value = "Internship" },
+                          new SelectListItem{ Text="Seminar", Value = "Seminar" },
+                       }, "--Select--", htmlAttributes: new { @class = "form-control" })
+
+                        @Html.ValidationMessageFor(model => model.ProDetail.TrainingType, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.SubjectType, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                    <div class="col-md-8">
+                        @*@Html.EditorFor(model => model.SubjectType, new { htmlAttributes = new { @class = "form-control" } })*@
+                        @Html.DropDownListFor(model => model.ProDetail.SubjectType, new List<SelectListItem>
+                     {
+                         new SelectListItem{ Text="General", Value = "General" },
+                         new SelectListItem{ Text="Language", Value = "Language" },
+                         new SelectListItem{ Text="Commnication", Value = "Commnication" },
+                      }, "--Select--", htmlAttributes: new { @class = "form-control" })
+
+                        @Html.ValidationMessageFor(model => model.ProDetail.SubjectType, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+
+            @*---------------------------------------------------------*@
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.TrainingID, "TrainingID", htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @*@Html.EditorFor(model => model.ProDetail.HRMS_Training_Request_Application.Training_Name, null, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })*@
+                        @Html.EditorFor(model => model.ProDetail.TrainingID, new { htmlAttributes = new { @class = "form-control ", @readonly = "readonly" } })
+
+                        @Html.ValidationMessageFor(model => model.ProDetail.TrainingID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.Subject, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.ProDetail.Subject, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ProDetail.Subject, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.FromTime, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                    <div class="col-md-8">
+                        @*@Model.ProDetail.FromTime?.ToString("hh\\:mm")*@
+                        @Html.EditorFor(model => model.ProDetail.FromTime, new { htmlAttributes = new { @class = "form-control", @style = "width:150px" } })
+                        @Html.ValidationMessageFor(model => model.ProDetail.FromTime, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.ToTime, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                    <div class="col-md-8">
+                        @*@Model.ProDetail.ToTime?.ToString("hh\\:mm")*@
+                        @Html.EditorFor(model => model.ProDetail.ToTime, new { htmlAttributes = new { @class = "form-control", @style = "width:150px" } })
+                        @Html.ValidationMessageFor(model => model.ProDetail.ToTime, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.Type, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                    <div class="col-md-8">
+                        @*@Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })*@
+                        @Html.DropDownListFor(model => model.ProDetail.Type, new List<SelectListItem>
+                    {
+                        new SelectListItem{ Text="Compliance", Value = "Compliance" },
+
+                     }, "--Select--", htmlAttributes: new { @class = "form-control" })
+
+                        @Html.ValidationMessageFor(model => model.ProDetail.Type, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.ProgramMode, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                    <div class="col-md-8">
+                        @*@Html.EditorFor(model => model.ProgramMode, new { htmlAttributes = new { @class = "form-control" } })*@
+                        @Html.DropDownListFor(model => model.ProDetail.ProgramMode, new List<SelectListItem>
+                    {
+                        new SelectListItem{ Text="Technical", Value = "Technical" },
+                        new SelectListItem{ Text="Theorical", Value = "Theorical" },
+
+                     }, "--Select--", htmlAttributes: new { @class = "form-control" })
+
+                        @Html.ValidationMessageFor(model => model.ProDetail.ProgramMode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.Budget, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.ProDetail.Budget, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ProDetail.Budget, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+            @*------------------------------------------------------*@
+
+
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.BenefitsToOrg, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.TextAreaFor(model => model.ProDetail.BenefitsToOrg, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ProDetail.BenefitsToOrg, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProDetail.Remarks, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.TextAreaFor(model => model.ProDetail.Remarks, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ProDetail.Remarks, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            @*-----------------------------------------------------------*@
             <div class="form-group">
-                @Html.LabelFor(model => model.TransactionDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.ProDetail.Venue, htmlAttributes: new { @class = "control-label col-md-2 required" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.TransactionDate, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.TransactionDate, "", new { @class = "text-danger" })
+                    @*@Html.EditorFor(model => model.Venue, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.DropDownListFor(model => model.ProDetail.Venue, new List<SelectListItem>
+               {
+                   new SelectListItem{ Text="Internal", Value = "Internal" },
+                   new SelectListItem{ Text="External", Value = "External" },
+
+                }, "--Select--", htmlAttributes: new { @class = "form-control", @id = "venue" })
+
+                    @Html.ValidationMessageFor(model => model.ProDetail.Venue, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+            <div class="form-group " id="city" style="display:none">
+                @Html.LabelFor(model => model.ProDetail.City, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ProDetail.City, new { htmlAttributes = new { @class = "form-control", @id = "city1" } })
+                    @Html.ValidationMessageFor(model => model.ProDetail.City, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.TrainingID, "TrainingID", htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <div class="form-group " id="address" style="display:none">
+                @Html.LabelFor(model => model.ProDetail.Address, htmlAttributes: new { @class = "control-label col-md-2 " })
                 <div class="col-md-10">
-                    @Html.DropDownList("TrainingID", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.TrainingID, "", new { @class = "text-danger" })
+                    @Html.TextAreaFor(model => model.ProDetail.Address, new { htmlAttributes = new { @class = "form-control", @id = "address11" } })
+                    @Html.ValidationMessageFor(model => model.ProDetail.Address, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+
+
+
             <div class="form-group">
-                @Html.LabelFor(model => model.ProgramName, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.ProDetail.RatingMethod, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.ProgramName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ProgramName, "", new { @class = "text-danger" })
+                    @*@Html.EditorFor(model => model.RatingMethod, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.DropDownListFor(model => model.ProDetail.RatingMethod, new List<SelectListItem>
+              {
+                  new SelectListItem{ Text="A", Value = "A" },
+                  new SelectListItem{ Text="B", Value = "B" },
+
+               }, "--Select--", htmlAttributes: new { @class = "form-control", @id = "RatingMethod1" })
+
+                    @Html.ValidationMessageFor(model => model.ProDetail.RatingMethod, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <div class="form-group rating1" style="display:none">
+
+
+                <div class="col-md-2"></div>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                    <div class="radio-inline">
+                        @Html.RadioButton("Rating", "1", new { @name = "Rating" })
+                        1
+                    </div>
+
+                    <div class="radio-inline">
+                        @Html.RadioButton("Rating", "2", new { @name = "Rating" })
+                        2
+                    </div>
+                    <div class="radio-inline">
+                        @Html.RadioButton("Rating", "3", new { @name = "Rating" })
+                        3
+                    </div>
+                    <div class="radio-inline">
+                        @Html.RadioButton("Rating", "4", new { @name = "Rating" })
+                        4
+                    </div>
                 </div>
             </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.FromDate, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <div class="form-group rating2" style="display:none">
+
+
+                <div class="col-md-2"></div>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "text-danger" })
+                    <div class="radio-inline">
+                        @Html.RadioButton("Rating", "1", new { @name = "Rating" })
+                        Very Bad
+                    </div>
+
+                    <div class="radio-inline">
+                        @Html.RadioButton("Rating", "2", new { @name = "Rating" })
+                        Bad
+                    </div>
+                    <div class="radio-inline">
+                        @Html.RadioButton("Rating", "3", new { @name = "Rating" })
+                        Good
+                    </div>
+                    <div class="radio-inline">
+                        @Html.RadioButton("Rating", "4", new { @name = "Rating" })
+                        Very Good
+                    </div>
                 </div>
             </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.ToDate, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ToDate, "", new { @class = "text-danger" })
+
+
+
+
+
+            @Html.HiddenFor(model => model.ProDetail.Flag)
+            @Html.Hidden("FacultyIDHidden")
+            @Html.Hidden("ProgramIDHidden")
+
+            <hr />
+            @*----------------------------TABLE------------------------------------*@
+            <div id="facultytable">
+
+                <div class="form-inline w3-right-align">
+                    <center>
+                        <table class="table-bordered">
+                            <tr>
+                                <td>
+
+                                    @Html.TextBox("Search", null, new { @class = "form-control", @placeholder = "Search Faculty" })
+                                </td>
+                                <td>
+
+                                    <input type="button" value="Add" class="form-control btn-success btn-group-lg" id="Add1" onclick="return AddFaculty() " />
+                                </td>
+                            </tr>
+                        </table>
+                    </center>
+                </div>
+                <br />
+
+                <table class="table table-bordered table-striped table-responsive">
+                    <tr>
+                        <th>
+                            <center>
+                                @Html.DisplayNameFor(model => model.ProFaculty.FacultyName)
+                            </center>
+                        </th>
+                        <th>
+                            <center>
+                                @Html.DisplayNameFor(model => model.ProFaculty.Email)
+                            </center>
+                        </th>
+                        <th> <center><i class="glyphicon glyphicon-wrench"> </i> Operations</center></th>
+                    </tr>
+                    <tbody id="insidetable">
+                        <tr id="">
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                @*<div>
+                        <center>
+                            @Html.ActionLink("Save Changes", "Index", new { }, new { @class = "btn btn-warning" })
+                        </center>
+                    </div>*@
+            </div>
+
+            
+
+            @*----------------------------------------------------------*@
+
+
+            <div class="comp">
+                <hr />
+                
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ProDetail.TrainingStatus, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @*@Html.EditorFor(model => model.TrainingStatus, new { htmlAttributes = new { @class = "form-control" } })*@
+                            <div class="radio-inline">
+                                @Html.RadioButtonFor(model => model.ProDetail.TrainingStatus, "Completed", new {@id="R1" })
+                                Completed
+                            </div>
+
+                            <div class="radio-inline">
+                                @Html.RadioButtonFor(model => model.ProDetail.TrainingStatus, "Cancel", new { @id="R2"})
+                                Cancel
+                            </div>
+                            @Html.ValidationMessageFor(model => model.ProDetail.TrainingStatus, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ProDetail.CompleteDate, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.ProDetail.CompleteDate, new { htmlAttributes = new { @class = "form-control datepicker1", @style = "width:200px" } })
+                            @Html.ValidationMessageFor(model => model.ProDetail.CompleteDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ProDetail.CompletedBy, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.ProDetail.CompletedBy, new { htmlAttributes = new { @class = "form-control",@id="AdminID" } })
+                            @Html.ValidationMessageFor(model => model.ProDetail.CompletedBy, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ProDetail.RemarksOther, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.TextAreaFor(model => model.ProDetail.RemarksOther, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ProDetail.RemarksOther, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
-    
+
+            
             <div class="form-group">
-                @Html.LabelFor(model => model.FromTime, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.FromTime, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.FromTime, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.ToTime, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ToTime, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ToTime, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.TrainingType, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.TrainingType, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.TrainingType, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.ProgramType, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ProgramType, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ProgramType, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.SubjectType, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.SubjectType, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.SubjectType, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.ProgramMode, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ProgramMode, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ProgramMode, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.Venue, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Venue, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Venue, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.Budget, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Budget, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Budget, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.BenefitsToOrg, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.BenefitsToOrg, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.BenefitsToOrg, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.RatingMethod, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.RatingMethod, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.RatingMethod, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.TrainingStatus, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.TrainingStatus, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.TrainingStatus, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.CompletedBy, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.CompletedBy, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.CompletedBy, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.CompleteDate, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.CompleteDate, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.CompleteDate, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.RemarksOther, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.RemarksOther, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.RemarksOther, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.Flag, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Flag, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Flag, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
-                </div>
+                
+                <center>
+                    <input type="submit" value="Save Changes" class="btn btn-primary" id="submit1" />
+                    <input type="Reset" value="Cancel" class="btn btn-danger" id="cancel1" />
+                </center>
             </div>
         </div>
+
     }
-    
+
+
+
+
+
     <div>
         @Html.ActionLink("Back to List", "Index")
     </div>
 </body>
 </html>
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+@section scripts{
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+    <script>
+        $(function () {
+
+            $(".datepicker").datepicker({
+
+                dateFormat: "yy-mm-dd",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "2020:2030",
+                orientation: "right top",
+                minDate: new Date()
+
+
+
+            });
+            //$('#ui-datepicker-div').css('clip', 'auto');
+
+        });
+    </script>
+
+    <script>
+        $(function () {
+
+            $(".datepicker1").datepicker({
+
+                dateFormat: "yy-mm-dd",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "2010:2020",
+                orientation: "right top",
+                maxDate: new Date()
+
+
+
+            });
+            //$('#ui-datepicker-div').css('clip', 'auto');
+
+        });
+    </script>
+}
+
+@*complete and cancel radio button*@
+<script>
+    $(document).ready(function () {
+
+        $('input[type=radio][name="ProDetail.TrainingStatus"]').on('change', function () {
+            //alert("Yes");
+            switch ($(this).val()) {
+                case 'Completed':
+                    if (confirm("Do you want to Complete this Program?") == true) {
+
+                        FillCreatedBy();
+                    }
+                    else {
+                        $("#R1").prop("checked", false);
+                         $("#AdminID").val("");
+                    }
+                    break;
+
+                case 'Cancel':
+                    if (confirm("Do you want to Cancel this Program?") == true) {
+                        FillCreatedBy();
+                    }
+                    else {
+                        $("#R2").prop("checked", false);
+                         $("#AdminID").val("");
+                    }
+                    break;
+            }
+        });
+    });
+</script>
+
+<script>
+
+    function FillCreatedBy() {
+        //debugger;
+        //document.getElementById("").disabled = false;
+        //$("#saveQuestionsList").show();
+
+        $.get("/TrainingProgramDetail/GetAdminID", {  }, function (data) {
+
+
+            $("#AdminID").val(data);
+
+        });
+    }
+
+
+</script>
+
+<script>
+    $(document).ready(function () {
+
+        //for venue
+        $("#venue").change(function () {
+
+            if ($(this).val() == "External") {
+
+                $("#city").show();
+                $("#address").show();
+            }
+            else {
+                $("#city").hide();
+                $("#address").hide();
+
+            }
+        });
+    });
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#RatingMethod1").change(function () {
+
+
+            if ($(this).val() == "A") {
+
+                $(".rating1").show();
+                $(".rating1").show();
+                $(".rating2").hide();
+                $(".rating2").hide();
+            }
+            else if ($(this).val() == "B") {
+                $(".rating2").show();
+                $(".rating2").show();
+                $(".rating1").hide();
+                $(".rating1").hide();
+            }
+
+            else {
+                $(".rating2").hide();
+                $(".rating2").hide();
+                $(".rating1").hide();
+                $(".rating1").hide();
+            }
+        });
+    });
+</script>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+
+<script type="text/javascript">
+
+    $(function () {
+        $("#Search").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: '/TrainingProgramDetail/AutoComplete/',
+                    data: "{ 'prefix': '" + request.term + "'}",
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return item;
+                        }))
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            },
+            select: function (e, i) {
+                //$("#Employee").val(i.item.val);
+                //alert("welcome");
+                $("#FacultyIDHidden").val(i.item.val);
+
+            },
+            minLength: 1
+        });
+    });
+</script>
+
+
+
+
+
+<script type="text/javascript">
+    //$(document).find('btn_edit').show();
+    //$(document).find('.btn_save').hide();
+    //$(document).find('.btn_cancel').hide();
+
+    //Start from here
+    $(document).ready(function () {
+        if ($("#venue").val() == "External") {
+
+                $("#city").show();
+                $("#address").show();
+        }
+        //reting method
+        //if ($("#RatingMethod1").val() == "A") {
+
+        //    $(".rating1").show();
+        //}
+        //else if($("#RatingMethod1").val() == "B")
+        //{
+        //    $(".rating2").show();
+        //}
+
+
+        //for list
+        var proidd = $("#PrimaryID").val();
+        FacultyList(proidd);
+        //alert(proidd);
+
+    })
+
+
+    var ProCode;
+    //for header ajax
+    function successHeader(data) {
+
+        if (data == true) {
+            alert("Program Edited Succesfully!");
+            window.location.href = '/TrainingProgramDetail/Index/';
+
+        }
+        else if (data == false) {
+            alert('Server failed!');
+        }
+        else if (data == "ToDate must be greater than FromDate!") {
+            alert("ToDate must be greater than FromDate!");
+        }
+    }
+    function Failureheader(data) {
+        //alert('Ajax is failed!');
+    }
+
+
+    //Add Faculty
+    function AddFaculty() {
+
+        if (confirm("Are you sure?") == true) {
+
+            if ($("#FacultyIDHidden").val() != "") {
+                var data = JSON.stringify({
+                    'facid': $("#FacultyIDHidden").val(),
+                    'proid': $("#PrimaryID").val()
+                });
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json",
+                    url: "@Url.Action("AddFacultyy", "TrainingProgramDetail")",
+                    datatype: "json",
+                    data: data,
+                    success: function (response) {
+                        //debugger;
+                        //getQuestionList(headerrrcode);
+                        //        $("#insidetable").show();
+                        //$("#MainQuestionContainer").show();
+                        $("#Search").val("");
+                        if (response != null) {
+
+                            if (response == "Faculty Already Exist!") {
+                                alert(response);
+                            }
+
+                            else {
+
+                                //var ProgID = response[0].ProgramID;
+                                var ProgID = response;
+                                //alert(ProgID);
+                                //headerrrcode = headrID;
+                                FacultyList(ProgID);
+                            }
+                        }
+
+                        else {
+                            alert("NULL");
+                        }
+                    },
+
+                    error: function (response) {
+                        alert("error");
+                    },
+                    failure: function (response) {
+                        alert("fail");
+                    }
+                });
+            }
+            else {
+                alert("Faculty Not Found!");
+                $("#Search").val("");
+            }
+        }
+    }
+
+    //faculty List
+
+    function FacultyList(ProgrID) {
+        //debugger;
+        //document.getElementById("").disabled = false;
+        //$("#saveQuestionsList").show();
+
+        $.get("/TrainingProgramDetail/GetFacultyList", { ProgrammID: ProgrID }, function (data) {
+
+
+            $("#insidetable").empty();
+            $.each(data, function (index, item) {
+                var tbody = "";
+
+                tbody += "<tr row_id='" + item.ID+"' id='" + item.ID +"'>";
+                tbody += "<td class='text-left'><center><div class='row_data' edit_type='click' col_name='Faculty Name'>" + item.FacultyName + "</div></center></td>";
+                tbody += "<td class='text-left'><center>" + item.Email + "</center></td>";
+
+                tbody += "<td class=''><center> <button class='btn btn-danger btn-sm  btn_cancelQuestion' onclick='return RemoveFromList(" + item.ID + ")'>Remove</button></center></td>";
+
+                tbody += "</tr>";
+                $("#insidetable").append(tbody);
+            });
+
+
+        });
+    }
+
+    //remove faculty
+    function RemoveFromList(id) {
+        if (confirm("Are you sure?") == true) {
+            var data = JSON.stringify({
+                'id': id
+            });
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "@Url.Action("deletefaculty", "TrainingProgramDetail")",
+                datatype: "json",
+                data: data,
+                success: function (response) {
+                    //debugger;
+                    //FacultyList(headerrrcode);
+                    var Pid = $("#PrimaryID").val();
+                     FacultyList(Pid);
+
+                }
+            });
+        }
+    }
+
+
+    //  function FacultyList() {
+
+    //        $.get("/TrainingProgramDetail/GetFaculty", { facid: $("#FacultyIDHidden").val(), proid: $("#ProgramIDHidden").val() }, function (data) {
+
+    //            alert("yep");
+    //        $("#insidetable").empty();
+    //            $.each(data, function (index, item) {
+    //                alert("yep");
+    //            var tbody = "";
+
+    //            tbody += "<tr row_id='" + item.ID+"' id='" + item.ID +"'>";
+    //            tbody += "<td class='text-left'><div class='row_data' edit_type='click' col_name='Faculty Name'>" + item.FacultyName + "</div></td>";
+    //            tbody += "<td class='text-left'><center>" + item.Email + "</center></td>";
+
+    //            tbody += "<td class=''><center><span class='btn_edit' > <a href='#' class='btn btn-link ' row_id='" + item.ID + "'>Edit</a> </span> &nbsp; <span class='btn_save' > <a href='#' class='btn btn-link ' row_id='" + item.ID + "'>Save</a></span>&nbsp;<span class='btn_cancel' ><a href='#' class='btn btn-link ' row_id='" + item.ID +"'>Cancel</a> </span> &nbsp; <button class='btn btn-danger btn-sm glyphicon glyphicon-trash btn_cancelQuestion' onclick='return RemoveFromList(" + item.ID + ")'>Remove</button></center></td>";
+
+    //            tbody += "</tr>";
+    //            $("#insidetable").append(tbody);
+    //        });
+
+
+    //    });
+
+    //}
+
+
+</script>

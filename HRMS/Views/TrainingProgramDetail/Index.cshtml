@@ -91,7 +91,22 @@
                     @Html.DisplayFor(modelItem => item.HRMS_TRAINING_SKILL_MS.Skill_Name)
                 </td>
                 <td>
-                    @Html.ActionLink("Add Program", "Create", new { id = item.ApplicationId }, new { @class = "btn btn-success" })
+                    @if (item.ProgramFlag == null)
+                    {
+                        @Html.ActionLink("Add Program", "Create", new { id = item.ApplicationId }, new { @class = "btn btn-primary" })
+                    }
+                    else if (item.ProgramFlag == 1)
+                    {
+                        @Html.ActionLink("Edit Program", "Edit", new { id = item.ApplicationId }, new { @class = "btn btn-warning" })
+                    }
+                    else if (item.ProgramFlag == 2)
+                    {
+                        @Html.ActionLink("View Completed", "Details", new { id = item.ApplicationId }, new { @class = "btn btn-success" })
+                    }
+                    else if (item.ProgramFlag == 3)
+                    {
+                        @Html.ActionLink("View Cancalled", "Details", new { id = item.ApplicationId }, new { @class = "btn btn-success" })
+                    }
                 </td>
             </tr>
         }

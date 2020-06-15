@@ -75,6 +75,7 @@ namespace HRMS.Models
         public virtual DbSet<HRMS_Training_Request_Application> HRMS_Training_Request_Application { get; set; }
         public virtual DbSet<HRMS_Evalution_Question> HRMS_Evalution_Question { get; set; }
         public virtual DbSet<HRMS_TrainingEvalution_Header> HRMS_TrainingEvalution_Header { get; set; }
+        public virtual DbSet<HRMS_ProgramFaculty> HRMS_ProgramFaculty { get; set; }
     
         public virtual ObjectResult<DepartmentData_Result> DepartmentData()
         {

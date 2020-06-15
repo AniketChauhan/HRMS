@@ -319,6 +319,9 @@
     <Compile Include="Models\HRMS_ProgramDetail.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\HRMS_ProgramFaculty.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\HRMS_SALUTATION.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

@@ -32,6 +32,7 @@ namespace HRMS.Models
         public Nullable<long> ApprovedBy_ID { get; set; }
         public string Approved_Remarks { get; set; }
         public long Skill { get; set; }
+        public Nullable<long> ProgramFlag { get; set; }
     
         public virtual Accounts Accounts { get; set; }
         public virtual Accounts Accounts1 { get; set; }
