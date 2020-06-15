@@ -211,6 +211,7 @@
     <Compile Include="Controllers\MaritalMasterController.cs" />
     <Compile Include="Controllers\PayRollMasterControllerv.cs" />
     <Compile Include="Controllers\ReligionMasterController.cs" />
+    <Compile Include="Controllers\RequestApplicationController.cs" />
     <Compile Include="Controllers\SALUTATIONController.cs" />
     <Compile Include="Controllers\SegmentMasterController.cs" />
     <Compile Include="Controllers\TrainingEvaluationController.cs" />
@@ -738,6 +739,11 @@
     <Content Include="Views\FacultyMaster\Details.cshtml" />
     <Content Include="Views\FacultyMaster\Edit.cshtml" />
     <Content Include="Views\FacultyMaster\Index.cshtml" />
+    <Content Include="Views\RequestApplication\Create.cshtml" />
+    <Content Include="Views\RequestApplication\Delete.cshtml" />
+    <Content Include="Views\RequestApplication\Details.cshtml" />
+    <Content Include="Views\RequestApplication\Edit.cshtml" />
+    <Content Include="Views\RequestApplication\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
