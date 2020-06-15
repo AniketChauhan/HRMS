@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="~/Content/w3.css" type="text/css" />
     <link rel="stylesheet" href="~/Content/Effect.css" type="text/css" />
     <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/StyleSheet/UnitStyleSheet.css" rel="stylesheet" />
 
 
     @Scripts.Render("~/bundles/modernizr")
@@ -430,7 +431,7 @@
                 </div>
             </div>
         }
-                                                                @*for mid man*@
+        @*for mid man*@
         @if (User.IsInRole("midman"))
         {
             <div class="w3-dropdown-hover DixDiv">
@@ -543,8 +544,8 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
-    
-
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 

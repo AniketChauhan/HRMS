@@ -152,10 +152,10 @@ namespace HRMS.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public JsonResult Create(TrainingProgramCommon hRMS_ProgramDetail)
+        public JsonResult Create(HRMS_ProgramDetail hRMS_ProgramDetail)
         {
             
-                HRMS_ProgramDetail obj = hRMS_ProgramDetail.ProDetail;
+                HRMS_ProgramDetail obj = hRMS_ProgramDetail;
             if (obj.ToDate < obj.FromDate)
             {
                 var msg = "ToDate must be greater than FromDate!";
