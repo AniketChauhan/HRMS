@@ -262,21 +262,22 @@
                 <button class="w3-button  @color">Training TS <i class="glyphicon glyphicon-chevron-down"> </i></button>
                 <div class="w3-dropdown-content w3-center w3-bar-block w3-card-4 DIVINSIDE">
                     <div class="w3-bar-item w3-button w3-mobile">
+                        <i class="glyphicon glyphicon-transfer"> </i>
+                        @Html.ActionLink("Training Request", "Index", "RequestApplication", new { area = "" }, new { @class = " " })
+                    </div>
+                    <div class="w3-bar-item w3-button w3-mobile">
                         <i class="glyphicon glyphicon-move"> </i>
                         @Html.ActionLink("Program Detail", "Index", "TrainingProgramDetail", new { area = "" }, new { @class = " " })
                     </div>
-                    @*<div class="w3-bar-item w3-button w3-mobile">
-                            <i class="glyphicon glyphicon-transfer"> </i>
-                            @Html.ActionLink("Skill", "Index", "TrainingSkillMaster", new { area = "" }, new { @class = " " })
-                        </div>
-                        <div class="w3-bar-item w3-button w3-mobile">
-                            <i class="glyphicon glyphicon-grain"> </i>
-                            @Html.ActionLink("Material", "Index", "TraningMaterialMaster", new { area = "" }, new { @class = " " })
-                        </div>
-                        <div class="w3-bar-item w3-button w3-mobile">
-                            <i class="glyphicon glyphicon-grain"> </i>
-                            @Html.ActionLink("Evaluation", "Index", "TrainingEvaluation", new { area = "" }, new { @class = " " })
-                        </div>*@
+
+                    @* <div class="w3-bar-item w3-button w3-mobile">
+            <i class="glyphicon glyphicon-grain"> </i>
+            @Html.ActionLink("Material", "Index", "TraningMaterialMaster", new { area = "" }, new { @class = " " })
+        </div>
+        <div class="w3-bar-item w3-button w3-mobile">
+            <i class="glyphicon glyphicon-grain"> </i>
+            @Html.ActionLink("Evaluation", "Index", "TrainingEvaluation", new { area = "" }, new { @class = " " })
+        </div>*@
 
                 </div>
             </div>

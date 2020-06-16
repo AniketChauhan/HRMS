@@ -50,8 +50,8 @@ namespace HRMS.Controllers
         // GET: RequestApplication
         public ActionResult Index()
         {
-            var Request_Application = db.HRMS_Training_Request_Application.Include(h => h.Accounts).Include(h => h.Accounts1).Include(h => h.HRMS_DEPT).Include(h => h.HRMS_DESG_MS).Include(h => h.HRMS_TRAINING_SKILL_MS);
-            return View(Request_Application.ToList());
+            //var Request_Application = db.HRMS_Training_Request_Application.Include(h => h.Accounts).Include(h => h.Accounts1).Include(h => h.HRMS_DEPT).Include(h => h.HRMS_DESG_MS).Include(h => h.HRMS_TRAINING_SKILL_MS);
+            //return View(Request_Application.ToList());
 
 
             if (User.IsInRole("admin"))
@@ -60,13 +60,17 @@ namespace HRMS.Controllers
 
                 return View(hRMS_Training_Request_Application.ToList());
             }
-            if (User.IsInRole("midman"))
+            else if (User.IsInRole("midman"))
             {
                 long emp_id = Convert.ToInt64(Session["id"]);
-                var hRMS_Training_Request_Application = db.HRMS_Training_Request_Application.Include(h => h.Accounts).Include(h => h.Accounts1).Include(h => h.HRMS_DEPT).Include(h => h.HRMS_DESG_MS).Include(h => h.HRMS_TRAINING_SKILL_MS).Where(rec=>rec.EmpID == emp_id);
+                var hRMS_Training_Request_Application = db.HRMS_Training_Request_Application.Include(h => h.Accounts).Include(h => h.Accounts1).Include(h => h.HRMS_DEPT).Include(h => h.HRMS_DESG_MS).Include(h => h.HRMS_TRAINING_SKILL_MS).Where(rec => rec.EmpID == emp_id);
 
 
                 return View(hRMS_Training_Request_Application.ToList());
+            }
+            else
+            {
+                return HttpNotFound();
             }
 
         }

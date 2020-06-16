@@ -325,6 +325,9 @@
     <Compile Include="Models\HRMS_SALUTATION.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\HRMS_TrainingApproval.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\HRMS_TrainingEvalution_Header.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

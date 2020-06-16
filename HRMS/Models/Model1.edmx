@@ -372,6 +372,20 @@
           <Property Name="Skill_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Skill_Remark" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="HRMS_TrainingApproval">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EMP_ID" Type="bigint" Nullable="false" />
+          <Property Name="Designation" Type="bigint" />
+          <Property Name="Program_ID" Type="bigint" Nullable="false" />
+          <Property Name="ApproveBy" Type="bigint" />
+          <Property Name="ApproveDate" Type="date" />
+          <Property Name="Status" Type="bigint" />
+          <Property Name="EmpName" Type="varchar" MaxLength="50" />
+          <Property Name="EmpDept" Type="bigint" />
+        </EntityType>
         <EntityType Name="HRMS_TrainingEvalution_Header">
           <Key>
             <PropertyRef Name="ID" />
@@ -1035,6 +1049,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_HRMS_TrainingApproval_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="HRMS_TrainingApproval" Type="Self.HRMS_TrainingApproval" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_TrainingApproval">
+              <PropertyRef Name="EMP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_TrainingApproval_HRMS_DEPT">
+          <End Role="HRMS_DEPT" Type="Self.HRMS_DEPT" Multiplicity="0..1" />
+          <End Role="HRMS_TrainingApproval" Type="Self.HRMS_TrainingApproval" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_DEPT">
+              <PropertyRef Name="Dept_Id" />
+            </Principal>
+            <Dependent Role="HRMS_TrainingApproval">
+              <PropertyRef Name="EmpDept" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_TrainingApproval_HRMS_DESG_MS">
+          <End Role="HRMS_DESG_MS" Type="Self.HRMS_DESG_MS" Multiplicity="0..1" />
+          <End Role="HRMS_TrainingApproval" Type="Self.HRMS_TrainingApproval" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_DESG_MS">
+              <PropertyRef Name="Desg_Id" />
+            </Principal>
+            <Dependent Role="HRMS_TrainingApproval">
+              <PropertyRef Name="Designation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_TrainingApproval_HRMS_ProgramDetail">
+          <End Role="HRMS_ProgramDetail" Type="Self.HRMS_ProgramDetail" Multiplicity="1" />
+          <End Role="HRMS_TrainingApproval" Type="Self.HRMS_TrainingApproval" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_ProgramDetail">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_TrainingApproval">
+              <PropertyRef Name="Program_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_HRMS_Travel_Application_Accounts">
           <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
           <End Role="HRMS_Travel_Application" Type="Self.HRMS_Travel_Application" Multiplicity="*" />
@@ -1232,6 +1294,7 @@
           <EntitySet Name="HRMS_TRAINING_MATERIAL_MS" EntityType="Self.HRMS_TRAINING_MATERIAL_MS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_Training_Request_Application" EntityType="Self.HRMS_Training_Request_Application" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_TRAINING_SKILL_MS" EntityType="Self.HRMS_TRAINING_SKILL_MS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_TrainingApproval" EntityType="Self.HRMS_TrainingApproval" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_TrainingEvalution_Header" EntityType="Self.HRMS_TrainingEvalution_Header" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_Travel_Application" EntityType="Self.HRMS_Travel_Application" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_Travel_Expense_App" EntityType="Self.HRMS_Travel_Expense_App" Schema="dbo" store:Type="Tables" />
@@ -1407,6 +1470,22 @@
             <End Role="HRMS_TRAINING_SKILL_MS" EntitySet="HRMS_TRAINING_SKILL_MS" />
             <End Role="HRMS_Training_Request_Application" EntitySet="HRMS_Training_Request_Application" />
           </AssociationSet>
+          <AssociationSet Name="FK_HRMS_TrainingApproval_Accounts" Association="Self.FK_HRMS_TrainingApproval_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="HRMS_TrainingApproval" EntitySet="HRMS_TrainingApproval" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_TrainingApproval_HRMS_DEPT" Association="Self.FK_HRMS_TrainingApproval_HRMS_DEPT">
+            <End Role="HRMS_DEPT" EntitySet="HRMS_DEPT" />
+            <End Role="HRMS_TrainingApproval" EntitySet="HRMS_TrainingApproval" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_TrainingApproval_HRMS_DESG_MS" Association="Self.FK_HRMS_TrainingApproval_HRMS_DESG_MS">
+            <End Role="HRMS_DESG_MS" EntitySet="HRMS_DESG_MS" />
+            <End Role="HRMS_TrainingApproval" EntitySet="HRMS_TrainingApproval" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_TrainingApproval_HRMS_ProgramDetail" Association="Self.FK_HRMS_TrainingApproval_HRMS_ProgramDetail">
+            <End Role="HRMS_ProgramDetail" EntitySet="HRMS_ProgramDetail" />
+            <End Role="HRMS_TrainingApproval" EntitySet="HRMS_TrainingApproval" />
+          </AssociationSet>
           <AssociationSet Name="FK_HRMS_Travel_Application_Accounts" Association="Self.FK_HRMS_Travel_Application_Accounts">
             <End Role="Accounts" EntitySet="Accounts" />
             <End Role="HRMS_Travel_Application" EntitySet="HRMS_Travel_Application" />
@@ -1482,6 +1561,7 @@
           <NavigationProperty Name="HRMS_EMP_GRA_POL" Relationship="HRMS5Model.FK_HRMS_EMP_GRA_POL_Accounts" FromRole="Accounts" ToRole="HRMS_EMP_GRA_POL" />
           <NavigationProperty Name="HRMS_Training_Request_Application" Relationship="HRMS5Model.FK_HRMS_Training_Request_Application_Accounts" FromRole="Accounts" ToRole="HRMS_Training_Request_Application" />
           <NavigationProperty Name="HRMS_Training_Request_Application1" Relationship="HRMS5Model.FK_HRMS_Training_Request_Application_Accounts1" FromRole="Accounts" ToRole="HRMS_Training_Request_Application" />
+          <NavigationProperty Name="HRMS_TrainingApproval" Relationship="HRMS5Model.FK_HRMS_TrainingApproval_Accounts" FromRole="Accounts" ToRole="HRMS_TrainingApproval" />
         </EntityType>
         <EntityType Name="BankMaster">
           <Key>
@@ -1647,6 +1727,7 @@
           <Property Name="ModifyDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="HRMS_Emp_Details" Relationship="HRMS5Model.FK_HRMS_Emp_Details_HRMS_DEPT" FromRole="HRMS_DEPT" ToRole="HRMS_Emp_Details" />
           <NavigationProperty Name="HRMS_Training_Request_Application" Relationship="HRMS5Model.FK_HRMS_Training_Request_Application_HRMS_DEPT" FromRole="HRMS_DEPT" ToRole="HRMS_Training_Request_Application" />
+          <NavigationProperty Name="HRMS_TrainingApproval" Relationship="HRMS5Model.FK_HRMS_TrainingApproval_HRMS_DEPT" FromRole="HRMS_DEPT" ToRole="HRMS_TrainingApproval" />
         </EntityType>
         <EntityType Name="HRMS_EMP_Attachment_Details">
           <Key>
@@ -2379,6 +2460,23 @@
             <End Role="HRMS_ProgramDetail" EntitySet="HRMS_ProgramDetail" />
             <End Role="HRMS_ProgramFaculty" EntitySet="HRMS_ProgramFaculty" />
           </AssociationSet>
+          <EntitySet Name="HRMS_TrainingApproval" EntityType="HRMS5Model.HRMS_TrainingApproval" />
+          <AssociationSet Name="FK_HRMS_TrainingApproval_Accounts" Association="HRMS5Model.FK_HRMS_TrainingApproval_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="HRMS_TrainingApproval" EntitySet="HRMS_TrainingApproval" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_TrainingApproval_HRMS_DEPT" Association="HRMS5Model.FK_HRMS_TrainingApproval_HRMS_DEPT">
+            <End Role="HRMS_DEPT" EntitySet="HRMS_DEPT" />
+            <End Role="HRMS_TrainingApproval" EntitySet="HRMS_TrainingApproval" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_TrainingApproval_HRMS_DESG_MS" Association="HRMS5Model.FK_HRMS_TrainingApproval_HRMS_DESG_MS">
+            <End Role="HRMS_DESG_MS" EntitySet="HRMS_DESG_MS" />
+            <End Role="HRMS_TrainingApproval" EntitySet="HRMS_TrainingApproval" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_TrainingApproval_HRMS_ProgramDetail" Association="HRMS5Model.FK_HRMS_TrainingApproval_HRMS_ProgramDetail">
+            <End Role="HRMS_ProgramDetail" EntitySet="HRMS_ProgramDetail" />
+            <End Role="HRMS_TrainingApproval" EntitySet="HRMS_TrainingApproval" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="DepartmentData_Result">
           <Property Type="Int64" Name="Dept_Id" Nullable="false" />
@@ -2403,6 +2501,7 @@
           <NavigationProperty Name="HRMS_Emp_Details" Relationship="HRMS5Model.FK_HRMS_Emp_Details_HRMS_DESG_MS" FromRole="HRMS_DESG_MS" ToRole="HRMS_Emp_Details" />
           <NavigationProperty Name="HRMS_Travel_Application" Relationship="HRMS5Model.FK_HRMS_Travel_Application_HRMS_DESG_MS" FromRole="HRMS_DESG_MS" ToRole="HRMS_Travel_Application" />
           <NavigationProperty Name="HRMS_Training_Request_Application" Relationship="HRMS5Model.FK_HRMS_Training_Request_Application_HRMS_DESG_MS" FromRole="HRMS_DESG_MS" ToRole="HRMS_Training_Request_Application" />
+          <NavigationProperty Name="HRMS_TrainingApproval" Relationship="HRMS5Model.FK_HRMS_TrainingApproval_HRMS_DESG_MS" FromRole="HRMS_DESG_MS" ToRole="HRMS_TrainingApproval" />
         </EntityType>
         <EntityType Name="HRMS_Emp_Details">
           <Key>
@@ -2868,6 +2967,7 @@
           <Property Name="Flag" Type="Int64" />
           <NavigationProperty Name="HRMS_Training_Request_Application" Relationship="HRMS5Model.FK_HRMS_ProgramDetail_HRMS_Training_Request_Application" FromRole="HRMS_ProgramDetail" ToRole="HRMS_Training_Request_Application" />
           <NavigationProperty Name="HRMS_ProgramFaculty" Relationship="HRMS5Model.FK_HRMS_ProgramFaculty_HRMS_ProgramDetail" FromRole="HRMS_ProgramDetail" ToRole="HRMS_ProgramFaculty" />
+          <NavigationProperty Name="HRMS_TrainingApproval" Relationship="HRMS5Model.FK_HRMS_TrainingApproval_HRMS_ProgramDetail" FromRole="HRMS_ProgramDetail" ToRole="HRMS_TrainingApproval" />
         </EntityType>
         <EntityType Name="HRMS_TRAINING_MATERIAL_MS">
           <Key>
@@ -3049,6 +3149,72 @@
             </Principal>
             <Dependent Role="HRMS_ProgramFaculty">
               <PropertyRef Name="ProgramID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="HRMS_TrainingApproval">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EMP_ID" Type="Int64" Nullable="false" />
+          <Property Name="Designation" Type="Int64" />
+          <Property Name="Program_ID" Type="Int64" Nullable="false" />
+          <Property Name="ApproveBy" Type="Int64" />
+          <Property Name="ApproveDate" Type="DateTime" Precision="0" />
+          <Property Name="Status" Type="Int64" />
+          <Property Name="EmpName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmpDept" Type="Int64" />
+          <NavigationProperty Name="Accounts" Relationship="HRMS5Model.FK_HRMS_TrainingApproval_Accounts" FromRole="HRMS_TrainingApproval" ToRole="Accounts" />
+          <NavigationProperty Name="HRMS_DEPT" Relationship="HRMS5Model.FK_HRMS_TrainingApproval_HRMS_DEPT" FromRole="HRMS_TrainingApproval" ToRole="HRMS_DEPT" />
+          <NavigationProperty Name="HRMS_DESG_MS" Relationship="HRMS5Model.FK_HRMS_TrainingApproval_HRMS_DESG_MS" FromRole="HRMS_TrainingApproval" ToRole="HRMS_DESG_MS" />
+          <NavigationProperty Name="HRMS_ProgramDetail" Relationship="HRMS5Model.FK_HRMS_TrainingApproval_HRMS_ProgramDetail" FromRole="HRMS_TrainingApproval" ToRole="HRMS_ProgramDetail" />
+        </EntityType>
+        <Association Name="FK_HRMS_TrainingApproval_Accounts">
+          <End Type="HRMS5Model.Accounts" Role="Accounts" Multiplicity="1" />
+          <End Type="HRMS5Model.HRMS_TrainingApproval" Role="HRMS_TrainingApproval" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_TrainingApproval">
+              <PropertyRef Name="EMP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_TrainingApproval_HRMS_DEPT">
+          <End Type="HRMS5Model.HRMS_DEPT" Role="HRMS_DEPT" Multiplicity="0..1" />
+          <End Type="HRMS5Model.HRMS_TrainingApproval" Role="HRMS_TrainingApproval" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_DEPT">
+              <PropertyRef Name="Dept_Id" />
+            </Principal>
+            <Dependent Role="HRMS_TrainingApproval">
+              <PropertyRef Name="EmpDept" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_TrainingApproval_HRMS_DESG_MS">
+          <End Type="HRMS5Model.HRMS_DESG_MS" Role="HRMS_DESG_MS" Multiplicity="0..1" />
+          <End Type="HRMS5Model.HRMS_TrainingApproval" Role="HRMS_TrainingApproval" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_DESG_MS">
+              <PropertyRef Name="Desg_Id" />
+            </Principal>
+            <Dependent Role="HRMS_TrainingApproval">
+              <PropertyRef Name="Designation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_TrainingApproval_HRMS_ProgramDetail">
+          <End Type="HRMS5Model.HRMS_ProgramDetail" Role="HRMS_ProgramDetail" Multiplicity="1" />
+          <End Type="HRMS5Model.HRMS_TrainingApproval" Role="HRMS_TrainingApproval" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_ProgramDetail">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_TrainingApproval">
+              <PropertyRef Name="Program_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3722,6 +3888,21 @@
                 <ScalarProperty Name="FacultyID" ColumnName="FacultyID" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="FacultyName" ColumnName="FacultyName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_TrainingApproval">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_TrainingApproval">
+              <MappingFragment StoreEntitySet="HRMS_TrainingApproval">
+                <ScalarProperty Name="EmpDept" ColumnName="EmpDept" />
+                <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+                <ScalarProperty Name="ApproveBy" ColumnName="ApproveBy" />
+                <ScalarProperty Name="Program_ID" ColumnName="Program_ID" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="EMP_ID" ColumnName="EMP_ID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

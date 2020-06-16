@@ -104,6 +104,13 @@ namespace HRMS.Controllers
             return id;
         }
 
+        //GetCompleteDate
+        public DateTime GetCompleteDate()
+        {
+            DateTime Datee = DateTime.Now;
+            return Datee;
+        }
+
 
 
         // GET: TrainingProgramDetail

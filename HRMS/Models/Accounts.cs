@@ -31,10 +31,12 @@ namespace HRMS.Models
             this.HRMS_EMP_GRA_POL = new HashSet<HRMS_EMP_GRA_POL>();
             this.HRMS_Training_Request_Application = new HashSet<HRMS_Training_Request_Application>();
             this.HRMS_Training_Request_Application1 = new HashSet<HRMS_Training_Request_Application>();
+            this.HRMS_TrainingApproval = new HashSet<HRMS_TrainingApproval>();
         }
+    
+        public long ID { get; set; }
         public string ConfirmUsername { get; set; }
 
-        public long ID { get; set; }
         public string UserName { get; set; }
         public string password { get; set; }
         public string role { get; set; }
@@ -67,5 +69,7 @@ namespace HRMS.Models
         public virtual ICollection<HRMS_Training_Request_Application> HRMS_Training_Request_Application { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HRMS_Training_Request_Application> HRMS_Training_Request_Application1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HRMS_TrainingApproval> HRMS_TrainingApproval { get; set; }
     }
 }

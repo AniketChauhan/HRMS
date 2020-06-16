@@ -20,6 +20,7 @@ namespace HRMS.Models
             this.HRMS_Emp_Details = new HashSet<HRMS_Emp_Details>();
             this.HRMS_Travel_Application = new HashSet<HRMS_Travel_Application>();
             this.HRMS_Training_Request_Application = new HashSet<HRMS_Training_Request_Application>();
+            this.HRMS_TrainingApproval = new HashSet<HRMS_TrainingApproval>();
         }
     
         public long Desg_Id { get; set; }
@@ -38,5 +39,7 @@ namespace HRMS.Models
         public virtual ICollection<HRMS_Travel_Application> HRMS_Travel_Application { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HRMS_Training_Request_Application> HRMS_Training_Request_Application { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HRMS_TrainingApproval> HRMS_TrainingApproval { get; set; }
     }
 }

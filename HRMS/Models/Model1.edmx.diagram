@@ -105,6 +105,11 @@
         <EntityTypeShape EntityType="HRMS5Model.HRMS_ProgramFaculty" Width="1.5" PointX="19.625" PointY="4.875" />
         <AssociationConnector Association="HRMS5Model.FK_HRMS_ProgramFaculty_HRMS_Faculty_MS" />
         <AssociationConnector Association="HRMS5Model.FK_HRMS_ProgramFaculty_HRMS_ProgramDetail" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_TrainingApproval" Width="1.5" PointX="19.625" PointY="19.25" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_TrainingApproval_Accounts" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_TrainingApproval_HRMS_DEPT" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_TrainingApproval_HRMS_DESG_MS" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_TrainingApproval_HRMS_ProgramDetail" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
