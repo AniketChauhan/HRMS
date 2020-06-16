@@ -10,6 +10,7 @@ using HRMS.Models;
 
 namespace HRMS.Controllers
 {
+   
     public class TrainingApprovalController : Controller
     {
         private HRMSEntities db = new HRMSEntities();
@@ -29,7 +30,7 @@ namespace HRMS.Controllers
 
          }
 
-
+        [HttpGet]
         //View Program
         public ActionResult View(long? id)
         {
@@ -40,6 +41,7 @@ namespace HRMS.Controllers
 
             HRMS_ProgramDetail obj = db.HRMS_ProgramDetail.Find(id.Value);
             HRMS_TrainingApproval obj1 = new HRMS_TrainingApproval();
+
             obj1.EMP_ID = Convert.ToInt64(Session["id"]);
 
             HRMS_Emp_Details Detail = db.HRMS_Emp_Details.Where(x=>x.EMP_ID==obj1.EMP_ID).FirstOrDefault();
@@ -47,9 +49,70 @@ namespace HRMS.Controllers
             obj1.EmpDept = Detail.Department;
             obj1.Program_ID = id.Value;
             obj1.EmpName = Detail.First_Name + " " + Detail.Last_Name;
+           // obj1.HRMS_ProgramDetail.FromDate = obj.FromDate;
+
+            //readonly dropdown
+            ViewBag.Designation = new SelectList(db.HRMS_DESG_MS.Where(x=>x.Desg_Id==obj1.Designation), "Desg_Id", "Desg_Name");
+            ViewBag.EmpDept = new SelectList(db.HRMS_DEPT.Where(x=>x.Dept_Id==obj1.EmpDept), "Dept_Id", "Dept_Name");
+            ViewBag.Program_ID = new SelectList(db.HRMS_ProgramDetail.Where(x=>x.ID==obj1.Program_ID), "ID", "ProgramName");
+
+            // ViewBag.xyz = new SelectList(db.HRMS_ProgramDetail.Where(x => x.ID == obj1.Program_ID), "FromDate", "FromDate");
+            ViewBag.fromdate = obj.FromDate?.ToString("yyyy/MM/dd");
+            ViewBag.todate = obj.ToDate?.ToString("yyyy/MM/dd");
+            ViewBag.fromtime = obj.FromTime;
+            ViewBag.totime = obj.ToTime;
+
+            //NoOfDays
+            TimeSpan? difference = obj.ToDate - obj.FromDate;
+            ViewBag.NoOfDays = difference.Value.TotalDays;
+
+            ViewBag.remarks = obj.Remarks;
+
+            //already Exist or completed
+            if (User.IsInRole("emp"))
+            {
+                bool IsExist = db.HRMS_TrainingApproval.Any(x => x.EMP_ID == obj1.EMP_ID && x.Program_ID == id.Value);
+                bool IsExist1 = db.HRMS_ProgramDetail.Any(x => x.ID == id.Value && x.TrainingStatus == "Completed");
+                if (IsExist || IsExist1)
+                {
+                    ViewBag.exist = "Exist";
+
+                }
+
+                HRMS_TrainingApproval status = db.HRMS_TrainingApproval.Where(x=>x.EMP_ID==obj1.EMP_ID && x.Program_ID==id.Value).FirstOrDefault();
+                if (status != null)
+                {
+                    if (status.Status == 1)
+                    {
+                        ViewBag.msg = "Your Request is in Pending!";
+                    }
+                    else if (status.Status == 2)
+                    {
+                        ViewBag.msg = "Your Request is Approved!";
+                    }
+                    else if (status.Status == 3)
+                    {
+                        ViewBag.msg = "Your Request is Cancelled!";
+                    }
+                   
+                }
+            }
+
 
             return View(obj1);
         }
+
+        //post method
+        [HttpPost]
+        public ActionResult Vieww(HRMS_TrainingApproval obj)
+        {
+            obj.Status = 1; //pending request
+            db.HRMS_TrainingApproval.Add(obj);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+
 
         // GET: TrainingApproval/Details/5
         public ActionResult Details(long? id)
