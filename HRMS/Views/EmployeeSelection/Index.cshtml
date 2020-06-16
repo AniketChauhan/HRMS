@@ -1,0 +1,56 @@
+﻿@model IEnumerable<HRMS.Models.HRMS_ProgramDetail>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+<h2>Programs</h2>
+@if (Model.Count<HRMS.Models.HRMS_ProgramDetail>() > 0 && Model != null)
+{
+
+    <table class="table table-bordered table-responsive table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProgramName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProgramType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrainingType)
+            </th>
+            <th><center><i class="glyphicon glyphicon-wrench"> </i> Operations</center></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+    <tr id="@item.ID">
+        <td>
+            @Html.DisplayFor(modelItem => item.ProgramName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProgramType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TrainingType)
+        </td>
+        <td>
+            <center>
+                @Html.ActionLink(" Edit", "EditHeader", new { id = item.ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" }) |
+                <button class="btn btn-danger btn-sm" onclick="return removeFromList(this, '@item.ID') "><i class="glyphicon glyphicon-trash"> </i> Delete</button>
+            </center>
+        </td>
+    </tr>
+        }
+
+
+    </table>
+}
+else
+{
+    <div class="container">
+        <h2>sorry!!! We don't have any HEADERS  Right Now...</h2>
+    </div>
+}
