@@ -21,12 +21,13 @@ namespace HRMS.Models
             this.HRMS_ProgramFaculty = new HashSet<HRMS_ProgramFaculty>();
             this.HRMS_TrainingApproval = new HashSet<HRMS_TrainingApproval>();
         }
+
         public long ID { get; set; }
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public System.DateTime TransactionDate { get; set; }
         public long TrainingID { get; set; }
         [Required]
-       
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
 
         public string ProgramName { get; set; }
         [Required]
@@ -70,7 +71,6 @@ namespace HRMS.Models
         public string RatingMethod { get; set; }
         public string TrainingStatus { get; set; }
         public Nullable<long> CompletedBy { get; set; }
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> CompleteDate { get; set; }
         public string RemarksOther { get; set; }
         public Nullable<long> Flag { get; set; }

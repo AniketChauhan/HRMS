@@ -23,11 +23,11 @@ namespace HRMS.Models
         public Nullable<long> Status { get; set; }
         public string EmpName { get; set; }
         public Nullable<long> EmpDept { get; set; }
+        public Nullable<System.DateTime> FromDate { get; set; }
+        public Nullable<System.DateTime> ToDate { get; set; }
+        public Nullable<System.TimeSpan> FromTime { get; set; }
+        public Nullable<System.TimeSpan> ToTime { get; set; }
     
-        //extra
-     
-
-
         public virtual Accounts Accounts { get; set; }
         public virtual HRMS_DEPT HRMS_DEPT { get; set; }
         public virtual HRMS_DESG_MS HRMS_DESG_MS { get; set; }

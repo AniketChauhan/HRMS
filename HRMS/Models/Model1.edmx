@@ -385,6 +385,10 @@
           <Property Name="Status" Type="bigint" />
           <Property Name="EmpName" Type="varchar" MaxLength="50" />
           <Property Name="EmpDept" Type="bigint" />
+          <Property Name="FromDate" Type="date" />
+          <Property Name="ToDate" Type="date" />
+          <Property Name="FromTime" Type="time" Precision="7" />
+          <Property Name="ToTime" Type="time" Precision="7" />
         </EntityType>
         <EntityType Name="HRMS_TrainingEvalution_Header">
           <Key>
@@ -3169,6 +3173,10 @@
           <NavigationProperty Name="HRMS_DEPT" Relationship="HRMS5Model.FK_HRMS_TrainingApproval_HRMS_DEPT" FromRole="HRMS_TrainingApproval" ToRole="HRMS_DEPT" />
           <NavigationProperty Name="HRMS_DESG_MS" Relationship="HRMS5Model.FK_HRMS_TrainingApproval_HRMS_DESG_MS" FromRole="HRMS_TrainingApproval" ToRole="HRMS_DESG_MS" />
           <NavigationProperty Name="HRMS_ProgramDetail" Relationship="HRMS5Model.FK_HRMS_TrainingApproval_HRMS_ProgramDetail" FromRole="HRMS_TrainingApproval" ToRole="HRMS_ProgramDetail" />
+          <Property Name="FromDate" Type="DateTime" Precision="0" />
+          <Property Name="ToDate" Type="DateTime" Precision="0" />
+          <Property Name="FromTime" Type="Time" Precision="7" />
+          <Property Name="ToTime" Type="Time" Precision="7" />
         </EntityType>
         <Association Name="FK_HRMS_TrainingApproval_Accounts">
           <End Type="HRMS5Model.Accounts" Role="Accounts" Multiplicity="1" />
@@ -3895,6 +3903,10 @@
           <EntitySetMapping Name="HRMS_TrainingApproval">
             <EntityTypeMapping TypeName="HRMS5Model.HRMS_TrainingApproval">
               <MappingFragment StoreEntitySet="HRMS_TrainingApproval">
+                <ScalarProperty Name="ToTime" ColumnName="ToTime" />
+                <ScalarProperty Name="FromTime" ColumnName="FromTime" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
                 <ScalarProperty Name="EmpDept" ColumnName="EmpDept" />
                 <ScalarProperty Name="EmpName" ColumnName="EmpName" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
