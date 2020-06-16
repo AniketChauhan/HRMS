@@ -187,7 +187,6 @@ namespace HRMS.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            HRMS_SALUTATION hRMS_SALUTATION = db.HRMS_SALUTATION.Find(id);
 
             HRMS_TrainingEvalution_Header evalution_Header = db.HRMS_TrainingEvalution_Header.FirstOrDefault(rec => rec.ID == id);
             EvalutionCommon common = new EvalutionCommon();

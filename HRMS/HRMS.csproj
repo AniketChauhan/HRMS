@@ -205,6 +205,7 @@
     <Compile Include="Controllers\EmployeeReferenceDetailController.cs" />
     <Compile Include="Controllers\EmployeeRegistrationController.cs" />
     <Compile Include="Controllers\EmployeeReportController.cs" />
+    <Compile Include="Controllers\EmployeeSelectionController.cs" />
     <Compile Include="Controllers\EmpReportController.cs" />
     <Compile Include="Controllers\FacultyMasterController.cs" />
     <Compile Include="Controllers\GenderController.cs" />
@@ -420,6 +421,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="ViewModel\EvalutionCommon.cs" />
+    <Compile Include="ViewModel\TrainingEmployeeSelection.cs" />
     <Compile Include="ViewModel\TrainingProgramCommon.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -758,6 +760,7 @@
     <Content Include="Views\TrainingApproval\Edit.cshtml" />
     <Content Include="Views\TrainingApproval\Index.cshtml" />
     <Content Include="Views\TrainingApproval\View.cshtml" />
+    <Content Include="Views\EmployeeSelection\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
