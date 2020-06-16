@@ -1,0 +1,90 @@
+﻿@model HRMS.Models.HRMS_TrainingApproval
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>HRMS_TrainingApproval</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ApproveBy)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ApproveBy)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ApproveDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ApproveDate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.EmpName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.EmpName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Accounts.UserName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Accounts.UserName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.HRMS_DEPT.Dept_Name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.HRMS_DEPT.Dept_Name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.HRMS_DESG_MS.Desg_Name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.HRMS_DESG_MS.Desg_Name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.HRMS_ProgramDetail.ProgramName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.HRMS_ProgramDetail.ProgramName)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

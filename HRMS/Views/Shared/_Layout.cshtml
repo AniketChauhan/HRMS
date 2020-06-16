@@ -203,6 +203,28 @@
         }
 
 
+        @*----------------------------Employee Transaction 3-----------------------------------------*@
+        @if (User.IsInRole("emp"))
+        {
+            <div class="w3-dropdown-hover DixDiv">
+                <button class="w3-button  @color">Training Program <i class="glyphicon glyphicon-chevron-down"> </i></button>
+                <div class="w3-dropdown-content w3-center w3-bar-block w3-card-4 DIVINSIDE">
+                    <div class="w3-bar-item w3-button w3-mobile">
+                        <i class="glyphicon glyphicon-move"> </i>
+                        @Html.ActionLink("Training Application", "Index", "TrainingApproval", new { area = "" }, new { @class = "" })
+                    </div>
+                    @*<div class="w3-bar-item w3-button w3-mobile">
+                        <i class="glyphicon glyphicon-adjust"> </i>
+                        @Html.ActionLink("Travel Expense", "TravelList", "TravelExpenseApplication", new { area = "" }, new { @class = "" })
+                    </div>*@
+
+                </div>
+
+            </div>
+
+        }
+
+
         @*----------------------------Admin Transaction 2---------------------------------*@
 
 
@@ -270,11 +292,11 @@
                         @Html.ActionLink("Program Detail", "Index", "TrainingProgramDetail", new { area = "" }, new { @class = " " })
                     </div>
 
-                    @* <div class="w3-bar-item w3-button w3-mobile">
-            <i class="glyphicon glyphicon-grain"> </i>
-            @Html.ActionLink("Material", "Index", "TraningMaterialMaster", new { area = "" }, new { @class = " " })
-        </div>
-        <div class="w3-bar-item w3-button w3-mobile">
+                    <div class="w3-bar-item w3-button w3-mobile">
+                        <i class="glyphicon glyphicon-grain"> </i>
+                        @Html.ActionLink("Training Approval", "Index", "TrainingApproval", new { area = "" }, new { @class = " " })
+                    </div>
+                    @*  <div class="w3-bar-item w3-button w3-mobile">
             <i class="glyphicon glyphicon-grain"> </i>
             @Html.ActionLink("Evaluation", "Index", "TrainingEvaluation", new { area = "" }, new { @class = " " })
         </div>*@
@@ -376,19 +398,19 @@
 
 
         @*@if (User.IsInRole("emp"))
-            {
-                @Html.ActionLink("Travel Application", "Index", "TravelApplication", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
-                @Html.ActionLink("Travel Expense", "TravelList", "TravelExpenseApplication", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
-            }
-            @if (User.IsInRole("admin"))
-            {
-                @Html.ActionLink("Travel Application(0)", "Index", "TravelApplication", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile", @id = "TravelCount" })
-                @Html.ActionLink("Travel Expense", "AdminExpenseList", "TravelExpenseApplication", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
-            }
-            @if (User.IsInRole("admin"))
-            {
-                @Html.ActionLink("Employee Report", "Index", "EmployeeReport", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
-            }*@
+        {
+            @Html.ActionLink("Travel Application", "Index", "TravelApplication", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
+            @Html.ActionLink("Travel Expense", "TravelList", "TravelExpenseApplication", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
+        }
+        @if (User.IsInRole("admin"))
+        {
+            @Html.ActionLink("Travel Application(0)", "Index", "TravelApplication", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile", @id = "TravelCount" })
+            @Html.ActionLink("Travel Expense", "AdminExpenseList", "TravelExpenseApplication", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
+        }
+        @if (User.IsInRole("admin"))
+        {
+            @Html.ActionLink("Employee Report", "Index", "EmployeeReport", new { area = "" }, new { @class = "w3-bar-item w3-button w3-mobile" })
+        }*@
 
 
         @*---------------------------fourth here----------------------------*@

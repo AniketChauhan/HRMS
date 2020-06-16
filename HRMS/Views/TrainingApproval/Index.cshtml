@@ -1,0 +1,87 @@
+﻿@model IEnumerable<HRMS.Models.HRMS_ProgramDetail>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <h3>Program List</h3>
+    <br />
+    <table class="table table-bordered table-striped table-responsive">
+        <tr style="background-color:lightgray">
+            <th>
+                @Html.DisplayNameFor(model => model.ProgramMode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Subject)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FromDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ToDate)
+            </th>
+            
+            <th >Program Status</th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProgramName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FromDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ToDate)
+            </td>
+            <td>
+                @if (item.TrainingStatus == null)
+                {
+                    <b class="label label-warning">Active</b>
+                }
+                else if (item.TrainingStatus == "Completed")
+                {
+                    <b class="label label-warning">Completed</b>
+                }
+
+            </td>
+            <td>
+                @if (User.IsInRole("emp"))
+                {
+                    @Html.ActionLink("View", "View", new { id = item.ID }, new { @class = "btn btn-sm btn-success" })
+                }
+                else if (User.IsInRole("admin"))
+                {
+                    if (item.TrainingStatus == null)
+                    {
+                        @Html.ActionLink("Approve Request", "View", new { id = item.ID }, new { @class = "btn btn-sm btn-primary" }) 
+                        <span>&nbsp;</span>
+                        //set your controller name here
+                        @Html.ActionLink("Employee Selection", "", "", new { id = item.ID }, new { @class = "btn btn-sm btn-danger" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("View Employee Selection", "View", new { id = item.ID }, new { @class = "btn btn-sm btn-success" })
+                    }
+
+                }
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>
