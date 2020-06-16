@@ -40,7 +40,7 @@ namespace HRMS.Controllers
                 }
                 if (User.IsInRole("midman"))
                 {
-                    return RedirectToAction("Create", "ReuestApplication");
+                    return RedirectToAction("Index", "RequestApplication");
 
                 }
             }

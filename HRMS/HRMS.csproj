@@ -214,6 +214,7 @@
     <Compile Include="Controllers\RequestApplicationController.cs" />
     <Compile Include="Controllers\SALUTATIONController.cs" />
     <Compile Include="Controllers\SegmentMasterController.cs" />
+    <Compile Include="Controllers\TrainingApprovalController.cs" />
     <Compile Include="Controllers\TrainingEvaluationController.cs" />
     <Compile Include="Controllers\TrainingProgramDetailController.cs" />
     <Compile Include="Controllers\TrainingSkillMasterController.cs" />
@@ -751,6 +752,12 @@
     <Content Include="Views\RequestApplication\Details.cshtml" />
     <Content Include="Views\RequestApplication\Edit.cshtml" />
     <Content Include="Views\RequestApplication\Index.cshtml" />
+    <Content Include="Views\TrainingApproval\Create.cshtml" />
+    <Content Include="Views\TrainingApproval\Delete.cshtml" />
+    <Content Include="Views\TrainingApproval\Details.cshtml" />
+    <Content Include="Views\TrainingApproval\Edit.cshtml" />
+    <Content Include="Views\TrainingApproval\Index.cshtml" />
+    <Content Include="Views\TrainingApproval\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
