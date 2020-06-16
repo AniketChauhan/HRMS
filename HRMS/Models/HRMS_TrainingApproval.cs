@@ -24,6 +24,10 @@ namespace HRMS.Models
         public string EmpName { get; set; }
         public Nullable<long> EmpDept { get; set; }
     
+        //extra
+     
+
+
         public virtual Accounts Accounts { get; set; }
         public virtual HRMS_DEPT HRMS_DEPT { get; set; }
         public virtual HRMS_DESG_MS HRMS_DESG_MS { get; set; }
