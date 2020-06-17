@@ -17,7 +17,7 @@
     <table class="table table-bordered table-striped table-responsive">
         <tr style="background-color:lightgray">
             <th>
-                @Html.DisplayNameFor(model => model.ProgramMode)
+                @Html.DisplayNameFor(model => model.ProgramName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Subject)
@@ -67,10 +67,12 @@
                 {
                     if (item.TrainingStatus == null)
                     {
-                        @Html.ActionLink("Approve Request", "View", new { id = item.ID }, new { @class = "btn btn-sm btn-primary" }) 
-                        <span>&nbsp;</span>
+                        @Html.ActionLink("Approve Request", "RequestList", new { id = item.ID }, new { @class = "btn btn-sm btn-primary" })
+                        <span>|</span>
                         //set your controller name here
                         @Html.ActionLink("Employee Selection", "", "", new { id = item.ID }, new { @class = "btn btn-sm btn-danger" })
+                        <span>|</span>
+                        @Html.ActionLink("Send Email", "Index", "TrainingNotification", new { id = item.ID }, new { @class = "btn btn-sm btn-success" })
                     }
                     else
                     {

@@ -18,6 +18,7 @@ namespace HRMS.Models
         public HRMS_TRAINING_SKILL_MS()
         {
             this.HRMS_Training_Request_Application = new HashSet<HRMS_Training_Request_Application>();
+            this.HRMS_TRAINING_SKILLSET = new HashSet<HRMS_TRAINING_SKILLSET>();
         }
     
         public long Skill_ID { get; set; }
@@ -26,5 +27,7 @@ namespace HRMS.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HRMS_Training_Request_Application> HRMS_Training_Request_Application { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HRMS_TRAINING_SKILLSET> HRMS_TRAINING_SKILLSET { get; set; }
     }
 }

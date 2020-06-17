@@ -318,6 +318,9 @@
           <Property Name="CompleteDate" Type="date" />
           <Property Name="RemarksOther" Type="varchar" MaxLength="200" />
           <Property Name="Flag" Type="bigint" />
+          <Property Name="Skill" Type="bit" Nullable="false" />
+          <Property Name="Material" Type="bit" Nullable="false" />
+          <Property Name="Program_Amount" Type="numeric" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="HRMS_ProgramFaculty">
           <Key>
@@ -346,6 +349,19 @@
           <Property Name="Material_Remarks" Type="nvarchar" MaxLength="50" />
           <Property Name="Material_IsActive" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="HRMS_TRAINING_MATERIALSET">
+          <Key>
+            <PropertyRef Name="MaterialSet_ID" />
+          </Key>
+          <Property Name="MaterialSet_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProgDet_ID" Type="bigint" Nullable="false" />
+          <Property Name="Material_ID" Type="bigint" Nullable="false" />
+          <Property Name="Material_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Bud_Act" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MaterialSet_Qty" Type="bigint" Nullable="false" />
+          <Property Name="MaterialSet_Rate" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MaterialSet_Amt" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
         <EntityType Name="HRMS_Training_Request_Application">
           <Key>
             <PropertyRef Name="ApplicationId" />
@@ -372,6 +388,15 @@
           <Property Name="Skill_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Skill_Remark" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="HRMS_TRAINING_SKILLSET">
+          <Key>
+            <PropertyRef Name="SkillSet_ID" />
+          </Key>
+          <Property Name="SkillSet_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProgDetail_ID" Type="bigint" Nullable="false" />
+          <Property Name="Skill_ID" Type="bigint" Nullable="false" />
+          <Property Name="Skill_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="HRMS_TrainingApproval">
           <Key>
             <PropertyRef Name="ID" />
@@ -389,6 +414,7 @@
           <Property Name="ToDate" Type="date" />
           <Property Name="FromTime" Type="time" Precision="7" />
           <Property Name="ToTime" Type="time" Precision="7" />
+          <Property Name="IsEmailSent" Type="bigint" />
         </EntityType>
         <EntityType Name="HRMS_TrainingEvalution_Header">
           <Key>
@@ -993,6 +1019,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_HRMS_TRAINING_MATERIALSET_HRMS_ProgramDetail">
+          <End Role="HRMS_ProgramDetail" Type="Self.HRMS_ProgramDetail" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HRMS_TRAINING_MATERIALSET" Type="Self.HRMS_TRAINING_MATERIALSET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_ProgramDetail">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_TRAINING_MATERIALSET">
+              <PropertyRef Name="ProgDet_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_TRAINING_MATERIALSET_HRMS_TRAINING_MATERIAL_MS">
+          <End Role="HRMS_TRAINING_MATERIAL_MS" Type="Self.HRMS_TRAINING_MATERIAL_MS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HRMS_TRAINING_MATERIALSET" Type="Self.HRMS_TRAINING_MATERIALSET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_TRAINING_MATERIAL_MS">
+              <PropertyRef Name="Material_ID" />
+            </Principal>
+            <Dependent Role="HRMS_TRAINING_MATERIALSET">
+              <PropertyRef Name="Material_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_HRMS_Training_Request_Application_Accounts">
           <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
           <End Role="HRMS_Training_Request_Application" Type="Self.HRMS_Training_Request_Application" Multiplicity="*" />
@@ -1050,6 +1104,34 @@
             </Principal>
             <Dependent Role="HRMS_Training_Request_Application">
               <PropertyRef Name="Skill" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_TRAINING_SKILLSET_HRMS_ProgramDetail">
+          <End Role="HRMS_ProgramDetail" Type="Self.HRMS_ProgramDetail" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HRMS_TRAINING_SKILLSET" Type="Self.HRMS_TRAINING_SKILLSET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_ProgramDetail">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_TRAINING_SKILLSET">
+              <PropertyRef Name="ProgDetail_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_TRAINING_SKILLSET_HRMS_TRAINING_SKILL_MS">
+          <End Role="HRMS_TRAINING_SKILL_MS" Type="Self.HRMS_TRAINING_SKILL_MS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HRMS_TRAINING_SKILLSET" Type="Self.HRMS_TRAINING_SKILLSET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_TRAINING_SKILL_MS">
+              <PropertyRef Name="Skill_ID" />
+            </Principal>
+            <Dependent Role="HRMS_TRAINING_SKILLSET">
+              <PropertyRef Name="Skill_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1296,8 +1378,10 @@
           <EntitySet Name="HRMS_ProgramFaculty" EntityType="Self.HRMS_ProgramFaculty" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_SALUTATION" EntityType="Self.HRMS_SALUTATION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_TRAINING_MATERIAL_MS" EntityType="Self.HRMS_TRAINING_MATERIAL_MS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_TRAINING_MATERIALSET" EntityType="Self.HRMS_TRAINING_MATERIALSET" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_Training_Request_Application" EntityType="Self.HRMS_Training_Request_Application" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_TRAINING_SKILL_MS" EntityType="Self.HRMS_TRAINING_SKILL_MS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_TRAINING_SKILLSET" EntityType="Self.HRMS_TRAINING_SKILLSET" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_TrainingApproval" EntityType="Self.HRMS_TrainingApproval" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_TrainingEvalution_Header" EntityType="Self.HRMS_TrainingEvalution_Header" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_Travel_Application" EntityType="Self.HRMS_Travel_Application" Schema="dbo" store:Type="Tables" />
@@ -1454,6 +1538,14 @@
             <End Role="HRMS_ProgramDetail" EntitySet="HRMS_ProgramDetail" />
             <End Role="HRMS_ProgramFaculty" EntitySet="HRMS_ProgramFaculty" />
           </AssociationSet>
+          <AssociationSet Name="FK_HRMS_TRAINING_MATERIALSET_HRMS_ProgramDetail" Association="Self.FK_HRMS_TRAINING_MATERIALSET_HRMS_ProgramDetail">
+            <End Role="HRMS_ProgramDetail" EntitySet="HRMS_ProgramDetail" />
+            <End Role="HRMS_TRAINING_MATERIALSET" EntitySet="HRMS_TRAINING_MATERIALSET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_TRAINING_MATERIALSET_HRMS_TRAINING_MATERIAL_MS" Association="Self.FK_HRMS_TRAINING_MATERIALSET_HRMS_TRAINING_MATERIAL_MS">
+            <End Role="HRMS_TRAINING_MATERIAL_MS" EntitySet="HRMS_TRAINING_MATERIAL_MS" />
+            <End Role="HRMS_TRAINING_MATERIALSET" EntitySet="HRMS_TRAINING_MATERIALSET" />
+          </AssociationSet>
           <AssociationSet Name="FK_HRMS_Training_Request_Application_Accounts" Association="Self.FK_HRMS_Training_Request_Application_Accounts">
             <End Role="Accounts" EntitySet="Accounts" />
             <End Role="HRMS_Training_Request_Application" EntitySet="HRMS_Training_Request_Application" />
@@ -1473,6 +1565,14 @@
           <AssociationSet Name="FK_HRMS_Training_Request_Application_HRMS_TRAINING_SKILL_MS" Association="Self.FK_HRMS_Training_Request_Application_HRMS_TRAINING_SKILL_MS">
             <End Role="HRMS_TRAINING_SKILL_MS" EntitySet="HRMS_TRAINING_SKILL_MS" />
             <End Role="HRMS_Training_Request_Application" EntitySet="HRMS_Training_Request_Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_TRAINING_SKILLSET_HRMS_ProgramDetail" Association="Self.FK_HRMS_TRAINING_SKILLSET_HRMS_ProgramDetail">
+            <End Role="HRMS_ProgramDetail" EntitySet="HRMS_ProgramDetail" />
+            <End Role="HRMS_TRAINING_SKILLSET" EntitySet="HRMS_TRAINING_SKILLSET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_TRAINING_SKILLSET_HRMS_TRAINING_SKILL_MS" Association="Self.FK_HRMS_TRAINING_SKILLSET_HRMS_TRAINING_SKILL_MS">
+            <End Role="HRMS_TRAINING_SKILL_MS" EntitySet="HRMS_TRAINING_SKILL_MS" />
+            <End Role="HRMS_TRAINING_SKILLSET" EntitySet="HRMS_TRAINING_SKILLSET" />
           </AssociationSet>
           <AssociationSet Name="FK_HRMS_TrainingApproval_Accounts" Association="Self.FK_HRMS_TrainingApproval_Accounts">
             <End Role="Accounts" EntitySet="Accounts" />
@@ -2481,6 +2581,24 @@
             <End Role="HRMS_ProgramDetail" EntitySet="HRMS_ProgramDetail" />
             <End Role="HRMS_TrainingApproval" EntitySet="HRMS_TrainingApproval" />
           </AssociationSet>
+          <EntitySet Name="HRMS_TRAINING_MATERIALSET" EntityType="HRMS5Model.HRMS_TRAINING_MATERIALSET" />
+          <EntitySet Name="HRMS_TRAINING_SKILLSET" EntityType="HRMS5Model.HRMS_TRAINING_SKILLSET" />
+          <AssociationSet Name="FK_HRMS_TRAINING_MATERIALSET_HRMS_ProgramDetail" Association="HRMS5Model.FK_HRMS_TRAINING_MATERIALSET_HRMS_ProgramDetail">
+            <End Role="HRMS_ProgramDetail" EntitySet="HRMS_ProgramDetail" />
+            <End Role="HRMS_TRAINING_MATERIALSET" EntitySet="HRMS_TRAINING_MATERIALSET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_TRAINING_SKILLSET_HRMS_ProgramDetail" Association="HRMS5Model.FK_HRMS_TRAINING_SKILLSET_HRMS_ProgramDetail">
+            <End Role="HRMS_ProgramDetail" EntitySet="HRMS_ProgramDetail" />
+            <End Role="HRMS_TRAINING_SKILLSET" EntitySet="HRMS_TRAINING_SKILLSET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_TRAINING_MATERIALSET_HRMS_TRAINING_MATERIAL_MS" Association="HRMS5Model.FK_HRMS_TRAINING_MATERIALSET_HRMS_TRAINING_MATERIAL_MS">
+            <End Role="HRMS_TRAINING_MATERIAL_MS" EntitySet="HRMS_TRAINING_MATERIAL_MS" />
+            <End Role="HRMS_TRAINING_MATERIALSET" EntitySet="HRMS_TRAINING_MATERIALSET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_TRAINING_SKILLSET_HRMS_TRAINING_SKILL_MS" Association="HRMS5Model.FK_HRMS_TRAINING_SKILLSET_HRMS_TRAINING_SKILL_MS">
+            <End Role="HRMS_TRAINING_SKILL_MS" EntitySet="HRMS_TRAINING_SKILL_MS" />
+            <End Role="HRMS_TRAINING_SKILLSET" EntitySet="HRMS_TRAINING_SKILLSET" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="DepartmentData_Result">
           <Property Type="Int64" Name="Dept_Id" Nullable="false" />
@@ -2972,6 +3090,11 @@
           <NavigationProperty Name="HRMS_Training_Request_Application" Relationship="HRMS5Model.FK_HRMS_ProgramDetail_HRMS_Training_Request_Application" FromRole="HRMS_ProgramDetail" ToRole="HRMS_Training_Request_Application" />
           <NavigationProperty Name="HRMS_ProgramFaculty" Relationship="HRMS5Model.FK_HRMS_ProgramFaculty_HRMS_ProgramDetail" FromRole="HRMS_ProgramDetail" ToRole="HRMS_ProgramFaculty" />
           <NavigationProperty Name="HRMS_TrainingApproval" Relationship="HRMS5Model.FK_HRMS_TrainingApproval_HRMS_ProgramDetail" FromRole="HRMS_ProgramDetail" ToRole="HRMS_TrainingApproval" />
+          <Property Name="Skill" Type="Boolean" Nullable="false" />
+          <Property Name="Material" Type="Boolean" Nullable="false" />
+          <Property Name="Program_Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="HRMS_TRAINING_MATERIALSET" Relationship="HRMS5Model.FK_HRMS_TRAINING_MATERIALSET_HRMS_ProgramDetail" FromRole="HRMS_ProgramDetail" ToRole="HRMS_TRAINING_MATERIALSET" />
+          <NavigationProperty Name="HRMS_TRAINING_SKILLSET" Relationship="HRMS5Model.FK_HRMS_TRAINING_SKILLSET_HRMS_ProgramDetail" FromRole="HRMS_ProgramDetail" ToRole="HRMS_TRAINING_SKILLSET" />
         </EntityType>
         <EntityType Name="HRMS_TRAINING_MATERIAL_MS">
           <Key>
@@ -2982,6 +3105,7 @@
           <Property Name="Material_Rate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="Material_Remarks" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Material_IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="HRMS_TRAINING_MATERIALSET" Relationship="HRMS5Model.FK_HRMS_TRAINING_MATERIALSET_HRMS_TRAINING_MATERIAL_MS" FromRole="HRMS_TRAINING_MATERIAL_MS" ToRole="HRMS_TRAINING_MATERIALSET" />
         </EntityType>
         <EntityType Name="HRMS_TRAINING_SKILL_MS">
           <Key>
@@ -2991,6 +3115,7 @@
           <Property Name="Skill_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Skill_Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="HRMS_Training_Request_Application" Relationship="HRMS5Model.FK_HRMS_Training_Request_Application_HRMS_TRAINING_SKILL_MS" FromRole="HRMS_TRAINING_SKILL_MS" ToRole="HRMS_Training_Request_Application" />
+          <NavigationProperty Name="HRMS_TRAINING_SKILLSET" Relationship="HRMS5Model.FK_HRMS_TRAINING_SKILLSET_HRMS_TRAINING_SKILL_MS" FromRole="HRMS_TRAINING_SKILL_MS" ToRole="HRMS_TRAINING_SKILLSET" />
         </EntityType>
         <EntityType Name="HRMS_Training_Request_Application">
           <Key>
@@ -3177,6 +3302,7 @@
           <Property Name="ToDate" Type="DateTime" Precision="0" />
           <Property Name="FromTime" Type="Time" Precision="7" />
           <Property Name="ToTime" Type="Time" Precision="7" />
+          <Property Name="IsEmailSent" Type="Int64" />
         </EntityType>
         <Association Name="FK_HRMS_TrainingApproval_Accounts">
           <End Type="HRMS5Model.Accounts" Role="Accounts" Multiplicity="1" />
@@ -3223,6 +3349,88 @@
             </Principal>
             <Dependent Role="HRMS_TrainingApproval">
               <PropertyRef Name="Program_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="HRMS_TRAINING_MATERIALSET">
+          <Key>
+            <PropertyRef Name="MaterialSet_ID" />
+          </Key>
+          <Property Name="MaterialSet_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProgDet_ID" Type="Int64" Nullable="false" />
+          <Property Name="Material_ID" Type="Int64" Nullable="false" />
+          <Property Name="Material_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bud_Act" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaterialSet_Qty" Type="Int64" Nullable="false" />
+          <Property Name="MaterialSet_Rate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="MaterialSet_Amt" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="HRMS_ProgramDetail" Relationship="HRMS5Model.FK_HRMS_TRAINING_MATERIALSET_HRMS_ProgramDetail" FromRole="HRMS_TRAINING_MATERIALSET" ToRole="HRMS_ProgramDetail" />
+          <NavigationProperty Name="HRMS_TRAINING_MATERIAL_MS" Relationship="HRMS5Model.FK_HRMS_TRAINING_MATERIALSET_HRMS_TRAINING_MATERIAL_MS" FromRole="HRMS_TRAINING_MATERIALSET" ToRole="HRMS_TRAINING_MATERIAL_MS" />
+        </EntityType>
+        <EntityType Name="HRMS_TRAINING_SKILLSET">
+          <Key>
+            <PropertyRef Name="SkillSet_ID" />
+          </Key>
+          <Property Name="SkillSet_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProgDetail_ID" Type="Int64" Nullable="false" />
+          <Property Name="Skill_ID" Type="Int64" Nullable="false" />
+          <Property Name="Skill_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HRMS_ProgramDetail" Relationship="HRMS5Model.FK_HRMS_TRAINING_SKILLSET_HRMS_ProgramDetail" FromRole="HRMS_TRAINING_SKILLSET" ToRole="HRMS_ProgramDetail" />
+          <NavigationProperty Name="HRMS_TRAINING_SKILL_MS" Relationship="HRMS5Model.FK_HRMS_TRAINING_SKILLSET_HRMS_TRAINING_SKILL_MS" FromRole="HRMS_TRAINING_SKILLSET" ToRole="HRMS_TRAINING_SKILL_MS" />
+        </EntityType>
+        <Association Name="FK_HRMS_TRAINING_MATERIALSET_HRMS_ProgramDetail">
+          <End Type="HRMS5Model.HRMS_ProgramDetail" Role="HRMS_ProgramDetail" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="HRMS5Model.HRMS_TRAINING_MATERIALSET" Role="HRMS_TRAINING_MATERIALSET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_ProgramDetail">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_TRAINING_MATERIALSET">
+              <PropertyRef Name="ProgDet_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_TRAINING_SKILLSET_HRMS_ProgramDetail">
+          <End Type="HRMS5Model.HRMS_ProgramDetail" Role="HRMS_ProgramDetail" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="HRMS5Model.HRMS_TRAINING_SKILLSET" Role="HRMS_TRAINING_SKILLSET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_ProgramDetail">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_TRAINING_SKILLSET">
+              <PropertyRef Name="ProgDetail_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_TRAINING_MATERIALSET_HRMS_TRAINING_MATERIAL_MS">
+          <End Type="HRMS5Model.HRMS_TRAINING_MATERIAL_MS" Role="HRMS_TRAINING_MATERIAL_MS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="HRMS5Model.HRMS_TRAINING_MATERIALSET" Role="HRMS_TRAINING_MATERIALSET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_TRAINING_MATERIAL_MS">
+              <PropertyRef Name="Material_ID" />
+            </Principal>
+            <Dependent Role="HRMS_TRAINING_MATERIALSET">
+              <PropertyRef Name="Material_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_TRAINING_SKILLSET_HRMS_TRAINING_SKILL_MS">
+          <End Type="HRMS5Model.HRMS_TRAINING_SKILL_MS" Role="HRMS_TRAINING_SKILL_MS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="HRMS5Model.HRMS_TRAINING_SKILLSET" Role="HRMS_TRAINING_SKILLSET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_TRAINING_SKILL_MS">
+              <PropertyRef Name="Skill_ID" />
+            </Principal>
+            <Dependent Role="HRMS_TRAINING_SKILLSET">
+              <PropertyRef Name="Skill_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3801,6 +4009,9 @@
           <EntitySetMapping Name="HRMS_ProgramDetail">
             <EntityTypeMapping TypeName="HRMS5Model.HRMS_ProgramDetail">
               <MappingFragment StoreEntitySet="HRMS_ProgramDetail">
+                <ScalarProperty Name="Program_Amount" ColumnName="Program_Amount" />
+                <ScalarProperty Name="Material" ColumnName="Material" />
+                <ScalarProperty Name="Skill" ColumnName="Skill" />
                 <ScalarProperty Name="Flag" ColumnName="Flag" />
                 <ScalarProperty Name="RemarksOther" ColumnName="RemarksOther" />
                 <ScalarProperty Name="CompleteDate" ColumnName="CompleteDate" />
@@ -3903,6 +4114,7 @@
           <EntitySetMapping Name="HRMS_TrainingApproval">
             <EntityTypeMapping TypeName="HRMS5Model.HRMS_TrainingApproval">
               <MappingFragment StoreEntitySet="HRMS_TrainingApproval">
+                <ScalarProperty Name="IsEmailSent" ColumnName="IsEmailSent" />
                 <ScalarProperty Name="ToTime" ColumnName="ToTime" />
                 <ScalarProperty Name="FromTime" ColumnName="FromTime" />
                 <ScalarProperty Name="ToDate" ColumnName="ToDate" />
@@ -3916,6 +4128,30 @@
                 <ScalarProperty Name="Designation" ColumnName="Designation" />
                 <ScalarProperty Name="EMP_ID" ColumnName="EMP_ID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_TRAINING_MATERIALSET">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_TRAINING_MATERIALSET">
+              <MappingFragment StoreEntitySet="HRMS_TRAINING_MATERIALSET">
+                <ScalarProperty Name="MaterialSet_Amt" ColumnName="MaterialSet_Amt" />
+                <ScalarProperty Name="MaterialSet_Rate" ColumnName="MaterialSet_Rate" />
+                <ScalarProperty Name="MaterialSet_Qty" ColumnName="MaterialSet_Qty" />
+                <ScalarProperty Name="Bud_Act" ColumnName="Bud_Act" />
+                <ScalarProperty Name="Material_Name" ColumnName="Material_Name" />
+                <ScalarProperty Name="Material_ID" ColumnName="Material_ID" />
+                <ScalarProperty Name="ProgDet_ID" ColumnName="ProgDet_ID" />
+                <ScalarProperty Name="MaterialSet_ID" ColumnName="MaterialSet_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_TRAINING_SKILLSET">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_TRAINING_SKILLSET">
+              <MappingFragment StoreEntitySet="HRMS_TRAINING_SKILLSET">
+                <ScalarProperty Name="Skill_Name" ColumnName="Skill_Name" />
+                <ScalarProperty Name="Skill_ID" ColumnName="Skill_ID" />
+                <ScalarProperty Name="ProgDetail_ID" ColumnName="ProgDetail_ID" />
+                <ScalarProperty Name="SkillSet_ID" ColumnName="SkillSet_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
