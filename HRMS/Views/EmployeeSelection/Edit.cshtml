@@ -1,0 +1,149 @@
+﻿@model HRMS.ViewModel.TrainingEmployeeSelection
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<style type="text/css">
+    #questionform {
+        display: block;
+    }
+
+    #questiontable {
+        /*        display: inline;
+    */
+    }
+
+    #MainQuestionContainer {
+        display: block;
+    }
+
+    .btn_save {
+        display: none;
+    }
+
+    .btn_cancel {
+        display: none;
+    }
+
+    #saveQuestionsList {
+        display: inline;
+    }
+</style>
+
+<div>
+    <div class="form-horizontal row">
+        <div class="col-md-6">
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.programDetail.TransactionDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.programDetail.TransactionDate, new { htmlAttributes = new { @class = "form-control", @id = "headerpart" } })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.programDetail.ID, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.programDetail.ID, new { htmlAttributes = new { @class = "form-control", @id = "headerpart" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.programDetail.FromDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.programDetail.FromDate, new { htmlAttributes = new { @class = "form-control", @id = "headerpart" } })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.programDetail.ToDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.programDetail.ToDate, new { htmlAttributes = new { @class = "form-control", @id = "headerpart" } })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.programDetail.ProgramType, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.programDetail.ProgramType, new { htmlAttributes = new { @class = "form-control", @id = "headerpart" } })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <br />
+            <br />
+            <div class="form-group">
+                @Html.LabelFor(model => model.programDetail.ProgramName, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.programDetail.ProgramName, new { htmlAttributes = new { @class = "form-control", @id = "headerpart" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.programDetail.FromTime, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.programDetail.FromTime, new { htmlAttributes = new { @class = "form-control", @id = "headerpart" } })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.programDetail.ToTime, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.programDetail.ToTime, new { htmlAttributes = new { @class = "form-control", @id = "headerpart" } })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.programDetail.TrainingType, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.programDetail.TrainingType, new { htmlAttributes = new { @class = "form-control", @id = "headerpart" } })
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <hr class="" />
+    <div class="container" id="questionform">
+        @using (Ajax.BeginForm("Edit", "EmployeeSelection", new AjaxOptions { HttpMethod = "POST", OnSuccess = "successEmployee", OnFailure = "FailureEmployee" }))
+        {
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.HiddenFor(model => model.employeeSelection.Program_ID, htmlAttributes: new { @id = "ProgramID" })
+                @Html.LabelFor(model => model.employeeSelection.EMP_ID, htmlAttributes: new { @class = "control-label col-md-4 required" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.employeeSelection.EMP_ID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.employeeSelection.EMP_ID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.programDetail.FromDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.programDetail.FromDate, new { htmlAttributes = new { @class = "form-control", @id = "headerpart" } })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.programDetail.ToDate, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.programDetail.ToDate, new { htmlAttributes = new { @class = "form-control", @id = "headerpart" } })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.programDetail.FromTime, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.programDetail.FromTime, new { htmlAttributes = new { @class = "form-control", @id = "headerpart" } })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.programDetail.ToTime, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.programDetail.ToTime, new { htmlAttributes = new { @class = "form-control", @id = "headerpart" } })
+                </div>
+            </div>
+        </div>
+
+            <div class="form-group">
+                <center>
+                    <input type="submit" value="Add Question" class="btn btn-primary btn-sm" />
+                    @Html.ActionLink("Save Questions", "index", new { area = "" }, new { @class = "btn btn-primary btn-sm ", @id = "saveQuestionsList" })
+                </center>
+            </div>
+        }
+    </div>
