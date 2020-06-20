@@ -68,7 +68,7 @@
                 @Html.HiddenFor(model => model.question.Header_ID, htmlAttributes: new { @id = "headerID" })
                 @Html.LabelFor(model => model.question.Question, htmlAttributes: new { @class = "control-label col-md-5 required" })
                 <div class="col-md-7">
-                    @Html.EditorFor(model => model.question.Question, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.question.Question, new { htmlAttributes = new { @class = "form-control", @id = "Questionnnn" } })
                     @Html.ValidationMessageFor(model => model.question.Question, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -76,7 +76,7 @@
                 @Html.LabelFor(model => model.question.IsDescription, htmlAttributes: new { @class = "control-label col-md-5" })
                 <div class="col-md-7">
                     <div class="checkbox">
-                        @Html.EditorFor(model => model.question.IsDescription)
+                        @Html.EditorFor(model => model.question.IsDescription, new { htmlAttributes = new { @id = "IsDEscription" } })
                         @Html.ValidationMessageFor(model => model.question.IsDescription, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -186,7 +186,8 @@
     function successQuestion(res) {
         $("#questiontable").show();
         $("#MainQuestionContainer").show();
-
+        document.getElementById("Questionnnn").value = "";
+        document.getElementById("IsDEscription").checked = false;
         if (res != null) {
             if (res == "this Question is already exist!") {
                 alert(res);
@@ -204,7 +205,8 @@
     }
     function FailureQuestion(data) {
         //debugger;
-
+        document.getElementById("Questionnnn").value = "";
+        document.getElementById("IsDEscription").checked = false;
         //alert(headerrrcode);
         getQuestionList(headerrrcode);
 
