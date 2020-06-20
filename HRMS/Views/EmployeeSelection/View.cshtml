@@ -1,0 +1,187 @@
+﻿@model HRMS.Models.HRMS_TrainingApproval
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+
+<div class="form-horizontal row">
+    <div class="col-md-6">
+
+        <div class="form-group">
+            <label class="control-label col-md-4">Transaction Date</label>
+            <div class="col-md-8">
+                <input type="datetime" value="@ViewBag.TransactionDate" class="form-control" readonly="readonly" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-4"> ID</label>
+
+            <div class="col-md-8">
+                <input type="number" value="@ViewBag.ID" class="form-control" readonly="readonly" />
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-4"> FromDate</label>
+
+            <div class="col-md-8">
+                <input type="datetime" value="@ViewBag.FromDate" class="form-control" readonly="readonly" />
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-4"> ToDate</label>
+
+            <div class="col-md-8">
+                <input type="datetime" value="@ViewBag.ToDate" class="form-control" readonly="readonly" />
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-4"> Program Type</label>
+
+            <div class="col-md-8">
+                <input type="text" value="@ViewBag.ProgramType" class="form-control" readonly="readonly" />
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <br />
+        <br />
+        <div class="form-group">
+            <label class="control-label col-md-4"> Program Name</label>
+
+            <div class="col-md-8">
+                <input type="text" value="@ViewBag.ProgramName" class="form-control" readonly="readonly" />
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-4"> FromTime</label>
+
+            <div class="col-md-8">
+                <input type="time" value="@ViewBag.FromTime" class="form-control" readonly="readonly" />
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-4"> ToTime</label>
+
+            <div class="col-md-8">
+                <input type="time" value="@ViewBag.ToTime" class="form-control" readonly="readonly" />
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-4"> Training Type</label>
+
+            <div class="col-md-8">
+                <input type="text" value="@ViewBag.TrainingType" class="form-control" readonly="readonly" />
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<hr class="" />
+<div class="container-fluid" id="MainEmployeeContainer">
+
+    <table class="table table-bordered table-responsive table-striped">
+        <tr>
+
+            <th>
+                <center>
+                    Employee Code
+                </center>
+            </th>
+
+            <th>
+                <center>
+                    Employee Name
+                </center>
+            </th>
+
+            <th>
+                <center>
+                    From Date
+                </center>
+            </th>
+
+            <th>
+                <center>
+                    To Date
+                </center>
+            </th>
+
+            <th>
+                <center>
+                    From Time
+                </center>
+            </th>
+
+            <th>
+                <center>
+                    To Time
+                </center>
+            </th>
+        </tr>
+        <tbody id="EmployeeTable">
+        </tbody>
+
+    </table>
+
+</div>
+<div id="EmptyEmployeedata">This Program Does not have any employees!</div>
+<script>
+      var ProgramID;
+    $(document).ready(function () {
+        $("#EmptyEmployeedata").hide();
+
+        ProgramID = @Html.Raw(Json.Encode(Model.Program_ID));
+        getEmployeeList(ProgramID);
+    })
+    function ToJavaScriptDate(value) {
+        var pattern = /Date\(([^)]+)\)/;
+        var results = pattern.exec(value);
+        var dt = new Date(parseFloat(results[1]));
+        return dt.getFullYear() + "/" + (dt.getMonth() + 1) + "/" + dt.getDate();
+
+    }
+    function getEmployeeList(ProgramID) {
+
+        $.get("/EmployeeSelection/GetEmployees", { ProgramId: ProgramID }, function (data) {
+            if (data == "") {
+                $("#MainEmployeeContainer").hide();
+                $("#EmptyEmployeedata").show();
+
+            } else {
+                $("#MainEmployeeContainer").show();
+
+                $("#EmployeeTable").empty();
+                $.each(data, function (index, item) {
+                    var Fromhours = item.FromTime.Hours;
+                    var Fromminutes = item.FromTime.Minutes;
+                    var Tohours = item.ToTime.Hours;
+                    var Tominutes = item.ToTime.Minutes;
+                    var tbody = "";
+
+                    tbody += "<tr row_id='" + item.ID + "' id='" + item.ID + "'>";
+                    tbody += "<td class=''><center>" + item.EMP_ID + "</center></td>";
+                    tbody += "<td class=''><center>" + item.EmpName + "</center></td>";
+                    tbody += "<td class=''><center><input type='datetime' value='" + ToJavaScriptDate(item.FromDate) + "'class='form-control' readonly='readonly'/></center></td>";
+                    tbody += "<td class=''><center><input type='datetime' value='" + ToJavaScriptDate(item.ToDate) + "'class='form-control 'readonly='readonly'/></center></td>";
+                    tbody += "<td class=''><center><input type='time' value='" + Fromhours + ":" + Fromminutes + "'class='form-control row_data'col_name='FromTime' readonly='readonly'/></center></td>";
+                    tbody += "<td class=''><center><input type='time' value='" + Tohours + ":" + Tominutes + "'class='form-control row_data'col_name='ToTime' readonly='readonly'/></center></td>";
+                    tbody += "</tr>";
+                    $("#EmployeeTable").append(tbody);
+                });
+
+            }
+        });
+    }
+</script>

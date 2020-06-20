@@ -205,6 +205,7 @@
     <Compile Include="Controllers\EmployeeReferenceDetailController.cs" />
     <Compile Include="Controllers\EmployeeRegistrationController.cs" />
     <Compile Include="Controllers\EmployeeReportController.cs" />
+    <Compile Include="Controllers\EmployeeSelectionController.cs" />
     <Compile Include="Controllers\EmpReportController.cs" />
     <Compile Include="Controllers\FacultyMasterController.cs" />
     <Compile Include="Controllers\GenderController.cs" />
@@ -777,6 +778,8 @@
     <Content Include="Views\TrainingMaterialTransaction\Edit.cshtml" />
     <Content Include="Views\TrainingMaterialTransaction\Index.cshtml" />
     <Content Include="Views\TrainingMaterialTransaction\Index1.cshtml" />
+    <Content Include="Views\EmployeeSelection\EditEmployeeSelection.cshtml" />
+    <Content Include="Views\EmployeeSelection\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

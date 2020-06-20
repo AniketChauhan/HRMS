@@ -70,13 +70,13 @@
                         @Html.ActionLink("Approve Request", "RequestList", new { id = item.ID }, new { @class = "btn btn-sm btn-primary" })
                         <span>|</span>
                         //set your controller name here
-                        @Html.ActionLink("Employee Selection", "", "", new { id = item.ID }, new { @class = "btn btn-sm btn-danger" })
+                        @Html.ActionLink("Employee Selection", "EditEmployeeSelection", "EmployeeSelection", new { id = item.ID }, new { @class = "btn btn-sm btn-danger" })
                         <span>|</span>
                         @Html.ActionLink("Send Email", "Index", "TrainingNotification", new { id = item.ID }, new { @class = "btn btn-sm btn-success" })
                     }
                     else
                     {
-                        @Html.ActionLink("View Employee Selection", "View", new { id = item.ID }, new { @class = "btn btn-sm btn-success" })
+                        @Html.ActionLink("View Employee Selection", "View", "EmployeeSelection", new { id = item.ID }, new { @class = "btn btn-sm btn-success" })
                     }
 
                 }
