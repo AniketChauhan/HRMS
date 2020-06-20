@@ -120,7 +120,7 @@
         <AssociationConnector Association="HRMS5Model.FK_HRMS_TrainingReview_Accounts" />
         <AssociationConnector Association="HRMS5Model.FK_HRMS_TrainingReview_HRMS_Evalution_Question" />
         <AssociationConnector Association="HRMS5Model.FK_HRMS_TrainingReview_HRMS_ProgramDetail" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

@@ -21,6 +21,7 @@ namespace HRMS.Models
             this.HRMS_ProgramDetail = new HashSet<HRMS_ProgramDetail>();
         }
         public string EmployeeName { get; set; }
+
         public long ApplicationId { get; set; }
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public System.DateTime request_date { get; set; }

@@ -220,6 +220,7 @@
     <Compile Include="Controllers\TrainingMaterialTransactionController.cs" />
     <Compile Include="Controllers\TrainingNotificationController.cs" />
     <Compile Include="Controllers\TrainingProgramDetailController.cs" />
+    <Compile Include="Controllers\TrainingReviewControllerController.cs" />
     <Compile Include="Controllers\TrainingSkillMasterController.cs" />
     <Compile Include="Controllers\TrainingSkillTransactionController.cs" />
     <Compile Include="Controllers\TraningMaterialMasterController.cs" />
@@ -334,6 +335,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HRMS_TrainingEvalution_Header.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HRMS_TrainingReview.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HRMS_TRAINING_MATERIALSET.cs">
@@ -780,6 +784,11 @@
     <Content Include="Views\TrainingMaterialTransaction\Index1.cshtml" />
     <Content Include="Views\EmployeeSelection\EditEmployeeSelection.cshtml" />
     <Content Include="Views\EmployeeSelection\View.cshtml" />
+    <Content Include="Views\TrainingReviewController\AdminIndex.cshtml" />
+    <Content Include="Views\TrainingReviewController\Index.cshtml" />
+    <Content Include="Views\TrainingReviewController\Review.cshtml" />
+    <Content Include="Views\TrainingReviewController\ReviewList.cshtml" />
+    <Content Include="Views\TrainingReviewController\Vieww.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

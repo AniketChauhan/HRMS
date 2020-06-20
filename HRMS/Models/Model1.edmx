@@ -2677,7 +2677,7 @@
             <End Role="HRMS_ProgramDetail" EntitySet="HRMS_ProgramDetail" />
             <End Role="HRMS_TrainingReview" EntitySet="HRMS_TrainingReview" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <ComplexType Name="DepartmentData_Result">
           <Property Type="Int64" Name="Dept_Id" Nullable="false" />
           <Property Type="String" Name="Dept_Name" Nullable="false" MaxLength="50" />
@@ -3568,7 +3568,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>

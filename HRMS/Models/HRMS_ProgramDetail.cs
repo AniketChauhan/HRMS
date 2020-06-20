@@ -30,7 +30,7 @@ namespace HRMS.Models
         public System.DateTime TransactionDate { get; set; }
         public long TrainingID { get; set; }
         [Required]
-
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
 
         public string ProgramName { get; set; }
         [Required]
@@ -81,8 +81,7 @@ namespace HRMS.Models
         public bool Skill { get; set; }
         public bool Material { get; set; }
         public decimal Program_Amount { get; set; }
-
-
+    
         public virtual HRMS_Training_Request_Application HRMS_Training_Request_Application { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HRMS_ProgramFaculty> HRMS_ProgramFaculty { get; set; }

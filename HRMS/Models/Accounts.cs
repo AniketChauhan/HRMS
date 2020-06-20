@@ -35,7 +35,6 @@ namespace HRMS.Models
             this.HRMS_TrainingReview = new HashSet<HRMS_TrainingReview>();
         }
         public string ConfirmUsername { get; set; }
-
         public long ID { get; set; }
         public string UserName { get; set; }
         public string password { get; set; }

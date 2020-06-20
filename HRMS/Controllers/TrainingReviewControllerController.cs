@@ -29,19 +29,19 @@ namespace HRMS.Controllers
         }
     }
 
-    public class TrainingReviewController : Controller
+    public class TrainingReviewControllerController : Controller
     {
         public HRMSEntities db = new HRMSEntities();
 
-        
+
 
         // GET: TrainingReview
         public ActionResult Index()
         {
-                //return View(db.HRMS_ProgramDetail.Where(x => x.TrainingStatus == "Completed").ToList());
-                long empid = Convert.ToInt64(Session["id"]);
-                return View(db.HRMS_TrainingApproval.Where(x=>x.EMP_ID==empid && x.Status==2).ToList());
-           
+            //return View(db.HRMS_ProgramDetail.Where(x => x.TrainingStatus == "Completed").ToList());
+            long empid = Convert.ToInt64(Session["id"]);
+            return View(db.HRMS_TrainingApproval.Where(x => x.EMP_ID == empid && x.Status == 2).ToList());
+
         }
         public ActionResult AdminIndex()
         {
@@ -50,11 +50,11 @@ namespace HRMS.Controllers
 
         public ActionResult ReviewList(long id)
         {
-            
-            var a = db.HRMS_TrainingReview.Where(x=>x.ProgramID==id).GroupBy(i => i.ProgramID).Select(g =>  g.Average(i => (1.0 *i.NonDescriptive)) ).FirstOrDefault();
+
+            var a = db.HRMS_TrainingReview.Where(x => x.ProgramID == id).GroupBy(i => i.ProgramID).Select(g => g.Average(i => (1.0 * i.NonDescriptive))).FirstOrDefault();
             int A = Convert.ToInt32(a);
             ViewBag.Rating = A;
-            return View(db.HRMS_TrainingApproval.Where(x=>x.Program_ID==id && x.IsReviewDone==1).ToList());
+            return View(db.HRMS_TrainingApproval.Where(x => x.Program_ID == id && x.IsReviewDone == 1).ToList());
         }
 
         public ActionResult Review(long id)
@@ -62,11 +62,11 @@ namespace HRMS.Controllers
             ViewBag.Error = TempData["Error"];
             long empid = Convert.ToInt64(Session["id"]);
             TempData["ProgramID"] = id;
-            bool IsExist = db.HRMS_TrainingReview.Any(x=>x.Emp_ID==empid && x.ProgramID==id);
+            bool IsExist = db.HRMS_TrainingReview.Any(x => x.Emp_ID == empid && x.ProgramID == id);
             if (IsExist == true) //already review given
             {
                 TempData["viewmode"] = "InViewMode";
-                return RedirectToAction("Vieww",new { id});
+                return RedirectToAction("Vieww", new { id });
             }
             return View(db.HRMS_Evalution_Question.ToList());
         }
@@ -86,10 +86,10 @@ namespace HRMS.Controllers
         //{
         //    Console.WriteLine(nw.Item1 + nw.Item2);
         //}
-       
+
 
         [HttpPost]
-        public ActionResult Revieww(IEnumerable<string> Answer, IEnumerable<long> Question, IEnumerable<string> flag, String Textt , string Check)
+        public ActionResult Revieww(IEnumerable<string> Answer, IEnumerable<long> Question, IEnumerable<string> flag, String Textt, string Check)
         {
             //Answer.Zip(Question, Tuple.Create)
             //a:answer
@@ -99,11 +99,11 @@ namespace HRMS.Controllers
             if (Textt == "")
             {
                 TempData["Error"] = "Please!Fill the Rating!";
-                return RedirectToAction("Review", new { id=ProID});
+                return RedirectToAction("Review", new { id = ProID });
             }
 
             long empid = Convert.ToInt64(Session["id"]);
-           // long ProID =Convert.ToInt64(TempData["ProgramID"]);
+            // long ProID =Convert.ToInt64(TempData["ProgramID"]);
             var results = Answer.ZipThree(Question, flag, (a, b, c) => new { a, b, c });
 
             foreach (var item in results)
@@ -136,7 +136,7 @@ namespace HRMS.Controllers
             }
 
             //flag insert in trainingApproval
-            HRMS_TrainingApproval TA = db.HRMS_TrainingApproval.Where(x=>x.Program_ID==ProID && x.EMP_ID==empid).FirstOrDefault();
+            HRMS_TrainingApproval TA = db.HRMS_TrainingApproval.Where(x => x.Program_ID == ProID && x.EMP_ID == empid).FirstOrDefault();
             TA.IsReviewDone = 1; //Review Done
             db.Entry(TA).State = EntityState.Modified;
             db.SaveChanges();
@@ -144,7 +144,7 @@ namespace HRMS.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Vieww(long id,long? empid)
+        public ActionResult Vieww(long id, long? empid)
         {
             //db.HRMS_TrainingReview.Where(x => x.Emp_ID == empid && x.ProgramID == id).ToList()
             if (User.IsInRole("emp"))
@@ -158,6 +158,6 @@ namespace HRMS.Controllers
 
             return View(db.HRMS_TrainingReview.Where(x => x.Emp_ID == empid.Value && x.ProgramID == id).ToList());
         }
-       
+
     }
 }
