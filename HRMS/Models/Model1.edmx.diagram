@@ -120,6 +120,12 @@
         <AssociationConnector Association="HRMS5Model.FK_HRMS_TrainingReview_Accounts" />
         <AssociationConnector Association="HRMS5Model.FK_HRMS_TrainingReview_HRMS_Evalution_Question" />
         <AssociationConnector Association="HRMS5Model.FK_HRMS_TrainingReview_HRMS_ProgramDetail" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_Program_Attandance" Width="1.5" PointX="22.625" PointY="19.125" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_Program_Attandance_Accounts" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_Program_Attandance_HRMS_DEPT" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_Program_Attandance_HRMS_DESG_MS" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_Program_Attandance_HRMS_Program_Attandance" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_Program_Attandance_HRMS_ProgramDetail" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

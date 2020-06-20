@@ -1,0 +1,40 @@
+﻿@model HRMS.Models.HRMS_TrainingApproval
+@{
+    ViewBag.Title = "EmployeeAttandance";
+}
+
+<h2>EmployeeAttandance</h2>
+
+<div class="container">
+    <label>select Date</label>
+    <input type="date" class="form-control datepicker" />
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+}
+
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+<script>
+     $(document).ready(function () {
+         var Fromdate = @Html.Raw(Json.Encode(Model.FromDate));
+         var ToDate = @Html.Raw(Json.Encode(Model.ToDate));
+     })
+
+    $(function () {
+        $(".datepicker").datepicker({
+            dateFormat: "yy-mm-dd",
+            changeMonth: true,
+            changeYear: true,
+            orientation: "right top",
+            maxDate: ToDate,
+            minDate: Fromdate
+        });
+
+    });
+</script>
+
