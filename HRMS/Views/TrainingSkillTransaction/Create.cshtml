@@ -1,0 +1,293 @@
+﻿@*@model transactions.Models.HRMS_TRAINING_SKILLSET*@
+@model dynamic
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    HRMS.Models.HRMS_ProgramDetail hRMS_ProgramDetail2 = Model.hRMS_ProgramDetail;
+    HRMS.Models.HRMS_TRAINING_SKILLSET hRMS_TRAINING_SKILLSET2 = Model.hRMS_TRAINING_SKILLSET;
+    IEnumerable<HRMS.Models.HRMS_TRAINING_SKILLSET> hRMS_TRAINING_SKILLSET5 = Model.hRMS_TRAINING_SKILLSET4;
+
+}
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="form-horizontal">
+        <h4>HRMS TRAINING SKILLSET</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*<div class="form-group">
+                @Html.LabelFor(model => hRMS_TRAINING_SKILLSET2.ProgDetail_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model =>  hRMS_TRAINING_SKILLSET2.ProgDetail_ID, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model =>  hRMS_TRAINING_SKILLSET2.ProgDetail_ID, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+        <div class="form-group">
+            @Html.LabelFor(model => hRMS_ProgramDetail2.ID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => hRMS_ProgramDetail2.ID, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @Name = "Prog_id" } })
+                @Html.ValidationMessageFor(model => hRMS_ProgramDetail2.ID, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(model => hRMS_ProgramDetail2.ProgramName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => hRMS_ProgramDetail2.ProgramName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => hRMS_ProgramDetail2.ProgramName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(model => hRMS_ProgramDetail2.Venue, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => hRMS_ProgramDetail2.Venue, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => hRMS_ProgramDetail2.Venue, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(model => hRMS_ProgramDetail2.Budget, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => hRMS_ProgramDetail2.Budget, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => hRMS_ProgramDetail2.Budget, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(model => hRMS_ProgramDetail2.FromDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => hRMS_ProgramDetail2.FromDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => hRMS_ProgramDetail2.FromDate, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(model => hRMS_ProgramDetail2.ToDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => hRMS_ProgramDetail2.ToDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => hRMS_ProgramDetail2.ToDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(model => hRMS_ProgramDetail2.FromTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => hRMS_ProgramDetail2.FromTime, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => hRMS_ProgramDetail2.FromTime, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(model => hRMS_ProgramDetail2.ToTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => hRMS_ProgramDetail2.ToTime, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => hRMS_ProgramDetail2.ToTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @if (hRMS_ProgramDetail2.TrainingStatus != "Completed")
+        {
+            <hr />
+            <div class="form-group row" align="center">
+
+                <div class="col-md-12 form-inline">
+                    @Html.LabelFor(model => hRMS_TRAINING_SKILLSET2.Skill_ID, htmlAttributes: new { @class = "control-label required" })
+                    @Html.EditorFor(model => hRMS_TRAINING_SKILLSET2.Skill_ID, new { htmlAttributes = new { @class = "form-control", @id = "Employee", @Name = "S_id", @readonly = "readonly" } })
+                    <input type="text" id="Search" name="Search" class="form-control" placeholder="Search Here" />
+                    @Html.ValidationMessageFor(model => hRMS_TRAINING_SKILLSET2.Skill_ID, "", new { @class = "text-danger" })
+                    <input type="submit" value="Create" class="btn btn-primary" @*class="btn btn-default"*@ />
+                </div>
+
+
+
+                @*</div>*@
+                @*<div class="form-group">
+                        @Html.LabelFor(model => hRMS_TRAINING_SKILLSET2.Skill_ID, "Skill_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("Skill_ID", null, "---Select---", htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => hRMS_TRAINING_SKILLSET2.Skill_ID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                @*<div class="form-group row">*@
+                @*<div class="col-md-offset-2 col-md-3">
+
+                    </div>*@
+
+                @*<div class="col-md-offset-2 col-md-4">
+                        <input type="reset" value="Clear" class="btn btn-danger" class="btn btn-default" />
+                    </div>*@
+            </div>
+        }
+    </div>
+}
+<hr />
+
+<table class="table table-bordered table-striped table-responsive" style="width : 700px " align="center">
+    <tr>
+        <th style="width : 100px ">
+            Sr.no
+        </th>
+        <th style="width : 500px ">
+            skill
+        </th>
+        @if (hRMS_ProgramDetail2.TrainingStatus != "Completed")
+        {
+            <th style="width : 100px ">
+
+            </th>
+        }
+    </tr>
+
+    @foreach (var item in hRMS_TRAINING_SKILLSET5)
+    {
+
+        <tr>
+            <td align="center">
+                @Html.DisplayFor(Item => item.SkillSet_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(Item => item.Skill_Name)
+
+
+            </td>
+            @if (hRMS_ProgramDetail2.TrainingStatus != "Completed")
+            {
+                <td align="center">
+                    <button class="btn btn-danger  btn-sm " onclick="return removeFromList(this, '@item.SkillSet_ID') "> <i class="glyphicon glyphicon-trash"> </i> Delete</button>
+                    @*@Html.ActionLink("Delete", "Delete", new { id = item.SkillSet_ID })*@
+
+                </td>
+            }
+        </tr>
+    }
+
+</table>
+@if (ViewBag.Status != null)
+{
+    <div class="alert alert-success alert-dismissible " style="width:50%;">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <span>
+            @ViewBag.Status
+        </span>
+    </div>
+}
+
+
+@*<div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>*@
+
+@*<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('select').on('change', function () {
+
+                $.get("/HRMS_TRAINING_SKILLSET/Getdata", { CountryX: $("#Country").val() }, function (data) {
+
+
+
+
+                //alert(this.value);
+                //alert($(this).find('option:selected').attr('ProgDetail_ID'));
+                    document.getElementById("HRMS_ProgramDetail_Venue").value = $(this).find('option:selected').attr('ProgDetail_ID');
+                });
+            });
+
+
+        });
+    </script>*@
+<script>
+    function removeFromList(thisobj, id) {
+        if (confirm("Are you sure?") == true) {
+            var data = JSON.stringify({
+                'id': id
+            });
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "@Url.Action("Delete","TrainingSkillTransaction")",
+                datatype: "json",
+                data: data,
+                success: function (response) {
+                    var tr = $(thisobj).closest("tr");
+                    $(tr).remove();
+                }
+            });
+        }
+    }
+</script>
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index1")
+</div>
+
+@*@section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+}
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+
+<script type="text/javascript">
+
+    $(function () {
+        $("#Search").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: '/TrainingSkillTransaction/AutoComplete/',
+                    data: "{ 'prefix': '" + request.term + "'}",
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return item;
+                        }))
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            },
+            select: function (e, i) {
+                $("#Employee").val(i.item.val);
+
+                //$.get('FacultyMaster/Data', { id: $("#Employee").val() }, function(data) { alert("External");
+                //  alert(data.Mo);
+                //  alert(data.Email);
+
+
+
+                //$(function () {
+
+                //    $.get("/RequestApplication/Data", { id: $("#Employee").val() }, function (data) {
+                //        //alert("External");
+                //        //alert(data.Mo);
+                //        //alert(data.Email);
+                //        $("#Employee").val(data.Skill_Name);
+                //        //$("#Email").val(data.Email);
+                //        //$("#Contact").attr('readonly', 'readonly');
+                //        //$("#Email").attr('readonly', 'readonly');
+                //    });
+
+
+
+                //});
+            },
+            minLength: 1
+        });
+    });
+</script>

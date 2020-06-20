@@ -1,0 +1,85 @@
+﻿@model IEnumerable<HRMS.Models.HRMS_ProgramDetail>
+
+@{
+    ViewBag.Title = "Index1";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>All Programs</h2>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<table class="table table-bordered table-striped table-responsive">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.ProgramName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FromDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ToDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Program_Amount)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @if (item.TrainingStatus != "Cancel")
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProgramName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FromDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ToDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Program_Amount)
+                </td>
+
+                @*@if (item.TrainingStatus != null)*@
+                if (item.TrainingStatus == null && item.TrainingStatus != "Completed" && item.TrainingStatus != "Cancel")
+                {
+                    if (item.Material == false)
+                    {
+                        <td>
+                            @Html.ActionLink("ADD Material", "Create", new { id = item.ID }, new { @class = "btn btn-primary" })
+
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @Html.ActionLink("Edit Material", "Create", new { id = item.ID }, new { @class = "btn btn-primary" })
+
+                        </td>
+                    }
+                }
+                else
+                {
+
+                    if (item.TrainingStatus != null && item.TrainingStatus == "Completed")
+                    {
+                        <td>
+                            @Html.ActionLink("View Material", "Create", new { id = item.ID }, new { @class = "btn btn-primary" })
+
+                        </td>
+                    }
+
+
+
+                }
+            }
+        </tr>
+    }
+
+</table>

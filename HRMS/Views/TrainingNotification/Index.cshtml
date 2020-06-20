@@ -1,0 +1,140 @@
+﻿@model IEnumerable<HRMS.Models.HRMS_TrainingApproval>
+
+@{
+    ViewBag.Tittle = "Index";
+}
+
+<!DOCTYPE html>
+
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    
+    <h3>Employee List</h3>
+    <br />
+    <p>
+        @Html.ActionLink("Back to List", "Index", "TrainingApproval")
+    </p>
+    @if (Model.Count() != 0)
+    {
+
+        using (Html.BeginForm("EmailNotification", "TrainingNotification", FormMethod.Post))
+        {
+            <table class="table table-bordered table-striped table-responsive">
+                <tr style="background-color:lightgray">
+                    <th>
+                        <input type="checkbox" id="CheckAll" />
+                    </th>
+                    <th>
+                        <text>Employee ID</text>
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EmpName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FromDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ToDate)
+                    </th>
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.FromTime)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ToTime)
+                        </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.Accounts.UserName)
+                    </th>
+                    <th>
+                        <text>IsEmailSent?</text>
+                    </th>
+
+                </tr>
+
+
+                @foreach (var item in Model)
+                {
+
+                    //var A = item.FromTime?.ToString("hh/mm");
+                    // var B = item.ToTime?.ToString("hh/mm");
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="ListOfEmp" id="ListOfEmp" value="@item.Accounts.UserName" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Accounts.ID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmpName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FromDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ToDate)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Accounts.UserName)
+                        </td>
+
+                        @if (item.IsEmailSent == 1)
+                        {
+                            <td>Yes</td>
+                        }
+                        else
+                        {
+                            <td>No</td>
+                        }
+
+
+                    </tr>
+                }
+
+            </table>
+            <center>
+                <input type="submit" value="Send Email" class="btn-danger btn" onclick="return confirm('Are sure wants to send an Email?');" />
+            </center>
+        }
+    }
+
+    else
+    {
+        <div class="alert alert-success alert-dismissible " style="width:50%;">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <span>
+                Please!Approve Employee First!
+            </span>
+        </div>
+    }
+</body>
+</html>
+
+@if (ViewBag.Error != null)
+{<script>alert("@ViewBag.Error");</script> 
+}
+<script>
+    //mail checkbox
+    $(function () { 
+        $("#CheckAll").click(function () {
+            $("input[name='ListOfEmp']").prop("checked", this.checked);
+    });
+
+    //subcheckbox 
+    $("input[name='ListOfEmp']").click(function () {
+        if ($("input[name='ListOfEmp']").length == $("input[name='ListOfEmp']:checked").length) {
+            $("#CheckAll").prop("checked", true);
+        }
+        else {
+            //$("#CheckAll").removeAttr("checked");
+            $("#CheckAll").prop("checked", false);
+        }
+    });
+       });
+</script>

@@ -11,7 +11,8 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class HRMS_TrainingApproval
     {
         public long ID { get; set; }
@@ -19,14 +20,22 @@ namespace HRMS.Models
         public Nullable<long> Designation { get; set; }
         public long Program_ID { get; set; }
         public Nullable<long> ApproveBy { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> ApproveDate { get; set; }
         public Nullable<long> Status { get; set; }
         public string EmpName { get; set; }
         public Nullable<long> EmpDept { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> FromDate { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> ToDate { get; set; }
+        [DataType(DataType.Time)]
+        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:H:mm}")]
         public Nullable<System.TimeSpan> FromTime { get; set; }
+        [DataType(DataType.Time)]
+        [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:H:mm}")]
         public Nullable<System.TimeSpan> ToTime { get; set; }
+        public Nullable<long> IsEmailSent { get; set; }
     
         public virtual Accounts Accounts { get; set; }
         public virtual HRMS_DEPT HRMS_DEPT { get; set; }

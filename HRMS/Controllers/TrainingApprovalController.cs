@@ -10,7 +10,7 @@ using HRMS.Models;
 
 namespace HRMS.Controllers
 {
-   
+    
     public class TrainingApprovalController : Controller
     {
         private HRMSEntities db = new HRMSEntities();
@@ -25,6 +25,7 @@ namespace HRMS.Controllers
 
             else
             {
+               
                 return View(db.HRMS_ProgramDetail.Where(x => x.TrainingStatus != "Cancel").ToList());
             }
 
@@ -57,10 +58,11 @@ namespace HRMS.Controllers
             ViewBag.Program_ID = new SelectList(db.HRMS_ProgramDetail.Where(x=>x.ID==obj1.Program_ID), "ID", "ProgramName");
 
             // ViewBag.xyz = new SelectList(db.HRMS_ProgramDetail.Where(x => x.ID == obj1.Program_ID), "FromDate", "FromDate");
-            ViewBag.fromdate = obj.FromDate?.ToString("yyyy/MM/dd");
-            ViewBag.todate = obj.ToDate?.ToString("yyyy/MM/dd");
-            ViewBag.fromtime = obj.FromTime;
-            ViewBag.totime = obj.ToTime;
+            obj1.FromDate = obj.FromDate;
+            obj1.ToDate = obj.ToDate;
+            obj1.FromTime = obj.FromTime;
+            obj1.ToTime = obj.ToTime;
+
 
             //NoOfDays
             TimeSpan? difference = obj.ToDate - obj.FromDate;
@@ -107,131 +109,69 @@ namespace HRMS.Controllers
         public ActionResult Vieww(HRMS_TrainingApproval obj)
         {
             obj.Status = 1; //pending request
+
             db.HRMS_TrainingApproval.Add(obj);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
 
-
-
-        // GET: TrainingApproval/Details/5
-        public ActionResult Details(long? id)
+        public ActionResult RequestList(long id)
         {
-            if (id == null)
+            ViewBag.ProID = id;
+            if (db.HRMS_TrainingApproval.Where(x => x.Program_ID == id && x.Status == 1).Count() == 0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                ViewBag.NoPending = "No";
             }
-            HRMS_TrainingApproval hRMS_TrainingApproval = db.HRMS_TrainingApproval.Find(id);
-            if (hRMS_TrainingApproval == null)
-            {
-                return HttpNotFound();
-            }
-            return View(hRMS_TrainingApproval);
+            return View(db.HRMS_TrainingApproval.Where(x=>x.Program_ID==id && x.Status==1).ToList());
         }
 
-        // GET: TrainingApproval/Create
-        public ActionResult Create()
+
+        //approve
+        public ActionResult Approve(long id)
         {
-            ViewBag.EMP_ID = new SelectList(db.Accounts, "ID", "UserName");
-            ViewBag.EmpDept = new SelectList(db.HRMS_DEPT, "Dept_Id", "Dept_Name");
-            ViewBag.Designation = new SelectList(db.HRMS_DESG_MS, "Desg_Id", "Desg_Name");
-            ViewBag.Program_ID = new SelectList(db.HRMS_ProgramDetail, "ID", "ProgramName");
-            return View();
+            HRMS_TrainingApproval obj = db.HRMS_TrainingApproval.Where(x => x.ID == id).FirstOrDefault();
+            obj.ApproveBy = Convert.ToInt64(Session["id"]);
+            obj.ApproveDate = DateTime.Now;
+            obj.Status = 2;//approved
+            db.Entry(obj).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("RequestList",new {id=obj.Program_ID});
+
         }
 
-        // POST: TrainingApproval/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,EMP_ID,Designation,Program_ID,ApproveBy,ApproveDate,Status,EmpName,EmpDept")] HRMS_TrainingApproval hRMS_TrainingApproval)
+        //Cancel
+        public ActionResult Reject(long id)
         {
-            if (ModelState.IsValid)
-            {
-                db.HRMS_TrainingApproval.Add(hRMS_TrainingApproval);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            HRMS_TrainingApproval obj = db.HRMS_TrainingApproval.Where(x => x.ID == id).FirstOrDefault();
+            
+            obj.Status = 3;//Reject
+            db.Entry(obj).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("RequestList", new { id=obj.Program_ID });
 
-            ViewBag.EMP_ID = new SelectList(db.Accounts, "ID", "UserName", hRMS_TrainingApproval.EMP_ID);
-            ViewBag.EmpDept = new SelectList(db.HRMS_DEPT, "Dept_Id", "Dept_Name", hRMS_TrainingApproval.EmpDept);
-            ViewBag.Designation = new SelectList(db.HRMS_DESG_MS, "Desg_Id", "Desg_Name", hRMS_TrainingApproval.Designation);
-            ViewBag.Program_ID = new SelectList(db.HRMS_ProgramDetail, "ID", "ProgramName", hRMS_TrainingApproval.Program_ID);
-            return View(hRMS_TrainingApproval);
         }
 
-        // GET: TrainingApproval/Edit/5
-        public ActionResult Edit(long? id)
+        //Approve ALL
+        public ActionResult ApproveAll(long id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            HRMS_TrainingApproval hRMS_TrainingApproval = db.HRMS_TrainingApproval.Find(id);
-            if (hRMS_TrainingApproval == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.EMP_ID = new SelectList(db.Accounts, "ID", "UserName", hRMS_TrainingApproval.EMP_ID);
-            ViewBag.EmpDept = new SelectList(db.HRMS_DEPT, "Dept_Id", "Dept_Name", hRMS_TrainingApproval.EmpDept);
-            ViewBag.Designation = new SelectList(db.HRMS_DESG_MS, "Desg_Id", "Desg_Name", hRMS_TrainingApproval.Designation);
-            ViewBag.Program_ID = new SelectList(db.HRMS_ProgramDetail, "ID", "ProgramName", hRMS_TrainingApproval.Program_ID);
-            return View(hRMS_TrainingApproval);
-        }
-
-        // POST: TrainingApproval/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,EMP_ID,Designation,Program_ID,ApproveBy,ApproveDate,Status,EmpName,EmpDept")] HRMS_TrainingApproval hRMS_TrainingApproval)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(hRMS_TrainingApproval).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.EMP_ID = new SelectList(db.Accounts, "ID", "UserName", hRMS_TrainingApproval.EMP_ID);
-            ViewBag.EmpDept = new SelectList(db.HRMS_DEPT, "Dept_Id", "Dept_Name", hRMS_TrainingApproval.EmpDept);
-            ViewBag.Designation = new SelectList(db.HRMS_DESG_MS, "Desg_Id", "Desg_Name", hRMS_TrainingApproval.Designation);
-            ViewBag.Program_ID = new SelectList(db.HRMS_ProgramDetail, "ID", "ProgramName", hRMS_TrainingApproval.Program_ID);
-            return View(hRMS_TrainingApproval);
-        }
-
-        // GET: TrainingApproval/Delete/5
-        public ActionResult Delete(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            HRMS_TrainingApproval hRMS_TrainingApproval = db.HRMS_TrainingApproval.Find(id);
-            if (hRMS_TrainingApproval == null)
-            {
-                return HttpNotFound();
-            }
-            return View(hRMS_TrainingApproval);
-        }
-
-        // POST: TrainingApproval/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
-        {
-            HRMS_TrainingApproval hRMS_TrainingApproval = db.HRMS_TrainingApproval.Find(id);
-            db.HRMS_TrainingApproval.Remove(hRMS_TrainingApproval);
+            var Listt = db.HRMS_TrainingApproval.Where(x =>x.Program_ID==id && x.Status==1).ToList();
+            Listt.ForEach(x => x.Status = 2);
             db.SaveChanges();
             return RedirectToAction("Index");
+
         }
 
-        protected override void Dispose(bool disposing)
+        //Cancel ALL
+        public ActionResult RejectAll(long id)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            var Listt = db.HRMS_TrainingApproval.Where(x => x.Program_ID == id && x.Status==1).ToList();
+            Listt.ForEach(x => x.Status = 3);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+
         }
+
+
+        
     }
 }

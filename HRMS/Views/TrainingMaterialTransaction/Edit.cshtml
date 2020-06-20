@@ -1,0 +1,221 @@
+﻿@model HRMS.Models.HRMS_TRAINING_MATERIALSET
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>HRMS TRAINING MATERIALSET</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.MaterialSet_ID)
+        @Html.HiddenFor(model => model.ProgDet_ID)
+
+
+
+
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.Material_ID, htmlAttributes: new { @class = "control-label col-md-2 required" })
+            <div class="col-md-10 form-inline">
+
+                @Html.EditorFor(model => model.Material_ID, new { htmlAttributes = new { @class = "form-control", @id = "Employee", @Name = "M_id", @readonly = "readonly" } })
+                <input type="text" id="Search" name="Search" class="form-control" placeholder="Search Here" readonly />
+                @Html.ValidationMessageFor(model => model.Material_ID, "", new { @class = "text-danger" })
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => hRMS_TRAINING_MATERIALSET2.Material_ID, "Material_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("Material_ID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => hRMS_TRAINING_MATERIALSET2.Material_ID, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => hRMS_TRAINING_MATERIALSET2.Bud_Act, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => hRMS_TRAINING_MATERIALSET2.Bud_Act, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => hRMS_TRAINING_MATERIALSET2.Bud_Act, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaterialSet_Qty, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MaterialSet_Qty, new { htmlAttributes = new { @class = "form-control", @Name = "M_qty" } })
+                @Html.ValidationMessageFor(model => model.MaterialSet_Qty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group" align="left">
+            @Html.LabelFor(model => model.Bud_Act, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div>
+
+                    <div class="radio-inline">
+                        @Html.RadioButtonFor(model => model.Bud_Act, "Budget", new { @Name = "Bud_Act", @id = "Budget" })
+                        Budget
+                    </div>
+
+                    <div class="radio-inline">
+                        @Html.RadioButtonFor(model => model.Bud_Act, "Actual", new { @Name = "Bud_Act", @id = "Actual" })
+                        Actual
+                    </div>
+
+
+                </div>
+
+                @*@Html.EditorFor(model => model.MilitaryService, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.ValidationMessageFor(model => model.Bud_Act, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group" id="div1">
+            @Html.LabelFor(model => model.MaterialSet_Rate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.MaterialSet_Rate, new { htmlAttributes = new { @class = "form-control", @Name = "M_rate", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.MaterialSet_Rate, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(model => model.MaterialSet_Amt, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.MaterialSet_Amt, new { htmlAttributes = new { @class = "form-control", @Name = "M_amt", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.MaterialSet_Amt, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+
+    </div>
+
+
+}
+
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@
+
+@if (ViewBag.Status != null)
+{
+    <div class="alert alert-success alert-dismissible " style="width:50%;">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <span>
+            @ViewBag.Status
+        </span>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back", "Index1", "", new { @class = "btn btn-primary btn-sm glyphicon" })
+    @*@Html.ActionLink("Back to List", "Index1")*@
+</div>
+
+@*@section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+}
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+
+        $('input[name="M_rate"]').keyup(function () {
+            var a = $('input[name="M_qty"]').val();
+            var b = $(this).val();
+            $('input[name="M_amt"]').val(a * b);
+        });
+        $('input[name="M_qty"]').keyup(function () {
+            var a = $('input[name="M_rate"]').val();
+            var b = $(this).val();
+            $('input[name="M_amt"]').val(a * b);
+        });
+         $('input[name="Bud_Act"]').change(function(){
+            if($('#Budget').prop('checked')){
+                //alert('Budget is checked!');
+                //document.getElementById("hRMS_TRAINING_MATERIALSET2_MaterialSet_Rate").val() = 0;
+                document.getElementById("MaterialSet_Rate").readOnly = true;
+                 $.get("/HRMS_TRAINING_MATERIALSET/GetDefaultRate", { id: $("#Employee").val() }, function (data) {
+
+                     $('#MaterialSet_Rate').val(data);
+                     $('#MaterialSet_Amt').val(data * $("#MaterialSet_Qty").val());
+                 });
+
+
+            }
+            else {
+                //alert('Actual is unchecked!');
+                $('#MaterialSet_Rate').val(0.00);
+                $('#MaterialSet_Amt').val(0.00);
+                document.getElementById("MaterialSet_Rate").readOnly = false;
+
+
+            }
+        });
+
+        $("#Search").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: '/HRMS_TRAINING_MATERIALSET/AutoComplete/',
+                    data: "{ 'prefix': '" + request.term + "'}",
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return item;
+                        }))
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            },
+            select: function (e, i) {
+                $("#Employee").val(i.item.val);
+            },
+            minLength: 1
+        });
+    });
+</script>

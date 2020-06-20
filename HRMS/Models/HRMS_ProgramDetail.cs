@@ -20,14 +20,16 @@ namespace HRMS.Models
         {
             this.HRMS_ProgramFaculty = new HashSet<HRMS_ProgramFaculty>();
             this.HRMS_TrainingApproval = new HashSet<HRMS_TrainingApproval>();
+            this.HRMS_TRAINING_MATERIALSET = new HashSet<HRMS_TRAINING_MATERIALSET>();
+            this.HRMS_TRAINING_SKILLSET = new HashSet<HRMS_TRAINING_SKILLSET>();
         }
-
+        public string Extra { get; set; }
         public long ID { get; set; }
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public System.DateTime TransactionDate { get; set; }
         public long TrainingID { get; set; }
         [Required]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
+        
 
         public string ProgramName { get; set; }
         [Required]
@@ -75,13 +77,18 @@ namespace HRMS.Models
         public string RemarksOther { get; set; }
         public Nullable<long> Flag { get; set; }
 
-        //extra
-        public string Extra { get; set; }
-
+        public bool Skill { get; set; }
+        public bool Material { get; set; }
+        public decimal Program_Amount { get; set; }
+    
         public virtual HRMS_Training_Request_Application HRMS_Training_Request_Application { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HRMS_ProgramFaculty> HRMS_ProgramFaculty { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HRMS_TrainingApproval> HRMS_TrainingApproval { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HRMS_TRAINING_MATERIALSET> HRMS_TRAINING_MATERIALSET { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HRMS_TRAINING_SKILLSET> HRMS_TRAINING_SKILLSET { get; set; }
     }
 }

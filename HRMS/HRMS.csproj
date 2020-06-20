@@ -205,7 +205,6 @@
     <Compile Include="Controllers\EmployeeReferenceDetailController.cs" />
     <Compile Include="Controllers\EmployeeRegistrationController.cs" />
     <Compile Include="Controllers\EmployeeReportController.cs" />
-    <Compile Include="Controllers\EmployeeSelectionController.cs" />
     <Compile Include="Controllers\EmpReportController.cs" />
     <Compile Include="Controllers\FacultyMasterController.cs" />
     <Compile Include="Controllers\GenderController.cs" />
@@ -217,8 +216,11 @@
     <Compile Include="Controllers\SegmentMasterController.cs" />
     <Compile Include="Controllers\TrainingApprovalController.cs" />
     <Compile Include="Controllers\TrainingEvaluationController.cs" />
+    <Compile Include="Controllers\TrainingMaterialTransactionController.cs" />
+    <Compile Include="Controllers\TrainingNotificationController.cs" />
     <Compile Include="Controllers\TrainingProgramDetailController.cs" />
     <Compile Include="Controllers\TrainingSkillMasterController.cs" />
+    <Compile Include="Controllers\TrainingSkillTransactionController.cs" />
     <Compile Include="Controllers\TraningMaterialMasterController.cs" />
     <Compile Include="Controllers\TravelApplicationController.cs" />
     <Compile Include="Controllers\TravelApplicationExpanseReportController.cs" />
@@ -333,10 +335,16 @@
     <Compile Include="Models\HRMS_TrainingEvalution_Header.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\HRMS_TRAINING_MATERIALSET.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\HRMS_TRAINING_MATERIAL_MS.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HRMS_Training_Request_Application.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HRMS_TRAINING_SKILLSET.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HRMS_TRAINING_SKILL_MS.cs">
@@ -421,7 +429,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="ViewModel\EvalutionCommon.cs" />
-    <Compile Include="ViewModel\TrainingEmployeeSelection.cs" />
     <Compile Include="ViewModel\TrainingProgramCommon.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -754,13 +761,22 @@
     <Content Include="Views\RequestApplication\Details.cshtml" />
     <Content Include="Views\RequestApplication\Edit.cshtml" />
     <Content Include="Views\RequestApplication\Index.cshtml" />
-    <Content Include="Views\TrainingApproval\Create.cshtml" />
-    <Content Include="Views\TrainingApproval\Delete.cshtml" />
-    <Content Include="Views\TrainingApproval\Details.cshtml" />
-    <Content Include="Views\TrainingApproval\Edit.cshtml" />
     <Content Include="Views\TrainingApproval\Index.cshtml" />
     <Content Include="Views\TrainingApproval\View.cshtml" />
-    <Content Include="Views\EmployeeSelection\Edit.cshtml" />
+    <Content Include="Views\TrainingApproval\RequestList.cshtml" />
+    <Content Include="Views\TrainingNotification\Index.cshtml" />
+    <Content Include="Views\TrainingSkillTransaction\Create.cshtml" />
+    <Content Include="Views\TrainingSkillTransaction\Delete.cshtml" />
+    <Content Include="Views\TrainingSkillTransaction\Details.cshtml" />
+    <Content Include="Views\TrainingSkillTransaction\Edit.cshtml" />
+    <Content Include="Views\TrainingSkillTransaction\Index.cshtml" />
+    <Content Include="Views\TrainingSkillTransaction\Index1.cshtml" />
+    <Content Include="Views\TrainingMaterialTransaction\Create.cshtml" />
+    <Content Include="Views\TrainingMaterialTransaction\Delete.cshtml" />
+    <Content Include="Views\TrainingMaterialTransaction\Details.cshtml" />
+    <Content Include="Views\TrainingMaterialTransaction\Edit.cshtml" />
+    <Content Include="Views\TrainingMaterialTransaction\Index.cshtml" />
+    <Content Include="Views\TrainingMaterialTransaction\Index1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

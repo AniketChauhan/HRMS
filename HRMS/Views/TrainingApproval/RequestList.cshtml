@@ -1,0 +1,73 @@
+﻿@model IEnumerable<HRMS.Models.HRMS_TrainingApproval>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>RequestList</title>
+</head>
+<body>
+    <br />
+    @if (ViewBag.NoPending != "No")
+    {
+        <div class="w3-right-align">
+
+            @Html.ActionLink("Approve All", "ApproveAll", new { id = ViewBag.ProID }, new { @class = "btn  btn-success", @onclick = "return confirm('Are sure wants to Approve All?');" })
+            @Html.ActionLink("Reject All", "RejectAll", new { id = ViewBag.ProID }, new { @class = "btn  btn-danger", @onclick = "return confirm('Are sure wants to Reject All?');" })
+        </div>
+    }
+    <br />
+    <table class="table table-bordered table-striped table-responsive">
+        <tr style="background-color:lightgray">
+
+            <th>
+                <text>Emplyee ID</text>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HRMS_DEPT.Dept_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HRMS_DESG_MS.Desg_Name)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Accounts.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmpName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HRMS_DEPT.Dept_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HRMS_DESG_MS.Desg_Name)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Approve", "Approve", new { id = item.ID }, new { @class = "btn btn-sm btn-primary" })
+                    @Html.ActionLink("Reject", "Reject", new { id = item.ID }, new { @class = "btn btn-sm btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</body>
+</html>

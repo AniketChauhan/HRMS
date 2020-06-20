@@ -1,0 +1,35 @@
+﻿@model HRMS.Models.HRMS_TRAINING_SKILLSET
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>HRMS_TRAINING_SKILLSET</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HRMS_ProgramDetail.ProgramName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HRMS_ProgramDetail.ProgramName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HRMS_TRAINING_SKILL_MS.Skill_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HRMS_TRAINING_SKILL_MS.Skill_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SkillSet_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

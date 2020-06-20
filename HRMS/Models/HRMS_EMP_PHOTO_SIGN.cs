@@ -15,14 +15,16 @@ namespace HRMS.Models
 
     public partial class HRMS_EMP_PHOTO_SIGN
     {
+        public HttpPostedFileBase ImageFile { get; set; }
+        public HttpPostedFileBase SignFile { get; set; }
+
         public long Emp_Photos_ID { get; set; }
         public long Emp_ID { get; set; }
         public string Emp_Photo_Title { get; set; }
         public string Emp_Photo_Path { get; set; }
         public string Emp_Sign_Title { get; set; }
         public string Emp_Sign_Path { get; set; }
-        public HttpPostedFileBase ImageFile { get; set; }
-        public HttpPostedFileBase SignFile { get; set; }
+    
         public virtual Accounts Accounts { get; set; }
     }
 }
