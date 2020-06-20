@@ -116,6 +116,10 @@
         <AssociationConnector Association="HRMS5Model.FK_HRMS_TRAINING_SKILLSET_HRMS_ProgramDetail" />
         <AssociationConnector Association="HRMS5Model.FK_HRMS_TRAINING_MATERIALSET_HRMS_TRAINING_MATERIAL_MS" />
         <AssociationConnector Association="HRMS5Model.FK_HRMS_TRAINING_SKILLSET_HRMS_TRAINING_SKILL_MS" />
+        <EntityTypeShape EntityType="HRMS5Model.HRMS_TrainingReview" Width="1.5" PointX="20.875" PointY="12.5" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_TrainingReview_Accounts" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_TrainingReview_HRMS_Evalution_Question" />
+        <AssociationConnector Association="HRMS5Model.FK_HRMS_TrainingReview_HRMS_ProgramDetail" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

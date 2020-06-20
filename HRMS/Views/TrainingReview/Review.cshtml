@@ -1,0 +1,110 @@
+﻿@model IEnumerable<HRMS.Models.HRMS_Evalution_Question>
+
+@{
+    ViewBag.Title = "Review";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Review</title>
+</head>
+<body>
+    <h3><b>Review</b></h3>
+    <br />
+
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+    @using (Html.BeginForm("Revieww", "TrainingReview", FormMethod.Post))
+    {
+        <table class="table table-bordered table-responsive table-striped">
+            <tr style="background-color:lightgray">
+                <th>Category</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Question)
+
+                </th>
+                <th>
+
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.HRMS_TrainingEvalution_Header.Header)
+                    </th>*@
+                @*<th></th>*@
+            </tr>
+
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HRMS_TrainingEvalution_Header.Header)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Question)
+                        <input type="hidden" name="Question" value="@item.ID" />
+                        <input type="hidden" name="flag" value="@item.IsDescription.ToString()" />
+                    </td>
+
+
+                    @if (item.IsDescription == false)
+                    {
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.IsDescription)*@
+                            @Html.DropDownList("Answer", new List<SelectListItem>
+                           {
+                               new SelectListItem{ Text="Very Bad", Value = "1" },
+                               new SelectListItem{ Text="Bad", Value = "2" },
+                               new SelectListItem{ Text="Good", Value = "3" },
+                               new SelectListItem{ Text="Very Good", Value = "4" },
+                               new SelectListItem{ Text="Excellent", Value = "5" },
+                            }, "--Select--", htmlAttributes: new { @class = "form-control" })
+                        </td>
+                    }
+                    else
+                    {
+                        <td>@Html.TextArea("Answer", new { htmlAttributes = new { @class = "form-control" } })</td>
+
+                    }
+
+                </tr>
+            }
+
+        </table>
+        @*<div>
+            <input type="text" name="Textt" />
+        </div>
+        <div>
+            <input type="checkbox" name="Check" /> bye bye
+        </div>*@
+
+        <div class="form-horizontal">
+            <div class="form-group">
+
+                <div class="col-md-3"> <text><i>Any Other Comments?</i></text></div>
+                <div class="col-md-9"> <textarea  name="Textt"></textarea></div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3">  <text><i>Do you think this will beneficial for other?</i></text></div>
+                <div class="col-md-9">   <input type="checkbox" name="Check" /></div>
+
+            </div>
+        </div>
+
+        <center>
+            <input type="submit" value="Submit Review" class="btn-primary btn" />
+            <input type="reset" value="Cancel" class="btn-danger btn" />
+        </center>
+    }
+
+</body>
+</html>
+
+@if (ViewBag.Error != null)
+{
+    <script>alert("@ViewBag.Error");</script>
+}
+    

@@ -14,11 +14,19 @@ namespace HRMS.Models
     
     public partial class HRMS_Evalution_Question
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public HRMS_Evalution_Question()
+        {
+            this.HRMS_TrainingReview = new HashSet<HRMS_TrainingReview>();
+        }
+    
         public long ID { get; set; }
         public string Question { get; set; }
         public bool IsDescription { get; set; }
         public long Header_ID { get; set; }
     
         public virtual HRMS_TrainingEvalution_Header HRMS_TrainingEvalution_Header { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HRMS_TrainingReview> HRMS_TrainingReview { get; set; }
     }
 }

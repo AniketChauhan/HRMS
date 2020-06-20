@@ -1,0 +1,78 @@
+﻿@model IEnumerable<HRMS.Models.HRMS_TrainingApproval>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <h3>Program List</h3>
+    <br />
+    <table class="table table-bordered table-striped table-responsive">
+        <tr style="background-color:lightgray">
+            
+            <th>
+                @Html.DisplayNameFor(model => model.HRMS_ProgramDetail.ProgramName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HRMS_ProgramDetail.Subject)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HRMS_ProgramDetail.FromDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HRMS_ProgramDetail.ToDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HRMS_ProgramDetail.TrainingStatus)
+            </th>
+            
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td >
+                @Html.DisplayFor(modelItem => item.HRMS_ProgramDetail.ProgramName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HRMS_ProgramDetail.Subject)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HRMS_ProgramDetail.FromDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HRMS_ProgramDetail.ToDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HRMS_ProgramDetail.TrainingStatus)
+            </td>
+            
+            @if (User.IsInRole("admin"))
+            {
+                <td>
+                @Html.ActionLink("Chech Review", "ReviewList", new { id = item.Program_ID }, new { @class = "btn btn-sm btn-primary" })
+
+                 </td>
+            }
+            else
+            {
+            <td>
+                @if (item.HRMS_ProgramDetail.TrainingStatus == "Completed")
+                {
+                @Html.ActionLink("Review", "Review", new { id = item.Program_ID }, new { @class = "btn btn-sm btn-primary" }) 
+                }
+            </td>
+            }
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

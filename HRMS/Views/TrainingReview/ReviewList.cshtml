@@ -1,0 +1,77 @@
+﻿@model IEnumerable<HRMS.Models.HRMS_TrainingApproval>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ReviewList</title>
+    <link href="~/StyleSheet/UnitStyleSheet.css" rel="stylesheet" />
+</head>
+<body>
+    <h2>Employee Review List</h2>
+    <br />
+    <div class="w3-card" style=" background-color:darkseagreen; margin-left:900px;margin-bottom:10px">
+        <div class="w3-right-align w3-xlarge ">
+            @for (int i = 0; i < ViewBag.Rating; i++)
+            {
+                <span class="glyphicon glyphicon-star"></span>
+            }
+            @for (int i = ViewBag.Rating; i < 5; i++)
+            {
+                <span class="glyphicon glyphicon-star-empty"></span>
+            }
+            <text class="w3-small">(@ViewBag.Rating out of 5)</text>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-striped table-responsive">
+        <tr style="background-color:lightgray">
+
+
+            <th>Employee ID</th>
+            <th>
+                @Html.DisplayNameFor(model => model.Accounts.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HRMS_ProgramDetail.ProgramName)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Accounts.ID)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Accounts.UserName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.HRMS_ProgramDetail.ProgramName)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Review", "Vieww", new { id = item.Program_ID, empid = item.EMP_ID }, new { @class = "btn btn-sm btn-danger" })
+
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+<div>
+    <p>
+        @Html.ActionLink("Back to List", "AdminIndex")
+    </p>
+    </div>
+</html>

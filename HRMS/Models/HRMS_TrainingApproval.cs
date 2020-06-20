@@ -35,7 +35,9 @@ namespace HRMS.Models
         [DataType(DataType.Time)]
         [DisplayFormat(ApplyFormatInEditMode = false, DataFormatString = "{0:H:mm}")]
         public Nullable<System.TimeSpan> ToTime { get; set; }
+
         public Nullable<long> IsEmailSent { get; set; }
+        public Nullable<long> IsReviewDone { get; set; }
     
         public virtual Accounts Accounts { get; set; }
         public virtual HRMS_DEPT HRMS_DEPT { get; set; }

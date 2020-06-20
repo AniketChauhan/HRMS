@@ -22,6 +22,7 @@ namespace HRMS.Models
             this.HRMS_TrainingApproval = new HashSet<HRMS_TrainingApproval>();
             this.HRMS_TRAINING_MATERIALSET = new HashSet<HRMS_TRAINING_MATERIALSET>();
             this.HRMS_TRAINING_SKILLSET = new HashSet<HRMS_TRAINING_SKILLSET>();
+            this.HRMS_TrainingReview = new HashSet<HRMS_TrainingReview>();
         }
         public string Extra { get; set; }
         public long ID { get; set; }
@@ -29,7 +30,7 @@ namespace HRMS.Models
         public System.DateTime TransactionDate { get; set; }
         public long TrainingID { get; set; }
         [Required]
-        
+
 
         public string ProgramName { get; set; }
         [Required]
@@ -80,7 +81,8 @@ namespace HRMS.Models
         public bool Skill { get; set; }
         public bool Material { get; set; }
         public decimal Program_Amount { get; set; }
-    
+
+
         public virtual HRMS_Training_Request_Application HRMS_Training_Request_Application { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HRMS_ProgramFaculty> HRMS_ProgramFaculty { get; set; }
@@ -90,5 +92,7 @@ namespace HRMS.Models
         public virtual ICollection<HRMS_TRAINING_MATERIALSET> HRMS_TRAINING_MATERIALSET { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HRMS_TRAINING_SKILLSET> HRMS_TRAINING_SKILLSET { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HRMS_TrainingReview> HRMS_TrainingReview { get; set; }
     }
 }
