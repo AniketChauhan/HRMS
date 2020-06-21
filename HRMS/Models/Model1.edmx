@@ -353,6 +353,19 @@
           <Property Name="Salutation_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Salutation_Name" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="HRMS_TRAINING_EFFECTIVENESS_REMARKS">
+          <Key>
+            <PropertyRef Name="Remark_ID" />
+          </Key>
+          <Property Name="Remark_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Remark_Date" Type="date" Nullable="false" />
+          <Property Name="Program_Det_ID" Type="bigint" Nullable="false" />
+          <Property Name="Emp_ID" Type="bigint" Nullable="false" />
+          <Property Name="HOD_ID" Type="bigint" Nullable="false" />
+          <Property Name="HOD_Remarks" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Trainee_Remarks" Type="nvarchar(max)" />
+          <Property Name="HOD_View" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="HRMS_TRAINING_MATERIAL_MS">
           <Key>
             <PropertyRef Name="Material_ID" />
@@ -430,6 +443,7 @@
           <Property Name="ToTime" Type="time" Precision="7" />
           <Property Name="IsEmailSent" Type="bigint" />
           <Property Name="IsReviewDone" Type="bigint" />
+          <Property Name="Remark" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="HRMS_TrainingEvalution_Header">
           <Key>
@@ -1108,6 +1122,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_HRMS_TRAINING_EFFECTIVENESS_REMARKS_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HRMS_TRAINING_EFFECTIVENESS_REMARKS" Type="Self.HRMS_TRAINING_EFFECTIVENESS_REMARKS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_TRAINING_EFFECTIVENESS_REMARKS">
+              <PropertyRef Name="Emp_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_TRAINING_EFFECTIVENESS_REMARKS_HRMS_ProgramDetail">
+          <End Role="HRMS_ProgramDetail" Type="Self.HRMS_ProgramDetail" Multiplicity="1" />
+          <End Role="HRMS_TRAINING_EFFECTIVENESS_REMARKS" Type="Self.HRMS_TRAINING_EFFECTIVENESS_REMARKS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_ProgramDetail">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_TRAINING_EFFECTIVENESS_REMARKS">
+              <PropertyRef Name="Program_Det_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_HRMS_TRAINING_MATERIALSET_HRMS_ProgramDetail">
           <End Role="HRMS_ProgramDetail" Type="Self.HRMS_ProgramDetail" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1503,6 +1543,7 @@
           <EntitySet Name="HRMS_ProgramDetail" EntityType="Self.HRMS_ProgramDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_ProgramFaculty" EntityType="Self.HRMS_ProgramFaculty" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_SALUTATION" EntityType="Self.HRMS_SALUTATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_TRAINING_EFFECTIVENESS_REMARKS" EntityType="Self.HRMS_TRAINING_EFFECTIVENESS_REMARKS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_TRAINING_MATERIAL_MS" EntityType="Self.HRMS_TRAINING_MATERIAL_MS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_TRAINING_MATERIALSET" EntityType="Self.HRMS_TRAINING_MATERIALSET" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_Training_Request_Application" EntityType="Self.HRMS_Training_Request_Application" Schema="dbo" store:Type="Tables" />
@@ -1685,6 +1726,14 @@
             <End Role="HRMS_ProgramDetail" EntitySet="HRMS_ProgramDetail" />
             <End Role="HRMS_ProgramFaculty" EntitySet="HRMS_ProgramFaculty" />
           </AssociationSet>
+          <AssociationSet Name="FK_HRMS_TRAINING_EFFECTIVENESS_REMARKS_Accounts" Association="Self.FK_HRMS_TRAINING_EFFECTIVENESS_REMARKS_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="HRMS_TRAINING_EFFECTIVENESS_REMARKS" EntitySet="HRMS_TRAINING_EFFECTIVENESS_REMARKS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_TRAINING_EFFECTIVENESS_REMARKS_HRMS_ProgramDetail" Association="Self.FK_HRMS_TRAINING_EFFECTIVENESS_REMARKS_HRMS_ProgramDetail">
+            <End Role="HRMS_ProgramDetail" EntitySet="HRMS_ProgramDetail" />
+            <End Role="HRMS_TRAINING_EFFECTIVENESS_REMARKS" EntitySet="HRMS_TRAINING_EFFECTIVENESS_REMARKS" />
+          </AssociationSet>
           <AssociationSet Name="FK_HRMS_TRAINING_MATERIALSET_HRMS_ProgramDetail" Association="Self.FK_HRMS_TRAINING_MATERIALSET_HRMS_ProgramDetail">
             <End Role="HRMS_ProgramDetail" EntitySet="HRMS_ProgramDetail" />
             <End Role="HRMS_TRAINING_MATERIALSET" EntitySet="HRMS_TRAINING_MATERIALSET" />
@@ -1827,7 +1876,8 @@
           <NavigationProperty Name="HRMS_TrainingApproval" Relationship="HRMS5Model.FK_HRMS_TrainingApproval_Accounts" FromRole="Accounts" ToRole="HRMS_TrainingApproval" />
           <NavigationProperty Name="HRMS_TrainingReview" Relationship="HRMS5Model.FK_HRMS_TrainingReview_Accounts" FromRole="Accounts" ToRole="HRMS_TrainingReview" />
           <NavigationProperty Name="HRMS_Program_Attandance" Relationship="HRMS5Model.FK_HRMS_Program_Attandance_Accounts" FromRole="Accounts" ToRole="HRMS_Program_Attandance" />
-        </EntityType>
+          <NavigationProperty Name="HRMS_TRAINING_EFFECTIVENESS_REMARKS" Relationship="HRMS5Model.FK_HRMS_TRAINING_EFFECTIVENESS_REMARKS_Accounts" FromRole="Accounts" ToRole="HRMS_TRAINING_EFFECTIVENESS_REMARKS" />
+          </EntityType>
         <EntityType Name="BankMaster">
           <Key>
             <PropertyRef Name="BankCode" />
@@ -2795,6 +2845,15 @@
             <End Role="HRMS_ProgramDetail" EntitySet="HRMS_ProgramDetail" />
             <End Role="HRMS_Program_Attandance" EntitySet="HRMS_Program_Attandance" />
           </AssociationSet>
+          <EntitySet Name="HRMS_TRAINING_EFFECTIVENESS_REMARKS" EntityType="HRMS5Model.HRMS_TRAINING_EFFECTIVENESS_REMARKS" />
+          <AssociationSet Name="FK_HRMS_TRAINING_EFFECTIVENESS_REMARKS_Accounts" Association="HRMS5Model.FK_HRMS_TRAINING_EFFECTIVENESS_REMARKS_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="HRMS_TRAINING_EFFECTIVENESS_REMARKS" EntitySet="HRMS_TRAINING_EFFECTIVENESS_REMARKS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_TRAINING_EFFECTIVENESS_REMARKS_HRMS_ProgramDetail" Association="HRMS5Model.FK_HRMS_TRAINING_EFFECTIVENESS_REMARKS_HRMS_ProgramDetail">
+            <End Role="HRMS_ProgramDetail" EntitySet="HRMS_ProgramDetail" />
+            <End Role="HRMS_TRAINING_EFFECTIVENESS_REMARKS" EntitySet="HRMS_TRAINING_EFFECTIVENESS_REMARKS" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="DepartmentData_Result">
           <Property Type="Int64" Name="Dept_Id" Nullable="false" />
@@ -3294,6 +3353,7 @@
           <NavigationProperty Name="HRMS_TRAINING_SKILLSET" Relationship="HRMS5Model.FK_HRMS_TRAINING_SKILLSET_HRMS_ProgramDetail" FromRole="HRMS_ProgramDetail" ToRole="HRMS_TRAINING_SKILLSET" />
           <NavigationProperty Name="HRMS_TrainingReview" Relationship="HRMS5Model.FK_HRMS_TrainingReview_HRMS_ProgramDetail" FromRole="HRMS_ProgramDetail" ToRole="HRMS_TrainingReview" />
           <NavigationProperty Name="HRMS_Program_Attandance" Relationship="HRMS5Model.FK_HRMS_Program_Attandance_HRMS_ProgramDetail" FromRole="HRMS_ProgramDetail" ToRole="HRMS_Program_Attandance" />
+          <NavigationProperty Name="HRMS_TRAINING_EFFECTIVENESS_REMARKS" Relationship="HRMS5Model.FK_HRMS_TRAINING_EFFECTIVENESS_REMARKS_HRMS_ProgramDetail" FromRole="HRMS_ProgramDetail" ToRole="HRMS_TRAINING_EFFECTIVENESS_REMARKS" />
         </EntityType>
         <EntityType Name="HRMS_TRAINING_MATERIAL_MS">
           <Key>
@@ -3504,6 +3564,7 @@
           <Property Name="ToTime" Type="Time" Precision="7" />
           <Property Name="IsEmailSent" Type="Int64" />
           <Property Name="IsReviewDone" Type="Int64" />
+          <Property Name="Remark" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_HRMS_TrainingApproval_Accounts">
           <End Type="HRMS5Model.Accounts" Role="Accounts" Multiplicity="1" />
@@ -3765,6 +3826,47 @@
             </Principal>
             <Dependent Role="HRMS_Program_Attandance">
               <PropertyRef Name="ProgramID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="HRMS_TRAINING_EFFECTIVENESS_REMARKS">
+          <Key>
+            <PropertyRef Name="Remark_ID" />
+          </Key>
+          <Property Name="Remark_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Remark_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Program_Det_ID" Type="Int64" Nullable="false" />
+          <Property Name="Emp_ID" Type="Int64" Nullable="false" />
+          <Property Name="HOD_ID" Type="Int64" Nullable="false" />
+          <Property Name="HOD_Remarks" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Trainee_Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HOD_View" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Accounts" Relationship="HRMS5Model.FK_HRMS_TRAINING_EFFECTIVENESS_REMARKS_Accounts" FromRole="HRMS_TRAINING_EFFECTIVENESS_REMARKS" ToRole="Accounts" />
+          <NavigationProperty Name="HRMS_ProgramDetail" Relationship="HRMS5Model.FK_HRMS_TRAINING_EFFECTIVENESS_REMARKS_HRMS_ProgramDetail" FromRole="HRMS_TRAINING_EFFECTIVENESS_REMARKS" ToRole="HRMS_ProgramDetail" />
+        </EntityType>
+        <Association Name="FK_HRMS_TRAINING_EFFECTIVENESS_REMARKS_Accounts">
+          <End Type="HRMS5Model.Accounts" Role="Accounts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="HRMS5Model.HRMS_TRAINING_EFFECTIVENESS_REMARKS" Role="HRMS_TRAINING_EFFECTIVENESS_REMARKS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_TRAINING_EFFECTIVENESS_REMARKS">
+              <PropertyRef Name="Emp_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_TRAINING_EFFECTIVENESS_REMARKS_HRMS_ProgramDetail">
+          <End Type="HRMS5Model.HRMS_ProgramDetail" Role="HRMS_ProgramDetail" Multiplicity="1" />
+          <End Type="HRMS5Model.HRMS_TRAINING_EFFECTIVENESS_REMARKS" Role="HRMS_TRAINING_EFFECTIVENESS_REMARKS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_ProgramDetail">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_TRAINING_EFFECTIVENESS_REMARKS">
+              <PropertyRef Name="Program_Det_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4448,6 +4550,7 @@
           <EntitySetMapping Name="HRMS_TrainingApproval">
             <EntityTypeMapping TypeName="HRMS5Model.HRMS_TrainingApproval">
               <MappingFragment StoreEntitySet="HRMS_TrainingApproval">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
                 <ScalarProperty Name="IsReviewDone" ColumnName="IsReviewDone" />
                 <ScalarProperty Name="IsEmailSent" ColumnName="IsEmailSent" />
                 <ScalarProperty Name="ToTime" ColumnName="ToTime" />
@@ -4517,6 +4620,20 @@
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_TRAINING_EFFECTIVENESS_REMARKS">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_TRAINING_EFFECTIVENESS_REMARKS">
+              <MappingFragment StoreEntitySet="HRMS_TRAINING_EFFECTIVENESS_REMARKS">
+                <ScalarProperty Name="HOD_View" ColumnName="HOD_View" />
+                <ScalarProperty Name="Trainee_Remarks" ColumnName="Trainee_Remarks" />
+                <ScalarProperty Name="HOD_Remarks" ColumnName="HOD_Remarks" />
+                <ScalarProperty Name="HOD_ID" ColumnName="HOD_ID" />
+                <ScalarProperty Name="Emp_ID" ColumnName="Emp_ID" />
+                <ScalarProperty Name="Program_Det_ID" ColumnName="Program_Det_ID" />
+                <ScalarProperty Name="Remark_Date" ColumnName="Remark_Date" />
+                <ScalarProperty Name="Remark_ID" ColumnName="Remark_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

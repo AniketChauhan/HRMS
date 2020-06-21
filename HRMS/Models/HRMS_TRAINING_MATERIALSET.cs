@@ -14,6 +14,8 @@ namespace HRMS.Models
     
     public partial class HRMS_TRAINING_MATERIALSET
     {
+        public decimal MaterialSet_Budget_Amt { get; set; }
+        public decimal MaterialSet_Actual_Amt { get; set; }
         public long MaterialSet_ID { get; set; }
         public long ProgDet_ID { get; set; }
         public long Material_ID { get; set; }
@@ -22,8 +24,7 @@ namespace HRMS.Models
         public long MaterialSet_Qty { get; set; }
         public decimal MaterialSet_Rate { get; set; }
         public decimal MaterialSet_Amt { get; set; }
-        public decimal MaterialSet_Budget_Amt { get; set; }
-        public decimal MaterialSet_Actual_Amt { get; set; }
+    
         public virtual HRMS_ProgramDetail HRMS_ProgramDetail { get; set; }
         public virtual HRMS_TRAINING_MATERIAL_MS HRMS_TRAINING_MATERIAL_MS { get; set; }
     }

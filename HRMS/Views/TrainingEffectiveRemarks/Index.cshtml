@@ -1,0 +1,118 @@
+﻿@model IEnumerable<HRMS.Models.HRMS_TRAINING_EFFECTIVENESS_REMARKS>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>All Remarks</h2>
+
+
+<table class="table table-bordered table-striped table-responsive">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Emp_ID)
+        </th>
+        <th>
+            EMP Name
+        </th>
+        <th>
+            HOD Name
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.HOD_ID)
+            </th>*@
+        @*<th>
+                @Html.DisplayNameFor(model => model.HOD_Remarks)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Trainee_Remarks)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HOD_View)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Remark_Date)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.HRMS_ProgramDetail.ProgramName)
+            </th>*@
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Emp_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Accounts.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HRMS_ProgramDetail.HRMS_Training_Request_Application.Accounts.UserName)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.HOD_ID)
+                </td>*@
+
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.HOD_Remarks)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Trainee_Remarks)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HOD_View)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Remark_Date)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.HRMS_ProgramDetail.ProgramName)
+                </td>*@
+            <td>
+
+                @Html.ActionLink("Details", "Details", new { id = item.Remark_ID }, new { @class = "btn btn-primary" }) 
+                @if (User.IsInRole("midman"))
+                {
+                <button class="btn btn-danger  btn-sm " onclick="return removeFromList(this, '@item.Remark_ID') "> <i class="glyphicon glyphicon-trash"> </i> Delete</button>
+                @*@Html.ActionLink("Delete", "Delete", new { id = item.Remark_ID }, new { @class = "btn btn-primary" })*@
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+<div>
+
+    @Html.ActionLink("Back to Program List", "Index1")
+</div>
+<script>
+    function removeFromList(thisobj, id) {
+        if (confirm("Are you sure?") == true) {
+            var data = JSON.stringify({
+                'id': id
+            });
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "@Url.Action("Delete","TrainingEffectiveRemarks")",
+                datatype: "json",
+                data: data,
+                success: function (response) {
+                    var tr = $(thisobj).closest("tr");
+                    $(tr).remove();
+
+                    //        $.get("/HRMS_TRAINING_MATERIALSET/GetTotalRate", { id: $("#hRMS_ProgramDetail2_ID").val() }, function (data) {
+
+                    //            $('#hRMS_ProgramDetail2_Program_Amount').val(data);
+
+                    //});
+                }
+
+            });
+        }
+    }
+</script>

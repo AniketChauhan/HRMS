@@ -21,6 +21,27 @@ namespace HRMS.Controllers
             if (User.IsInRole("emp"))
             {
                 return View(db.HRMS_ProgramDetail.Where(x => x.TrainingStatus != "Cancel").ToList());
+
+                //long id = Convert.ToInt64(Session["id"]);
+
+                //long ?facID = db.HRMS_Faculty_MS.Where(x=>x.EMP_ID==id).Select(x=>x.ID).FirstOrDefault();
+                //if (facID != null) //assigned as faculty
+                //{
+
+
+                //    List<HRMS_ProgramDetail> Y = (from s in db.HRMS_ProgramDetail
+                //                                  join sa in db.HRMS_ProgramFaculty on s.ID equals sa.ProgramID
+                //                                  where sa.FacultyID != facID
+                //                                  select s).ToList();
+
+                //    // return View(db.HRMS_ProgramDetail.Where(x => x.TrainingStatus != "Cancel").ToList());
+                //    return View(Y);
+                //}
+                //else //not assigned as faculty
+                //{
+                //       
+                //}
+
             }
 
             else

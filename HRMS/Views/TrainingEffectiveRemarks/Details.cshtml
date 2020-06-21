@@ -1,0 +1,92 @@
+﻿@model HRMS.Models.HRMS_TRAINING_EFFECTIVENESS_REMARKS
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>HRMS TRAINING EFFECTIVENESS REMARKS</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Remark_Date)
+        </dt>
+
+        <dd>
+            @Html.EditorFor(model => model.Remark_Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HRMS_ProgramDetail.ProgramName)
+        </dt>
+
+        <dd>
+            @Html.EditorFor(model => model.HRMS_ProgramDetail.ProgramName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Emp_ID)*@
+            EMP Name
+        </dt>
+        <dd>
+            @Html.EditorFor(model => model.Accounts.UserName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </dd>
+       
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @*@Html.DisplayNameFor(model => model.HOD_ID)*@
+            HOD Name
+        </dt>
+
+        <dd>
+            @Html.EditorFor(model => model.HRMS_ProgramDetail.HRMS_Training_Request_Application.Accounts.UserName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HOD_Remarks)
+        </dt>
+
+        <dd>
+            @Html.TextAreaFor(model => model.HOD_Remarks, new { @class = "form-control", @readonly = "readonly" })
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Trainee_Remarks)
+        </dt>
+
+        <dd>
+            @Html.TextAreaFor(model => model.Trainee_Remarks, new { @class = "form-control", @readonly = "readonly" })
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HOD_View)
+        </dt>
+
+        <dd>
+            @Html.EditorFor(model => model.HOD_View, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </dd>
+
+
+
+
+    </dl>
+</div>
+<p>
+
+    @Html.ActionLink("Back to List", "Index", new { id = Model.Program_Det_ID }, new { @class = "btn btn-primary" })
+</p>

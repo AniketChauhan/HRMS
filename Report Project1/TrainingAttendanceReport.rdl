@@ -6,11 +6,26 @@
     <DataSource Name="HRMS5">
       <DataSourceReference>HRMS5</DataSourceReference>
       <rd:SecurityType>None</rd:SecurityType>
-      <rd:DataSourceID>f73952fb-5523-4648-85b1-334b56171daf</rd:DataSourceID>
+      <rd:DataSourceID>f5aad7c9-19b8-4e7a-85fe-bce28064de24</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="TrainingProgramReport">
+    <DataSet Name="ProgramList">
+      <SharedDataSet>
+        <SharedDataSetReference>ProgramList</SharedDataSetReference>
+      </SharedDataSet>
+      <Fields>
+        <Field Name="ID">
+          <DataField>ID</DataField>
+          <rd:TypeName>System.Int64</rd:TypeName>
+        </Field>
+        <Field Name="ProgramName">
+          <DataField>ProgramName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="TrainingAttendance">
       <Query>
         <DataSourceName>HRMS5</DataSourceName>
         <QueryParameters>
@@ -20,45 +35,44 @@
           <QueryParameter Name="@todate">
             <Value>=Parameters!todate.Value</Value>
           </QueryParameter>
-          <QueryParameter Name="@trainingstatus">
-            <Value>=Parameters!trainingstatus.Value</Value>
+          <QueryParameter Name="@ProgramID">
+            <Value>=Parameters!ProgramID.Value</Value>
+          </QueryParameter>
+          <QueryParameter Name="@status">
+            <Value>=Parameters!status.Value</Value>
           </QueryParameter>
         </QueryParameters>
         <CommandType>StoredProcedure</CommandType>
-        <CommandText>TrainingProgramReport</CommandText>
+        <CommandText>TrainingAttendance</CommandText>
       </Query>
       <Fields>
-        <Field Name="ProgramID">
-          <DataField>ProgramID</DataField>
+        <Field Name="EmployeeID">
+          <DataField>EmployeeID</DataField>
           <rd:TypeName>System.Int64</rd:TypeName>
         </Field>
-        <Field Name="ProgramName">
-          <DataField>ProgramName</DataField>
+        <Field Name="EmpName">
+          <DataField>EmpName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Subject">
-          <DataField>Subject</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="FromDate">
-          <DataField>FromDate</DataField>
+        <Field Name="AttandenceDate">
+          <DataField>AttandenceDate</DataField>
           <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
-        <Field Name="ToDate">
-          <DataField>ToDate</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
-        </Field>
-        <Field Name="Venue">
-          <DataField>Venue</DataField>
+        <Field Name="Gender">
+          <DataField>Gender</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Budget">
-          <DataField>Budget</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
+        <Field Name="IsPresent">
+          <DataField>IsPresent</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Program_Amount">
-          <DataField>Program_Amount</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
+        <Field Name="Desg_Name">
+          <DataField>Desg_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Dept_Name">
+          <DataField>Dept_Name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
@@ -74,7 +88,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Training Program Report</Value>
+                    <Value>Training Attendance Report</Value>
                     <Style>
                       <FontSize>14pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -87,10 +101,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>ReportName</rd:DefaultName>
-            <Top>0.55245cm</Top>
-            <Left>7.56391cm</Left>
+            <Top>0.68474cm</Top>
+            <Left>9.94516cm</Left>
             <Height>0.6cm</Height>
-            <Width>8.02979cm</Width>
+            <Width>8.5325cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -105,16 +119,10 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>3.90229cm</Width>
-                </TablixColumn>
-                <TablixColumn>
                   <Width>2.5cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.73937cm</Width>
-                </TablixColumn>
-                <TablixColumn>
-                  <Width>2.97625cm</Width>
+                  <Width>3.16146cm</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>2.5cm</Width>
@@ -123,7 +131,13 @@
                   <Width>2.5cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.08208cm</Width>
+                  <Width>3.5325cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.81208cm</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>2.28833cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -139,7 +153,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Program Name</Value>
+                                  <Value>Employee ID</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -154,7 +168,6 @@
                           <Style>
                             <Border>
                               <Style>Solid</Style>
-                              <Width>2pt</Width>
                             </Border>
                             <BackgroundColor>LightGrey</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
@@ -174,7 +187,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Subject</Value>
+                                  <Value>Name</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -189,7 +202,6 @@
                           <Style>
                             <Border>
                               <Style>Solid</Style>
-                              <Width>2pt</Width>
                             </Border>
                             <BackgroundColor>LightGrey</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
@@ -209,7 +221,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>From Date</Value>
+                                  <Value>Designation</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -224,8 +236,27 @@
                           <Style>
                             <Border>
                               <Style>Solid</Style>
-                              <Width>2pt</Width>
                             </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
                             <BackgroundColor>LightGrey</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -244,7 +275,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>To Date</Value>
+                                  <Value>Department</Value>
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -260,8 +291,27 @@
                           <Style>
                             <Border>
                               <Style>Solid</Style>
-                              <Width>2pt</Width>
                             </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
                             <BackgroundColor>LightGrey</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -280,7 +330,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Venue</Value>
+                                  <Value>Attandence Date</Value>
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -296,8 +346,27 @@
                           <Style>
                             <Border>
                               <Style>Solid</Style>
-                              <Width>2pt</Width>
                             </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
                             <BackgroundColor>LightGrey</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -316,7 +385,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Budget</Value>
+                                  <Value>Gender</Value>
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -332,8 +401,27 @@
                           <Style>
                             <Border>
                               <Style>Solid</Style>
-                              <Width>2pt</Width>
                             </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
                             <BackgroundColor>LightGrey</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -352,7 +440,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Material Amount</Value>
+                                  <Value>Is Present?</Value>
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
                                     <FontWeight>Bold</FontWeight>
@@ -368,8 +456,27 @@
                           <Style>
                             <Border>
                               <Style>Solid</Style>
-                              <Width>2pt</Width>
                             </Border>
+                            <TopBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </TopBorder>
+                            <BottomBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <LeftBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </LeftBorder>
+                            <RightBorder>
+                              <Color>Black</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </RightBorder>
                             <BackgroundColor>LightGrey</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -386,14 +493,14 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="ProgramName">
+                        <Textbox Name="EmployeeID">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!ProgramName.Value</Value>
+                                  <Value>=Fields!EmployeeID.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -402,7 +509,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>ProgramName</rd:DefaultName>
+                          <rd:DefaultName>EmployeeID</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -418,14 +525,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Subject">
+                        <Textbox Name="EmpName">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Subject.Value</Value>
+                                  <Value>=Fields!EmpName.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -434,7 +541,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Subject</rd:DefaultName>
+                          <rd:DefaultName>EmpName</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -450,15 +557,82 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="FromDate">
+                        <Textbox Name="Desg_Name">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!FromDate.Value</Value>
+                                  <Value>=Fields!Desg_Name.Value</Value>
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Desg_Name</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Dept_Name">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!Dept_Name.Value</Value>
                                   <Style>
+                                    <FontFamily>Arial</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Dept_Name</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="AttandenceDate">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!AttandenceDate.Value</Value>
+                                  <Style>
+                                    <FontFamily>Arial</FontFamily>
                                     <Format>dd MMMM yyyy</Format>
                                   </Style>
                                 </TextRun>
@@ -468,7 +642,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>FromDate</rd:DefaultName>
+                          <rd:DefaultName>AttandenceDate</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -484,17 +658,16 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="ToDate">
+                        <Textbox Name="Gender">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!ToDate.Value</Value>
+                                  <Value>=Fields!Gender.Value</Value>
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
-                                    <Format>dd MMMM yyyy</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -503,7 +676,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>ToDate</rd:DefaultName>
+                          <rd:DefaultName>Gender</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -519,14 +692,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Venue">
+                        <Textbox Name="IsPresent">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Venue.Value</Value>
+                                  <Value>=Fields!IsPresent.Value</Value>
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
                                   </Style>
@@ -537,75 +710,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Venue</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Budget">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!Budget.Value</Value>
-                                  <Style>
-                                    <FontFamily>Arial</FontFamily>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Budget</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Program_Amount">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>=Fields!Program_Amount.Value</Value>
-                                  <Style>
-                                    <FontFamily>Arial</FontFamily>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Program_Amount</rd:DefaultName>
+                          <rd:DefaultName>IsPresent</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -644,11 +749,11 @@
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <DataSetName>TrainingProgramReport</DataSetName>
-            <Top>4.75932cm</Top>
-            <Left>1.87537cm</Left>
+            <DataSetName>TrainingAttendance</DataSetName>
+            <Top>5.57953cm</Top>
+            <Left>4.94516cm</Left>
             <Height>1.2cm</Height>
-            <Width>20.19999cm</Width>
+            <Width>18.29437cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -662,32 +767,32 @@
                 <ChartMember>
                   <Group Name="Chart1_CategoryGroup">
                     <GroupExpressions>
-                      <GroupExpression>=Fields!Venue.Value</GroupExpression>
+                      <GroupExpression>=Fields!Gender.Value</GroupExpression>
                     </GroupExpressions>
                   </Group>
                   <SortExpressions>
                     <SortExpression>
-                      <Value>=Fields!Venue.Value</Value>
+                      <Value>=Fields!Gender.Value</Value>
                     </SortExpression>
                   </SortExpressions>
-                  <Label>=Fields!Venue.Value</Label>
+                  <Label>=Fields!Gender.Value</Label>
                 </ChartMember>
               </ChartMembers>
             </ChartCategoryHierarchy>
             <ChartSeriesHierarchy>
               <ChartMembers>
                 <ChartMember>
-                  <Label>Venue</Label>
+                  <Label>Gender</Label>
                 </ChartMember>
               </ChartMembers>
             </ChartSeriesHierarchy>
             <ChartData>
               <ChartSeriesCollection>
-                <ChartSeries Name="Venue">
+                <ChartSeries Name="Gender">
                   <ChartDataPoints>
                     <ChartDataPoint>
                       <ChartDataPointValues>
-                        <Y>=Count(Fields!Venue.Value)</Y>
+                        <Y>=Count(Fields!Gender.Value)</Y>
                       </ChartDataPointValues>
                       <ChartDataLabel>
                         <Style />
@@ -974,7 +1079,7 @@
             </ChartLegends>
             <ChartTitles>
               <ChartTitle Name="Default">
-                <Caption>Venue Chart</Caption>
+                <Caption>Gender Chart</Caption>
                 <Style>
                   <BackgroundGradientType>None</BackgroundGradientType>
                   <FontSize>9pt</FontSize>
@@ -983,7 +1088,7 @@
                   <VerticalAlign>Top</VerticalAlign>
                   <Color>#a6a6a6</Color>
                 </Style>
-                <DockOutsideChartArea>true</DockOutsideChartArea>
+                <Position>TopLeft</Position>
               </ChartTitle>
             </ChartTitles>
             <Palette>Pacific</Palette>
@@ -1003,11 +1108,11 @@
                 <VerticalAlign>Top</VerticalAlign>
               </Style>
             </ChartNoDataMessage>
-            <DataSetName>TrainingProgramReport</DataSetName>
-            <Top>1.5846cm</Top>
-            <Left>1.87537cm</Left>
-            <Height>2.43354cm</Height>
-            <Width>5.88604cm</Width>
+            <DataSetName>TrainingAttendance</DataSetName>
+            <Top>1.74335cm</Top>
+            <Left>4.94516cm</Left>
+            <Height>3.31667cm</Height>
+            <Width>4.84125cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -1019,13 +1124,13 @@
             </Style>
           </Chart>
         </ReportItems>
-        <Height>2.69642in</Height>
+        <Height>3.11309in</Height>
         <Style />
       </Body>
-      <Width>9.14409in</Width>
+      <Width>10.73276in</Width>
       <Page>
         <PageFooter>
-          <Height>2.54cm</Height>
+          <Height>4.65667cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -1044,8 +1149,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>PageNumber</rd:DefaultName>
-              <Top>0.73766cm</Top>
-              <Left>13.56995cm</Left>
+              <Top>0.79058cm</Top>
+              <Left>22.43349cm</Left>
               <Height>0.6cm</Height>
               <Width>2.5cm</Width>
               <Style>
@@ -1073,8 +1178,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>ExecutionTime</rd:DefaultName>
-              <Top>0.68474cm</Top>
-              <Left>1.50495cm</Left>
+              <Top>0.79058cm</Top>
+              <Left>2.11349cm</Left>
               <Height>0.6cm</Height>
               <Width>2.5cm</Width>
               <ZIndex>1</ZIndex>
@@ -1107,22 +1212,41 @@
     </ReportSection>
   </ReportSections>
   <ReportParameters>
-    <ReportParameter Name="trainingstatus">
+    <ReportParameter Name="ProgramID">
+      <DataType>Integer</DataType>
+      <Nullable>true</Nullable>
+      <DefaultValue>
+        <Values>
+          <Value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+        </Values>
+      </DefaultValue>
+      <Prompt>Program ID</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>ProgramList</DataSetName>
+          <ValueField>ID</ValueField>
+          <LabelField>ProgramName</LabelField>
+        </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="status">
       <DataType>String</DataType>
       <Nullable>true</Nullable>
-      <Prompt>trainingstatus</Prompt>
+      <DefaultValue>
+        <Values>
+          <Value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+        </Values>
+      </DefaultValue>
+      <Prompt>status</Prompt>
       <ValidValues>
         <ParameterValues>
           <ParameterValue>
-            <Label>Active</Label>
+            <Value>Present</Value>
+            <Label>Present</Label>
           </ParameterValue>
           <ParameterValue>
-            <Value>Completed</Value>
-            <Label>Completed</Label>
-          </ParameterValue>
-          <ParameterValue>
-            <Value>Cancel</Value>
-            <Label>Cancelled</Label>
+            <Value>Absent</Value>
+            <Label>Absent</Label>
           </ParameterValue>
         </ParameterValues>
       </ValidValues>
@@ -1156,15 +1280,20 @@
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>trainingstatus</ParameterName>
+          <ParameterName>ProgramID</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>0</RowIndex>
-          <ParameterName>fromdate</ParameterName>
+          <ParameterName>status</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>2</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>fromdate</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
           <RowIndex>0</RowIndex>
           <ParameterName>todate</ParameterName>
         </CellDefinition>
@@ -1172,5 +1301,5 @@
     </GridLayoutDefinition>
   </ReportParametersLayout>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
-  <rd:ReportID>9b6716cc-4c29-449f-8fe1-051d15cb3ab4</rd:ReportID>
+  <rd:ReportID>c1c0fc98-b2e9-4d12-b32b-75ee3d65e7a3</rd:ReportID>
 </Report>

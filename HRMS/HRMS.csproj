@@ -217,6 +217,7 @@
     <Compile Include="Controllers\SegmentMasterController.cs" />
     <Compile Include="Controllers\TrainingApprovalController.cs" />
     <Compile Include="Controllers\TrainingAttandanceController.cs" />
+    <Compile Include="Controllers\TrainingEffectiveRemarksController.cs" />
     <Compile Include="Controllers\TrainingEvaluationController.cs" />
     <Compile Include="Controllers\TrainingMaterialTransactionController.cs" />
     <Compile Include="Controllers\TrainingNotificationController.cs" />
@@ -342,6 +343,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HRMS_TrainingReview.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HRMS_TRAINING_EFFECTIVENESS_REMARKS.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HRMS_TRAINING_MATERIALSET.cs">
@@ -785,7 +789,6 @@
     <Content Include="Views\TrainingMaterialTransaction\Details.cshtml" />
     <Content Include="Views\TrainingMaterialTransaction\Edit.cshtml" />
     <Content Include="Views\TrainingMaterialTransaction\Index.cshtml" />
-    <Content Include="Views\TrainingMaterialTransaction\Index1.cshtml" />
     <Content Include="Views\EmployeeSelection\EditEmployeeSelection.cshtml" />
     <Content Include="Views\EmployeeSelection\View.cshtml" />
     <Content Include="Views\TrainingReviewController\AdminIndex.cshtml" />
@@ -797,6 +800,11 @@
     <Content Include="Views\TrainingAttandance\EmployeeAttandance.cshtml" />
     <Content Include="Views\EmpReport\TrainingApprovalReporttt.cshtml" />
     <Content Include="Views\EmpReport\TrainingProgramReporttt.cshtml" />
+    <Content Include="Views\TrainingEffectiveRemarks\Create.cshtml" />
+    <Content Include="Views\TrainingEffectiveRemarks\Details.cshtml" />
+    <Content Include="Views\TrainingEffectiveRemarks\Index.cshtml" />
+    <Content Include="Views\TrainingEffectiveRemarks\Index1.cshtml" />
+    <Content Include="Views\EmpReport\TrainingAttendanceReporttt.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

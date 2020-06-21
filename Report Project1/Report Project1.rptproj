@@ -60,6 +60,7 @@
   <ItemGroup>
     <Report Include="EmployeeReport.rdl" />
     <Report Include="TrainingApprovalaReport.rdl" />
+    <Report Include="TrainingAttendanceReport.rdl" />
     <Report Include="TrainingProgramReport.rdl" />
     <Report Include="TravelExpanseReport.rdl" />
     <Report Include="TravelReport.rdl" />

@@ -11,7 +11,9 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class HRMS_Faculty_MS
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,16 +23,32 @@ namespace HRMS.Models
         }
     
         public long ID { get; set; }
+        [Required]
+        [DisplayName("Faculty Name")]
         public string FacultyType { get; set; }
+        [DisplayName("Employee ID")]
         public Nullable<long> EMP_ID { get; set; }
+        [DisplayName("Faculty Name")]
+        [MaxLength(50, ErrorMessage = "Name can have 50 characters maximum!")]
         public string External_Name { get; set; }
+        [DisplayName("PanCard No")]
+        [RegularExpression(@"^[A-Za-z0-9_ ]*$", ErrorMessage = "Only AlphNumeric values are allowed!")]
         public string PAN_No { get; set; }
+        [RegularExpression(@"^[A-Za-z0-9_ ]*$", ErrorMessage = "Only AlphNumeric values are allowed!")]
+        [DisplayName("Service Tax No")]
         public string ServiceTaxNo { get; set; }
+        [RegularExpression(@"^[A-Za-z0-9_ ]*$", ErrorMessage = "Only AlphNumeric values are allowed!")]
         public string Qualification { get; set; }
+        [Required]
+        [RegularExpression(@"^[0-9]{10}$", ErrorMessage = "Contact must be in valid format")]
         public string Contact { get; set; }
+        [Required]
+        [RegularExpression(@"^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$", ErrorMessage = "Enter a valid email !")]
         public string Email { get; set; }
+        [MaxLength(100, ErrorMessage = "Remarks can have 50 characters maximum!")]
         public string Remark { get; set; }
         public bool IsActive { get; set; }
+        [MaxLength(100, ErrorMessage = "Address can have 50 characters maximum!")]
         public string Empty { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -6,12 +6,13 @@
 }
 
 <h2>All Programs</h2>
+<br />
 
 @*<p>
         @Html.ActionLink("Create New", "Create")
     </p>*@
 <table class="table table-bordered table-striped table-responsive">
-    <tr>
+    <tr style="background-color:lightgray">
 
         <th>
             @Html.DisplayNameFor(model => model.ProgramName)
@@ -23,59 +24,96 @@
             @Html.DisplayNameFor(model => model.ToDate)
         </th>
 
-        <th></th>
+        <th>Skill</th>
+        <th>Material</th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            @if (item.TrainingStatus != "Cancel")
+<tr>
+    @if (item.TrainingStatus != "Cancel")
+    {
+        <td>
+            @Html.DisplayFor(modelItem => item.ProgramName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FromDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ToDate)
+        </td>
+
+        <td>
+            @*@if (item.TrainingStatus != null)*@
+            @if (item.TrainingStatus == null && item.TrainingStatus != "Completed" && item.TrainingStatus != "Cancel")
             {
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProgramName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FromDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ToDate)
-                </td>
+            if (item.Skill == false)
+            {
+
+            @Html.ActionLink("ADD SKILLS", "Create", new { id = item.ID }, new { @class = "btn btn-primary" })
 
 
-                @*@if (item.TrainingStatus != null)*@
-                if (item.TrainingStatus == null && item.TrainingStatus != "Completed" && item.TrainingStatus != "Cancel")
-                {
-                    if (item.Skill == false)
-                    {
-                        <td>
-                            @Html.ActionLink("ADD SKILLS", "Create", new { id = item.ID }, new { @class = "btn btn-primary" })
-
-                        </td>
-                    }
-                    else
-                    {
-                        <td>
-                            @Html.ActionLink("Edit SKILLS", "Create", new { id = item.ID }, new { @class = "btn btn-primary" })
-
-                        </td>
-                    }
-                }
-                else
-                {
-
-                    if (item.TrainingStatus != null && item.TrainingStatus == "Completed")
-                    {
-                        <td>
-                            @Html.ActionLink("View SKILLS", "Create", new { id = item.ID }, new { @class = "btn btn-primary" })
-
-                        </td>
-                    }
-
-
-
-                }
             }
-        </tr>
+            else
+            {
+       
+            @Html.ActionLink("Edit SKILLS", "Create", new { id = item.ID }, new { @class = "btn btn-warning" })
+
+       
+        }
+        }
+        else
+        {
+
+        if (item.TrainingStatus != null && item.TrainingStatus == "Completed")
+        {
+        
+            @Html.ActionLink("View SKILLS", "Create", new { id = item.ID }, new { @class = "btn btn-success" })
+
+        
+        }
+
+
+
+        }
+            </td>
+        <td>
+
+        @*//from Material*@
+        @if (item.TrainingStatus == null && item.TrainingStatus != "Completed" && item.TrainingStatus != "Cancel")
+        {
+        if (item.Material == false)
+        {
+        
+            @Html.ActionLink("ADD Material", "Create", "TrainingMaterialTransaction", new { id = item.ID }, new { @class = "btn btn-primary" })
+
+        
+        }
+        else
+        {
+        
+            @Html.ActionLink("Edit Material", "Create", "TrainingMaterialTransaction", new { id = item.ID }, new { @class = "btn btn-warning" })
+
+        
+        }
+        }
+        else
+        {
+
+        if (item.TrainingStatus != null && item.TrainingStatus == "Completed")
+        {
+        
+            @Html.ActionLink("View Material", "Create", "TrainingMaterialTransaction", new { id = item.ID }, new { @class = "btn btn-success" })
+
+        
+        }
+
+
+
+        }
+        </td>
+    }
+</tr>
     }
 
 </table>

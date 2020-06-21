@@ -295,10 +295,10 @@
                         <i class="glyphicon glyphicon-transfer"> </i>
                         @Html.ActionLink("Skill Set", "Index1", "TrainingSkillTransaction", new { area = "" }, new { @class = " " })
                     </div>
-                    <div class="w3-bar-item w3-button w3-mobile">
+                    @*<div class="w3-bar-item w3-button w3-mobile">
                         <i class="glyphicon glyphicon-move"> </i>
                         @Html.ActionLink("Material Set", "Index1", "TrainingMaterialTransaction", new { area = "" }, new { @class = " " })
-                    </div>
+                    </div>*@
 
                     <div class="w3-bar-item w3-button w3-mobile">
                         <i class="glyphicon glyphicon-grain"> </i>
@@ -307,6 +307,10 @@
                     <div class="w3-bar-item w3-button w3-mobile">
                         <i class="glyphicon glyphicon-adjust"> </i>
                         @Html.ActionLink("Training Review", "AdminIndex", "TrainingReviewController", new { area = "" }, new { @class = "" })
+                    </div>
+                    <div class="w3-bar-item w3-button w3-mobile">
+                        <i class="glyphicon glyphicon-move"> </i>
+                        @Html.ActionLink("Training Remarks", "Index1", "TrainingEffectiveRemarks", new { area = "" }, new { @class = " " })
                     </div>
 
                 </div>
@@ -367,7 +371,10 @@
                         <i class="glyphicon glyphicon-move"> </i>
                         @Html.ActionLink("Training Approval Report", "TrainingApprovalReporttt", "EmpReport", new { area = "" }, new { @class = "" })
                     </div>
-
+                    <div class="w3-bar-item w3-button w3-mobile">
+                        <i class="glyphicon glyphicon-transfer"> </i>
+                        @Html.ActionLink("Training Attendance Report", "TrainingAttendanceReporttt", "EmpReport", new { area = "" }, new { @class = "" })
+                    </div>
                 </div>
 
             </div>
@@ -481,7 +488,10 @@
                         @Html.ActionLink("Travel Request Application", "Create", "RequestApplication", new { area = "" }, new { @class = " " })
                     </div>
 
-
+                    <div class="w3-bar-item w3-button w3-mobile">
+                        <i class="glyphicon glyphicon-move"> </i>
+                        @Html.ActionLink("Training Remarks", "Index1", "TrainingEffectiveRemarks", new { area = "" }, new { @class = " " })
+                    </div>
 
                 </div>
             </div>

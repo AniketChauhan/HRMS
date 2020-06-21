@@ -90,6 +90,23 @@ namespace HRMS.Controllers
             return View();
         }
 
+        public ActionResult TrainingAttendanceReporttt()
+        {
+            ReportViewer rptViewer = new ReportViewer();
+            rptViewer.ProcessingMode = ProcessingMode.Remote;
+            rptViewer.SizeToReportContent = true;
+            rptViewer.ZoomMode = ZoomMode.PageWidth;
+            rptViewer.Width = Unit.Percentage(100);
+            rptViewer.Height = Unit.Percentage(100);
+            rptViewer.AsyncRendering = true;
+            rptViewer.ServerReport.ReportServerUrl = new Uri("http://DESKTOP-5FDC8M5:80/ReportServer");
+            rptViewer.ServerReport.ReportPath = "/Report Project1/TrainingAttendanceReport";
+            ViewBag.ReportViewer = rptViewer;
+
+            return View();
+        }
+
+
     }
 
 }
