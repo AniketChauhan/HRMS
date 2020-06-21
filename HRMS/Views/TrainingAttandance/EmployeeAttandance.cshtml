@@ -1,14 +1,51 @@
-﻿@model HRMS.Models.HRMS_TrainingApproval
-@{
+﻿@{
     ViewBag.Title = "EmployeeAttandance";
 }
 
 <h2>EmployeeAttandance</h2>
 
-<div class="container">
+<div class="form-inline">
+
     <label>select Date</label>
-    <input type="date" class="form-control datepicker" />
+    <input type="datetime" autocomplete="off" class="form-control datepicker" id="date" name="date" />
+    <input type="submit" onclick="GetEmployeeList()" class="btn btn-sm btn-primary" />
 </div>
+<div class="container-fluid" id="MainEmployeeContainer">
+
+    <table class="table table-bordered table-responsive table-striped">
+        <tr>
+            <th>
+                <center>
+                    Employee Code
+                </center>
+            </th>
+
+            <th>
+                <center>
+                    Employee Name
+                </center>
+            </th>
+            <th>
+                <center>
+                    From Time
+                </center>
+            </th>
+
+            <th>
+                <center>
+                    To Time
+                </center>
+            </th>
+            <th><center><i class="glyphicon glyphicon-wrench "> </i> Operations</center></th>
+        </tr>
+        <tbody id="EmployeeTable">
+        </tbody>
+
+    </table>
+
+</div>
+
+@Html.ActionLink("Go Back", "Index", "TrainingAttandance", new { area = "" }, new { @class = "btn btn-link " })
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -20,11 +57,110 @@
 <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
 
 <script>
-     $(document).ready(function () {
-         var Fromdate = @Html.Raw(Json.Encode(Model.FromDate));
-         var ToDate = @Html.Raw(Json.Encode(Model.ToDate));
-     })
+    var date;
+    var Fromdate = new Date("@ViewBag.FromDate");
+    var programid = @ViewBag.ProgramID;
+         var ToDate = new Date("@ViewBag.ToDate");
+    $(document).ready(function () {
+        $("#MainEmployeeContainer").hide();
 
+     })
+    function GetEmployeeList() {
+        var date = $("#date").val();
+        if (date == "") {
+            alert("please select a date ");
+        }
+
+        else {
+            EmployeeData(date, programid);
+        }
+    }
+    function EmployeeData(date, programmId) {
+        $.get("/TrainingAttandance/GetEmployees", { ProgramId: programmId, datee: date }, function (data) {
+
+            if (data == "No Data") {
+                alert("There is no data !");
+                $("#MainEmployeeContainer").hide();
+
+            }
+             else
+            {
+                $("#MainEmployeeContainer").show();
+
+                $("#EmployeeTable").empty();
+
+                $.each(data, function (index, item) {
+                    //debugger;
+                    var Fromhours = item.FromTime.Hours;
+                    var Fromminutes = item.FromTime.Minutes;
+                    var Tohours = item.ToTime.Hours;
+                    var Tominutes = item.ToTime.Minutes;
+                    var tbody = "";
+
+                    tbody += "<tr row_id='" + item.ID + "' id='" + item.ID + "'>";
+                    tbody += "<td class=''><center>" + item.EMP_ID + "</center></td>";
+                    tbody += "<td class=''><center>" + item.EmpName + "</center></td>";
+                    tbody += "<td class=''><center><input type='time' value='" + Fromhours + ":" + Fromminutes + "'class='form-control row_data'col_name='FromTime' readonly='readonly'/></center></td>";
+                    tbody += "<td class=''><center><input type='time' value='" + Tohours + ":" + Tominutes + "'class='form-control row_data'col_name='ToTime' readonly='readonly'/></center></td>";
+                    tbody += "<td class=''><center> &nbsp; <button class='btn btn-primary btn-sm present_btn'><i class='glyphicon glyphicon-ok-circle'> </i> Present</button>&nbsp; <button class='btn btn-warining btn-sm absent_btn' ><i class='glyphicon glyphicon-remove-circle'></i>Absent</button></center></td>";
+                    tbody += "</tr>";
+                    $("#EmployeeTable").append(tbody);
+                });
+
+            }
+        });
+
+    }
+    $(document).on('click', '.present_btn', function (event) {
+        debugger;
+
+        var dates = $("#date").val();;
+        event.preventDefault();
+        var tbl_row = $(this).closest('tr');
+
+        var row_id = tbl_row.attr('row_id');
+
+        var status = "Present";
+        tbl_row.hide();
+
+
+        var arr = { rowid: row_id, state: status, datee: dates };
+        insertAttandance(arr);
+    });
+    $(document).on('click', '.absent_btn', function (event) {
+        debugger;
+
+        var dates = $("#date").val();;
+        event.preventDefault();
+        var tbl_row = $(this).closest('tr');
+
+        var row_id = tbl_row.attr('row_id');
+
+        var status = "Absent";
+        tbl_row.hide();
+
+
+        var arr = { rowid: row_id, state: status, datee: dates };
+        insertAttandance(arr);
+    });
+    function insertAttandance(arr) {
+         var data = JSON.stringify({
+             'id': arr.rowid,
+             'Status': arr.state,
+            'date': arr.datee
+        });
+        $.ajax({
+        type: "POST",
+            contentType: "application/json",
+            url: "@Url.Action("insertAttandance", "TrainingAttandance")",
+            datatype: "json",
+            data: data,
+            success: function (response) {
+
+
+            }
+        });
+        }
     $(function () {
         $(".datepicker").datepicker({
             dateFormat: "yy-mm-dd",

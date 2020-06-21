@@ -437,6 +437,7 @@
     <Compile Include="MyRollProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="ViewModel\AttandanceCommon.cs" />
     <Compile Include="ViewModel\EvalutionCommon.cs" />
     <Compile Include="ViewModel\TrainingProgramCommon.cs" />
   </ItemGroup>
@@ -795,6 +796,7 @@
     <Content Include="Views\TrainingReviewController\Vieww.cshtml" />
     <Content Include="Views\TrainingAttandance\Index.cshtml" />
     <Content Include="Views\TrainingAttandance\EmployeeAttandance.cshtml" />
+    <Content Include="Views\TrainingAttandance\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

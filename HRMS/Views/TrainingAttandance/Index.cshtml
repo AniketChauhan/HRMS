@@ -22,17 +22,19 @@
 
         @foreach (var item in Model)
         {
-            <tr id="@item.ProgramID">
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProgramID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HRMS_ProgramDetail.ProgramName)
-                </td>
-                <td>
-                    @Html.ActionLink(" Select", "EmployeeAttandance", new { id = item.ProgramID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" })
-                </td>
-            </tr>
+    <tr id="@item.ProgramID">
+        <td>
+            @Html.DisplayFor(modelItem => item.ProgramID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HRMS_ProgramDetail.ProgramName)
+        </td>
+        <td>
+            @Html.ActionLink(" Select", "EmployeeAttandance", new { id = item.ProgramID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" })
+        
+            @Html.ActionLink("View", "View", new { id = item.ProgramID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" })
+        </td>
+    </tr>
         }
 
 
