@@ -20,7 +20,7 @@ namespace HRMS.Controllers
             db.Configuration.ProxyCreationEnabled = false;
             long program = Convert.ToInt64(ProgramId);
 
-            List<HRMS_TrainingApproval> EmployeeList = db.HRMS_TrainingApproval.Where(x => x.Program_ID == program).ToList();
+            List<HRMS_TrainingApproval> EmployeeList = db.HRMS_TrainingApproval.Where(x => x.Program_ID == program && x.Status==2).ToList();
             if (EmployeeList != null)
             {
                 return Json(EmployeeList, JsonRequestBehavior.AllowGet);

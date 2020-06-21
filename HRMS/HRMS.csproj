@@ -789,6 +789,8 @@
     <Content Include="Views\TrainingReviewController\Review.cshtml" />
     <Content Include="Views\TrainingReviewController\ReviewList.cshtml" />
     <Content Include="Views\TrainingReviewController\Vieww.cshtml" />
+    <Content Include="Views\EmpReport\TrainingApprovalReporttt.cshtml" />
+    <Content Include="Views\EmpReport\TrainingProgramReporttt.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
