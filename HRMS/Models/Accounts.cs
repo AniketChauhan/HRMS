@@ -34,14 +34,14 @@ namespace HRMS.Models
             this.HRMS_TrainingApproval = new HashSet<HRMS_TrainingApproval>();
             this.HRMS_TrainingReview = new HashSet<HRMS_TrainingReview>();
             this.HRMS_Program_Attandance = new HashSet<HRMS_Program_Attandance>();
+            this.HRMS_TRAINING_EFFECTIVENESS_REMARKS = new HashSet<HRMS_TRAINING_EFFECTIVENESS_REMARKS>();
         }
-    
+        public string ConfirmUsername { get; set; }
         public long ID { get; set; }
         public string UserName { get; set; }
         public string password { get; set; }
         public string role { get; set; }
-        public string ConfirmUsername { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EMP_Grade_Assignment> EMP_Grade_Assignment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -76,5 +76,7 @@ namespace HRMS.Models
         public virtual ICollection<HRMS_TrainingReview> HRMS_TrainingReview { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HRMS_Program_Attandance> HRMS_Program_Attandance { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HRMS_TRAINING_EFFECTIVENESS_REMARKS> HRMS_TRAINING_EFFECTIVENESS_REMARKS { get; set; }
     }
 }

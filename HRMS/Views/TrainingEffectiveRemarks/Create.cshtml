@@ -1,0 +1,303 @@
+﻿@model HRMS.Models.HRMS_TRAINING_EFFECTIVENESS_REMARKS
+
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    // HRMSEntities db = new HRMSEntities();
+    //IEnumerable<HRMS_TrainingApproval> hRMS_TrainingApproval = db.HRMS_TrainingApproval.Where(x => x.Remark == false).ToList();
+
+}
+
+
+
+@*"Create", "HRMS_TRAINING_EFFECTIVENESS_REMARKS", FormMethod.Post*@
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>HRMS TRAINING EFFECTIVENESS REMARKS</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Remark_Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.Remark_Date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Remark_Date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Program_Det_ID, "Program_Det_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("Program_Det_ID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Program_Det_ID, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.Program_Det_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 form-inline">
+                @Html.EditorFor(model => model.Program_Det_ID, new { htmlAttributes = new { @class = "form-control", @Value = @ViewBag.Program_Det_ID.ID, @readonly = "readonly" } })
+                @Html.Editor("Program_Det_Name", new { htmlAttributes = new { @class = "form-control", @Value = @ViewBag.Program_Det_ID.ProgramName, @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Program_Det_ID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @*<div class="form-group">*@
+        @*@Html.Label("Program_Det_Name", htmlAttributes: new { @class = "control-label col-md-2" })*@
+        @*<div class="col-md-6" align="left">
+                    @Html.Editor("Program_Det_Name", new { htmlAttributes = new { @class = "form-control", @Value = @ViewBag.Program_Det_ID.ProgramName, @readonly = "readonly" } })
+
+                </div>
+            </div>*@
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.Emp_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">*@
+        @Html.HiddenFor(model => model.Emp_ID, new { htmlAttributes = new { @class = "form-control" } })
+        @*@Html.ValidationMessageFor(model => model.Emp_ID, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+        @*<div class="form-group">
+                @Html.Label("Fromdate", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+                    @Html.Editor("fromdate", new { htmlAttributes = new { @class = "form-control", @Value = @ViewBag.Program_Det_ID.FromDate, @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.Remark_Date, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Todate", htmlAttributes: new { @class = "control-label col-md-1" })
+                <div class="col-md-2">
+                    @Html.Editor("todate", new { htmlAttributes = new { @class = "form-control", @Value = @ViewBag.Program_Det_ID.ToDate, @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.Remark_Date, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HOD_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 form-inline">
+
+                @Html.EditorFor(model => model.HOD_ID, new { htmlAttributes = new { @class = "form-control", @Value = @ViewBag.HOD_Detail.ID, @readonly = "readonly" } })
+                @Html.Editor("HOD_Name", new { htmlAttributes = new { @class = "form-control", @Value = @ViewBag.HOD_Detail.UserName, @readonly = "readonly" } })
+
+
+                @Html.ValidationMessageFor(model => model.HOD_ID, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+        @*<div class="form-group">
+                @Html.Label("HOD_Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+
+                </div>
+            </div>*@
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.HOD_Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">*@
+        @Html.HiddenFor(model => model.HOD_Remarks, new { htmlAttributes = new { @class = "form-control" } })
+        @*@Html.ValidationMessageFor(model => model.HOD_Remarks, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.Trainee_Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">*@
+        @Html.HiddenFor(model => model.Trainee_Remarks, new { htmlAttributes = new { @class = "form-control" } })
+        @*@Html.ValidationMessageFor(model => model.Trainee_Remarks, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.HOD_View, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">*@
+        @Html.HiddenFor(model => model.HOD_View, new { htmlAttributes = new { @class = "form-control" } })
+        @*@Html.ValidationMessageFor(model => model.HOD_View, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.Remark_Date, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Remark_Date, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Remark_Date, "", new { @class = "text-danger" })-
+                </div>
+            </div>*@
+
+        <div class="form-group">
+
+            <div class="col-md-12">
+                @Html.CheckBox("check1", false, htmlAttributes: new { @id = "c1" })
+                @Html.Label("Put same Remark", htmlAttributes: new { @class = "control-label " })
+            </div>
+
+        </div>
+        <div id="d1">
+            <div class="form-group">
+                @Html.LabelFor(model => model.HOD_Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextArea("HOD_Remarks1", null, new { @class = "form-control", @id = "a" })
+                    @*@Html.Editor("HOD_Remarks1", new { htmlAttributes = new { @class = "form-control", @id = "a" } })*@
+                    @Html.ValidationMessageFor(model => model.HOD_Remarks, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Trainee_Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextArea("Trainee_Remarks1", null, new { @class = "form-control", @id = "b" })
+                    @*@Html.Editor("Trainee_Remarks1", new { htmlAttributes = new { @class = "form-control", @id = "b" } })*@
+                    @Html.ValidationMessageFor(model => model.Trainee_Remarks, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.HOD_View, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("HOD_View1", new List<SelectListItem>
+                                   {
+                                      new SelectListItem{ Text="Very Effective", Value = "Very Effective" },
+                                      new SelectListItem{ Text="Effective", Value = "Effective" },
+                                      new SelectListItem{ Text="Very Good", Value = "Very Good" },
+                                      new SelectListItem{ Text="Good", Value = "Good" },
+                                      new SelectListItem{ Text="Bad", Value = "Bad" },
+                                      }, "---Select---", new { @class = "form-control", @id = "c" })
+
+
+                    @Html.ValidationMessageFor(model => model.HOD_View, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-6" align="center">
+                    <input type="submit" value="Add Remark" onclick="myfun()" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+
+        <table id="t1" class="table table-bordered table-striped table-responsive" align="center">
+            <tr>
+
+                <th>
+                    Name
+                </th>
+                <th>
+                    HOD Remark
+                </th>
+                <th>
+                    Trainee Remark
+                </th>
+                <th>
+                    HOD Review
+                </th>
+                <th>
+
+                </th>
+
+            </tr>
+
+            @foreach (var item in ViewBag.EMP_List)
+            {
+                if (item.Program_ID == @ViewBag.Program_Det_ID.ID)
+                {
+                    <tr>
+                        @*<td align="center">
+
+                                <input type="text" name="EMP_ID1" value="@item.EMP_ID" id="@item.EMP_ID">
+                                @Html.Editor("EMP_ID1", new { htmlAttributes = new { @class = "form-control", @id = @item.EMP_ID, @Value = @item.EMP_ID, @readonly = "readonly" } })
+                            </td>*@
+                        <td>
+                            @*<input type="text" name="EmpName1" value="@item.EmpName">*@
+                            @Html.Editor("EmpName1", new { htmlAttributes = new { @class = "form-control", @Value = @item.EmpName, @readonly = "readonly" } })
+                        </td>
+
+                        <td>
+                            @*<input type="text" name="HOD_Remarks1" id="@item.EMP_ID+a">*@
+                            @Html.TextArea("HOD_Remarks1", null, new { @class = "form-control", @id = @item.EMP_ID + "a" })
+                        </td>
+                        <td>
+                            @Html.TextArea("Trainee_Remarks1", null, new { @class = "form-control", @id = @item.EMP_ID + "b" })
+                            @*<input type="text" name="Trainee_Remarks1" id="@item.EMP_ID+b">*@
+                        </td>
+                        <td>
+                            @*@Html.Editor("HOD_View1", new { htmlAttributes = new { @class = "form-control", @id = @item.EMP_ID + "c" } })*@
+                            @*<input type="text" name="HOD_View1" id="@item.EMP_ID+c">*@
+
+                            @Html.DropDownList("HOD_View1", new List<SelectListItem>
+                                {
+                                   new SelectListItem{ Text="Very Effective", Value = "Very Effective" },
+                                   new SelectListItem{ Text="Effective", Value = "Effective" },
+                                   new SelectListItem{ Text="Very Good", Value = "Very Good" },
+                                   new SelectListItem{ Text="Good", Value = "Good" },
+                                   new SelectListItem{ Text="Bad", Value = "Bad" },
+                                   }, "---Select---", new { @class = "form-control", @id = @item.EMP_ID + "c" })
+
+
+
+
+                        </td>
+                        <td>
+                            <input type="submit" value="Add Remark" onclick="myfunction(@item.EMP_ID)" id="@item.EMP_ID" class="btn btn-primary" />
+                        </td>
+
+                    </tr>
+                }
+            }
+
+
+        </table>
+    </div>
+}
+
+
+<div>
+    @Html.ActionLink("Remark List", "Index", new { id = @ViewBag.Program_Det_ID.ID }, new { @class = "btn btn-primary" })
+    @*@Html.ActionLink("Back to List", "Index")*@
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#d1').hide();
+        var d = new Date();
+        var strDate = d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate();
+        $('#Remark_Date').val(strDate);
+
+
+    });
+
+    //$(".xyz").click(function () {
+    //       alert($('#Remark_Date').val());
+
+    //});
+    $("#c1").click(function () {
+        if (!$(this).is(':checked')) {
+
+            $('#d1').hide();
+            $('#t1').show();
+
+        }
+        else {
+
+            $('#d1').show();
+            $('#t1').hide();
+        }
+    });
+    function myfunction(emp_id) {
+
+        $('#Emp_ID').val(emp_id);
+        $('#HOD_Remarks').val($("#" + emp_id + "a").val());
+        $('#Trainee_Remarks').val($("#" + emp_id + "b").val());
+        $('#HOD_View').val($("#" + emp_id + "c").val());
+    }
+
+    function myfun() {
+        //alert($("#b").val());
+        $('#Emp_ID').val(null);
+        $('#HOD_Remarks').val($("#a").val());
+        $('#Trainee_Remarks').val($("#b").val());
+        $('#HOD_View').val($("#c").val());
+    }
+
+</script>

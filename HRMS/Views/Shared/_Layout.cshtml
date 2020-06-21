@@ -231,7 +231,7 @@
         @if (User.IsInRole("admin"))
         {
             <div class="w3-dropdown-hover DixDiv">
-                <button class="w3-button  @color">Transactions <i class="glyphicon glyphicon-chevron-down"> </i></button>
+                <button class="w3-button  @color">Travel TS <i class="glyphicon glyphicon-chevron-down"> </i></button>
                 <div class="w3-dropdown-content w3-center w3-bar-block w3-card-4 DIVINSIDE">
                     <div class="w3-bar-item w3-button w3-mobile">
                         <i class="glyphicon glyphicon-move"> </i>
@@ -295,10 +295,10 @@
                         <i class="glyphicon glyphicon-transfer"> </i>
                         @Html.ActionLink("Skill Set", "Index1", "TrainingSkillTransaction", new { area = "" }, new { @class = " " })
                     </div>
-                    <div class="w3-bar-item w3-button w3-mobile">
+                    @*<div class="w3-bar-item w3-button w3-mobile">
                         <i class="glyphicon glyphicon-move"> </i>
                         @Html.ActionLink("Material Set", "Index1", "TrainingMaterialTransaction", new { area = "" }, new { @class = " " })
-                    </div>
+                    </div>*@
 
                     <div class="w3-bar-item w3-button w3-mobile">
                         <i class="glyphicon glyphicon-grain"> </i>
@@ -307,6 +307,10 @@
                     <div class="w3-bar-item w3-button w3-mobile">
                         <i class="glyphicon glyphicon-adjust"> </i>
                         @Html.ActionLink("Training Review", "AdminIndex", "TrainingReviewController", new { area = "" }, new { @class = "" })
+                    </div>
+                    <div class="w3-bar-item w3-button w3-mobile">
+                        <i class="glyphicon glyphicon-move"> </i>
+                        @Html.ActionLink("Training Remarks", "Index1", "TrainingEffectiveRemarks", new { area = "" }, new { @class = " " })
                     </div>
 
                 </div>
@@ -359,7 +363,18 @@
                         <i class="glyphicon glyphicon-file"> </i>
                         @Html.ActionLink("Travel Expanse Report", "TravelExpanseReporttt", "EmpReport", new { area = "" }, new { @class = "" })
                     </div>
-
+                    <div class="w3-bar-item w3-button w3-mobile">
+                        <i class="glyphicon glyphicon-move"> </i>
+                        @Html.ActionLink("Training Program Report", "TrainingProgramReporttt", "EmpReport", new { area = "" }, new { @class = "" })
+                    </div>
+                    <div class="w3-bar-item w3-button w3-mobile">
+                        <i class="glyphicon glyphicon-move"> </i>
+                        @Html.ActionLink("Training Approval Report", "TrainingApprovalReporttt", "EmpReport", new { area = "" }, new { @class = "" })
+                    </div>
+                    <div class="w3-bar-item w3-button w3-mobile">
+                        <i class="glyphicon glyphicon-transfer"> </i>
+                        @Html.ActionLink("Training Attendance Report", "TrainingAttendanceReporttt", "EmpReport", new { area = "" }, new { @class = "" })
+                    </div>
                 </div>
 
             </div>
@@ -473,7 +488,10 @@
                         @Html.ActionLink("Travel Request Application", "Create", "RequestApplication", new { area = "" }, new { @class = " " })
                     </div>
 
-
+                    <div class="w3-bar-item w3-button w3-mobile">
+                        <i class="glyphicon glyphicon-move"> </i>
+                        @Html.ActionLink("Training Remarks", "Index1", "TrainingEffectiveRemarks", new { area = "" }, new { @class = " " })
+                    </div>
 
                 </div>
             </div>

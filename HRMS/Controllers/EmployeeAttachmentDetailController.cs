@@ -226,7 +226,7 @@ namespace HRMS.Controllers
                 }
                 catch (Exception e)
                 {
-                    //msg
+                    Console.WriteLine(e.Message);
                 }
             }
             return false;
