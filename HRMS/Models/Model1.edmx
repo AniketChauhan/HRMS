@@ -288,6 +288,20 @@
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="Empty" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="HRMS_Program_Attandance">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProgramID" Type="bigint" Nullable="false" />
+          <Property Name="EmployeeID" Type="bigint" Nullable="false" />
+          <Property Name="AttandenceDate" Type="date" Nullable="false" />
+          <Property Name="EmpName" Type="varchar" MaxLength="250" />
+          <Property Name="IsPresent" Type="varchar" MaxLength="50" />
+          <Property Name="DesignationID" Type="bigint" />
+          <Property Name="DepartmentID" Type="bigint" />
+          <Property Name="Gender" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="HRMS_ProgramDetail">
           <Key>
             <PropertyRef Name="ID" />
@@ -998,6 +1012,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_HRMS_Program_Attandance_Accounts">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="HRMS_Program_Attandance" Type="Self.HRMS_Program_Attandance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_Program_Attandance">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_Program_Attandance_HRMS_DEPT">
+          <End Role="HRMS_DEPT" Type="Self.HRMS_DEPT" Multiplicity="0..1" />
+          <End Role="HRMS_Program_Attandance" Type="Self.HRMS_Program_Attandance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_DEPT">
+              <PropertyRef Name="Dept_Id" />
+            </Principal>
+            <Dependent Role="HRMS_Program_Attandance">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_Program_Attandance_HRMS_DESG_MS">
+          <End Role="HRMS_DESG_MS" Type="Self.HRMS_DESG_MS" Multiplicity="0..1" />
+          <End Role="HRMS_Program_Attandance" Type="Self.HRMS_Program_Attandance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_DESG_MS">
+              <PropertyRef Name="Desg_Id" />
+            </Principal>
+            <Dependent Role="HRMS_Program_Attandance">
+              <PropertyRef Name="DesignationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_Program_Attandance_HRMS_Program_Attandance">
+          <End Role="HRMS_Program_Attandance" Type="Self.HRMS_Program_Attandance" Multiplicity="1" />
+          <End Role="HRMS_Program_Attandance1" Type="Self.HRMS_Program_Attandance" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_Program_Attandance">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_Program_Attandance1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_Program_Attandance_HRMS_ProgramDetail">
+          <End Role="HRMS_ProgramDetail" Type="Self.HRMS_ProgramDetail" Multiplicity="1" />
+          <End Role="HRMS_Program_Attandance" Type="Self.HRMS_Program_Attandance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_ProgramDetail">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_Program_Attandance">
+              <PropertyRef Name="ProgramID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_HRMS_ProgramDetail_HRMS_Training_Request_Application">
           <End Role="HRMS_Training_Request_Application" Type="Self.HRMS_Training_Request_Application" Multiplicity="1" />
           <End Role="HRMS_ProgramDetail" Type="Self.HRMS_ProgramDetail" Multiplicity="*" />
@@ -1425,6 +1499,7 @@
           <EntitySet Name="HRMS_EMP_ReferenceDetail" EntityType="Self.HRMS_EMP_ReferenceDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_Evalution_Question" EntityType="Self.HRMS_Evalution_Question" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_Faculty_MS" EntityType="Self.HRMS_Faculty_MS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HRMS_Program_Attandance" EntityType="Self.HRMS_Program_Attandance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_ProgramDetail" EntityType="Self.HRMS_ProgramDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_ProgramFaculty" EntityType="Self.HRMS_ProgramFaculty" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HRMS_SALUTATION" EntityType="Self.HRMS_SALUTATION" Schema="dbo" store:Type="Tables" />
@@ -1577,6 +1652,26 @@
           <AssociationSet Name="FK_HRMS_Evalution_Question_HRMS_TrainingEvalution_Header" Association="Self.FK_HRMS_Evalution_Question_HRMS_TrainingEvalution_Header">
             <End Role="HRMS_TrainingEvalution_Header" EntitySet="HRMS_TrainingEvalution_Header" />
             <End Role="HRMS_Evalution_Question" EntitySet="HRMS_Evalution_Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_Program_Attandance_Accounts" Association="Self.FK_HRMS_Program_Attandance_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="HRMS_Program_Attandance" EntitySet="HRMS_Program_Attandance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_Program_Attandance_HRMS_DEPT" Association="Self.FK_HRMS_Program_Attandance_HRMS_DEPT">
+            <End Role="HRMS_DEPT" EntitySet="HRMS_DEPT" />
+            <End Role="HRMS_Program_Attandance" EntitySet="HRMS_Program_Attandance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_Program_Attandance_HRMS_DESG_MS" Association="Self.FK_HRMS_Program_Attandance_HRMS_DESG_MS">
+            <End Role="HRMS_DESG_MS" EntitySet="HRMS_DESG_MS" />
+            <End Role="HRMS_Program_Attandance" EntitySet="HRMS_Program_Attandance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_Program_Attandance_HRMS_Program_Attandance" Association="Self.FK_HRMS_Program_Attandance_HRMS_Program_Attandance">
+            <End Role="HRMS_Program_Attandance" EntitySet="HRMS_Program_Attandance" />
+            <End Role="HRMS_Program_Attandance1" EntitySet="HRMS_Program_Attandance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_Program_Attandance_HRMS_ProgramDetail" Association="Self.FK_HRMS_Program_Attandance_HRMS_ProgramDetail">
+            <End Role="HRMS_ProgramDetail" EntitySet="HRMS_ProgramDetail" />
+            <End Role="HRMS_Program_Attandance" EntitySet="HRMS_Program_Attandance" />
           </AssociationSet>
           <AssociationSet Name="FK_HRMS_ProgramDetail_HRMS_Training_Request_Application" Association="Self.FK_HRMS_ProgramDetail_HRMS_Training_Request_Application">
             <End Role="HRMS_Training_Request_Application" EntitySet="HRMS_Training_Request_Application" />
@@ -1731,6 +1826,7 @@
           <NavigationProperty Name="HRMS_Training_Request_Application1" Relationship="HRMS5Model.FK_HRMS_Training_Request_Application_Accounts1" FromRole="Accounts" ToRole="HRMS_Training_Request_Application" />
           <NavigationProperty Name="HRMS_TrainingApproval" Relationship="HRMS5Model.FK_HRMS_TrainingApproval_Accounts" FromRole="Accounts" ToRole="HRMS_TrainingApproval" />
           <NavigationProperty Name="HRMS_TrainingReview" Relationship="HRMS5Model.FK_HRMS_TrainingReview_Accounts" FromRole="Accounts" ToRole="HRMS_TrainingReview" />
+          <NavigationProperty Name="HRMS_Program_Attandance" Relationship="HRMS5Model.FK_HRMS_Program_Attandance_Accounts" FromRole="Accounts" ToRole="HRMS_Program_Attandance" />
         </EntityType>
         <EntityType Name="BankMaster">
           <Key>
@@ -1897,6 +1993,7 @@
           <NavigationProperty Name="HRMS_Emp_Details" Relationship="HRMS5Model.FK_HRMS_Emp_Details_HRMS_DEPT" FromRole="HRMS_DEPT" ToRole="HRMS_Emp_Details" />
           <NavigationProperty Name="HRMS_Training_Request_Application" Relationship="HRMS5Model.FK_HRMS_Training_Request_Application_HRMS_DEPT" FromRole="HRMS_DEPT" ToRole="HRMS_Training_Request_Application" />
           <NavigationProperty Name="HRMS_TrainingApproval" Relationship="HRMS5Model.FK_HRMS_TrainingApproval_HRMS_DEPT" FromRole="HRMS_DEPT" ToRole="HRMS_TrainingApproval" />
+          <NavigationProperty Name="HRMS_Program_Attandance" Relationship="HRMS5Model.FK_HRMS_Program_Attandance_HRMS_DEPT" FromRole="HRMS_DEPT" ToRole="HRMS_Program_Attandance" />
         </EntityType>
         <EntityType Name="HRMS_EMP_Attachment_Details">
           <Key>
@@ -2677,6 +2774,27 @@
             <End Role="HRMS_ProgramDetail" EntitySet="HRMS_ProgramDetail" />
             <End Role="HRMS_TrainingReview" EntitySet="HRMS_TrainingReview" />
           </AssociationSet>
+          <EntitySet Name="HRMS_Program_Attandance" EntityType="HRMS5Model.HRMS_Program_Attandance" />
+          <AssociationSet Name="FK_HRMS_Program_Attandance_Accounts" Association="HRMS5Model.FK_HRMS_Program_Attandance_Accounts">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="HRMS_Program_Attandance" EntitySet="HRMS_Program_Attandance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_Program_Attandance_HRMS_DEPT" Association="HRMS5Model.FK_HRMS_Program_Attandance_HRMS_DEPT">
+            <End Role="HRMS_DEPT" EntitySet="HRMS_DEPT" />
+            <End Role="HRMS_Program_Attandance" EntitySet="HRMS_Program_Attandance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_Program_Attandance_HRMS_DESG_MS" Association="HRMS5Model.FK_HRMS_Program_Attandance_HRMS_DESG_MS">
+            <End Role="HRMS_DESG_MS" EntitySet="HRMS_DESG_MS" />
+            <End Role="HRMS_Program_Attandance" EntitySet="HRMS_Program_Attandance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_Program_Attandance_HRMS_Program_Attandance" Association="HRMS5Model.FK_HRMS_Program_Attandance_HRMS_Program_Attandance">
+            <End Role="HRMS_Program_Attandance" EntitySet="HRMS_Program_Attandance" />
+            <End Role="HRMS_Program_Attandance1" EntitySet="HRMS_Program_Attandance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HRMS_Program_Attandance_HRMS_ProgramDetail" Association="HRMS5Model.FK_HRMS_Program_Attandance_HRMS_ProgramDetail">
+            <End Role="HRMS_ProgramDetail" EntitySet="HRMS_ProgramDetail" />
+            <End Role="HRMS_Program_Attandance" EntitySet="HRMS_Program_Attandance" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="DepartmentData_Result">
           <Property Type="Int64" Name="Dept_Id" Nullable="false" />
@@ -2702,6 +2820,7 @@
           <NavigationProperty Name="HRMS_Travel_Application" Relationship="HRMS5Model.FK_HRMS_Travel_Application_HRMS_DESG_MS" FromRole="HRMS_DESG_MS" ToRole="HRMS_Travel_Application" />
           <NavigationProperty Name="HRMS_Training_Request_Application" Relationship="HRMS5Model.FK_HRMS_Training_Request_Application_HRMS_DESG_MS" FromRole="HRMS_DESG_MS" ToRole="HRMS_Training_Request_Application" />
           <NavigationProperty Name="HRMS_TrainingApproval" Relationship="HRMS5Model.FK_HRMS_TrainingApproval_HRMS_DESG_MS" FromRole="HRMS_DESG_MS" ToRole="HRMS_TrainingApproval" />
+          <NavigationProperty Name="HRMS_Program_Attandance" Relationship="HRMS5Model.FK_HRMS_Program_Attandance_HRMS_DESG_MS" FromRole="HRMS_DESG_MS" ToRole="HRMS_Program_Attandance" />
         </EntityType>
         <EntityType Name="HRMS_Emp_Details">
           <Key>
@@ -3174,6 +3293,7 @@
           <NavigationProperty Name="HRMS_TRAINING_MATERIALSET" Relationship="HRMS5Model.FK_HRMS_TRAINING_MATERIALSET_HRMS_ProgramDetail" FromRole="HRMS_ProgramDetail" ToRole="HRMS_TRAINING_MATERIALSET" />
           <NavigationProperty Name="HRMS_TRAINING_SKILLSET" Relationship="HRMS5Model.FK_HRMS_TRAINING_SKILLSET_HRMS_ProgramDetail" FromRole="HRMS_ProgramDetail" ToRole="HRMS_TRAINING_SKILLSET" />
           <NavigationProperty Name="HRMS_TrainingReview" Relationship="HRMS5Model.FK_HRMS_TrainingReview_HRMS_ProgramDetail" FromRole="HRMS_ProgramDetail" ToRole="HRMS_TrainingReview" />
+          <NavigationProperty Name="HRMS_Program_Attandance" Relationship="HRMS5Model.FK_HRMS_Program_Attandance_HRMS_ProgramDetail" FromRole="HRMS_ProgramDetail" ToRole="HRMS_Program_Attandance" />
         </EntityType>
         <EntityType Name="HRMS_TRAINING_MATERIAL_MS">
           <Key>
@@ -3564,6 +3684,86 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="HRMS_TrainingReview">
+              <PropertyRef Name="ProgramID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="HRMS_Program_Attandance">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProgramID" Type="Int64" Nullable="false" />
+          <Property Name="EmployeeID" Type="Int64" Nullable="false" />
+          <Property Name="AttandenceDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EmpName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="IsPresent" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DesignationID" Type="Int64" />
+          <Property Name="DepartmentID" Type="Int64" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Accounts" Relationship="HRMS5Model.FK_HRMS_Program_Attandance_Accounts" FromRole="HRMS_Program_Attandance" ToRole="Accounts" />
+          <NavigationProperty Name="HRMS_DEPT" Relationship="HRMS5Model.FK_HRMS_Program_Attandance_HRMS_DEPT" FromRole="HRMS_Program_Attandance" ToRole="HRMS_DEPT" />
+          <NavigationProperty Name="HRMS_DESG_MS" Relationship="HRMS5Model.FK_HRMS_Program_Attandance_HRMS_DESG_MS" FromRole="HRMS_Program_Attandance" ToRole="HRMS_DESG_MS" />
+          <NavigationProperty Name="HRMS_Program_Attandance1" Relationship="HRMS5Model.FK_HRMS_Program_Attandance_HRMS_Program_Attandance" FromRole="HRMS_Program_Attandance" ToRole="HRMS_Program_Attandance1" />
+          <NavigationProperty Name="HRMS_Program_Attandance2" Relationship="HRMS5Model.FK_HRMS_Program_Attandance_HRMS_Program_Attandance" FromRole="HRMS_Program_Attandance1" ToRole="HRMS_Program_Attandance" />
+          <NavigationProperty Name="HRMS_ProgramDetail" Relationship="HRMS5Model.FK_HRMS_Program_Attandance_HRMS_ProgramDetail" FromRole="HRMS_Program_Attandance" ToRole="HRMS_ProgramDetail" />
+        </EntityType>
+        <Association Name="FK_HRMS_Program_Attandance_Accounts">
+          <End Type="HRMS5Model.Accounts" Role="Accounts" Multiplicity="1" />
+          <End Type="HRMS5Model.HRMS_Program_Attandance" Role="HRMS_Program_Attandance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_Program_Attandance">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_Program_Attandance_HRMS_DEPT">
+          <End Type="HRMS5Model.HRMS_DEPT" Role="HRMS_DEPT" Multiplicity="0..1" />
+          <End Type="HRMS5Model.HRMS_Program_Attandance" Role="HRMS_Program_Attandance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_DEPT">
+              <PropertyRef Name="Dept_Id" />
+            </Principal>
+            <Dependent Role="HRMS_Program_Attandance">
+              <PropertyRef Name="DepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_Program_Attandance_HRMS_DESG_MS">
+          <End Type="HRMS5Model.HRMS_DESG_MS" Role="HRMS_DESG_MS" Multiplicity="0..1" />
+          <End Type="HRMS5Model.HRMS_Program_Attandance" Role="HRMS_Program_Attandance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_DESG_MS">
+              <PropertyRef Name="Desg_Id" />
+            </Principal>
+            <Dependent Role="HRMS_Program_Attandance">
+              <PropertyRef Name="DesignationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_Program_Attandance_HRMS_Program_Attandance">
+          <End Type="HRMS5Model.HRMS_Program_Attandance" Role="HRMS_Program_Attandance" Multiplicity="1" />
+          <End Type="HRMS5Model.HRMS_Program_Attandance" Role="HRMS_Program_Attandance1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_Program_Attandance">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_Program_Attandance1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HRMS_Program_Attandance_HRMS_ProgramDetail">
+          <End Type="HRMS5Model.HRMS_ProgramDetail" Role="HRMS_ProgramDetail" Multiplicity="1" />
+          <End Type="HRMS5Model.HRMS_Program_Attandance" Role="HRMS_Program_Attandance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HRMS_ProgramDetail">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HRMS_Program_Attandance">
               <PropertyRef Name="ProgramID" />
             </Dependent>
           </ReferentialConstraint>
@@ -4300,6 +4500,21 @@
                 <ScalarProperty Name="NonDescriptive" ColumnName="NonDescriptive" />
                 <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
                 <ScalarProperty Name="Emp_ID" ColumnName="Emp_ID" />
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HRMS_Program_Attandance">
+            <EntityTypeMapping TypeName="HRMS5Model.HRMS_Program_Attandance">
+              <MappingFragment StoreEntitySet="HRMS_Program_Attandance">
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
+                <ScalarProperty Name="DesignationID" ColumnName="DesignationID" />
+                <ScalarProperty Name="IsPresent" ColumnName="IsPresent" />
+                <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+                <ScalarProperty Name="AttandenceDate" ColumnName="AttandenceDate" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>

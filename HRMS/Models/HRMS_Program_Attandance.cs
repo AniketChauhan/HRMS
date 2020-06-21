@@ -12,27 +12,23 @@ namespace HRMS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class HRMS_TrainingApproval
+    public partial class HRMS_Program_Attandance
     {
         public long ID { get; set; }
-        public long EMP_ID { get; set; }
-        public Nullable<long> Designation { get; set; }
-        public long Program_ID { get; set; }
-        public Nullable<long> ApproveBy { get; set; }
-        public Nullable<System.DateTime> ApproveDate { get; set; }
-        public Nullable<long> Status { get; set; }
+        public long ProgramID { get; set; }
+        public long EmployeeID { get; set; }
+        public System.DateTime AttandenceDate { get; set; }
         public string EmpName { get; set; }
-        public Nullable<long> EmpDept { get; set; }
-        public Nullable<System.DateTime> FromDate { get; set; }
-        public Nullable<System.DateTime> ToDate { get; set; }
-        public Nullable<System.TimeSpan> FromTime { get; set; }
-        public Nullable<System.TimeSpan> ToTime { get; set; }
-        public Nullable<long> IsEmailSent { get; set; }
-        public Nullable<long> IsReviewDone { get; set; }
+        public string IsPresent { get; set; }
+        public Nullable<long> DesignationID { get; set; }
+        public Nullable<long> DepartmentID { get; set; }
+        public string Gender { get; set; }
     
         public virtual Accounts Accounts { get; set; }
         public virtual HRMS_DEPT HRMS_DEPT { get; set; }
         public virtual HRMS_DESG_MS HRMS_DESG_MS { get; set; }
+        public virtual HRMS_Program_Attandance HRMS_Program_Attandance1 { get; set; }
+        public virtual HRMS_Program_Attandance HRMS_Program_Attandance2 { get; set; }
         public virtual HRMS_ProgramDetail HRMS_ProgramDetail { get; set; }
     }
 }

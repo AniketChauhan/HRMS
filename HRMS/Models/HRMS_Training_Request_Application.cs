@@ -11,8 +11,7 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class HRMS_Training_Request_Application
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,16 +20,13 @@ namespace HRMS.Models
             this.HRMS_ProgramDetail = new HashSet<HRMS_ProgramDetail>();
         }
         public string EmployeeName { get; set; }
-
         public long ApplicationId { get; set; }
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public System.DateTime request_date { get; set; }
         public long EmpID { get; set; }
         public Nullable<long> designationID { get; set; }
         public Nullable<long> DepartmentId { get; set; }
         public string Training_Name { get; set; }
         public string TrainingDetails { get; set; }
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> ApprovedDate { get; set; }
         public Nullable<int> Status { get; set; }
         public Nullable<long> ApprovedBy_ID { get; set; }

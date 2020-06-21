@@ -216,6 +216,7 @@
     <Compile Include="Controllers\SALUTATIONController.cs" />
     <Compile Include="Controllers\SegmentMasterController.cs" />
     <Compile Include="Controllers\TrainingApprovalController.cs" />
+    <Compile Include="Controllers\TrainingAttandanceController.cs" />
     <Compile Include="Controllers\TrainingEvaluationController.cs" />
     <Compile Include="Controllers\TrainingMaterialTransactionController.cs" />
     <Compile Include="Controllers\TrainingNotificationController.cs" />
@@ -326,6 +327,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HRMS_ProgramFaculty.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HRMS_Program_Attandance.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HRMS_SALUTATION.cs">
@@ -789,6 +793,8 @@
     <Content Include="Views\TrainingReviewController\Review.cshtml" />
     <Content Include="Views\TrainingReviewController\ReviewList.cshtml" />
     <Content Include="Views\TrainingReviewController\Vieww.cshtml" />
+    <Content Include="Views\TrainingAttandance\Index.cshtml" />
+    <Content Include="Views\TrainingAttandance\EmployeeAttandance.cshtml" />
     <Content Include="Views\EmpReport\TrainingApprovalReporttt.cshtml" />
     <Content Include="Views\EmpReport\TrainingProgramReporttt.cshtml" />
   </ItemGroup>

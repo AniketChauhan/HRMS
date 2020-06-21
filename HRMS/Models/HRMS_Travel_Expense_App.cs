@@ -14,8 +14,6 @@ namespace HRMS.Models
     
     public partial class HRMS_Travel_Expense_App
     {
-        public decimal TotalAmount { get; set; }
-
         public long ID { get; set; }
         public long Travel_App_ID { get; set; }
         public System.DateTime Travel_Date { get; set; }
@@ -31,7 +29,7 @@ namespace HRMS.Models
         public Nullable<int> Status { get; set; }
         public bool DateLimit { get; set; }
         public Nullable<int> Warning { get; set; }
-    
+        public decimal TotalAmount { get; set; }
         public virtual HRMS_Travel_Application HRMS_Travel_Application { get; set; }
         public virtual Accounts Accounts { get; set; }
     }
