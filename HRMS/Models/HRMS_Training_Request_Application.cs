@@ -27,7 +27,16 @@ namespace HRMS.Models
         public long EmpID { get; set; }
         public Nullable<long> designationID { get; set; }
         public Nullable<long> DepartmentId { get; set; }
+        [Required]
+        [Display(Name = "Training Name")]
+
+        [MaxLength(500, ErrorMessage = "Training Name can have 500 characters maximum!")]
+        [RegularExpression(@"^[A-Za-z_ ]*$", ErrorMessage = "Only Alphabetic values are allowed!")]
+
         public string Training_Name { get; set; }
+        [Display(Name = "Training Details ")]
+
+        [MaxLength(1000, ErrorMessage = "Training Details can have 500 characters maximum!")]
         public string TrainingDetails { get; set; }
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> ApprovedDate { get; set; }
