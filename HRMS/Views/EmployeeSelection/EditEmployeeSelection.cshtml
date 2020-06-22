@@ -253,9 +253,14 @@
             if (res == "Employee is already exist for this program!") {
                 alert(res);
                 getEmployeeList(ProgramID);
+                document.getElementById('Employee').value = "";
+                document.getElementById('Search').value = "";
+            
 
             }
             else {
+                document.getElementById('Employee').value = "";
+                document.getElementById('Search').value = "";
                 alert(res);
                 getEmployeeList(ProgramID);
 

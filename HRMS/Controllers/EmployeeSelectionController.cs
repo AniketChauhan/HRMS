@@ -94,12 +94,23 @@ namespace HRMS.Controllers
             var exist = db.HRMS_TrainingApproval.Where(rec => rec.EMP_ID == hRMS_TrainingApproval.EMP_ID && rec.Program_ID == hRMS_TrainingApproval.Program_ID && rec.Status ==2).FirstOrDefault();
             if (exist == null)
             {
-
-                db.HRMS_TrainingApproval.Add(hRMS_TrainingApproval);
-                db.SaveChanges();
-                ModelState.Clear();
-                var status = "Employee Added successfullly.";
-                return Json(status, JsonRequestBehavior.AllowGet);
+                var existsameEmp = db.HRMS_TrainingApproval.Where(rec => rec.EMP_ID == hRMS_TrainingApproval.EMP_ID && rec.Program_ID == hRMS_TrainingApproval.Program_ID ).FirstOrDefault();
+                if (existsameEmp == null)
+                {
+                    db.HRMS_TrainingApproval.Add(hRMS_TrainingApproval);
+                    db.SaveChanges();
+                    ModelState.Clear();
+                    var status = "Employee Added successfullly.";
+                    return Json(status, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    existsameEmp.Status = 2;
+                    db.Entry(existsameEmp).State = EntityState.Modified;
+                    db.SaveChanges(); ModelState.Clear();
+                    var status = "Employee Added successfullly.";
+                    return Json(status, JsonRequestBehavior.AllowGet);
+                }
             }
             else
             {
@@ -170,9 +181,9 @@ namespace HRMS.Controllers
             HRMS_TrainingApproval Employee = db.HRMS_TrainingApproval.Find(id);
             if (Employee != null)
             {
-                db.HRMS_TrainingApproval.Remove(Employee);
+                Employee.Status = 3;
+                db.Entry(Employee).State = EntityState.Modified;
                 db.SaveChanges(); ModelState.Clear();
-
                 return true;
             }
             else
