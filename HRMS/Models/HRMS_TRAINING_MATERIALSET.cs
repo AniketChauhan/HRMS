@@ -11,20 +11,41 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class HRMS_TRAINING_MATERIALSET
     {
-        public decimal MaterialSet_Budget_Amt { get; set; }
-        public decimal MaterialSet_Actual_Amt { get; set; }
+        [DisplayName("MaterialSet ID")]
+
         public long MaterialSet_ID { get; set; }
+        [DisplayName("Program")]
+        [Required]
         public long ProgDet_ID { get; set; }
+        [DisplayName("Material ID")]
+        [Required]
         public long Material_ID { get; set; }
+        [DisplayName("Material Name")]
+
         public string Material_Name { get; set; }
+        [DisplayName("Budget/Actual")]
+        [Required]
         public string Bud_Act { get; set; }
+        [DisplayName("Material Qty")]
+        [Required]
         public long MaterialSet_Qty { get; set; }
+        [DisplayName("Material Rate")]
+        [Required]
         public decimal MaterialSet_Rate { get; set; }
+        [DisplayName("Material Amt")]
+        [Required]
         public decimal MaterialSet_Amt { get; set; }
-    
+        [DisplayName("Total Budget")]
+
+        public decimal MaterialSet_Budget_Amt { get; set; }
+        [DisplayName("Total Actual")]
+        public decimal MaterialSet_Actual_Amt { get; set; }
+
         public virtual HRMS_ProgramDetail HRMS_ProgramDetail { get; set; }
         public virtual HRMS_TRAINING_MATERIAL_MS HRMS_TRAINING_MATERIAL_MS { get; set; }
     }

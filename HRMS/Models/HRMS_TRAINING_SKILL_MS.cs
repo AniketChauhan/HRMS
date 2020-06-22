@@ -11,7 +11,9 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class HRMS_TRAINING_SKILL_MS
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,11 +22,20 @@ namespace HRMS.Models
             this.HRMS_Training_Request_Application = new HashSet<HRMS_Training_Request_Application>();
             this.HRMS_TRAINING_SKILLSET = new HashSet<HRMS_TRAINING_SKILLSET>();
         }
-    
+
+        [DisplayName("Skill ID")]
+
         public long Skill_ID { get; set; }
+        [DisplayName("Skill Name")]
+        [Required]
+
         public string Skill_Name { get; set; }
+        [DisplayName("Remark")]
+
+
         public string Skill_Remark { get; set; }
-    
+
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HRMS_Training_Request_Application> HRMS_Training_Request_Application { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -11,26 +11,35 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
     public partial class HRMS_TRAINING_EFFECTIVENESS_REMARKS
     {
+        [DisplayName("Remark ID")]
         public long Remark_ID { get; set; }
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
-
-        public System.DateTime Remark_Date { get; set; }
+        [DisplayName("Training")]
         [Required]
         public long Program_Det_ID { get; set; }
+        [DisplayName("Employee")]
         [Required]
         public long Emp_ID { get; set; }
+        [DisplayName("HOD")]
         [Required]
         public long HOD_ID { get; set; }
+        [DisplayName("HOD Remark")]
         [Required]
         public string HOD_Remarks { get; set; }
-        [Required]
+        [DisplayName("Trainee Remark")]
         public string Trainee_Remarks { get; set; }
+        [DisplayName("HOD View")]
         [Required]
         public string HOD_View { get; set; }
+        [DisplayName("Transaction Date")]
+        [Required]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
+        public System.DateTime Remark_Date { get; set; }
+
 
         public virtual Accounts Accounts { get; set; }
         public virtual HRMS_ProgramDetail HRMS_ProgramDetail { get; set; }

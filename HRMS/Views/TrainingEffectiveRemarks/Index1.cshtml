@@ -5,7 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>All Programs Lists</h2>
+<h2>Programs Lists</h2>
+<hr />
 
 @*<p>
         @Html.ActionLink("Create New", "Create")
@@ -18,7 +19,7 @@
 else
 {
     <table class="table table-bordered table-striped table-responsive">
-        <tr>
+        <tr style="background-color:lightgray">
 
             <th>
                 @Html.DisplayNameFor(model => model.ProgramName)

@@ -11,7 +11,9 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class HRMS_TRAINING_MATERIAL_MS
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,13 +21,23 @@ namespace HRMS.Models
         {
             this.HRMS_TRAINING_MATERIALSET = new HashSet<HRMS_TRAINING_MATERIALSET>();
         }
-    
+
+        [DisplayName("Material ID")]
+
         public long Material_ID { get; set; }
+        [DisplayName("Material Name")]
+        [Required]
         public string Material_Name { get; set; }
+        [DisplayName("Material Rate")]
+        [Required]
         public decimal Material_Rate { get; set; }
+        [DisplayName("Remarks")]
+
         public string Material_Remarks { get; set; }
+        [DisplayName("IsActive")]
+
         public bool Material_IsActive { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HRMS_TRAINING_MATERIALSET> HRMS_TRAINING_MATERIALSET { get; set; }
     }

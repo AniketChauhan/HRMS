@@ -12,8 +12,8 @@
     <title>Index</title>
 </head>
 <body>
-    <h3>Program List</h3>
-    <br />
+    <h2>Program List</h2>
+    <hr />
     <table class="table table-bordered table-striped table-responsive">
         <tr style="background-color:lightgray">
 
@@ -38,40 +38,49 @@
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HRMS_ProgramDetail.ProgramName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HRMS_ProgramDetail.Subject)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HRMS_ProgramDetail.FromDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HRMS_ProgramDetail.ToDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HRMS_ProgramDetail.TrainingStatus)
-                </td>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.HRMS_ProgramDetail.ProgramName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HRMS_ProgramDetail.Subject)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HRMS_ProgramDetail.FromDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HRMS_ProgramDetail.ToDate)
+        </td>
 
-                @if (User.IsInRole("admin"))
-                {
-                    <td>
-                        @Html.ActionLink("Chech Review", "ReviewList", new { id = item.Program_ID }, new { @class = "btn btn-sm btn-primary" })
+        @if (item.HRMS_ProgramDetail.TrainingStatus == null)
+        {
+            <td>
+                Active
+            </td>
+        }
+        else
+        {
+    <td>   @Html.DisplayFor(modelItem => item.HRMS_ProgramDetail.TrainingStatus)</td>
+        }
 
-                    </td>
-                }
-                else
+
+        @if (User.IsInRole("admin"))
+        {
+            <td>
+                @Html.ActionLink("Check Review", "ReviewList", new { id = item.Program_ID }, new { @class = "btn btn-sm btn-primary" })
+
+            </td>
+        }
+        else
+        {
+            <td>
+                @if (item.HRMS_ProgramDetail.TrainingStatus == "Completed")
                 {
-                    <td>
-                        @if (item.HRMS_ProgramDetail.TrainingStatus == "Completed")
-                        {
-                            @Html.ActionLink("Review", "Review", new { id = item.Program_ID }, new { @class = "btn btn-sm btn-primary" })
-                        }
-                    </td>
+                    @Html.ActionLink("Review", "Review", new { id = item.Program_ID }, new { @class = "btn btn-sm btn-primary" })
                 }
-            </tr>
+            </td>
+        }
+    </tr>
         }
 
     </table>

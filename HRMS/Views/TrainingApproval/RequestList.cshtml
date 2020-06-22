@@ -5,14 +5,15 @@
 }
 
 <!DOCTYPE html>
-
+<h2>Request List</h2>
+<hr />
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>RequestList</title>
 </head>
 <body>
-    <br />
+    
     @if (ViewBag.NoPending != "No")
     {
         <div class="w3-right-align">
@@ -21,7 +22,7 @@
             @Html.ActionLink("Reject All", "RejectAll", new { id = ViewBag.ProID }, new { @class = "btn  btn-danger", @onclick = "return confirm('Are sure wants to Reject All?');" })
         </div>
     }
-    <br />
+    
     <table class="table table-bordered table-striped table-responsive">
         <tr style="background-color:lightgray">
 

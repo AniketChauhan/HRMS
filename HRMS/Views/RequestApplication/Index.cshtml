@@ -5,6 +5,7 @@
 }
 
 <h2>Index</h2>
+<hr />
 @if (User.IsInRole("midman"))
 {
 
@@ -16,7 +17,7 @@
 {
 
     <table class="table table-responsive table-striped table-bordered">
-        <tr>
+        <tr style="background-color:lightgray">
             <th>
                 @Html.DisplayNameFor(model => model.request_date)
             </th>
