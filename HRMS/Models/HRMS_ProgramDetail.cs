@@ -32,10 +32,10 @@ namespace HRMS.Models
         public System.DateTime TransactionDate { get; set; }
         public long TrainingID { get; set; }
         [Required]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Use letters only please")]
-
+        [MaxLength(50, ErrorMessage = "Name can have 50 characters maximum!")]
         public string ProgramName { get; set; }
         [Required]
+        [MaxLength(50, ErrorMessage = "Name can have 50 characters maximum!")]
         public string Subject { get; set; }
         //public System.DateTime FromDate { get; set; }
         //public System.DateTime ToDate { get; set; }
@@ -61,22 +61,27 @@ namespace HRMS.Models
         public string ProgramType { get; set; }
         [Required]
         public string SubjectType { get; set; }
-
+        [Required]
         public string Type { get; set; }
-
+        [Required]
         public string ProgramMode { get; set; }
         [Required]
         public string Venue { get; set; }
         [Required]
         public Nullable<decimal> Budget { get; set; }
+        [MaxLength(50, ErrorMessage = "Address can have 50 characters maximum!")]
         public string Address { get; set; }
+        [MaxLength(50, ErrorMessage = "City can have 50 characters maximum!")]
         public string City { get; set; }
+        [MaxLength(50, ErrorMessage = "Filed can have 50 characters maximum!")]
         public string BenefitsToOrg { get; set; }
+        [MaxLength(50, ErrorMessage = "Filed can have 50 characters maximum!")]
         public string Remarks { get; set; }
         public string RatingMethod { get; set; }
         public string TrainingStatus { get; set; }
         public Nullable<long> CompletedBy { get; set; }
         public Nullable<System.DateTime> CompleteDate { get; set; }
+        [MaxLength(50, ErrorMessage = "Filed can have 50 characters maximum!")]
         public string RemarksOther { get; set; }
         public Nullable<long> Flag { get; set; }
 

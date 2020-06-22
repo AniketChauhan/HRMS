@@ -11,14 +11,25 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class HRMS_TRAINING_SKILLSET
     {
+        [DisplayName("SkillSet ID")]
+
         public long SkillSet_ID { get; set; }
+        [Required]
+        [DisplayName("Program")]
         public long ProgDetail_ID { get; set; }
+        [Required]
+        [DisplayName("Skill ID")]
         public long Skill_ID { get; set; }
+
+        [DisplayName("Skill Name")]
         public string Skill_Name { get; set; }
-    
+
+
         public virtual HRMS_ProgramDetail HRMS_ProgramDetail { get; set; }
         public virtual HRMS_TRAINING_SKILL_MS HRMS_TRAINING_SKILL_MS { get; set; }
     }

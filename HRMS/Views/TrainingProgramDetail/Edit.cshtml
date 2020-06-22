@@ -353,7 +353,7 @@
                 <br />
 
                 <table class="table table-bordered table-striped table-responsive">
-                    <tr>
+                    <tr style="background-color:lightgray">
                         <th>
                             <center>
                                 @Html.DisplayNameFor(model => model.ProFaculty.FacultyName)
@@ -367,7 +367,7 @@
                         <th> <center><i class="glyphicon glyphicon-wrench"> </i> Operations</center></th>
                     </tr>
                     <tbody id="insidetable">
-                        <tr id="">
+                        <tr  id="">
                             <td>
                             </td>
                             <td>
@@ -798,7 +798,7 @@
             $.each(data, function (index, item) {
                 var tbody = "";
 
-                tbody += "<tr row_id='" + item.ID+"' id='" + item.ID +"'>";
+                tbody += "<tr  row_id='" + item.ID+"' id='" + item.ID +"'>";
                 tbody += "<td class='text-left'><center><div class='row_data' edit_type='click' col_name='Faculty Name'>" + item.FacultyName + "</div></center></td>";
                 tbody += "<td class='text-left'><center>" + item.Email + "</center></td>";
 
