@@ -36,7 +36,7 @@
 
 
 @*@using (Html.BeginForm("Create", "TrainingEvaluation", FormMethod.Post))*@
-@using (Ajax.BeginForm("Create", "TrainingEvaluation", new AjaxOptions { HttpMethod = "POST", OnSuccess = "successHeader", OnFailure = "Failureheader" ,OnBegin}))
+@using (Ajax.BeginForm("Create", "TrainingEvaluation", new AjaxOptions { HttpMethod = "POST", OnSuccess = "successHeader", OnFailure = "Failureheader" }))
 {
 
     <div class="form-horizontal">

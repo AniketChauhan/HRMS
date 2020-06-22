@@ -8,15 +8,18 @@
 @if (Model.Count<HRMS.Models.HRMS_ProgramFaculty>() > 0 && Model != null)
 {
     <h2>ProgramList</h2>
+    <hr />
 
     <table class="table table-bordered table-responsive table-striped">
-        <tr>
+        <tr style="background-color:lightgray">
             <th>
                 Program Code
             </th>
             <th>
                 Program Name
             </th>
+            <th>Start Date</th>
+            <th>End Date</th>
             <th><i class="glyphicon glyphicon-wrench"> </i> Operations</th>
         </tr>
 
@@ -30,8 +33,14 @@
             @Html.DisplayFor(modelItem => item.HRMS_ProgramDetail.ProgramName)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.HRMS_ProgramDetail.FromDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HRMS_ProgramDetail.ToDate)
+        </td>
+        <td>
             @Html.ActionLink(" Select", "EmployeeAttandance", new { id = item.ProgramID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" })
-        
+
             @Html.ActionLink("View", "View", new { id = item.ProgramID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" })
         </td>
     </tr>

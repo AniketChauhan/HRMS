@@ -78,7 +78,7 @@ namespace HRMS.Controllers
             var a = db.HRMS_ProgramDetail.Where(x => x.ID == id).Select(x => x.TrainingID).FirstOrDefault();
             var b = db.HRMS_Training_Request_Application.Where(x => x.ApplicationId == a).Select(x => x.EmpID).FirstOrDefault();
             ViewBag.HOD_Detail = db.Accounts.Where(x => x.ID == b).FirstOrDefault();
-            ViewBag.EMP_List = db.HRMS_TrainingApproval.Where(x => x.Remark == false).ToList();
+            ViewBag.EMP_List = db.HRMS_TrainingApproval.Where(x => x.Remark == false && x.Status == 2 && x.Program_ID==id).ToList();
             return View();
         }
 
@@ -96,7 +96,7 @@ namespace HRMS.Controllers
             var a = db.HRMS_ProgramDetail.Where(x => x.ID == hRMS_TRAINING_EFFECTIVENESS_REMARKS.Program_Det_ID).Select(x => x.TrainingID).FirstOrDefault();
             var b = db.HRMS_Training_Request_Application.Where(x => x.ApplicationId == a).Select(x => x.EmpID).FirstOrDefault();
             ViewBag.HOD_Detail = db.Accounts.Where(x => x.ID == b).FirstOrDefault();
-            ViewBag.EMP_List = db.HRMS_TrainingApproval.Where(x => x.Remark == false).ToList();
+            ViewBag.EMP_List = db.HRMS_TrainingApproval.Where(x => x.Remark == false && x.Status==2 && x.Program_ID == hRMS_TRAINING_EFFECTIVENESS_REMARKS.Program_Det_ID).ToList();
             if (ModelState.IsValid)
             {
 
@@ -110,7 +110,7 @@ namespace HRMS.Controllers
 
                     db.SaveChanges();
                    
-                    var c = db.HRMS_TrainingApproval.Where(x => x.EMP_ID == hRMS_TRAINING_EFFECTIVENESS_REMARKS.Emp_ID && x.Program_ID ==hRMS_TRAINING_EFFECTIVENESS_REMARKS.Program_Det_ID).Select(x => x.ID).FirstOrDefault();
+                    var c = db.HRMS_TrainingApproval.Where(x => x.EMP_ID == hRMS_TRAINING_EFFECTIVENESS_REMARKS.Emp_ID && x.Program_ID ==hRMS_TRAINING_EFFECTIVENESS_REMARKS.Program_Det_ID && x.Status==2).Select(x => x.ID).FirstOrDefault();
                     HRMS_TrainingApproval hRMS_TrainingApproval = db.HRMS_TrainingApproval.Find(c);
                     if (hRMS_TrainingApproval.Remark != true)
                     {
@@ -124,7 +124,7 @@ namespace HRMS.Controllers
                     var b3 = db.HRMS_ProgramDetail.Where(x => x.ID == hRMS_TRAINING_EFFECTIVENESS_REMARKS.Program_Det_ID).Select(x => x.TrainingID).FirstOrDefault();
                     var z1 = db.HRMS_Training_Request_Application.Where(x => x.ApplicationId == b3).Select(x => x.EmpID).FirstOrDefault();
                     ViewBag.HOD_Detail = db.Accounts.Where(x => x.ID == z1).FirstOrDefault();
-                    ViewBag.EMP_List = db.HRMS_TrainingApproval.Where(x => x.Remark == false).ToList();
+                    ViewBag.EMP_List = db.HRMS_TrainingApproval.Where(x => x.Remark == false && x.Status == 2 && x.Program_ID == hRMS_TRAINING_EFFECTIVENESS_REMARKS.Program_Det_ID).ToList();
                     return View();
                     //return RedirectToAction("Index1");
                 }
@@ -135,7 +135,7 @@ namespace HRMS.Controllers
             else if (hRMS_TRAINING_EFFECTIVENESS_REMARKS.Emp_ID == 0 && hRMS_TRAINING_EFFECTIVENESS_REMARKS.HOD_Remarks != null && hRMS_TRAINING_EFFECTIVENESS_REMARKS.Trainee_Remarks != null && hRMS_TRAINING_EFFECTIVENESS_REMARKS.HOD_View != null && hRMS_TRAINING_EFFECTIVENESS_REMARKS.Program_Det_ID != 0 && hRMS_TRAINING_EFFECTIVENESS_REMARKS.HOD_ID != 0 && hRMS_TRAINING_EFFECTIVENESS_REMARKS.Remark_Date != null)
             {
 
-                var a1 = db.HRMS_TrainingApproval.Where(x => x.Remark != true && x.Program_ID == hRMS_TRAINING_EFFECTIVENESS_REMARKS.Program_Det_ID).Select(x => x.EMP_ID).ToList();
+                var a1 = db.HRMS_TrainingApproval.Where(x => x.Remark != true && x.Program_ID == hRMS_TRAINING_EFFECTIVENESS_REMARKS.Program_Det_ID && x.Status==2).Select(x => x.EMP_ID).ToList();
                 if (a1 != null)
                 {
                     foreach (var item in a1)
@@ -144,7 +144,7 @@ namespace HRMS.Controllers
 
                         db.HRMS_TRAINING_EFFECTIVENESS_REMARKS.Add(hRMS_TRAINING_EFFECTIVENESS_REMARKS);
                         db.SaveChanges();
-                        var c = db.HRMS_TrainingApproval.Where(x => x.EMP_ID == hRMS_TRAINING_EFFECTIVENESS_REMARKS.Emp_ID && x.Program_ID==hRMS_TRAINING_EFFECTIVENESS_REMARKS.Program_Det_ID).Select(x => x.ID).FirstOrDefault();
+                        var c = db.HRMS_TrainingApproval.Where(x => x.EMP_ID == hRMS_TRAINING_EFFECTIVENESS_REMARKS.Emp_ID && x.Program_ID==hRMS_TRAINING_EFFECTIVENESS_REMARKS.Program_Det_ID && x.Status==2).Select(x => x.ID).FirstOrDefault();
                         HRMS_TrainingApproval hRMS_TrainingApproval = db.HRMS_TrainingApproval.Find(c);
                         if (hRMS_TrainingApproval.Remark != true)
                         {
@@ -162,7 +162,7 @@ namespace HRMS.Controllers
                 var b1 = db.HRMS_ProgramDetail.Where(x => x.ID == hRMS_TRAINING_EFFECTIVENESS_REMARKS.Program_Det_ID).Select(x => x.TrainingID).FirstOrDefault();
                 var z2 = db.HRMS_Training_Request_Application.Where(x => x.ApplicationId == b1).Select(x => x.EmpID).FirstOrDefault();
                 ViewBag.HOD_Detail = db.Accounts.Where(x => x.ID == z2).FirstOrDefault();
-                ViewBag.EMP_List = db.HRMS_TrainingApproval.Where(x => x.Remark == false).ToList();
+                ViewBag.EMP_List = db.HRMS_TrainingApproval.Where(x => x.Remark == false && x.Status == 2 && x.Program_ID == hRMS_TRAINING_EFFECTIVENESS_REMARKS.Program_Det_ID).ToList();
                 return View();
 
             }
@@ -172,7 +172,7 @@ namespace HRMS.Controllers
                 var b2 = db.HRMS_ProgramDetail.Where(x => x.ID == hRMS_TRAINING_EFFECTIVENESS_REMARKS.Program_Det_ID).Select(x => x.TrainingID).FirstOrDefault();
                 var z3 = db.HRMS_Training_Request_Application.Where(x => x.ApplicationId == b2).Select(x => x.EmpID).FirstOrDefault();
                 ViewBag.HOD_Detail = db.Accounts.Where(x => x.ID == z3).FirstOrDefault();
-                ViewBag.EMP_List = db.HRMS_TrainingApproval.Where(x => x.Remark == false).ToList();
+                ViewBag.EMP_List = db.HRMS_TrainingApproval.Where(x => x.Remark == false && x.Status == 2 && x.Program_ID == hRMS_TRAINING_EFFECTIVENESS_REMARKS.Program_Det_ID).ToList();
                 return View();
 
             }
@@ -182,7 +182,7 @@ namespace HRMS.Controllers
             var z4 = db.HRMS_ProgramDetail.Where(x => x.ID == hRMS_TRAINING_EFFECTIVENESS_REMARKS.Program_Det_ID).Select(x => x.TrainingID).FirstOrDefault();
             var z5 = db.HRMS_Training_Request_Application.Where(x => x.ApplicationId == z4).Select(x => x.EmpID).FirstOrDefault();
             ViewBag.HOD_Detail = db.Accounts.Where(x => x.ID == z5).FirstOrDefault();
-            ViewBag.EMP_List = db.HRMS_TrainingApproval.Where(x => x.Remark == false).ToList();
+            ViewBag.EMP_List = db.HRMS_TrainingApproval.Where(x => x.Remark == false && x.Status == 2 && x.Program_ID == hRMS_TRAINING_EFFECTIVENESS_REMARKS.Program_Det_ID).ToList();
             return View();
         }
 
@@ -204,7 +204,7 @@ namespace HRMS.Controllers
 
                 db.HRMS_TRAINING_EFFECTIVENESS_REMARKS.Remove(hRMS_TRAINING_EFFECTIVENESS_REMARKS);
                 db.SaveChanges();
-                var c = db.HRMS_TrainingApproval.Where(x => x.EMP_ID == hRMS_TRAINING_EFFECTIVENESS_REMARKS.Emp_ID && x.Program_ID ==hRMS_TRAINING_EFFECTIVENESS_REMARKS.Program_Det_ID).Select(x => x.ID).FirstOrDefault();
+                var c = db.HRMS_TrainingApproval.Where(x => x.EMP_ID == hRMS_TRAINING_EFFECTIVENESS_REMARKS.Emp_ID && x.Program_ID ==hRMS_TRAINING_EFFECTIVENESS_REMARKS.Program_Det_ID && x.Status==2).Select(x => x.ID).FirstOrDefault();
                 HRMS_TrainingApproval hRMS_TrainingApproval = db.HRMS_TrainingApproval.Find(c);
                 if (hRMS_TrainingApproval.Remark != false)
                 {

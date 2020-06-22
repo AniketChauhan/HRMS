@@ -91,9 +91,10 @@ namespace HRMS.Controllers
             hRMS_TrainingApproval.ApproveBy = Convert.ToInt64(Session["id"]);
             hRMS_TrainingApproval.ApproveDate = DateTime.Now.Date;
 
-            var exist = db.HRMS_TrainingApproval.Where(rec => rec.EMP_ID == hRMS_TrainingApproval.EMP_ID && rec.Program_ID == hRMS_TrainingApproval.Program_ID).FirstOrDefault();
+            var exist = db.HRMS_TrainingApproval.Where(rec => rec.EMP_ID == hRMS_TrainingApproval.EMP_ID && rec.Program_ID == hRMS_TrainingApproval.Program_ID && rec.Status ==2).FirstOrDefault();
             if (exist == null)
             {
+
                 db.HRMS_TrainingApproval.Add(hRMS_TrainingApproval);
                 db.SaveChanges();
                 ModelState.Clear();

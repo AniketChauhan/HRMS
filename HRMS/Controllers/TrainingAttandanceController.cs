@@ -15,7 +15,8 @@ namespace HRMS.Controllers
         public ActionResult Index()
         {
             long emp_id = Convert.ToInt64(Session["id"]);
-            var ProgramList = db.HRMS_ProgramFaculty.Where(rec => rec.FacultyID == emp_id).ToList();
+            long facID = db.HRMS_Faculty_MS.Where(x=>x.EMP_ID==emp_id).Select(x=>x.ID).FirstOrDefault();
+            var ProgramList = db.HRMS_ProgramFaculty.Where(rec => rec.FacultyID == facID).ToList();
 
             return View(ProgramList);
         }

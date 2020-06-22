@@ -3,17 +3,19 @@
 }
 
 <h2>EmployeeAttandance</h2>
+<br />
 
 <div class="form-inline">
 
     <label>select Date</label>
     <input type="datetime" autocomplete="off" class="form-control datepicker" id="date" name="date" />
-    <input type="submit" onclick="GetEmployeeList()" class="btn btn-sm btn-primary" />
+    <input type="submit" value="Select" onclick="GetEmployeeList()" class="btn btn-sm btn-success" />
 </div>
+<hr />
 <div class="container-fluid" id="MainEmployeeContainer">
 
     <table class="table table-bordered table-responsive table-striped">
-        <tr>
+        <tr style="background-color:lightgray">
             <th>
                 <center>
                     Employee Code
@@ -57,6 +59,7 @@
 <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
 
 <script>
+    
     var date;
     var Fromdate = new Date("@ViewBag.FromDate");
     var programid = @ViewBag.ProgramID;
@@ -162,15 +165,18 @@
         });
         }
     $(function () {
+        debugger;
         $(".datepicker").datepicker({
+            
             dateFormat: "yy-mm-dd",
             changeMonth: true,
             changeYear: true,
             orientation: "right top",
             maxDate: ToDate,
             minDate: Fromdate
+           
         });
-
+        
     });
 </script>
 
