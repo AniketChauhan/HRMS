@@ -441,7 +441,6 @@
     <Compile Include="MyRollProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
-    <Compile Include="ViewModel\AttandanceCommon.cs" />
     <Compile Include="ViewModel\EvalutionCommon.cs" />
     <Compile Include="ViewModel\TrainingProgramCommon.cs" />
   </ItemGroup>
