@@ -11,23 +11,36 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class BranchMaster
     {
+        [Display(Name= "Bank Branch Code")]
         public long BranchCode { get; set; }
+        [Display(Name = "Bank Name")]
         public long BankCode { get; set; }
+        [Required]
+        [Display(Name = "Bank Branch Name")]
+        [RegularExpression(@"^[A-Za-z]+", ErrorMessage = "Only Alphabetic values are allowed!")]
+        [MaxLength(50, ErrorMessage = "Bank Branch Name can have 50 characters maximum!")]
         public string BranchName { get; set; }
+        [Display(Name = "MICR Code")]
+
         public string MICR_Code { get; set; }
+        [Display(Name = "IFSC Code")]
         public string IFSC_Code { get; set; }
+        [Display(Name = "Contact Number")]
         public Nullable<long> Contact { get; set; }
+        [Display(Name = "Fax Number")]
         public string Fax { get; set; }
+        [Display(Name = "Email ID")]
         public string EmailID { get; set; }
         public string Country { get; set; }
         public string State { get; set; }
         public string City { get; set; }
         public string Address { get; set; }
         public Nullable<long> PinCode { get; set; }
-    
+
         public virtual BankMaster BankMaster { get; set; }
     }
 }

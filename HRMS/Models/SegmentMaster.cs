@@ -11,11 +11,22 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class SegmentMaster
     {
         public long SegmentID { get; set; }
+        [Required]
+        [DisplayName("Segment Name")]
+        [RegularExpression(@"^[A-Za-z0-9]+", ErrorMessage = "Only AlphaNumeric values are allowed!")]
+        [MaxLength(50, ErrorMessage = "Segment name can have 50 characters maximum!")]
+
         public string SegmentName { get; set; }
+        [DisplayName("SAP Code")]
+        [RegularExpression(@"^[A-Za-z0-9]+", ErrorMessage = "Only AlphaNumeric values are allowed!")]
+        [MaxLength(50, ErrorMessage = "SAP Code can have 50 characters maximum!")]
+
         public string SAPCode { get; set; }
     }
 }

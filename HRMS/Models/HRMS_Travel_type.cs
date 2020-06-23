@@ -11,7 +11,8 @@ namespace HRMS.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class HRMS_Travel_type
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,12 +20,25 @@ namespace HRMS.Models
         {
             this.HRMS_Travel_Application = new HashSet<HRMS_Travel_Application>();
         }
-    
+
         public int ID { get; set; }
+        [Required]
+        [Display(Name = "Short Name")]
+        [RegularExpression(@"^[A-Za-z_ ]*$", ErrorMessage = "Only Alphabetic values are allowed!")]
+        [DataType(DataType.Text, ErrorMessage = "Only Alphabetic value are allowed")]
+        [MaxLength(50, ErrorMessage = "First name can have 50 characters maximum!")]
         public string Short_Name { get; set; }
+        [Required]
+        [Display(Name = "Name")]
+        [RegularExpression(@"^[A-Za-z_ ]*$", ErrorMessage = "Only Alphabetic values are allowed!")]
+        [DataType(DataType.Text, ErrorMessage = "Only Alphabetic value are allowed")]
+        [MaxLength(250, ErrorMessage = "name can have 250 characters maximum!")]
         public string Name { get; set; }
+        [RegularExpression(@"^[A-Za-z0-9_ ]*$", ErrorMessage = "Only AlphNumeric values are allowed!")]
+
         public string Description { get; set; }
-    
+
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HRMS_Travel_Application> HRMS_Travel_Application { get; set; }
     }
