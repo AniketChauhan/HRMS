@@ -106,6 +106,9 @@ namespace HRMS.Controllers
                 else
                 {
                     existsameEmp.Status = 2;
+                    existsameEmp.FromTime = hRMS_TrainingApproval.FromTime;
+                    existsameEmp.ToTime = hRMS_TrainingApproval.ToTime;
+
                     db.Entry(existsameEmp).State = EntityState.Modified;
                     db.SaveChanges(); ModelState.Clear();
                     var status = "Employee Added successfullly.";
