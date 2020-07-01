@@ -21,8 +21,8 @@ namespace HRMS.Models
         [Required]
         [DisplayName("BusinessDivision Name")]
         public string BusinessDivision_Name { get; set; }
-        [Required]
-        [RegularExpression(@"^[1-9][0-9]{6}$", ErrorMessage = "Sapcode must be in valid format")]
+        
+        
         [DisplayName("BusinessDivision SapCode")]
         public Nullable<long> BusinessDivision_SapCode { get; set; }
 

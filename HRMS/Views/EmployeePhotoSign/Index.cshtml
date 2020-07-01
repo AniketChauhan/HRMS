@@ -5,13 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Employee Photo Sign Details</h2>
+<hr />
 <br />
 @*<p>
     @Html.ActionLink("Create New", "Create")
 </p>*@
 <table class="table table-bordered table-responsive table-striped">
-    <tr>
+    <tr style="background-color:lightgray">
         @*<th>
             @Html.DisplayNameFor(model => model.Emp_Photo_Title)
         </th>*@
@@ -49,8 +50,8 @@
                 @Html.DisplayFor(modelItem => item.Accounts.ID)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Emp_Photos_ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Emp_Photos_ID }, new { @class = "btn btn-warning btn-sm glyphicon glyphicon-list-alt" }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.Emp_Photos_ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" }) 
+                @*@Html.ActionLink("Details", "Details", new { id = item.Emp_Photos_ID }, new { @class = "btn btn-warning btn-sm glyphicon glyphicon-list-alt" })*@ 
                 @Html.ActionLink("Delete", "Delete", new { id = item.Emp_Photos_ID }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-trash" })
             </td>
         </tr>

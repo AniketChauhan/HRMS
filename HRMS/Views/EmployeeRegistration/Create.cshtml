@@ -83,12 +83,15 @@
 @if (ViewBag.AccountStatus != null)
 {
     <div class="alert alert-danger alert-dismissible " style="width:50%;">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <span>
-            @ViewBag.AccountStatus
+       
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <span>
+                <center>
+                    @ViewBag.AccountStatus
+                </center>
 
-        </span>
-
+            </span>
+        
     </div>
 }
 

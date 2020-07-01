@@ -4,13 +4,13 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-<br />
+<h2>Employee Reference Details</h2>
+<hr />
 @*<p>
     @Html.ActionLink("Create New", "Create")
 </p>*@
 <table class="table table-bordered table-responsive table-striped">
-    <tr>
+    <tr style="background-color:lightgray">
         <th>
             @Html.DisplayNameFor(model => model.Is_Ref_Emp)
         </th>
@@ -102,8 +102,8 @@
         </td>
         <td>
             <center>
-                @Html.ActionLink(" Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" }) |
-                @Html.ActionLink(" Details", "Details", new { id = item.ID }, new { @class = "btn btn-warning btn-sm glyphicon glyphicon-edit" }) |
+                @Html.ActionLink(" Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" }) 
+                @Html.ActionLink(" Details", "Details", new { id = item.ID }, new { @class = "btn btn-warning btn-sm glyphicon glyphicon-edit" }) 
                 <button class="btn btn-danger  btn-sm " onclick="return removeFromList(this, '@item.ID') "> <i class="glyphicon glyphicon-trash"> </i> Delete</button>
             </center>
         </td>

@@ -7,11 +7,13 @@
 }
 
 <h2>Index</h2>
+<br />
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<br />
+
+@*<br />
 <div class="form-inline">
 
     @using (Html.BeginForm("Index", "UnitMaster", FormMethod.Get))
@@ -43,9 +45,9 @@
 </div>
 <br>
 <br>
-<br>
+<br>*@
 <table class="table table-bordered table-striped table-responsive">
-    <tr>
+    <tr style="background-color:lightgray">
         <th>
             @Html.DisplayNameFor(model => model.First().UnitName)
         </th>

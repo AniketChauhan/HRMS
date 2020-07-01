@@ -35,8 +35,11 @@ namespace HRMS.Models
         public string Fax { get; set; }
         [Display(Name = "Email ID")]
         public string EmailID { get; set; }
+        [Required]
         public string Country { get; set; }
+        [Required]
         public string State { get; set; }
+        [Required]
         public string City { get; set; }
         public string Address { get; set; }
         public Nullable<long> PinCode { get; set; }

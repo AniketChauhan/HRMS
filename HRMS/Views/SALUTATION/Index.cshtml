@@ -5,6 +5,7 @@
 }
 
 <h2>Salutations</h2>
+<br />
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -12,7 +13,7 @@
 {
 
 <table class="table table-bordered table-responsive table-striped">
-    <tr>
+    <tr style="background-color:lightgray">
         <th>
             @Html.DisplayNameFor(model => model.Salutation_Name)
         </th>
@@ -26,7 +27,7 @@
                 @Html.DisplayFor(modelItem => item.Salutation_Name)
             </td>
             <td>
-                @Html.ActionLink(" Edit", "Edit", new { id = item.Salutation_ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" }) |
+                @Html.ActionLink(" Edit", "Edit", new { id = item.Salutation_ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" }) 
                 <button class="btn btn-danger btn-sm" onclick="return removeFromList(this, '@item.Salutation_ID') "><i class="glyphicon glyphicon-trash"> </i> Delete</button>
             </td>
         </tr>

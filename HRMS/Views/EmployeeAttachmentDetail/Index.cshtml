@@ -109,9 +109,9 @@
 <br />
 <h3><b>Uploaded File Details</b></h3>
 <table class="table table-bordered table-responsive table-striped">
-    <tr>
+    <tr style="background-color:lightgray">
         <th>
-            @Html.DisplayNameFor(model => model.EMP_ID)
+            @Html.DisplayNameFor(model => model.Accounts.UserName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Attachment_Title)
@@ -126,7 +126,7 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.EMP_ID)
+                @Html.DisplayFor(modelItem => item.Accounts.UserName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Attachment_Title)

@@ -5,6 +5,7 @@
 }
 
 <h2>Index</h2>
+<br />
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -13,7 +14,7 @@
 {
 
     <table class="table table-bordered table-responsive table-striped">
-        <tr>
+        <tr style="background-color:lightgray">
             <th>
                 @Html.DisplayNameFor(model => model.Dept_Name)
             </th>
@@ -48,7 +49,7 @@
                 <td>
                     <center>
                         @Html.ActionLink(" Edit", "Edit", new { id = item.Dept_Id }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" })
-                        @Html.ActionLink(" Delete", "Delete", new { id = item.Dept_Id }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-trash" })
+                        @Html.ActionLink(" Delete", "Delete", new { id = item.Dept_Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-trash" })
                     </center>
                 </td>
             </tr>

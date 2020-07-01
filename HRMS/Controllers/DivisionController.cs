@@ -51,8 +51,7 @@ namespace HRMS.Controllers
         public ActionResult Create(HRMS_EMP_BUSINESSDIVISION_MS hRMS_EMP_BUSINESSDIVISION_MS)
         {
             ViewBag.message = "";
-            if (ModelState.IsValid)
-            {
+            
                 HRMS_EMP_BUSINESSDIVISION_MS hebd = new HRMS_EMP_BUSINESSDIVISION_MS();
                 string BD_name1 = Request["BD_name"];
                 string BD_sapcode1 = (Request["BD_sapcode"]);
@@ -95,7 +94,7 @@ namespace HRMS.Controllers
                 {
                     ViewBag.message = "please fill up all value !!!!!";
                 }
-            }
+            
 
             return View();
         }

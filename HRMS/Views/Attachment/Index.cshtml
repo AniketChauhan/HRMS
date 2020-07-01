@@ -6,6 +6,7 @@
 
 
 <h2>Attachment types</h2>
+<br />
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -13,7 +14,7 @@
 @if (Model.Count<HRMS.Models.HRMS_ATTACHMENT_TYPE>() > 0 && Model != null)
 {
     <table class="table table-bordered table-responsive table-striped">
-        <tr>
+        <tr style="background-color:lightgray">
             <th>
                 @Html.DisplayNameFor(model => model.Attachment_Type_Name)
             </th>
@@ -27,7 +28,7 @@
                     @Html.DisplayFor(modelItem => item.Attachment_Type_Name)
                 </td>
                 <td>
-                    @Html.ActionLink(" Edit", "Edit", new { id = item.Attachment_Type_ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" }) |
+                    @Html.ActionLink(" Edit", "Edit", new { id = item.Attachment_Type_ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" }) 
                     <button class="btn btn-danger" onclick="return removeFromList(this, '@item.Attachment_Type_ID') "><i class="glyphicon glyphicon-trash"> </i> Delete</button>
 
                 </td>

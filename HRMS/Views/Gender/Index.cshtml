@@ -5,12 +5,13 @@
 }
 
 <h2>Index</h2>
+<br />
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table table-bordered table-responsive table-striped">
-    <tr>
+    <tr style="background-color:lightgray">
         <th>
             @Html.DisplayNameFor(model => model.Gender_Value)
         </th>
@@ -23,15 +24,11 @@
     <td>
         @Html.DisplayFor(modelItem => item.Gender_Value)
     </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.Gender_ID }) |
-        @Html.ActionLink("Details", "Details", new { id = item.Gender_ID }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.Gender_ID })
-    </td>
+   
     <td>
         <center>
-            @Html.ActionLink(" Edit", "Edit", new { id = item.Gender_ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" }) |
-            @Html.ActionLink(" Details", "Details", new { id = item.Gender_ID }, new { @class = "btn btn-warning btn-sm glyphicon glyphicon-edit" }) |
+            @Html.ActionLink(" Edit", "Edit", new { id = item.Gender_ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" }) 
+            @Html.ActionLink(" Details", "Details", new { id = item.Gender_ID }, new { @class = "btn btn-warning btn-sm glyphicon glyphicon-edit" }) 
             <button class="btn btn-danger  btn-sm " onclick="return removeFromList(this, '@item.Gender_ID') "> <i class="glyphicon glyphicon-trash"> </i> Delete</button>
         </center>
     </td>

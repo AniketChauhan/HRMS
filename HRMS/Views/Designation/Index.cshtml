@@ -5,6 +5,7 @@
 }
 
 <h2>Index</h2>
+<br />
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -13,7 +14,7 @@
 {
 
     <table class="table  table-bordered table-responsive table-striped">
-        <tr>
+        <tr style="background-color:lightgray">
             <th>
                 @Html.DisplayNameFor(model => model.Desg_Id)
             </th>
@@ -57,9 +58,9 @@
                             @Html.DisplayFor(modelItem => item.IsActive)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit_Parent", "Edit_Parent", new { id = item.Desg_Id })
-                            @Html.ActionLink("Delete_Parent", "Delete_Parent", new { id = item.Desg_Id })
-                            @Html.ActionLink("Details", "Details", new { id = item.Desg_Id })
+                            @Html.ActionLink("Edit", "Edit_Parent", new { id = item.Desg_Id }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" })
+                            @Html.ActionLink("Delete", "Delete_Parent", new { id = item.Desg_Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-edit" })
+                            @Html.ActionLink("Details", "Details", new { id = item.Desg_Id }, new { @class = "btn btn-warning btn-sm glyphicon glyphicon-edit" })
                         </td>
                     </tr>
                 }
@@ -84,9 +85,9 @@
                             @Html.DisplayFor(modelItem => item.IsActive)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Desg_Id })
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Desg_Id })
-                            @Html.ActionLink("Details", "Details", new { id = item.Desg_Id })
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Desg_Id }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" })
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Desg_Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-edit" })
+                            @Html.ActionLink("Details", "Details", new { id = item.Desg_Id }, new { @class = "btn btn-warning btn-sm glyphicon glyphicon-edit" })
                         </td>
                     </tr>
                 }

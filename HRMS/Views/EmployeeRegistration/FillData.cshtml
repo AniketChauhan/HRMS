@@ -13,13 +13,13 @@
     </p>*@
 
 
-<br />
+<hr />
 <div class="form-inline">
 
     @using (Html.BeginForm("FillData", "EmployeeRegistration", FormMethod.Get))
     {
         <table class="col-md-4 table-bordered">
-            <tr>
+            <tr >
                 <td>
                     @Html.DropDownList("Data", new List<SelectListItem>
                            {
@@ -50,7 +50,7 @@
 
 
 <table class="table table-bordered table-responsive table-striped">
-    <tr>
+    <tr style="background-color:lightgray">
 
         <th>
             Employee ID

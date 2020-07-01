@@ -7,13 +7,15 @@
 }
 
 <h2>Index</h2>
+<br />
 
 <p>
     @Html.ActionLink("Create New", "Create")
 
 
 </p>
-<div style="float:right" >
+
+@*<div style="float:right" >
     @using (Html.BeginForm("Index", "MaritalMaster", FormMethod.Get))
     {
     <div class="input-group">
@@ -26,11 +28,11 @@
 
     }
 </div>
-<br />
+<br />*@
 
 
 <table class="table table-bordered table-striped table-responsive">
-    <tr>
+    <tr style="background-color:lightgray">
         <th>
             @Html.DisplayNameFor(model => model.First().MaritalName)
         </th>
@@ -46,8 +48,8 @@
 
     <td>
         <center>
-            @Html.ActionLink(" Edit", "Edit", new { id = item.MaritalID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" }) |
-            @Html.ActionLink(" Details", "Details", new { id = item.MaritalID }, new { @class = "btn btn-warning btn-sm glyphicon glyphicon-edit" }) |
+            @Html.ActionLink(" Edit", "Edit", new { id = item.MaritalID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" }) 
+            @Html.ActionLink(" Details", "Details", new { id = item.MaritalID }, new { @class = "btn btn-warning btn-sm glyphicon glyphicon-edit" })
             <button class="btn btn-danger  btn-sm " onclick="return removeFromList(this, '@item.MaritalID') "> <i class="glyphicon glyphicon-trash"> </i> Delete</button>
         </center>
     </td>

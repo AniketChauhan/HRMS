@@ -5,12 +5,13 @@
 }
 
 <h2>Index</h2>
+<br />
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table  table-bordered table-responsive table-striped">
-    <tr>
+    <tr style="background-color:lightgray">
         <th>
             @Html.DisplayNameFor(model => model.CitizenShip_Country_NM)
         </th>
@@ -25,7 +26,7 @@
             </td>
 
             <td>
-                @Html.ActionLink(" Edit", "Edit", new { id = item.CitizenShip_ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" }) |
+                @Html.ActionLink(" Edit", "Edit", new { id = item.CitizenShip_ID }, new { @class = "btn btn-primary btn-sm glyphicon glyphicon-edit" }) 
                 <button class="btn btn-danger" onclick="return removeFromList(this, '@item.CitizenShip_ID') "><i class="glyphicon glyphicon-trash"> </i> Delete</button>
 
             </td>

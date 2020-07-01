@@ -51,7 +51,7 @@
     {
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Emp_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Emp_ID,"Employee ID" ,htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Emp_ID, new { htmlAttributes = new { @class = "form-control" } })
                 @*@Html.DropDownList("Emp_ID", null, htmlAttributes: new { @class = "form-control" })*@
@@ -71,7 +71,7 @@
             <img src="@imagePath" height="200" width="200">
         }*@
     <div class="form-group">
-        @Html.LabelFor(model => model.Emp_Photo_Path, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.Emp_Photo_Path,"Employee Photo", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
 
             <input type="file" name="ImageFile">
@@ -89,7 +89,7 @@
         </div>*@
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Emp_Sign_Path, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.Emp_Sign_Path,"Employee Sign", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <input type="file" name="SignFile">
             @*@Html.EditorFor(model => model.Emp_Sign_Path, new { htmlAttributes = new { @class = "form-control" } })*@
@@ -99,7 +99,7 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" value="Add" class="btn btn-danger" />
         </div>
     </div>
 </div>

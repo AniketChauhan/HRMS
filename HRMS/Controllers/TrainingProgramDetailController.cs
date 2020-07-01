@@ -118,7 +118,7 @@ namespace HRMS.Controllers
         {
             //var hRMS_ProgramDetail = db.HRMS_ProgramDetail.Include(h => h.HRMS_Training_Request_Application);
             //return View(hRMS_ProgramDetail.ToList());
-            return View(db.HRMS_Training_Request_Application.ToList());
+            return View(db.HRMS_Training_Request_Application.Where(x=>x.Status!=0).ToList());
         }
 
         // GET: TrainingProgramDetail/Details/5

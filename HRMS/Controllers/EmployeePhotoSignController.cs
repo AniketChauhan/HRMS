@@ -51,6 +51,20 @@ namespace HRMS.Controllers
                     }
 
                 }
+                else
+                {
+                    bool isThere = db.HRMS_EMP_PHOTO_SIGN.Any(x => x.Emp_Photos_ID == id.Value);
+                    if (!isThere)
+                    {
+                        return RedirectToAction("Create", "EmployeePhotoSign", new { ID = id.Value });
+                    }
+                    else
+                    {
+                        ViewBag.EditVisible = "No";
+                        HRMS_EMP_PHOTO_SIGN employee_Personal_Detail = db.HRMS_EMP_PHOTO_SIGN.Where(x => x.Emp_ID == id.Value).FirstOrDefault();
+                        return View(employee_Personal_Detail);
+                    }
+                }
             }
 
             bool isExist = db.HRMS_EMP_PHOTO_SIGN.Any(x => x.Emp_ID == emp_id);

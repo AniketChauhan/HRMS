@@ -7,7 +7,7 @@
 }
 
 <h2>Employee Personal Details</h2>
-<br />
+<hr />
 
 @*<p>
         @Html.ActionLink("Create New", "Create")
@@ -50,7 +50,7 @@
 
 
 <table class="table table-bordered table-responsive table-striped">
-    <tr>
+    <tr style="background-color:lightgray">
         <th>
             @Html.DisplayNameFor(model => model.First().EMP_ID)
         </th>
@@ -85,7 +85,7 @@
                 @Html.DisplayNameFor(model => model.AKA)
             </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.First().MilitaryService)
+            @Html.DisplayNameFor(model => model.First().Accounts.UserName)
         </th>
         @*<th>
                 @Html.DisplayNameFor(model => model.BirthCity)
@@ -161,7 +161,7 @@
                     @Html.DisplayFor(modelItem => item.AKA)
                 </td>*@
             <td>
-                @Html.DisplayFor(modelItem => item.MilitaryService)
+                @Html.DisplayFor(modelItem => item.Accounts.UserName)
             </td>
             @*<td>
                     @Html.DisplayFor(modelItem => item.BirthCity)
